@@ -1,0 +1,36 @@
+# depslib dependency file v1.0
+1651173812 source:c:\repos\ece-arena\projet\projet final\main.c
+	"structures.h"
+	"prototypes.h"
+
+1650989571 source:c:\repos\ece-arena\projet\projet final\menu et choix\choix_classes.c
+	<stdio.h>
+	<stdlib.h>
+	<allegro.h>
+	<time.h>
+
+1651175623 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\choix_classes.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651171255 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\creation_classes.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651258210 c:\repos\ece-arena\projet\projet final\structures.h
+	<allegro.h>
+
+1651173962 c:\repos\ece-arena\projet\projet final\prototypes.h
+	<stdio.h>
+	<stdlib.h>
+	<allegro.h>
+	<time.h>
+
+1651256874 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\tour_joueur.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651168869 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\deplacement_joueur.c
+	"../prototypes.h"
+	"../structures.h"
+
