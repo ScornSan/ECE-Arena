@@ -4,11 +4,20 @@
 void affichage_hud_sorts(t_joueur* joueur, int i, BITMAP* buffer, BITMAP* hud_icone)
 {
     masked_blit(hud_icone, buffer, 0, 0, 280, 660, SCREEN_W, SCREEN_H);
-    blit(joueur[i].classe.logo_attaque, buffer, 0, 0, 300, 670, SCREEN_W, SCREEN_H);
+    masked_blit(joueur[i].classe.logo_attaque, buffer, 0, 0, 300, 670, SCREEN_W, SCREEN_H);
     blit(joueur[i].classe.sort1.logo, buffer, 0, 0, 335, 670, SCREEN_W, SCREEN_H);
     blit(joueur[i].classe.sort2.logo, buffer, 0, 0, 370, 670, SCREEN_W, SCREEN_H);
     blit(joueur[i].classe.sort3.logo, buffer, 0, 0, 405, 670, SCREEN_W, SCREEN_H);
     blit(joueur[i].classe.sort4.logo, buffer, 0, 0, 440, 670, SCREEN_W, SCREEN_H);
+    if (mouse_x >= 300 && mouse_x <= 330 && mouse_y >= 670 && mouse_y <= 700) // attaque de bas
+    {
+        textprintf_ex(buffer, font, 280, 650, makecol(255, 255, 0), -1, "%s", joueur[i].classe.description_attaque);
+        textprintf(buffer, font, 280, 660, makecol(255, 255, 0), "A 1 chance sur 10 d'échouer");
+    }
+    if (mouse_x >= 335 && mouse_x <= 365 && mouse_y >= 670 && mouse_y <= 700) // sort 1
+    if (mouse_x >= 370 && mouse_x <= 400 && mouse_y >= 670 && mouse_y <= 700) // sort 2
+    if (mouse_x >= 405 && mouse_x <= 435 && mouse_y >= 670 && mouse_y <= 700) // sort 3
+    if (mouse_x >= 440 && mouse_x <= 470 && mouse_y >= 670 && mouse_y <= 700) // sort 4
     i = (i + 1) % 4; // On change le hud des sorts joueur à la fin du tour
 }
 
@@ -31,6 +40,13 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur)
     BITMAP *hud_joueur;
     BITMAP *hud_icone;
     int i = 0;
+    int j;
+
+    // Declaration des phrases pour chaque commentaire sur les classes
+    for (j = 0; j < 4; j++)
+    {
+        joueur[j].classe.description_attaque = "Inflige 1 à 5 de dégât à l'adversaire s'il est à la portée du coup (1 carreau).";
+    }
 
     // Chargement de l'image (l'allocation a lieu en m�me temps)
 
@@ -49,8 +65,9 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur)
 
     clear_bitmap(buffer);
     time_t start = time(NULL);
+    int joueur_en_vie = 4;
     // Boucle d'animation
-    while (!key[KEY_ESC])
+    while (joueur_en_vie != 0)
     {
         clear_bitmap(buffer);
         blit(map, buffer, 250, 100, 0, 0, 1280, 720);

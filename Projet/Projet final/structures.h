@@ -14,12 +14,14 @@ typedef struct sorts
     int zone;
     BITMAP* logo;
     BITMAP* animation_sort;
+    char* description;
 }t_sort;
 
 typedef struct classes
 {
     int attaque;
     BITMAP* logo_attaque;
+    char* description_attaque;
     t_sort sort1;
     t_sort sort2;
     t_sort sort3;
@@ -40,6 +42,7 @@ typedef struct Players
     int pv;
     int pm;
     int pa;
+    int vivant;
     t_classe classe;
 }t_joueur;
 
