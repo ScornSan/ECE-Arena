@@ -37,6 +37,9 @@
 		<Unit filename="Menu_et_choix/creation_classes.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="Menu_et_choix/menu.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="Partie_en_cours/Tour_joueur.c">
 			<Option compilerVar="CC" />
 		</Unit>

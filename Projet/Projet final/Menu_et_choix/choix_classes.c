@@ -70,7 +70,7 @@ void affichage_classe(t_joueur* joueur, BITMAP* buffer, BITMAP* classe[], int *n
     rectfill(buffer, x_depart + 100 * 3, 150, 450, 450, makecol(255, 0, 0));
     rectfill(buffer, 100 * 5, 150, 600, 450, makecol(255, 0, 0));
     rectfill(buffer, x_depart + 100 * 6, 150, 750, 450, makecol(255, 0, 0));*/
-    sprintf(texte, "Joueur %d, choisissez votre classe", *nb + 1);
+    sprintf(texte, "%s, choisissez votre classe", joueur[*nb].pseudo);
     textprintf_ex(buffer, font, 500, 20, makecol(255, 0, 0), -1, texte);
     for (int i = 0; i < 4; i++)
     {
@@ -136,7 +136,7 @@ void affichage_classe(t_joueur* joueur, BITMAP* buffer, BITMAP* classe[], int *n
     }
 }
 
-void choix_classe(BITMAP *buffer, BITMAP* cursor, t_joueur* joueur)
+void choix_classe(BITMAP *buffer, BITMAP* cursor, t_joueur* joueur, int nb_joueurs)
 {
     // Déclaration du pointeur sur BITMAP devant recevoir l'image
     BITMAP *classe[4];
@@ -160,7 +160,7 @@ void choix_classe(BITMAP *buffer, BITMAP* cursor, t_joueur* joueur)
     clear_bitmap(buffer);
 
     // Boucle d'animation (quand on arrive aux nombres de joueurs, ici 3, c'est que la selection pour chaque joueur a été faite)
-    while (nb != 4)
+    while (nb != nb_joueurs)
     {
         clear_bitmap(buffer);
         affichage_classe(joueur, buffer, classe, &nb);

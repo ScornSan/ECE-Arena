@@ -9,9 +9,9 @@ typedef struct sorts
     int portee_min;
     int portee_max;
     int cout;
-    int degats;
+    int degats_min;
+    int degats_max;
     int chance;
-    int zone;
     BITMAP* logo;
     BITMAP* animation_sort;
     char* description;
@@ -32,6 +32,7 @@ typedef struct classes
 
 typedef struct Players
 {
+    char pseudo[20];
     int id_classe;
     BITMAP* skin;
     int position[23][23];
@@ -42,8 +43,20 @@ typedef struct Players
     int pv;
     int pm;
     int pa;
+    int statut;
     int vivant;
     t_classe classe;
 }t_joueur;
+
+typedef struct bloc
+{
+    int red;
+    int green;
+    int blue;
+    int x_bloc;
+    int y_bloc;
+    int accessible;
+    int occuper;
+}t_bloc;
 
 #endif // STRUCTURES_H_INCLUDED

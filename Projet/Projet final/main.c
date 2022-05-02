@@ -1,6 +1,11 @@
 #include "structures.h"
 #include "prototypes.h"
 
+int pourcentage_de_chance() // Retourne u nombre entre 1 et 10
+{
+    return rand() % 10 + 1; // On appellera le spgm quand on lancera une attaque, et on test pour savoir si l'attaque reussi
+}
+
 void display_cursor(BITMAP* cursor, BITMAP* buffer, int mouse_x, int mouse_y)
 {
     masked_blit(cursor, buffer, 0, 0, mouse_x, mouse_y, cursor->w, cursor->h);
@@ -8,6 +13,8 @@ void display_cursor(BITMAP* cursor, BITMAP* buffer, int mouse_x, int mouse_y)
 
 int main()
 {
+    int nb_joueurs;
+    srand(time(NULL));
     BITMAP *cursor;
     BITMAP *buffer;
     // Lancer allegro et le mode graphique
@@ -32,7 +39,8 @@ int main()
     // Boucle d'animation (quand on arrive aux nombres de joueurs, ici 3, c'est que la selection pour chaque joueur a été faite)
     while (key != KEY_ESC)
     {
-        choix_classe(buffer, cursor, joueur);
+        nb_joueurs = menu(buffer, cursor, joueur);
+        choix_classe(buffer, cursor, joueur, nb_joueurs);
         tour_joueur(buffer, cursor, joueur);
     }
     destroy_bitmap(cursor);

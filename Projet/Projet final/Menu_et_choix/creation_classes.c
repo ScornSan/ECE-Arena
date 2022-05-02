@@ -9,7 +9,8 @@ void creation_joueurs(t_joueur* joueur)
         joueur[i].pm = 3;
         joueur[i].pa = 6;
         joueur[i].classe.attaque = 5;
-        joueur[i].classe.logo_attaque = load_bitmap("BITMAP/assassin_attaque1_gauche.bmp", NULL);
+        joueur[i].vivant = 1;
+        joueur[i].classe.logo_attaque = load_bitmap("BITMAP/sort_attaque.bmp", NULL);
         switch(joueur[i].id_classe)
         {
         case 1: // creation d'une classe guerrier
