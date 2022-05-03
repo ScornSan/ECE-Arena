@@ -17,7 +17,7 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1651590663 c:\repos\ece-arena\projet\projet final\structures.h
+1651598895 c:\repos\ece-arena\projet\projet final\structures.h
 	<allegro.h>
 
 1651590847 c:\repos\ece-arena\projet\projet final\prototypes.h
@@ -27,7 +27,7 @@
 	<time.h>
 	<string.h>
 
-1651596799 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\tour_joueur.c
+1651598593 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\tour_joueur.c
 	"../prototypes.h"
 	"../structures.h"
 

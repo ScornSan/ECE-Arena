@@ -1,7 +1,7 @@
 #include "../prototypes.h"
 #include "../structures.h"
 
-void deplacement_joueur(BITMAP *buffer, BITMAP *buffer_pixels, BITMAP *buffer_map, BITMAP *fond, BITMAP *cursor, t_joueur* joueur, BITMAP * croix_rouge, BITMAP * croix_bleue, int i)
+void deplacement_joueur(BITMAP *buffer, BITMAP *buffer_pixels, BITMAP *buffer_map, BITMAP *fond, BITMAP *cursor, t_joueur* joueur, BITMAP * croix_rouge, BITMAP * croix_bleue, int ligne_joueur, int colonne_joueur, int ligne_souris, int colonne_souris)
 {
     cursor = load_bitmap("cursor.bmp", NULL);
     int x_souris;
@@ -15,21 +15,15 @@ void deplacement_joueur(BITMAP *buffer, BITMAP *buffer_pixels, BITMAP *buffer_ma
     int nombre_pm = 3;
     //int x = 114, y = 399;
     //quadrillage_test(screen);
-    distribution_couleur_blocs(buffer_map, joueur[i].position);
-    definition_accessible(joueur[i].position);
-    definition_occuper(joueur[i].position);
 
-    int ligne_souris, colonne_souris;
     int green_mouse, red_mouse, blue_mouse;
 
-    blit(fond, buffer_pixels, 0, 0, 0, 0, fond->w, fond->h);
-    int ligne_joueur = 10, colonne_joueur = 10;
     while (deplacement_effectuer != 50)
     {
         lecture_pixels_buffer_map(buffer_map, &red_mouse, &green_mouse, &blue_mouse);
         blit(fond, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-        //effacement_bloc_unique(buffer_pixels,buffer, ligne_joueur, colonne_joueur+2, joueur[i].position, 255,100,255);
         reperage_bloc_souris(&ligne_souris, &colonne_souris, red_mouse, green_mouse, blue_mouse, joueur[i].position, &autorisation_dep);
+        //effacement_bloc_unique(buffer_pixels,buffer, ligne_joueur, colonne_joueur+2, joueur[i].position, 255,100,255);
         if(mouse_b && autorisation_dep == 1)
         {
             /// variables contenant les parametres de la souris au moment du clic

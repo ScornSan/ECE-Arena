@@ -65,6 +65,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
     BITMAP * croix_bleue;
 
     int i = 0;
+    t_bloc matrice[23][23];
 
     // Chargement de l'image (l'allocation a lieu en m�me temps)
 
@@ -84,6 +85,11 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
 
     //creations des classes pour chaque joueurs
     creation_icones_classes(joueur);
+
+    // creation des calques sous la map, et initialisation des cases innacessibles
+    distribution_couleur_blocs(buffer_map, matrice);
+    definition_accessible(matrice);
+    definition_occuper(matrice);
 
     if (!map)
     {
@@ -112,6 +118,8 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
     {
         if (joueur[i].vivant) // on fait joueur le joueur i car il est vivant
         {
+            clear_bitmap(buffer_map);
+            clear_bitmap(buffer_pixels);
             clear_bitmap(buffer);
             blit(map, buffer, 250, 100, 0, 0, 1280, 720);
             affichage_hud_sorts(joueur, i, buffer, hud_icone, desc_sorts); // Blit de 5 logos (les mêmes pour la barre d'action, à changer après...)
@@ -120,8 +128,8 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
             textprintf_ex(buffer, font, 0, 10, makecol(0, 0, 0), -1, "Mouse Y : %d", mouse_y);
             textprintf_ex(buffer, font, 0, 20, makecol(0, 0, 0), -1, "Temps: %f", (float)((time(NULL)) - start));
             rectfill(buffer, 1000, 650, 1000 - (int)((time(NULL)) - start) * 5, 673, makecol(255, 0, 0)); // barre de temps
-            reperage_chemin(buffer, &ligne_joueur, &colonne_joueur, ligne_souris, colonne_souris, joueur[i].position);
-            deplacement_joueur(buffer, buffer_pixels, buffer_map, map, cursor, joueur, croix_rouge, croix_bleue, i);
+            reperage_chemin(buffer, &ligne_joueur, &colonne_joueur, ligne_souris, colonne_souris, matrice);
+            deplacement_joueur(buffer, buffer_pixels, buffer_map, cursor, joueur, croix_rouge, croix_bleue, i);
             display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             if ((int)(time(NULL) - start >= TEMPS_TOUR) || (mouse_b&1 && (mouse_x >= 900 && mouse_x <= 1000 && mouse_y >= 600 && mouse_y <= 700)))
