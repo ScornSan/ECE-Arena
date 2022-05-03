@@ -54,14 +54,14 @@ char* ecriture_classe(int i)
     case 1:
         return "  MAGE";
     case 2:
-        return " MUTANT";
+        return "  VAMPIRE";
     case 3:
         return "ASSASSIN";
     }
     return 0;
 }
 
-void affichage_classe(t_joueur* joueur, BITMAP* buffer, BITMAP* classe[], int *nb)
+void affichage_classe(t_joueur* joueur, BITMAP* buffer, BITMAP *bg, BITMAP* classe[], int *nb)
 {
     int x_depart = 70;
     char texte[50];
@@ -70,18 +70,21 @@ void affichage_classe(t_joueur* joueur, BITMAP* buffer, BITMAP* classe[], int *n
     rectfill(buffer, x_depart + 100 * 3, 150, 450, 450, makecol(255, 0, 0));
     rectfill(buffer, 100 * 5, 150, 600, 450, makecol(255, 0, 0));
     rectfill(buffer, x_depart + 100 * 6, 150, 750, 450, makecol(255, 0, 0));*/
+    blit(bg, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     sprintf(texte, "%s, choisissez votre classe", joueur[*nb].pseudo);
-    textprintf_ex(buffer, font, 500, 20, makecol(255, 0, 0), -1, texte);
+    textprintf_ex(buffer, font, 500, 20, makecol(joueur[*nb].r, joueur[*nb].g, joueur[*nb].b), -1, texte);
     for (int i = 0; i < 4; i++)
     {
         reset_color(classe[0]);
         textprintf(buffer, font, x_depart + 120 * i * 3, 500, makecol(255, 0, 0), ecriture_classe(i));
         masked_blit(classe[i], buffer, 0, 0, 120 * i*3, 150, classe[i]->w, classe[i]->h);
     }
+    textprintf_ex(buffer,font,96,36,makecol(0,255,0), makecol(0,0,0),"%4d %4d",mouse_x,mouse_y);
+    /// CLASSE GUERRIER
     if(mouse_x >= 30 && mouse_x <= 120 && mouse_y >= 150 && mouse_y <= 450)
     {
         rectfill(buffer, x_depart, 510, x_depart + 56, 512, makecol(255, 0, 0));
-        textprintf_ex(buffer, font, x_depart, 540, makecol(255, 0, 0), -1, "Sort 1");
+        textprintf_ex(buffer, font, x_depart, 540, makecol(255, 0, 0), -1, "");
         textprintf_ex(buffer, font, x_depart, 560, makecol(255, 0, 0), -1, "Sort 2");
         textprintf_ex(buffer, font, x_depart, 580, makecol(255, 0, 0), -1, "Sort 3");
         textprintf_ex(buffer, font, x_depart, 600, makecol(255, 0, 0), -1, "Sort 4");
@@ -92,6 +95,7 @@ void affichage_classe(t_joueur* joueur, BITMAP* buffer, BITMAP* classe[], int *n
             rest(100);
         }
     }
+    /// CLASSE MAGE
     if(mouse_x >= 400 && mouse_x <= 500 && mouse_y >= 150 && mouse_y <= 450)
     {
         rectfill(buffer, x_depart + 120 * 3, 510, x_depart + 120 * 3 + 56, 512, makecol(255, 0, 0));
@@ -106,6 +110,7 @@ void affichage_classe(t_joueur* joueur, BITMAP* buffer, BITMAP* classe[], int *n
             rest(100);
         }
     }
+    /// CLASSE VAMPIRE
     if(mouse_x >= 750 && mouse_x <= 840 && mouse_y >= 150 && mouse_y <= 450)
     {
         rectfill(buffer, x_depart + 120 * 6, 510, x_depart + 120 * 6 + 56, 512, makecol(255, 0, 0));
@@ -120,6 +125,7 @@ void affichage_classe(t_joueur* joueur, BITMAP* buffer, BITMAP* classe[], int *n
             rest(100);
         }
     }
+    /// CLASSE ASSASSIN
     if(mouse_x >= 1100 && mouse_x <= 1200 && mouse_y >= 150 && mouse_y <= 450)
     {
         rectfill(buffer, x_depart + 120 * 9, 510, x_depart + 120 * 9 + 56, 512, makecol(255, 0, 0));
@@ -134,9 +140,10 @@ void affichage_classe(t_joueur* joueur, BITMAP* buffer, BITMAP* classe[], int *n
             rest(100);
         }
     }
+    rest(20);
 }
 
-void choix_classe(BITMAP *buffer, BITMAP* cursor, t_joueur* joueur, int nb_joueurs)
+void choix_classe(BITMAP *buffer, BITMAP *fond, BITMAP* cursor, t_joueur* joueur, int nb_joueurs)
 {
     // Déclaration du pointeur sur BITMAP devant recevoir l'image
     BITMAP *classe[4];
@@ -147,7 +154,7 @@ void choix_classe(BITMAP *buffer, BITMAP* cursor, t_joueur* joueur, int nb_joueu
 
     for (int i = 0; i < 4; i++)
     {
-        sprintf(nom_perso, "BITMAP/perso%d.bmp", i);
+        sprintf(nom_perso, "BITMAP/persoo%d.bmp", i);
         classe[i] = load_bitmap(nom_perso,NULL);
         if (!classe[i])
         {
@@ -163,7 +170,7 @@ void choix_classe(BITMAP *buffer, BITMAP* cursor, t_joueur* joueur, int nb_joueu
     while (nb != nb_joueurs)
     {
         clear_bitmap(buffer);
-        affichage_classe(joueur, buffer, classe, &nb);
+        affichage_classe(joueur, buffer, fond, classe, &nb);
         display_cursor(cursor, buffer, mouse_x, mouse_y);
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 

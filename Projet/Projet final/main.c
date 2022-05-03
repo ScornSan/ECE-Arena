@@ -1,6 +1,15 @@
 #include "structures.h"
 #include "prototypes.h"
 
+void chrono()
+{
+    time_t start = time (NULL);
+    while ((float) (time (NULL) - start)<= 2.1)
+    {
+        printf ("Duree = %fs\n", (float) (time (NULL) - start));
+    }
+}
+
 int pourcentage_de_chance() // Retourne u nombre entre 1 et 10
 {
     return rand() % 10 + 1; // On appellera le spgm quand on lancera une attaque, et on test pour savoir si l'attaque reussi
@@ -13,9 +22,10 @@ void display_cursor(BITMAP* cursor, BITMAP* buffer, int mouse_x, int mouse_y)
 
 int main()
 {
-    int nb_joueurs;
     srand(time(NULL));
+    int nb_joueurs;
     BITMAP *cursor;
+    BITMAP *fond;
     BITMAP *buffer;
     // Lancer allegro et le mode graphique
     allegro_init();
@@ -31,17 +41,21 @@ int main()
     }
 
     cursor=load_bitmap("BITMAP/cursor.bmp",NULL);
+    fond = load_bitmap("BITMAP/fond.bmp", NULL);
+
     buffer = create_bitmap(SCREEN_W, SCREEN_H);
     clear_bitmap(buffer);
 
     t_joueur* joueur = (t_joueur*)malloc(sizeof(t_joueur) * 4);
 
+    creation_classes(joueur);
+
     // Boucle d'animation (quand on arrive aux nombres de joueurs, ici 3, c'est que la selection pour chaque joueur a été faite)
     while (key != KEY_ESC)
     {
-        nb_joueurs = menu(buffer, cursor, joueur);
-        choix_classe(buffer, cursor, joueur, nb_joueurs);
-        tour_joueur(buffer, cursor, joueur);
+        nb_joueurs = menu(buffer, fond, cursor, joueur);
+        choix_classe(buffer, fond, cursor, joueur, nb_joueurs);
+        tour_joueur(buffer, cursor, joueur, nb_joueurs);
     }
     destroy_bitmap(cursor);
     destroy_bitmap(buffer);

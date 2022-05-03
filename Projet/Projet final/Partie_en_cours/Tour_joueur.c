@@ -11,34 +11,30 @@ void affichage_hud_sorts(t_joueur* joueur, int i, BITMAP* buffer, BITMAP* hud_ic
     blit(joueur[i].classe.sort4.logo, buffer, 0, 0, 440, 670, SCREEN_W, SCREEN_H);
     if (mouse_x >= 300 && mouse_x <= 330 && mouse_y >= 670 && mouse_y <= 700) // attaque de bas
     {
-        masked_blit(desc_sorts, buffer, 0, 0, 278, 550, SCREEN_W, SCREEN_H); // affichage bitmap description
-        textout_ex(desc_sorts, font, "DEGATS:", 18, 16, makecol(255, 0, 0), -1);
-        textprintf_ex(desc_sorts, font, 80, 16, makecol(255, 0, 0), -1, "%d-%d", 1, joueur[i].classe.attaque);
-        textprintf_ex(desc_sorts, font, 18, 30, makecol(0, 0, 255), -1, "PA: %d", joueur[i].pa);
-        textprintf_ex(desc_sorts, font, 18, 44, makecol(0, 255, 0), -1, "PM: %d", joueur[i].pm);
-        textprintf_ex(desc_sorts, font, 18, 58, makecol(0, 0, 0), -1, "Portee: %d", 1);
-        textout_ex(desc_sorts, font, "%", 15, 72, makecol(0, 0, 0), -1);
-        textprintf_ex(desc_sorts, font, 20, 72, makecol(0, 0, 0), -1, "chance: %d", 90);
+        masked_blit(desc_sorts, buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H);
     }
     if (mouse_x >= 335 && mouse_x <= 365 && mouse_y >= 670 && mouse_y <= 700) // sort 1
     {
         masked_blit(desc_sorts, buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage bitmap description
+        masked_blit(joueur[i].classe.sorts[0], buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage description sort 1
 
     }
     if (mouse_x >= 370 && mouse_x <= 400 && mouse_y >= 670 && mouse_y <= 700) // sort 2
     {
-        masked_blit(desc_sorts, buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage bitmap description
+        masked_blit(desc_sorts, buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage stats sorts
+        masked_blit(joueur[i].classe.sorts[1], buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage bitmap description sort 2
 
     }
     if (mouse_x >= 405 && mouse_x <= 435 && mouse_y >= 670 && mouse_y <= 700) // sort 3
     {
-        masked_blit(desc_sorts, buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage bitmap description
+        masked_blit(desc_sorts, buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage stats sorts
+        masked_blit(joueur[i].classe.sorts[2], buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage description sort 3
 
     }
     if (mouse_x >= 440 && mouse_x <= 470 && mouse_y >= 670 && mouse_y <= 700) // sort 4
     {
-        masked_blit(desc_sorts, buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage bitmap description
-
+        masked_blit(desc_sorts, buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage stats sort
+        masked_blit(joueur[i].classe.sorts[3], buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage description sort 4
     }
 }
 
@@ -53,7 +49,7 @@ void affichage_hud_joueur(BITMAP* buffer, BITMAP* hud, t_joueur* joueur, int i)
     textprintf_ex(buffer, font, 120, 687, makecol(255, 255, 255), -1, "PM : %d/3", joueur[i].pm);
 }
 
-void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur)
+void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueurs)
 {
     // Déclaration du pointeur sur BITMAP devant recevoir l'image
     BITMAP *map;
@@ -62,14 +58,13 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur)
     BITMAP *desc_sorts;
     FONT *kristen12;
     FONT *fixedsys;
-    int i = 0;
-    int j;
 
-    // Declaration des phrases pour chaque commentaire sur les classes
-    for (j = 0; j < 4; j++)
-    {
-        joueur[j].classe.description_attaque = "Inflige 1 à 5 de dégât à l'adversaire s'il est à la portée du coup (1 carreau).";
-    }
+    BITMAP * buffer_pixels; // LE 2
+    BITMAP * buffer_map; // LE 1
+    BITMAP * croix_rouge;
+    BITMAP * croix_bleue;
+
+    int i = 0;
 
     // Chargement de l'image (l'allocation a lieu en m�me temps)
 
@@ -80,7 +75,15 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur)
     kristen12 = load_font("FONT/kristen12.pcx", NULL, NULL);
     fixedsys = load_font("FONT/fixedsys10.pcx", NULL, NULL);
 
-    creation_joueurs(joueur);
+    buffer =create_bitmap(SCREEN_W,SCREEN_H);
+    buffer_map =create_bitmap(SCREEN_W,SCREEN_H);
+    buffer_pixels =create_bitmap(SCREEN_W,SCREEN_H);
+    croix_rouge = load_bitmap("croix_rouge.bmp", NULL);
+    croix_bleue = load_bitmap("croix_bleue.bmp", NULL);
+
+
+    //creations des classes pour chaque joueurs
+    creation_icones_classes(joueur);
 
     if (!map)
     {
@@ -92,6 +95,16 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur)
     clear_bitmap(buffer);
     time_t start = time(NULL);
     int joueur_en_vie = 4;
+
+
+    textout_ex(desc_sorts, font, "DEGATS:", 18, 20, makecol(255, 0, 0), -1);
+    textout_ex(desc_sorts, font, "PA:", 18, 34, makecol(60, 0, 255), -1);
+    textout_ex(desc_sorts, font, "PM:", 18, 48, makecol(0, 255, 0), -1);
+    textout_ex(desc_sorts, font, "Portee:", 18, 62, makecol(255, 255, 255), -1);
+    textout_ex(desc_sorts, font, "%", 18, 76, makecol(0, 0, 0), -1);
+    textout_ex(desc_sorts, font, "chance:", 34, 76, makecol(0, 0, 0), -1);
+    //textprintf_ex(desc_sorts, font, 80, 16, makecol(255, 0, 0), -1, "%d-%d", 1, joueur[i].classe.attaque);
+
     // Boucle d'animation
     while (joueur_en_vie != 0)
     {
@@ -105,6 +118,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur)
             textprintf_ex(buffer, font, 0, 10, makecol(0, 0, 0), -1, "Mouse Y : %d", mouse_y);
             textprintf_ex(buffer, font, 0, 20, makecol(0, 0, 0), -1, "Temps: %f", (float)((time(NULL)) - start));
             rectfill(buffer, 1000, 650, 1000 - (int)((time(NULL)) - start) * 5, 673, makecol(255, 0, 0)); // barre de temps
+            deplacement_joueur(buffer, buffer_pixels, buffer_map, map, cursor, joueur, croix_rouge, croix_bleue, i);
             display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             if ((int)(time(NULL) - start >= TEMPS_TOUR) || (mouse_b&1 && (mouse_x >= 900 && mouse_x <= 1000 && mouse_y >= 600 && mouse_y <= 700)))
@@ -112,17 +126,17 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur)
                 start = time(NULL);
                 joueur[i].pm = 3; // on remet les pm et pa du joueur au nombre initial
                 joueur[i].pa = 6;
-                i = (i + 1) % 4; // On boucle car temps finis ou on a cliqué sur le bouton
+                i = (i + 1) % nb_joueurs; // On boucle car temps finis ou on a cliqué sur le bouton
             }
         }
         else
         {
-            i = (i + 1) % 4; // On boucle car le joueur est mort
+            i = (i + 1) % nb_joueurs; // On boucle car le joueur est mort
         }
         rest(20);
     }
     /// On fera une espèce d'animation de fin de jeu, on affiche le classement et on appuie sur un bouton quand on veut continuer
-    /// on revient donc au menu (insérez le programme de Sarah
+    /// on revient donc au menu (insérez le programme de Sarah)
 
     for (int i = 0; i < 4; i++)
     {

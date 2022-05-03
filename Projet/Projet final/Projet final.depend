@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1651496831 source:c:\repos\ece-arena\projet\projet final\main.c
+1651590867 source:c:\repos\ece-arena\projet\projet final\main.c
 	"structures.h"
 	"prototypes.h"
 
@@ -9,33 +9,61 @@
 	<allegro.h>
 	<time.h>
 
-1651496986 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\choix_classes.c
+1651585068 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\choix_classes.c
 	"../prototypes.h"
 	"../structures.h"
 
-1651403667 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\creation_classes.c
+1651589248 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\creation_classes.c
 	"../prototypes.h"
 	"../structures.h"
 
-1651419130 c:\repos\ece-arena\projet\projet final\structures.h
+1651590663 c:\repos\ece-arena\projet\projet final\structures.h
 	<allegro.h>
 
-1651496902 c:\repos\ece-arena\projet\projet final\prototypes.h
+1651590847 c:\repos\ece-arena\projet\projet final\prototypes.h
 	<stdio.h>
 	<stdlib.h>
 	<allegro.h>
 	<time.h>
 	<string.h>
 
-1651503236 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\tour_joueur.c
+1651590915 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\tour_joueur.c
 	"../prototypes.h"
 	"../structures.h"
 
-1651419607 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\deplacement_joueur.c
+1651590806 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\deplacement_joueur.c
 	"../prototypes.h"
 	"../structures.h"
 
-1651502505 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\menu.c
+1651590159 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\menu.c
 	"../structures.h"
 	"../prototypes.h"
+
+1651588596 source:c:\repos\ece-arena\projet\projet final\spgm affichages\affichage_elements.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651588790 source:c:\repos\ece-arena\projet\projet final\spgm affichages\calques.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651589091 source:c:\repos\ece-arena\projet\projet final\spgm affichages\dessins_blocs.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651588444 source:c:\repos\ece-arena\projet\projet final\spgm affichages\initialisations_tab.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651588630 source:c:\repos\ece-arena\projet\projet final\spgm affichages\lecture_pixels.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651588493 source:c:\repos\ece-arena\projet\projet final\spgm affichages\quadrilages.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651588844 source:c:\repos\ece-arena\projet\projet final\spgm affichages\zone_deplacement.c
+	"../prototypes.h"
+	"../structures.h"
 

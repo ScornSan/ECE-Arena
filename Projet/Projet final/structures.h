@@ -4,11 +4,22 @@
 #include <allegro.h>
 #define TEMPS_TOUR 15
 
+typedef struct bloc
+{
+    int red;
+    int green;
+    int blue;
+    int x_bloc;
+    int y_bloc;
+    int accessible;
+    int occuper;
+} t_bloc;
+
 typedef struct sorts
 {
     int portee_min;
     int portee_max;
-    int cout;
+    int cout_pa;
     int degats_min;
     int degats_max;
     int chance;
@@ -21,7 +32,7 @@ typedef struct classes
 {
     int attaque;
     BITMAP* logo_attaque;
-    char* description_attaque;
+    BITMAP* sorts[4];
     t_sort sort1;
     t_sort sort2;
     t_sort sort3;
@@ -35,9 +46,12 @@ typedef struct Players
     char pseudo[20];
     int id_classe;
     BITMAP* skin;
-    int position[23][23];
+    t_bloc position[23][23];
     int x;
     int y;
+    int ligne_joueur;
+    int colonne_joueur;
+    int nb_pm;
     int dx;
     int dy;
     int pv;
@@ -45,18 +59,11 @@ typedef struct Players
     int pa;
     int statut;
     int vivant;
+    int r;
+    int g;
+    int b;
     t_classe classe;
 }t_joueur;
 
-typedef struct bloc
-{
-    int red;
-    int green;
-    int blue;
-    int x_bloc;
-    int y_bloc;
-    int accessible;
-    int occuper;
-}t_bloc;
 
 #endif // STRUCTURES_H_INCLUDED

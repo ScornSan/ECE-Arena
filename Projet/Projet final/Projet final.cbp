@@ -46,6 +46,12 @@
 		<Unit filename="Partie_en_cours/deplacement_joueur.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="SPGM Utilitaires/dessins_blocs.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="SPGM Utilitaires/quadrilages.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

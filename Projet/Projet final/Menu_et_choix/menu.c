@@ -123,13 +123,12 @@ void menu_principal(BITMAP *buffer, BITMAP *accueil, BITMAP *cursor)
 }
 
 
-int menu(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur)
+int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, t_joueur* joueur)
 {
     int fin;
     int ok;
     int nb_joueur = 0;
     int y = 314;
-    BITMAP *fond;
     BITMAP *creators;
     BITMAP *choix_nb_joueurs;
     BITMAP *nom_joueurs;
@@ -139,7 +138,6 @@ int menu(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur)
     // init. variable de sortie boucle interactive
     fin=0;
 
-    fond = load_bitmap("BITMAP/fond.bmp", NULL);
     creators = load_bitmap("BITMAP/creators.bmp", NULL);
     choix_nb_joueurs =load_bitmap("BITMAP/buffer_nb_joueurs.bmp", NULL);
     nom_joueurs =load_bitmap("BITMAP/noms.bmp", NULL);
@@ -246,7 +244,6 @@ int menu(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur)
 
         }
     }
-    destroy_bitmap(fond);
     destroy_bitmap(creators);
     destroy_bitmap(choix_nb_joueurs);
     return nb_joueur;
