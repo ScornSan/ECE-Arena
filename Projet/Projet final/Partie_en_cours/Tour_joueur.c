@@ -68,7 +68,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
 
     // Chargement de l'image (l'allocation a lieu en m�me temps)
 
-    map = load_bitmap("BITMAP/terraintest.bmp", NULL);
+    map = load_bitmap("BITMAP/map.bmp", NULL);
     hud_joueur = load_bitmap("BITMAP/hud_joueur2.bmp", NULL);
     hud_icone = load_bitmap("BITMAP/hud_icone_temp.bmp", NULL);
     desc_sorts = load_bitmap("BITMAP/desc_sorts.bmp", NULL);
@@ -104,9 +104,11 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
     textout_ex(desc_sorts, font, "%", 18, 76, makecol(0, 0, 0), -1);
     textout_ex(desc_sorts, font, "chance:", 34, 76, makecol(0, 0, 0), -1);
     //textprintf_ex(desc_sorts, font, 80, 16, makecol(255, 0, 0), -1, "%d-%d", 1, joueur[i].classe.attaque);
+    int ligne_souris, colonne_souris;
+    int ligne_joueur = 10, colonne_joueur = 10;
 
     // Boucle d'animation
-    while (joueur_en_vie != 0)
+    while (joueur_en_vie != 1)
     {
         if (joueur[i].vivant) // on fait joueur le joueur i car il est vivant
         {
@@ -118,6 +120,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
             textprintf_ex(buffer, font, 0, 10, makecol(0, 0, 0), -1, "Mouse Y : %d", mouse_y);
             textprintf_ex(buffer, font, 0, 20, makecol(0, 0, 0), -1, "Temps: %f", (float)((time(NULL)) - start));
             rectfill(buffer, 1000, 650, 1000 - (int)((time(NULL)) - start) * 5, 673, makecol(255, 0, 0)); // barre de temps
+            reperage_chemin(buffer, &ligne_joueur, &colonne_joueur, ligne_souris, colonne_souris, joueur[i].position);
             deplacement_joueur(buffer, buffer_pixels, buffer_map, map, cursor, joueur, croix_rouge, croix_bleue, i);
             display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);

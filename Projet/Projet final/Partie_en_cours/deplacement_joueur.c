@@ -27,7 +27,7 @@ void deplacement_joueur(BITMAP *buffer, BITMAP *buffer_pixels, BITMAP *buffer_ma
     while (deplacement_effectuer != 50)
     {
         lecture_pixels_buffer_map(buffer_map, &red_mouse, &green_mouse, &blue_mouse);
-        blit(fond, buffer, 0, 0, 0, 0, fond->w, fond->h);
+        blit(fond, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
         //effacement_bloc_unique(buffer_pixels,buffer, ligne_joueur, colonne_joueur+2, joueur[i].position, 255,100,255);
         reperage_bloc_souris(&ligne_souris, &colonne_souris, red_mouse, green_mouse, blue_mouse, joueur[i].position, &autorisation_dep);
         if(mouse_b && autorisation_dep == 1)
@@ -36,7 +36,7 @@ void deplacement_joueur(BITMAP *buffer, BITMAP *buffer_pixels, BITMAP *buffer_ma
             lecture_pixels_buffer_map(buffer_map, &red_mouse, &green_mouse, &blue_mouse);
             /// recherche du bloc correspondant sous la souris au moment du clic
             reperage_bloc_souris(&ligne_souris, &colonne_souris, red_mouse, green_mouse, blue_mouse, joueur[i].position, &autorisation_dep);
-
+            printf("reperage2\n");
             /// condition si la souris clic sur un bloc valable
             if (joueur[i].position[ligne_souris][colonne_souris].accessible == 0)
             {
@@ -71,13 +71,12 @@ void deplacement_joueur(BITMAP *buffer, BITMAP *buffer_pixels, BITMAP *buffer_ma
         //couleur_sous_joueur(buffer, ligne_joueur, colonne_joueur, joueur[i].position);
         textprintf_ex(buffer, font, 415, 710, makecol(0,255,0), -1, "position de la souris : x = %d et y = %d", mouse_x, mouse_y);
         quadrillage_test(buffer);
-        affichage_croix_bleue(buffer, croix_bleue, ligne_souris, colonne_souris, joueur[i].position);
-        affichage_croix_rouge(buffer, croix_rouge, ligne_souris, colonne_souris, joueur[i].position);
+        //affichage_croix_bleue(buffer, croix_bleue, ligne_souris, colonne_souris, joueur[i].position);
+        //affichage_croix_rouge(buffer, croix_rouge, ligne_souris, colonne_souris, joueur[i].position);
         //encadrement_souris(buffer, red_mouse, green_mouse, blue_mouse);
         deplacement_nombre_pm(buffer_pixels, buffer, ligne_joueur, colonne_joueur, joueur[i].position, &nombre_pm, &clic, cursor);
-        reperage_chemin(buffer, &ligne_joueur, &colonne_joueur, ligne_souris, colonne_souris, joueur[i].position);
         circlefill(buffer, joueur[i].position[ligne_joueur][colonne_joueur].x_bloc, joueur[i].position[ligne_joueur][colonne_joueur].y_bloc, 9, makecol(0,0,0));
-        blit(buffer, screen, 0, 0, 0, 0, buffer->w, buffer->h);
+        blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     }
     textout_ex(screen, font,"Au tour du joueur suivant ",15, 100, makecol(255,255,255), -1);
 }
