@@ -47,8 +47,8 @@ typedef struct Players
     int id_classe;
     BITMAP* skin;
     t_bloc position[23][23];
-    int ligne_joueur;
-    int colonne_joueur;
+    int x;
+    int y;
     int nb_pm;
     int pv;
     int pm;

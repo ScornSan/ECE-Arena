@@ -1,18 +1,18 @@
 #include "../prototypes.h"
 #include "../structures.h"
 
-void reperage_chemin(BITMAP * buffer, int *ligne_joueur, int *colonne_joueur, int x_souris, int y_souris, t_bloc tab_bloc[23][23], t_joueur* j, int i, int *autorisation_dep)
+void reperage_chemin(BITMAP * buffer, int x_joueur, int y_joueur, int x_souris, int y_souris, t_bloc tab_bloc[23][23], t_joueur* j, int i, int *autorisation_dep)
 {
     int x_augmente;
     int y_augmente;
-    int x_joueur = *ligne_joueur;
-    int y_joueur = *colonne_joueur;
+    x_joueur = j[i].x;
+    y_joueur = j[i].y;
 
-    if (*ligne_joueur <= x_souris)
+    if (x_joueur <= x_souris)
         x_augmente = 1;
     else
         x_augmente = 0;
-    if (*colonne_joueur <= y_souris)
+    if (y_joueur <= y_souris)
         y_augmente = 1;
     else
         y_augmente = 0;
@@ -56,7 +56,7 @@ void reperage_chemin(BITMAP * buffer, int *ligne_joueur, int *colonne_joueur, in
     }
 }
 
-void deplacement_personnage(BITMAP * buffer,BITMAP * fond, int *ligne_joueur, int *colonne_joueur, int ligne_souris, int colonne_souris, t_bloc tab_bloc[23][23], int *deplacement_effectuer/*, int chrono1, int *erreur1*/)
+void deplacement_personnage(BITMAP * buffer,BITMAP * fond, t_joueur* joueur, int i, int ligne_souris, int colonne_souris, t_bloc tab_bloc[23][23], int *deplacement_effectuer/*, int chrono1, int *erreur1*/)
 {
 
     /// affichage du message d'erreur apres changement de prog et avec chrono :::::: A REGLER
@@ -85,54 +85,58 @@ void deplacement_personnage(BITMAP * buffer,BITMAP * fond, int *ligne_joueur, in
     int x_augmente;
     int y_augmente;
 
-    if (*ligne_joueur <= ligne_souris)
+    if (joueur[i].x <= ligne_souris)
         x_augmente = 1;
     else
         x_augmente = 0;
-    if (*colonne_joueur <= colonne_souris)
+    if (joueur[i].y <= colonne_souris)
         y_augmente = 1;
     else
         y_augmente = 0;
 
-    while (*ligne_joueur != ligne_souris || *colonne_joueur != colonne_souris)
+    while ((joueur[i].x != ligne_souris || joueur[i].y != colonne_souris) && (abs(joueur[i].x - ligne_souris) + abs(joueur[i].y - colonne_souris)) <= joueur[i].pm && !tab_bloc[ligne_souris][colonne_souris].occuper)
     {
         clear_bitmap(buffer);
         /// condition -> le joueur doit descendre
-        while(x_augmente && *ligne_joueur != ligne_souris && !tab_bloc[*ligne_joueur + 1][*colonne_joueur].occuper)
+        while(x_augmente && joueur[i].x != ligne_souris && !tab_bloc[joueur[i].x + 1][joueur[i].y].occuper)
         {
-            *ligne_joueur = *ligne_joueur +1;
+            joueur[i].x = joueur[i].x +1;
+            joueur[i].pm--;
             blit(fond, buffer, 0, 0, 0, 0, fond->w, fond->h);
-            circlefill(buffer, tab_bloc[*ligne_joueur][*colonne_joueur].x_bloc, tab_bloc[*ligne_joueur][*colonne_joueur].y_bloc, 9, makecol(0,0,0));
+            circlefill(buffer, tab_bloc[joueur[i].x][joueur[i].y].x_bloc, tab_bloc[joueur[i].x][joueur[i].y].y_bloc, 9, makecol(0,0,0));
             textprintf_ex(buffer, font, 415, 710, makecol(0,255,0), -1, "position de la souris : x = %d et y = %d", mouse_x, mouse_y);
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             usleep(200000);
         }
         /// condition -> le joueur doit monter
-        while(!x_augmente && *ligne_joueur != ligne_souris && !tab_bloc[*ligne_joueur - 1][*colonne_joueur].occuper)
+        while(!x_augmente && joueur[i].x != ligne_souris && !tab_bloc[joueur[i].x - 1][joueur[i].y].occuper)
         {
-            *ligne_joueur = *ligne_joueur -1;
+            joueur[i].x = joueur[i].x -1;
+            joueur[i].pm--;
             blit(fond, buffer, 0, 0, 0, 0, fond->w, fond->h);
-            circlefill(buffer, tab_bloc[*ligne_joueur][*colonne_joueur].x_bloc, tab_bloc[*ligne_joueur][*colonne_joueur].y_bloc, 9, makecol(0,0,0));
+            circlefill(buffer, tab_bloc[joueur[i].x][joueur[i].y].x_bloc, tab_bloc[joueur[i].x][joueur[i].y].y_bloc, 9, makecol(0,0,0));
             textprintf_ex(buffer, font, 415, 710, makecol(0,255,0), -1, "position de la souris : x = %d et y = %d", mouse_x, mouse_y);
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             usleep(200000);
         }
         /// condition -> le joueur doit aller a droite
-        while(y_augmente && *colonne_joueur != colonne_souris && !tab_bloc[*ligne_joueur][*colonne_joueur + 1].occuper)
+        while(y_augmente && joueur[i].y != colonne_souris && !tab_bloc[joueur[i].x][joueur[i].y + 1].occuper)
         {
-            *colonne_joueur = *colonne_joueur +1;
+            joueur[i].y = joueur[i].y +1;
+            joueur[i].pm--;
             blit(fond, buffer, 0, 0, 0, 0, fond->w, fond->h);
-            circlefill(buffer, tab_bloc[*ligne_joueur][*colonne_joueur].x_bloc, tab_bloc[*ligne_joueur][*colonne_joueur].y_bloc, 9, makecol(0,0,0));
+            circlefill(buffer, tab_bloc[joueur[i].x][joueur[i].y].x_bloc, tab_bloc[joueur[i].x][joueur[i].y].y_bloc, 9, makecol(0,0,0));
             textprintf_ex(buffer, font, 415, 710, makecol(0,255,0), -1, "position de la souris : x = %d et y = %d", mouse_x, mouse_y);
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             usleep(200000);
         }
         /// condition -> le joueur doit aller a gauche
-        while(!y_augmente && *colonne_joueur != colonne_souris && !tab_bloc[*ligne_joueur][*colonne_joueur - 1].occuper)
+        while(!y_augmente && joueur[i].y != colonne_souris && !tab_bloc[joueur[i].x][joueur[i].y - 1].occuper)
         {
-            *colonne_joueur = *colonne_joueur -1;
+            joueur[i].y = joueur[i].y -1;
+            joueur[i].pm--;
             blit(fond, buffer, 0, 0, 0, 0, fond->w, fond->h);
-            circlefill(buffer, tab_bloc[*ligne_joueur][*colonne_joueur].x_bloc, tab_bloc[*ligne_joueur][*colonne_joueur].y_bloc, 9, makecol(0,0,0));
+            circlefill(buffer, tab_bloc[joueur[i].x][joueur[i].y].x_bloc, tab_bloc[joueur[i].x][joueur[i].y].y_bloc, 9, makecol(0,0,0));
             textprintf_ex(buffer, font, 415, 710, makecol(0,255,0), -1, "position de la souris : x = %d et y = %d", mouse_x, mouse_y);
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             usleep(200000);

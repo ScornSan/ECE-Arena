@@ -111,7 +111,12 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
 
     //textprintf_ex(desc_sorts, font, 80, 16, makecol(255, 0, 0), -1, "%d-%d", 1, joueur[i].classe.attaque);
     int ligne_souris, colonne_souris;
-    int ligne_joueur = 10, colonne_joueur = 10;
+    joueur[0].x = 10;
+    joueur[0].y = 10;
+    joueur[1].x = 9;
+    joueur[1].y = 9;
+    int x_joueur = joueur[0].x;
+    int y_joueur = joueur[0].y;
     int green_mouse, red_mouse, blue_mouse;
     int autorisation_dep = 0;
     time_t chrono1 = time (NULL);
@@ -139,7 +144,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
 
             lecture_pixels_buffer_map(buffer_map, &red_mouse, &green_mouse, &blue_mouse);
             reperage_bloc_souris(&ligne_souris, &colonne_souris, red_mouse, green_mouse, blue_mouse, matrice, &autorisation_dep, joueur, i);
-            reperage_chemin(buffer, &ligne_joueur, &colonne_joueur, ligne_souris, colonne_souris, matrice, joueur[i], i, &autorisation_dep);
+            reperage_chemin(buffer, x_joueur, y_joueur, ligne_souris, colonne_souris, matrice, joueur, i, &autorisation_dep);
             if(autorisation_dep == 1)
             {
                 /*/// variables contenant les parametres de la souris au moment du clic
@@ -147,7 +152,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
                 /// recherche du bloc correspondant sous la souris au moment du clic
                 reperage_bloc_souris(&ligne_souris, &colonne_souris, red_mouse, green_mouse, blue_mouse, matrice, &autorisation_dep);*/
 
-                /// condition si la souris clic sur un bloc valable
+                /*/// condition si la souris clic sur un bloc valable
                 if (matrice[ligne_souris][colonne_souris].accessible == 0)
                 {
                     textout_ex(screen, font,"Vous ne pouvez pas vous deplacer en dehors de la carte !! ",15, 30, makecol(255,0,0), -1); /////// A CHANGER PLUS TARD
@@ -163,10 +168,10 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
                     erreur2 =1;
                 }
                 else
-                {
-                    deplacement_personnage(buffer,map, &ligne_joueur,&colonne_joueur, ligne_souris, colonne_souris, matrice, &deplacement_effectuer/*, chrono1, &erreur1*/);
+                {*/
+                    deplacement_personnage(buffer,map, joueur, i, ligne_souris, colonne_souris, matrice, &deplacement_effectuer/*, chrono1, &erreur1*/);
                     autorisation_dep = 0;
-                }
+                //}
             }
             //lecture_pixels_buffer_map(buffer_map, &red_mouse, &green_mouse, &blue_mouse); // ca bug
 
@@ -175,8 +180,8 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
             affichage_croix_rouge(buffer, croix_rouge, ligne_souris, colonne_souris, matrice); // bug
             //encadrement_souris(buffer, red_mouse, green_mouse, blue_mouse);
             display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
-            //deplacement_nombre_pm(buffer_pixels, buffer, ligne_joueur, colonne_joueur, matrice, &nombre_pm, &clic, cursor);
-            circlefill(buffer, matrice[ligne_joueur][colonne_joueur].x_bloc, matrice[ligne_joueur][colonne_joueur].y_bloc, 9, makecol(0,0,0));
+            //deplacement_nombre_pm(buffer_pixels, buffer, joueur[i].x, joueur[i].y, matrice, &nombre_pm, &clic, cursor);
+            circlefill(buffer, matrice[joueur[i].x][joueur[i].y].x_bloc, matrice[joueur[i].x][joueur[i].y].y_bloc, 9, makecol(0,0,0));
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             if ((int)(time(NULL) - start >= TEMPS_TOUR) || (mouse_b&1 && (mouse_x >= 900 && mouse_x <= 1000 && mouse_y >= 600 && mouse_y <= 700)))
             {
