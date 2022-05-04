@@ -69,7 +69,6 @@ void creation_icones_classes(t_joueur* joueur)
 void creation_classes(t_joueur* joueur)
 {
     int i;
-    int j;
     for (i = 0; i < 4; i++)
     {
         joueur[i].pv = 55;
@@ -78,16 +77,27 @@ void creation_classes(t_joueur* joueur)
         joueur[i].classe.attaque = 5;
         joueur[i].vivant = 1;
         joueur[i].classe.logo_attaque = load_bitmap("BITMAP/sort_attaque.bmp", NULL);
-        joueur[i].r = 0;
-        joueur[i].g = 0;
-        joueur[i].b = i * 85;
 
+        if (i == 2)
+        {
+            joueur[2].red = 0;
+            joueur[2].green = 190;
+            joueur[2].blue = 0;
+        }
+        if (i == 3)
+        {
+            joueur[3].red = 0;
+            joueur[3].green = 230;
+            joueur[3].blue = 230;
+        }
     }
-    joueur[0].r = 200;
-    joueur[0].g = 0;
-    joueur[0].b = 0;
+    //creation des couleurs joueurs
+    joueur[0].red = 190;
+    joueur[0].green = 0;
+    joueur[0].blue = 0;
 
-    joueur[1].r = 0;
-    joueur[1].g = 200;
-    joueur[1].b = 0;
+    joueur[1].red = 0;
+    joueur[1].green = 0;
+    joueur[1].blue = 190;
+
 }

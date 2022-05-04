@@ -38,7 +38,7 @@ void deplacement_nombre_pm(BITMAP* buffer_pixels, BITMAP * buffer, int ligne_jou
         }
         else
         {
-            zone_max_deplacement_3pm(buffer, ligne_joueur, colonne_joueur, tab_bloc);
+            //zone_max_deplacement_3pm(buffer, ligne_joueur, colonne_joueur, tab_bloc);
             anomalie_case_deplacement(buffer_pixels,buffer, ligne_joueur, colonne_joueur, tab_bloc);
         }
         break;

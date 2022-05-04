@@ -72,7 +72,7 @@ void affichage_classe(t_joueur* joueur, BITMAP* buffer, BITMAP *bg, BITMAP* clas
     rectfill(buffer, x_depart + 100 * 6, 150, 750, 450, makecol(255, 0, 0));*/
     blit(bg, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     sprintf(texte, "%s, choisissez votre classe", joueur[*nb].pseudo);
-    textprintf_ex(buffer, font, 500, 20, makecol(joueur[*nb].r, joueur[*nb].g, joueur[*nb].b), -1, texte);
+    textprintf_ex(buffer, font, 500, 20, makecol(joueur[*nb].red, joueur[*nb].green, joueur[*nb].blue), -1, texte);
     for (int i = 0; i < 4; i++)
     {
         reset_color(classe[0]);
@@ -84,7 +84,7 @@ void affichage_classe(t_joueur* joueur, BITMAP* buffer, BITMAP *bg, BITMAP* clas
     if(mouse_x >= 30 && mouse_x <= 120 && mouse_y >= 150 && mouse_y <= 450)
     {
         rectfill(buffer, x_depart, 510, x_depart + 56, 512, makecol(255, 0, 0));
-        textprintf_ex(buffer, font, x_depart, 540, makecol(255, 0, 0), -1, "");
+        textprintf_ex(buffer, font, x_depart, 540, makecol(255, 0, 0), -1, "Sort 1");
         textprintf_ex(buffer, font, x_depart, 560, makecol(255, 0, 0), -1, "Sort 2");
         textprintf_ex(buffer, font, x_depart, 580, makecol(255, 0, 0), -1, "Sort 3");
         textprintf_ex(buffer, font, x_depart, 600, makecol(255, 0, 0), -1, "Sort 4");

@@ -46,21 +46,18 @@ typedef struct Players
     char pseudo[20];
     int id_classe;
     BITMAP* skin;
-    int x;
-    int y;
+    t_bloc position[23][23];
     int ligne_joueur;
     int colonne_joueur;
     int nb_pm;
-    int dx;
-    int dy;
     int pv;
     int pm;
     int pa;
     int statut;
     int vivant;
-    int r;
-    int g;
-    int b;
+    int red;
+    int green;
+    int blue;
     t_classe classe;
 }t_joueur;
 

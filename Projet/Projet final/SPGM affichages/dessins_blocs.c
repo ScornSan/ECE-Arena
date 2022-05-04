@@ -1,7 +1,7 @@
 #include "../prototypes.h"
 #include "../structures.h"
 
-void reperage_chemin(BITMAP * buffer, int *ligne_joueur, int *colonne_joueur, int x_souris, int y_souris, t_bloc tab_bloc[23][23])
+void reperage_chemin(BITMAP * buffer, int *ligne_joueur, int *colonne_joueur, int x_souris, int y_souris, t_bloc tab_bloc[23][23], t_joueur* j, int i, int *autorisation_dep)
 {
     int x_augmente;
     int y_augmente;
@@ -18,18 +18,19 @@ void reperage_chemin(BITMAP * buffer, int *ligne_joueur, int *colonne_joueur, in
         y_augmente = 0;
 
 /// tant que le x et le y du joueur sont différents de celui de la souris ET seulement si la case est accessible la ou pointe la souris
-    while( (x_joueur != x_souris || y_joueur != y_souris) && (abs(x_joueur - x_souris) + abs(y_joueur - y_souris)) <= 3 && !tab_bloc[x_souris][y_souris].occuper)
+    while((x_joueur != x_souris || y_joueur != y_souris) && (abs(x_joueur - x_souris) + abs(y_joueur - y_souris)) <= j[i].pm && !tab_bloc[x_souris][y_souris].occuper)
     {
         if (x_joueur != x_souris) // le x du joueur différent de la souris, alors
-        {                             // on dessine un bloc puis on augmente de 1 la valeur du x_joueur
+        {
+            // on dessine un bloc puis on augmente de 1 la valeur du x_joueur
             if (x_augmente && !tab_bloc[x_joueur + 1][y_joueur].occuper)
             {
-                dessin_bloc_unique(buffer, x_joueur + 1, y_joueur, tab_bloc, 0, 180, 0);
+                dessin_bloc_unique(buffer, x_joueur + 1, y_joueur, tab_bloc, j[i].red, j[i].green, j[i].blue);
                 x_joueur = x_joueur + 1;
             }
             else if (!x_augmente && !tab_bloc[x_joueur - 1][y_joueur].occuper)
             {
-                dessin_bloc_unique(buffer, x_joueur - 1, y_joueur, tab_bloc, 0, 180, 0);
+                dessin_bloc_unique(buffer, x_joueur - 1, y_joueur, tab_bloc, j[i].red, j[i].green, j[i].blue);
                 x_joueur = x_joueur - 1;
             }
         }
@@ -37,17 +38,21 @@ void reperage_chemin(BITMAP * buffer, int *ligne_joueur, int *colonne_joueur, in
         {
             if (y_augmente && !tab_bloc[x_joueur][y_joueur + 1].occuper)
             {
-                dessin_bloc_unique(buffer, x_joueur, y_joueur + 1, tab_bloc, 0, 180, 0);
+                dessin_bloc_unique(buffer, x_joueur, y_joueur + 1, tab_bloc, j[i].red, j[i].green, j[i].blue);
                 y_joueur = y_joueur + 1;
             }
             else if (!y_augmente && !tab_bloc[x_joueur][y_joueur - 1].occuper)
             {
-                dessin_bloc_unique(buffer, x_joueur, y_joueur - 1, tab_bloc, 0, 180, 0);
+                dessin_bloc_unique(buffer, x_joueur, y_joueur - 1, tab_bloc, j[i].red, j[i].green, j[i].blue);
                 y_joueur = y_joueur - 1;
             }
         }
-        dessin_bloc_unique(buffer, x_souris, y_souris, tab_bloc, 0, 180, 0);
-        dessin_bloc_unique(buffer, x_souris, y_souris, tab_bloc, 0, 180, 0);
+        dessin_bloc_unique(buffer, x_souris, y_souris, tab_bloc, 0, 0, 0);
+        dessin_bloc_unique(buffer, x_souris, y_souris, tab_bloc, 0, 0, 0);
+    }
+    if (mouse_b&1)
+    {
+        *autorisation_dep = 1;
     }
 }
 
@@ -64,7 +69,7 @@ void deplacement_personnage(BITMAP * buffer,BITMAP * fond, int *ligne_joueur, in
             circlefill(buffer, tab_bloc[ligne_joueur][colonne_joueur].x_bloc, tab_bloc[ligne_joueur][colonne_joueur].y_bloc, 9, makecol(0,0,0));
             textprintf_ex(buffer, font, 415, 710, makecol(0,255,0), -1, "position de la souris : x = %d et y = %d", mouse_x, mouse_y);
             quadrillage_test(buffer);
-            blit(buffer, screen, 0, 0, 0, 0, buffer->w, buffer->h);
+            blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
         }
         else
         {
@@ -72,68 +77,68 @@ void deplacement_personnage(BITMAP * buffer,BITMAP * fond, int *ligne_joueur, in
             circlefill(buffer, tab_bloc[ligne_joueur][colonne_joueur].x_bloc, tab_bloc[ligne_joueur][colonne_joueur].y_bloc, 9, makecol(0,0,0));
             textprintf_ex(buffer, font, 415, 710, makecol(0,255,0), -1, "position de la souris : x = %d et y = %d", mouse_x, mouse_y);
             quadrillage_test(buffer);
-            blit(buffer, screen, 0, 0, 0, 0, buffer->w, buffer->h);
+            blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             *erreur1 = 0;
         }
     }*/
 
-    /// condition -> le joueur doit aller a gauche
-    if (*colonne_joueur >= colonne_souris)
-    {
-        while(*colonne_joueur != colonne_souris)
-        {
-            *colonne_joueur = *colonne_joueur -1;
-            blit(fond, buffer, 0, 0, 0, 0, fond->w, fond->h);
-            circlefill(buffer, tab_bloc[*ligne_joueur][*colonne_joueur].x_bloc, tab_bloc[*ligne_joueur][*colonne_joueur].y_bloc, 9, makecol(0,0,0));
-            textprintf_ex(buffer, font, 415, 710, makecol(0,255,0), -1, "position de la souris : x = %d et y = %d", mouse_x, mouse_y);
-            quadrillage_test(buffer);
-            blit(buffer, screen, 0, 0, 0, 0, buffer->w, buffer->h);
-            usleep(200000);
-        }
-    }
-    /// condition -> le joueur doit aller a droite
+    int x_augmente;
+    int y_augmente;
+
+    if (*ligne_joueur <= ligne_souris)
+        x_augmente = 1;
     else
-    {
-        while(*colonne_joueur != colonne_souris)
-        {
-            *colonne_joueur = *colonne_joueur +1;
-            blit(fond, buffer, 0, 0, 0, 0, fond->w, fond->h);
-            circlefill(buffer, tab_bloc[*ligne_joueur][*colonne_joueur].x_bloc, tab_bloc[*ligne_joueur][*colonne_joueur].y_bloc, 9, makecol(0,0,0));
-            textprintf_ex(buffer, font, 415, 710, makecol(0,255,0), -1, "position de la souris : x = %d et y = %d", mouse_x, mouse_y);
-            quadrillage_test(buffer);
-            blit(buffer, screen, 0, 0, 0, 0, buffer->w, buffer->h);
-            usleep(200000);
-        }
-    }
-    /// condition -> le joueur doit monter
-    if (*ligne_joueur >= ligne_souris)
-    {
-        while(*ligne_joueur != ligne_souris)
-        {
-            *ligne_joueur = *ligne_joueur -1;
-            blit(fond, buffer, 0, 0, 0, 0, fond->w, fond->h);
-            circlefill(buffer, tab_bloc[*ligne_joueur][*colonne_joueur].x_bloc, tab_bloc[*ligne_joueur][*colonne_joueur].y_bloc, 9, makecol(0,0,0));
-            textprintf_ex(buffer, font, 415, 710, makecol(0,255,0), -1, "position de la souris : x = %d et y = %d", mouse_x, mouse_y);
-            quadrillage_test(buffer);
-            blit(buffer, screen, 0, 0, 0, 0, buffer->w, buffer->h);
-            usleep(200000);
-        }
-    }
-    /// condition -> le joueur doit descendre
+        x_augmente = 0;
+    if (*colonne_joueur <= colonne_souris)
+        y_augmente = 1;
     else
+        y_augmente = 0;
+
+    while (*ligne_joueur != ligne_souris || *colonne_joueur != colonne_souris)
     {
-        while(*ligne_joueur != ligne_souris)
+        clear_bitmap(buffer);
+        /// condition -> le joueur doit descendre
+        while(x_augmente && *ligne_joueur != ligne_souris && !tab_bloc[*ligne_joueur + 1][*colonne_joueur].occuper)
         {
             *ligne_joueur = *ligne_joueur +1;
             blit(fond, buffer, 0, 0, 0, 0, fond->w, fond->h);
             circlefill(buffer, tab_bloc[*ligne_joueur][*colonne_joueur].x_bloc, tab_bloc[*ligne_joueur][*colonne_joueur].y_bloc, 9, makecol(0,0,0));
             textprintf_ex(buffer, font, 415, 710, makecol(0,255,0), -1, "position de la souris : x = %d et y = %d", mouse_x, mouse_y);
-            quadrillage_test(buffer);
-            blit(buffer, screen, 0, 0, 0, 0, buffer->w, buffer->h);
+            blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             usleep(200000);
         }
+        /// condition -> le joueur doit monter
+        while(!x_augmente && *ligne_joueur != ligne_souris && !tab_bloc[*ligne_joueur - 1][*colonne_joueur].occuper)
+        {
+            *ligne_joueur = *ligne_joueur -1;
+            blit(fond, buffer, 0, 0, 0, 0, fond->w, fond->h);
+            circlefill(buffer, tab_bloc[*ligne_joueur][*colonne_joueur].x_bloc, tab_bloc[*ligne_joueur][*colonne_joueur].y_bloc, 9, makecol(0,0,0));
+            textprintf_ex(buffer, font, 415, 710, makecol(0,255,0), -1, "position de la souris : x = %d et y = %d", mouse_x, mouse_y);
+            blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+            usleep(200000);
+        }
+        /// condition -> le joueur doit aller a droite
+        while(y_augmente && *colonne_joueur != colonne_souris && !tab_bloc[*ligne_joueur][*colonne_joueur + 1].occuper)
+        {
+            *colonne_joueur = *colonne_joueur +1;
+            blit(fond, buffer, 0, 0, 0, 0, fond->w, fond->h);
+            circlefill(buffer, tab_bloc[*ligne_joueur][*colonne_joueur].x_bloc, tab_bloc[*ligne_joueur][*colonne_joueur].y_bloc, 9, makecol(0,0,0));
+            textprintf_ex(buffer, font, 415, 710, makecol(0,255,0), -1, "position de la souris : x = %d et y = %d", mouse_x, mouse_y);
+            blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+            usleep(200000);
+        }
+        /// condition -> le joueur doit aller a gauche
+        while(!y_augmente && *colonne_joueur != colonne_souris && !tab_bloc[*ligne_joueur][*colonne_joueur - 1].occuper)
+        {
+            *colonne_joueur = *colonne_joueur -1;
+            blit(fond, buffer, 0, 0, 0, 0, fond->w, fond->h);
+            circlefill(buffer, tab_bloc[*ligne_joueur][*colonne_joueur].x_bloc, tab_bloc[*ligne_joueur][*colonne_joueur].y_bloc, 9, makecol(0,0,0));
+            textprintf_ex(buffer, font, 415, 710, makecol(0,255,0), -1, "position de la souris : x = %d et y = %d", mouse_x, mouse_y);
+            blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+            usleep(200000);
+        }
+        *deplacement_effectuer = *deplacement_effectuer +1;
     }
-    *deplacement_effectuer = *deplacement_effectuer +1;
 }
 
 void dessin_bloc_unique(BITMAP *buffer, int param1, int param2, t_bloc tab_bloc[23][23], int r, int g, int b)

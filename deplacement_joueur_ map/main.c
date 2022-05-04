@@ -910,52 +910,7 @@ int main()
     ///int x_joueur = tab_bloc[12][15].x_bloc , y_joueur = tab_bloc[12][15].y_bloc;
     int ligne_souris, colonne_souris;
     int green_mouse, red_mouse, blue_mouse;
-    /// placement des joueurs chacun leur tour
-    /*t_j tab_temp[4];
-    for (int i = 0; i<4; i++)
-    {
-        tab_temp[i].x = -20;
-        tab_temp[i].y =  -20;
-        tab_temp[i].nb_pm = 3;
-    }
 
-    int choix = 0;
-    for(int i = 0; i< 4; i++)
-    {
-        choix = 0;
-        while(choix == 0)
-        {
-            if (mouse_b && 1 && tab_bloc[ligne_souris][colonne_souris].accessible == 1 && tab_bloc[ligne_souris][colonne_souris].occuper == 0 && getr(getpixel(buffer_map, mouse_x, mouse_y))!= 0)
-            {
-                choix = 1;
-                tab_temp[i].ligne_joueur = ligne_souris;
-                tab_temp[i].colonne_joueur = colonne_souris;
-                tab_temp[i].x = tab_bloc[tab_temp[i].ligne_joueur][tab_temp[i].colonne_joueur].x_bloc;
-                tab_temp[i].y = tab_bloc[tab_temp[i].ligne_joueur][tab_temp[i].colonne_joueur].y_bloc;
-                tab_bloc[tab_temp[i].ligne_joueur][tab_temp[i].colonne_joueur].occuper = 1;
-                usleep(400000);
-            }
-            lecture_pixels_buffer_map(buffer_map, &red_mouse, &green_mouse, &blue_mouse);
-            blit(fond, buffer, 0, 0, 0, 0, fond->w, fond->h);
-            textprintf_ex(buffer, font, 500, 100, makecol(255,255,255), -1, "joueur %d choisit son emplacement", i);
-            reperage_bloc_souris(&ligne_souris, &colonne_souris, red_mouse, green_mouse, blue_mouse, tab_bloc, &autorisation_dep);
-            //couleur_sous_joueur(buffer, ligne_joueur, colonne_joueur, tab_bloc);
-            circlefill(buffer, tab_temp[0].x, tab_temp[0].y, 9, makecol(30,30,30));
-            circlefill(buffer, tab_temp[1].x, tab_temp[1].y, 9, makecol(60,60,60));
-            circlefill(buffer, tab_temp[2].x, tab_temp[2].y, 9, makecol(120,120,120));
-            circlefill(buffer, tab_temp[3].x, tab_temp[3].y, 9, makecol(230,230,230));
-            textprintf_ex(buffer, font, 415, 710, makecol(0,255,0), -1, "position de la souris : x = %d et y = %d", mouse_x, mouse_y);
-            //quadrillage_test(buffer);
-            deplacement_nombre_pm(buffer, tab_temp[0].ligne_joueur, tab_temp[0].colonne_joueur, tab_bloc, &tab_temp[0].nb_pm, &clic);
-            deplacement_nombre_pm(buffer, tab_temp[1].ligne_joueur, tab_temp[1].colonne_joueur, tab_bloc, &tab_temp[1].nb_pm, &clic);
-            deplacement_nombre_pm(buffer, tab_temp[2].ligne_joueur, tab_temp[2].colonne_joueur, tab_bloc, &tab_temp[2].nb_pm, &clic);
-            deplacement_nombre_pm(buffer, tab_temp[3].ligne_joueur, tab_temp[3].colonne_joueur, tab_bloc, &tab_temp[3].nb_pm, &clic);
-            affichage_croix_bleue(buffer, croix_bleue, ligne_souris, colonne_souris, tab_bloc);
-            affichage_croix_rouge(buffer, croix_rouge, ligne_souris, colonne_souris, tab_bloc);
-            blit(buffer, screen, 0, 0, 0, 0, buffer->w, buffer->h);
-
-        }
-    }*/
     blit(fond, buffer_pixels, 0, 0, 0, 0, fond->w, fond->h);
     int ligne_joueur = 10, colonne_joueur = 10;
     while (deplacement_effectuer != 50)
