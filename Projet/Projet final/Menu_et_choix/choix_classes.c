@@ -140,7 +140,6 @@ void affichage_classe(t_joueur* joueur, BITMAP* buffer, BITMAP *bg, BITMAP* clas
             rest(100);
         }
     }
-    rest(20);
 }
 
 void choix_classe(BITMAP *buffer, BITMAP *fond, BITMAP* cursor, t_joueur* joueur, int nb_joueurs)
@@ -175,6 +174,6 @@ void choix_classe(BITMAP *buffer, BITMAP *fond, BITMAP* cursor, t_joueur* joueur
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 
         // 4) ON FAIT UNE PETITE PAUSE à chaque fois sinon ça va trop vite...
-        rest(20);
+        //rest(20);
     }
 }

@@ -119,10 +119,16 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
 
     //textprintf_ex(desc_sorts, font, 80, 16, makecol(255, 0, 0), -1, "%d-%d", 1, joueur[i].classe.attaque);
     int ligne_souris, colonne_souris;
+
     joueur[0].x = 10;
     joueur[0].y = 10;
     joueur[1].x = 9;
     joueur[1].y = 9;
+    joueur[2].x = 9;
+    joueur[2].y = 9;
+    joueur[3].x = 9;
+    joueur[3].y = 9;
+
     int x_joueur = joueur[0].x;
     int y_joueur = joueur[0].y;
     int green_mouse, red_mouse, blue_mouse;
@@ -190,6 +196,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
             //deplacement_nombre_pm(buffer_pixels, buffer, joueur[i].x, joueur[i].y, matrice, &nombre_pm, &clic, cursor);
             circlefill(buffer, matrice[joueur[i].x][joueur[i].y].x_bloc, matrice[joueur[i].x][joueur[i].y].y_bloc, 9, makecol(0,0,0));
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+            rest(20);
             if ((int)(time(NULL) - start >= TEMPS_TOUR) || (mouse_b&1 && (mouse_x >= 900 && mouse_x <= 1000 && mouse_y >= 600 && mouse_y <= 700)))
             {
                 start = time(NULL);

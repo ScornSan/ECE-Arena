@@ -24,5 +24,15 @@ void quadrillage_test();
 void distribution_couleur_blocs();
 void definition_accessible();
 void definition_occuper();
+void deplacement_personnage();
+void affichage_croix_bleue();
+void affichage_croix_rouge();
+void dessin_bloc_unique();
+void usleep();
+void zone_max_deplacement_0pm();
+void zone_max_deplacement_1pm();
+void zone_max_deplacement_2pm();
+void zone_max_deplacement_3pm();
+void anomalie_case_deplacement();
 
 #endif // PROTOTYOPES_H_INCLUDED

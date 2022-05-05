@@ -10,7 +10,7 @@ void tour_joueur_alea(int nb_joueur, t_joueur* joueur, BITMAP* buffer )
 
 }
 
-void prenom(int *nb_joueur, BITMAP* buffer,  t_joueur* joueur, BITMAP* fond, BITMAP *cursor, int i, int y)
+void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BITMAP *cursor, int i, int y)
 {
     int x = 498;
     int touche;
@@ -46,7 +46,7 @@ void prenom(int *nb_joueur, BITMAP* buffer,  t_joueur* joueur, BITMAP* fond, BIT
             if( carac != '\r' && !key[KEY_BACKSPACE] )
             {
                 textprintf_ex(buffer,font,x+poscarac,y,makecol(255,255,255),makecol(0,0,0),"%c",carac);
-                joueur[i].pseudo[place] = carac;
+                pseudo[i][place] = carac;
                 poscarac = poscarac+8;
             }
 
@@ -55,7 +55,7 @@ void prenom(int *nb_joueur, BITMAP* buffer,  t_joueur* joueur, BITMAP* fond, BIT
                 if(x+poscarac == 506)
                 {
                     poscarac=poscarac-8;
-                    joueur[i].pseudo[place] = ' ';
+                    pseudo[i][place] = ' ';
                     textprintf_ex(buffer,font,x+poscarac,y,makecol(255,255,255),makecol(0,0,0)," ");
                     place = place-2;
                 }
@@ -63,7 +63,7 @@ void prenom(int *nb_joueur, BITMAP* buffer,  t_joueur* joueur, BITMAP* fond, BIT
                 {
                     nb = nb +1;
                     poscarac=poscarac-8;
-                    joueur[i].pseudo[place-1] = ' ';
+                    pseudo[i][place-1] = ' ';
                     textprintf_ex(buffer,font,x+poscarac,y,makecol(255,255,255),makecol(0,0,0)," ");
                     place = place-2;
                 }
@@ -123,7 +123,7 @@ void menu_principal(BITMAP *buffer, BITMAP *accueil, BITMAP *cursor)
 }
 
 
-int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, t_joueur* joueur)
+int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20])
 {
     int fin;
     int ok;
@@ -133,7 +133,6 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, t_joueur* joueur)
     BITMAP *choix_nb_joueurs;
     BITMAP *nom_joueurs;
     BITMAP *accueil;
-
 
     // init. variable de sortie boucle interactive
     fin=0;
@@ -227,9 +226,10 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, t_joueur* joueur)
                 prenom(nb_joueur, buffer, joueur, fond, cursor);
             }*/
             rest(200);
+
             for (int i = 0; i < nb_joueur; i++)
             {
-                prenom(&nb_joueur, buffer, joueur, fond, cursor, i, y);
+                prenom(&nb_joueur, buffer, pseudo, fond, cursor, i, y);
                 y = y + 15;
             }
             fin = 1;

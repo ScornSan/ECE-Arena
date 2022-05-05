@@ -27,6 +27,7 @@ int main()
     BITMAP *cursor;
     BITMAP *fond;
     BITMAP *buffer;
+    t_joueur* joueur;
     // Lancer allegro et le mode graphique
     allegro_init();
     install_keyboard();
@@ -46,7 +47,10 @@ int main()
     buffer = create_bitmap(SCREEN_W, SCREEN_H);
     clear_bitmap(buffer);
 
-    t_joueur* joueur = (t_joueur*)malloc(sizeof(t_joueur) * 4);
+    char pseudo[4][20]; // creation pseudo temporaires qui seront stocker dans les structures joueurs
+    nb_joueurs = menu(buffer, fond, cursor, pseudo);
+
+    joueur = (t_joueur*)malloc(sizeof(t_joueur) * nb_joueurs); // allocation dynamiques des structures joueurs
     if (joueur == NULL)
     {
         allegro_message("Erreur allocation dynamique");
@@ -54,13 +58,15 @@ int main()
         exit(EXIT_FAILURE);
     }
 
-    creation_classes(joueur);
-
+    for (int i = 0; i < nb_joueurs; i++)
+    {
+        strcpy(joueur[i].pseudo, pseudo[i]);
+    }
+    creation_classes(joueur, nb_joueurs);
+    choix_classe(buffer, fond, cursor, joueur, nb_joueurs);
     // Boucle d'animation (quand on arrive aux nombres de joueurs, ici 3, c'est que la selection pour chaque joueur a été faite)
     while (key != KEY_ESC)
     {
-        nb_joueurs = menu(buffer, fond, cursor, joueur);
-        choix_classe(buffer, fond, cursor, joueur, nb_joueurs);
         tour_joueur(buffer, cursor, joueur, nb_joueurs);
     }
     destroy_bitmap(cursor);
