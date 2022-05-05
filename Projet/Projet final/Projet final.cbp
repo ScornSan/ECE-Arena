@@ -37,10 +37,34 @@
 		<Unit filename="Menu_et_choix/creation_classes.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="Menu_et_choix/menu.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="Partie_en_cours/Tour_joueur.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Partie_en_cours/deplacement_joueur.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="SPGM affichages/affichage_elements.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="SPGM affichages/calques.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="SPGM affichages/dessins_blocs.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="SPGM affichages/initialisations_tab.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="SPGM affichages/lecture_pixels.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="SPGM affichages/quadrilages.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="SPGM affichages/zone_deplacement.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="main.c">
