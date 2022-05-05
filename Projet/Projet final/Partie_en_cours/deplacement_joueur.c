@@ -1,7 +1,7 @@
 #include "../prototypes.h"
 #include "../structures.h"
 
-void deplacement_joueur(BITMAP *buffer, BITMAP *buffer_pixels, BITMAP *buffer_map, BITMAP *fond, BITMAP *cursor, t_joueur* joueur, t_bloc matrice[23][23], BITMAP * croix_rouge, BITMAP * croix_bleue, int ligne_joueur, int colonne_joueur, int ligne_souris, int colonne_souris, int i)
+/*void deplacement_joueur(BITMAP *buffer, BITMAP *buffer_pixels, BITMAP *buffer_map, BITMAP *fond, BITMAP *cursor, t_joueur* joueur, t_bloc matrice[23][23], BITMAP * croix_rouge, BITMAP * croix_bleue, int ligne_joueur, int colonne_joueur, int ligne_souris, int colonne_souris, int i)
 {
     cursor = load_bitmap("cursor.bmp", NULL);
     int x_souris;
@@ -48,13 +48,13 @@ void deplacement_joueur(BITMAP *buffer, BITMAP *buffer_pixels, BITMAP *buffer_ma
             }
             else
             {
-                clic = 1;
-                deplacement_personnage(buffer,fond, &ligne_joueur,&colonne_joueur, ligne_souris, colonne_souris, joueur[i].position, &deplacement_effectuer/*, chrono1, &erreur1*/);
-                autorisation_dep = 0;
+                clic = 1;*/
+                //deplacement_personnage(buffer,fond, &ligne_joueur,&colonne_joueur, ligne_souris, colonne_souris, joueur[i].position, &deplacement_effectuer/*, chrono1, &erreur1*/);
+                /*autorisation_dep = 0;
             }
         }
         display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
-        /// Chrono a finir d'integrer plus tard
+        /// Chrono a finir d'integrer plus tard*/
         /*if ((int) (time (NULL) - chrono1) < 2 && erreur1 == 1)
         {
             textout_ex(buffer, font,"Vous ne pouvez pas vous deplacer en dehors de la carte !! ",15, 30, makecol(255,0,0), -1);
@@ -64,14 +64,14 @@ void deplacement_joueur(BITMAP *buffer, BITMAP *buffer_pixels, BITMAP *buffer_ma
             erreur1 = 0;
         }*/
         //couleur_sous_joueur(buffer, ligne_joueur, colonne_joueur, joueur[i].position);
-        textprintf_ex(buffer, font, 415, 710, makecol(0,255,0), -1, "position de la souris : x = %d et y = %d", mouse_x, mouse_y);
+        /*textprintf_ex(buffer, font, 415, 710, makecol(0,255,0), -1, "position de la souris : x = %d et y = %d", mouse_x, mouse_y);
         quadrillage_test(buffer);
         //affichage_croix_bleue(buffer, croix_bleue, ligne_souris, colonne_souris, joueur[i].position);
         //affichage_croix_rouge(buffer, croix_rouge, ligne_souris, colonne_souris, joueur[i].position);
         //encadrement_souris(buffer, red_mouse, green_mouse, blue_mouse);
-        deplacement_nombre_pm(buffer_pixels, buffer, ligne_joueur, colonne_joueur, joueur[i].position, &nombre_pm, &clic, cursor);
+        zone_nombre_pm(buffer_pixels, buffer, ligne_joueur, colonne_joueur, joueur[i].position, &nombre_pm, &clic, cursor);
         circlefill(buffer, joueur[i].position[ligne_joueur][colonne_joueur].x_bloc, joueur[i].position[ligne_joueur][colonne_joueur].y_bloc, 9, makecol(0,0,0));
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     }
     textout_ex(screen, font,"Au tour du joueur suivant ",15, 100, makecol(255,255,255), -1);
-}
+}*/

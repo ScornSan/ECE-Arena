@@ -262,6 +262,9 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
         display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
         blit(buffer, screen, 0, 0, 0, 0, buffer->w, buffer->h);
     }
+
+    int x_joueur = joueur[0].x;
+    int y_joueur = joueur[0].y;
     time_t chrono1 = time (NULL);
     time_t chrono2 = time (NULL);
 
@@ -287,8 +290,8 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
 
             lecture_pixels_buffer_map(buffer_map, &red_mouse, &green_mouse, &blue_mouse);
             reperage_bloc_souris(&ligne_souris, &colonne_souris, red_mouse, green_mouse, blue_mouse, matrice, &autorisation_dep, joueur, i);
-            reperage_chemin(buffer, joueur[i].x, joueur[i].y, ligne_souris, colonne_souris, matrice, joueur, i, &autorisation_dep);
-            if(mouse_b && 1 && autorisation_dep == 1)
+            reperage_chemin(buffer, x_joueur, y_joueur, ligne_souris, colonne_souris, matrice, joueur, i, &autorisation_dep);
+            if(autorisation_dep == 1)
             {
                 /*/// variables contenant les parametres de la souris au moment du clic
                 lecture_pixels_buffer_map(buffer_map, &red_mouse, &green_mouse, &blue_mouse);
@@ -312,7 +315,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
                 }
                 else
                 {*/
-                deplacement_personnage(buffer,map, joueur, i, ligne_souris, colonne_souris, matrice, &deplacement_effectuer,nb_joueurs/*, chrono1, &erreur1*/);
+                deplacement_personnage(buffer,map, joueur, i, ligne_souris, colonne_souris, matrice, &deplacement_effectuer/*, chrono1, &erreur1*/);
                 autorisation_dep = 0;
                 //}
             }

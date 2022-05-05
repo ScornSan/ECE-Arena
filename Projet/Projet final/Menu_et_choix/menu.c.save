@@ -200,19 +200,17 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20])
                 {
 
                     nb_joueur = nb_joueur -1;
-                    rest(100);
+                    rest(1);
                 }
                 // On appuie sur ok
                 if ((mouse_b&1) && (mouse_x > 458) && (mouse_x < 833) && (mouse_y > 573) && (mouse_y < 654) && (nb_joueur >= 2))
                 {
                     ok = 1;
-                    rest(100);
                     //blit(buffer, screen, 0, 0, 0, 0, SCREEN_W / 2, SCREEN_H);
                 }
                 if(key[KEY_ESC] || mouse_b&2)
                 {
                     ok =1;
-                    rest(100);
                 }
                 blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             }
