@@ -8,8 +8,6 @@
 #include <time.h>
 #include <string.h>
 
-#define NB_BUFFERS 3
-
 void creation_icones_classes();
 void reperage_bloc_souris();
 void reperage_chemin();

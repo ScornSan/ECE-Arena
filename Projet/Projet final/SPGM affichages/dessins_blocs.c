@@ -47,8 +47,8 @@ void reperage_chemin(BITMAP * buffer, int x_joueur, int y_joueur, int x_souris, 
                 y_joueur = y_joueur - 1;
             }
         }
-        dessin_bloc_unique(buffer, x_souris, y_souris, tab_bloc, 0, 0, 0);
-        dessin_bloc_unique(buffer, x_souris, y_souris, tab_bloc, 0, 0, 0);
+        dessin_bloc_unique(buffer, x_souris, y_souris, tab_bloc, j[i].red, j[i].green, j[i].blue);
+        dessin_bloc_unique(buffer, x_souris, y_souris, tab_bloc, j[i].red, j[i].green, j[i].blue);
     }
     if (mouse_b&1)
     {

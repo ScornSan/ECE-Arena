@@ -47,6 +47,12 @@ int main()
     clear_bitmap(buffer);
 
     t_joueur* joueur = (t_joueur*)malloc(sizeof(t_joueur) * 4);
+    if (joueur == NULL)
+    {
+        allegro_message("Erreur allocation dynamique");
+        allegro_exit();
+        exit(EXIT_FAILURE);
+    }
 
     creation_classes(joueur);
 
@@ -59,6 +65,7 @@ int main()
     }
     destroy_bitmap(cursor);
     destroy_bitmap(buffer);
+    free(joueur);
     return 0;
 }
 END_OF_MAIN();

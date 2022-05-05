@@ -3,6 +3,7 @@
 
 #include <allegro.h>
 #define TEMPS_TOUR 15
+#define NB_SORTS 4
 
 typedef struct bloc
 {
@@ -25,18 +26,14 @@ typedef struct sorts
     int chance;
     BITMAP* logo;
     BITMAP* animation_sort;
-    char* description;
+    BITMAP* description;
 }t_sort;
 
 typedef struct classes
 {
     int attaque;
     BITMAP* logo_attaque;
-    BITMAP* sorts[4];
-    t_sort sort1;
-    t_sort sort2;
-    t_sort sort3;
-    t_sort sort4;
+    t_sort spell[NB_SORTS];
 
 }t_classe;
 
