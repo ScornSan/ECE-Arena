@@ -38,12 +38,13 @@ void affichage_hud_sorts(t_joueur* joueur, int i, int nb_joueurs, BITMAP* buffer
     }
 }
 
-void affichage_hud_joueur(BITMAP* buffer, BITMAP* hud, t_joueur* joueur, int i)
+void affichage_hud_joueur(BITMAP* buffer, BITMAP** hud, t_joueur* joueur, int i, BITMAP **icone_classes)
 {
     rectfill(buffer, 72, 650, 74 + joueur[i].pv * 3, 673, makecol(255, 0, 0)); // rectangle pv a reduire quand il perd des hp
     rectfill(buffer, 68, 675, 70 + joueur[i].pa * 30, 685, makecol(0, 0, 255)); // rectangle pa a reduire quand il perd des hp
     rectfill(buffer, 66, 685, 70 + joueur[i].pm * 60, 695, makecol(0, 255, 0)); // rectangle pm a reduire quand il perd des hp
-    masked_blit(hud, buffer, 0, 0, 3, 640, SCREEN_W, SCREEN_H);
+    masked_blit(icone_classes[joueur[i].id_classe - 1], buffer, 0, 0, 3, 640, SCREEN_W, SCREEN_H);
+    masked_blit(hud[i], buffer, 0, 0, 3, 640, SCREEN_W, SCREEN_H);
     textprintf_ex(buffer, font, 120, 658, makecol(255, 255, 255), -1, "PV : %d/55", joueur[i].pv);
     textprintf_ex(buffer, font, 120, 676, makecol(255, 255, 255), -1, "PA : %d/6", joueur[i].pa);
     textprintf_ex(buffer, font, 120, 687, makecol(255, 255, 255), -1, "PM : %d/3", joueur[i].pm);
@@ -53,7 +54,8 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
 {
     // Déclaration du pointeur sur BITMAP devant recevoir l'image
     BITMAP *map;
-    BITMAP *hud_joueur;
+    BITMAP **hud_joueur;
+    BITMAP **icone_classes;
     BITMAP *hud_icone;
     BITMAP *desc_sorts;
     FONT *kristen12;
@@ -66,12 +68,15 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
     BITMAP * croix_bleue;
 
     int i = 0;
+    int j;
     t_bloc matrice[23][23];
 
+    hud_joueur = (BITMAP **)malloc(sizeof(BITMAP *) * nb_joueurs);
+    icone_classes = (BITMAP **)malloc(sizeof(BITMAP *) * 4);
     // Chargement de l'image (l'allocation a lieu en m�me temps)
 
     map = load_bitmap("BITMAP/map_reparation.bmp", NULL);
-    hud_joueur = load_bitmap("BITMAP/hud_joueur2.bmp", NULL);
+    //hud_joueur = load_bitmap("BITMAP/hud_joueur_0.bmp", NULL);
     hud_icone = load_bitmap("BITMAP/hud_icone_temp.bmp", NULL);
     desc_sorts = load_bitmap("BITMAP/desc_sorts.bmp", NULL);
     kristen12 = load_font("FONT/kristen12.pcx", NULL, NULL);
@@ -83,6 +88,19 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
     buffer_pixels =create_bitmap(SCREEN_W,SCREEN_H);
     croix_rouge = load_bitmap("BITMAP/croix_rouge.bmp", NULL);
     croix_bleue = load_bitmap("BITMAP/croix_bleue.bmp", NULL);
+
+    for (i = 0; i < nb_joueurs; i++)
+    {
+        char text_hud_joueur[30];
+        sprintf(text_hud_joueur, "BITMAP/hud_joueur_%d.bmp", i);
+        hud_joueur[i] = load_bitmap(text_hud_joueur, NULL);
+    }
+    for (j = 0; j < 4; j++)
+    {
+        char text_icone_classes[50];
+        sprintf(text_icone_classes, "BITMAP/icone_hud_classe_%d.bmp", j);
+        icone_classes[j] = load_bitmap(text_icone_classes, NULL);
+    }
 
 
     //creations des classes pour chaque joueurs
@@ -175,7 +193,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
             clear_bitmap(buffer);
             blit(map, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             affichage_hud_sorts(joueur, i, nb_joueurs, buffer, hud_icone, desc_sorts); // Blit de 5 logos (les mêmes pour la barre d'action, à changer après...)
-            affichage_hud_joueur(buffer, hud_joueur, joueur, i); // affiche du hud joueur, avec pv, pa, pm
+            affichage_hud_joueur(buffer, hud_joueur, joueur, i, icone_classes); // affiche du hud joueur, avec pv, pa, pm
             textprintf_ex(buffer, font, 0, 0, makecol(0, 0, 0), -1, "Mouse X : %d", mouse_x);
             textprintf_ex(buffer, font, 0, 10, makecol(0, 0, 0), -1, "Mouse Y : %d", mouse_y);
             textprintf_ex(buffer, font, 0, 20, makecol(0, 0, 0), -1, "Temps: %f", (float)((time(NULL)) - start));

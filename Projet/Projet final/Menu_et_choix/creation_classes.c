@@ -125,11 +125,3 @@ void creation_classes(t_joueur* joueur, int nb_joueurs)
     joueur[1].blue = 170;
 }
 
-
-void initialisation_acteurs(t_acteurs* acteurs)
-{
-    acteurs->x = 0;
-    acteurs->y = 0;
-    acteurs->tx = 49;
-    acteurs->ty = 64;
-}

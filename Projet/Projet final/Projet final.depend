@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1651852167 source:c:\repos\ece-arena\projet\projet final\main.c
+1651852848 source:c:\repos\ece-arena\projet\projet final\main.c
 	"structures.h"
 	"prototypes.h"
 
@@ -9,69 +9,139 @@
 	<allegro.h>
 	<time.h>
 
-1651747290 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\choix_classes.c
+1651852848 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\choix_classes.c
 	"../prototypes.h"
 	"../structures.h"
 
-1651847897 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\creation_classes.c
+1651858746 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\creation_classes.c
 	"../prototypes.h"
 	"../structures.h"
 
-1651847629 c:\repos\ece-arena\projet\projet final\structures.h
+1651852848 c:\repos\ece-arena\projet\projet final\structures.h
 	<allegro.h>
 
-1651749819 c:\repos\ece-arena\projet\projet final\prototypes.h
+1651852848 c:\repos\ece-arena\projet\projet final\prototypes.h
 	<stdio.h>
 	<stdlib.h>
 	<allegro.h>
 	<time.h>
 	<string.h>
 
-1651847868 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\tour_joueur.c
+1651862371 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\tour_joueur.c
 	"../prototypes.h"
 	"../structures.h"
 
-1651847968 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\deplacement_joueur.c
+1651852848 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\deplacement_joueur.c
 	"../prototypes.h"
 	"../structures.h"
 
-1651833341 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\menu.c
+1651852848 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\menu.c
 	"../structures.h"
 	"../prototypes.h"
 
-1651834015 source:c:\repos\ece-arena\projet\projet final\spgm affichages\affichage_elements.c
+1651852848 source:c:\repos\ece-arena\projet\projet final\spgm affichages\affichage_elements.c
 	"../prototypes.h"
 	"../structures.h"
 
-1651834015 source:c:\repos\ece-arena\projet\projet final\spgm affichages\calques.c
+1651852848 source:c:\repos\ece-arena\projet\projet final\spgm affichages\calques.c
 	"../prototypes.h"
 	"../structures.h"
 
-1651846579 source:c:\repos\ece-arena\projet\projet final\spgm affichages\dessins_blocs.c
+1651852848 source:c:\repos\ece-arena\projet\projet final\spgm affichages\dessins_blocs.c
 	"../prototypes.h"
 	"../structures.h"
 
-1651834015 source:c:\repos\ece-arena\projet\projet final\spgm affichages\initialisations_tab.c
+1651852848 source:c:\repos\ece-arena\projet\projet final\spgm affichages\initialisations_tab.c
 	"../prototypes.h"
 	"../structures.h"
 
-1651834015 source:c:\repos\ece-arena\projet\projet final\spgm affichages\lecture_pixels.c
+1651852848 source:c:\repos\ece-arena\projet\projet final\spgm affichages\lecture_pixels.c
 	"../prototypes.h"
 	"../structures.h"
 
-1651588493 source:c:\repos\ece-arena\projet\projet final\spgm affichages\quadrilages.c
+1651852848 source:c:\repos\ece-arena\projet\projet final\spgm affichages\quadrilages.c
 	"../prototypes.h"
 	"../structures.h"
 
-1651834015 source:c:\repos\ece-arena\projet\projet final\spgm affichages\zone_deplacement.c
+1651852848 source:c:\repos\ece-arena\projet\projet final\spgm affichages\zone_deplacement.c
 	"../prototypes.h"
 	"../structures.h"
 
-1651850641 source:c:\repos\ece-arena\projet\projet final\animations\animation_deplacement.c
+1651852848 source:c:\repos\ece-arena\projet\projet final\animations\animation_deplacement.c
 	"../prototypes.h"
 	"../structures.h"
 
-1651833417 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\position_depart_joueurs.c
+1651852848 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\position_depart_joueurs.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\animations\animation_deplacement.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\prototypes.h
+	<stdio.h>
+	<stdlib.h>
+	<allegro.h>
+	<time.h>
+	<string.h>
+
+1651852848 c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\structures.h
+	<allegro.h>
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\main.c
+	"structures.h"
+	"prototypes.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\menu_et_choix\choix_classes.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\menu_et_choix\creation_classes.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\menu_et_choix\menu.c
+	"../structures.h"
+	"../prototypes.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\partie_en_cours\deplacement_joueur.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\partie_en_cours\position_depart_joueurs.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\partie_en_cours\tour_joueur.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\spgm affichages\affichage_elements.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\spgm affichages\calques.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\spgm affichages\dessins_blocs.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\spgm affichages\initialisations_tab.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\spgm affichages\lecture_pixels.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\spgm affichages\quadrilages.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\spgm affichages\zone_deplacement.c
 	"../prototypes.h"
 	"../structures.h"
 
