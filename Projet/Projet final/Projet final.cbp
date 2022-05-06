@@ -31,6 +31,9 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Animations/animation_deplacement.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="Menu_et_choix/choix_classes.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -44,6 +47,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Partie_en_cours/deplacement_joueur.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Partie_en_cours/position_depart_joueurs.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="SPGM affichages/affichage_elements.c">

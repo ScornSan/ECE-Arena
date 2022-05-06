@@ -4,6 +4,17 @@
 #include <allegro.h>
 #define TEMPS_TOUR 15
 #define NB_SORTS 4
+#define DIRECTIONS 4
+#define NB_BITMAPS_D 4
+#define NB_BITMAPS_R 4
+
+typedef struct Acteur
+{
+    int x; // depart du tracage de l'image (Ex du guerrier : En 0 pour le premier mvt, en 49 pour le second...)
+    int y; // depart du tracage de l'image (Ex du guerrier : reste à 0 car meme taille d'image pour 1 direction)
+    int tx; // dimension de la taille de l'acteur en x (49)
+    int ty; // dimension de la taille de l'acteur en y (64)
+}t_acteurs;
 
 typedef struct bloc
 {
@@ -32,9 +43,10 @@ typedef struct sorts
 typedef struct classes
 {
     int attaque;
-    BITMAP* logo_attaque;
+    BITMAP *logo_attaque;
+    BITMAP *respiration[NB_BITMAPS_R];
+    BITMAP *deplacement[DIRECTIONS][NB_BITMAPS_D];
     t_sort spell[NB_SORTS];
-
 }t_classe;
 
 
@@ -43,7 +55,6 @@ typedef struct Players
     char pseudo[20];
     int id_classe;
     BITMAP* skin;
-    t_bloc position[23][23];
     int x;
     int y;
     int nb_pm;

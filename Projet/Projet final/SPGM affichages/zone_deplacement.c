@@ -1,7 +1,7 @@
 #include "../prototypes.h"
 #include "../structures.h"
 
-void deplacement_nombre_pm(BITMAP* buffer_pixels, BITMAP * buffer, int ligne_joueur, int colonne_joueur, t_bloc tab_bloc[23][23], int *nombre_pm, int *clic, BITMAP *cursor)
+void deplacement_nombre_pm(BITMAP* buffer_pixels, BITMAP * buffer, int ligne_joueur, int colonne_joueur, t_bloc matrice[23][23], int *nombre_pm, int *clic, BITMAP *cursor)
 {
     switch(*nombre_pm)
     {
@@ -16,7 +16,7 @@ void deplacement_nombre_pm(BITMAP* buffer_pixels, BITMAP * buffer, int ligne_jou
         }
         else
         {
-            zone_max_deplacement_1pm(buffer, ligne_joueur, colonne_joueur, tab_bloc);
+            zone_max_deplacement_1pm(buffer, ligne_joueur, colonne_joueur, matrice);
         }
         break;
     case 2:
@@ -27,7 +27,7 @@ void deplacement_nombre_pm(BITMAP* buffer_pixels, BITMAP * buffer, int ligne_jou
         }
         else
         {
-            zone_max_deplacement_2pm(buffer, ligne_joueur, colonne_joueur, tab_bloc);
+            zone_max_deplacement_2pm(buffer, ligne_joueur, colonne_joueur, matrice);
         }
         break;
     case 3:
@@ -38,14 +38,14 @@ void deplacement_nombre_pm(BITMAP* buffer_pixels, BITMAP * buffer, int ligne_jou
         }
         else
         {
-            //zone_max_deplacement_3pm(buffer, ligne_joueur, colonne_joueur, tab_bloc);
-            anomalie_case_deplacement(buffer_pixels,buffer, ligne_joueur, colonne_joueur, tab_bloc);
+            //zone_max_deplacement_3pm(buffer, ligne_joueur, colonne_joueur, matrice);
+            anomalie_case_deplacement(buffer_pixels,buffer, ligne_joueur, colonne_joueur, matrice);
         }
         break;
     }
 }
 
-void zone_max_deplacement_2pm(BITMAP * buffer, int ligne_joueur, int colonne_joueur, t_bloc tab_bloc[23][23])
+void zone_max_deplacement_2pm(BITMAP * buffer, int ligne_joueur, int colonne_joueur, t_bloc matrice[23][23])
 {
     for(int j = ligne_joueur-1; j<= ligne_joueur +1; j++)
     {
@@ -55,32 +55,32 @@ void zone_max_deplacement_2pm(BITMAP * buffer, int ligne_joueur, int colonne_jou
             else
             {
                 ///condition affichage en vert cases disponibles
-                if (tab_bloc[j][k].accessible == 1 && tab_bloc[j][k].occuper == 0)
+                if (matrice[j][k].accessible == 1 && matrice[j][k].occuper == 0)
                 {
-                    dessin_bloc_unique(buffer, j, k, tab_bloc, 0, 255, 0);
+                    dessin_bloc_unique(buffer, j, k, matrice, 0, 255, 0);
                 }
             }
         }
     }
-    if (tab_bloc[ligne_joueur-2][colonne_joueur].accessible == 1 && tab_bloc[ligne_joueur-2][colonne_joueur].occuper == 0 && (ligne_joueur-2 >=0 && ligne_joueur-2 <= 22) && (colonne_joueur >= 0 && colonne_joueur <= 22))
+    if (matrice[ligne_joueur-2][colonne_joueur].accessible == 1 && matrice[ligne_joueur-2][colonne_joueur].occuper == 0 && (ligne_joueur-2 >=0 && ligne_joueur-2 <= 22) && (colonne_joueur >= 0 && colonne_joueur <= 22))
     {
-        dessin_bloc_unique(buffer, ligne_joueur-2, colonne_joueur, tab_bloc, 0, 255, 0);
+        dessin_bloc_unique(buffer, ligne_joueur-2, colonne_joueur, matrice, 0, 255, 0);
     }
-    if (tab_bloc[ligne_joueur+2][colonne_joueur].accessible == 1 && tab_bloc[ligne_joueur+2][colonne_joueur].occuper == 0 && (ligne_joueur+2 >=0 && ligne_joueur+2 <= 22) && (colonne_joueur >= 0 && colonne_joueur <= 22))
+    if (matrice[ligne_joueur+2][colonne_joueur].accessible == 1 && matrice[ligne_joueur+2][colonne_joueur].occuper == 0 && (ligne_joueur+2 >=0 && ligne_joueur+2 <= 22) && (colonne_joueur >= 0 && colonne_joueur <= 22))
     {
-        dessin_bloc_unique(buffer, ligne_joueur+2, colonne_joueur, tab_bloc, 0, 255, 0);
+        dessin_bloc_unique(buffer, ligne_joueur+2, colonne_joueur, matrice, 0, 255, 0);
     }
-    if (tab_bloc[ligne_joueur][colonne_joueur-2].accessible == 1 && tab_bloc[ligne_joueur][colonne_joueur-2].occuper == 0&& (ligne_joueur >=0 && ligne_joueur <= 22) && (colonne_joueur -2 >= 0 && colonne_joueur -2 <= 22))
+    if (matrice[ligne_joueur][colonne_joueur-2].accessible == 1 && matrice[ligne_joueur][colonne_joueur-2].occuper == 0&& (ligne_joueur >=0 && ligne_joueur <= 22) && (colonne_joueur -2 >= 0 && colonne_joueur -2 <= 22))
     {
-        dessin_bloc_unique(buffer, ligne_joueur, colonne_joueur-2, tab_bloc, 0, 255, 0);
+        dessin_bloc_unique(buffer, ligne_joueur, colonne_joueur-2, matrice, 0, 255, 0);
     }
-    if (tab_bloc[ligne_joueur][colonne_joueur+2].accessible == 1 && tab_bloc[ligne_joueur][colonne_joueur+2].occuper == 0 && (ligne_joueur >=0 && ligne_joueur <= 22) && (colonne_joueur +2 >= 0 && colonne_joueur +2 <= 22))
+    if (matrice[ligne_joueur][colonne_joueur+2].accessible == 1 && matrice[ligne_joueur][colonne_joueur+2].occuper == 0 && (ligne_joueur >=0 && ligne_joueur <= 22) && (colonne_joueur +2 >= 0 && colonne_joueur +2 <= 22))
     {
-        dessin_bloc_unique(buffer, ligne_joueur, colonne_joueur +2, tab_bloc, 0, 255, 0);
+        dessin_bloc_unique(buffer, ligne_joueur, colonne_joueur +2, matrice, 0, 255, 0);
     }
 }
 
-void zone_max_deplacement_3pm(BITMAP * buffer, int ligne_joueur, int colonne_joueur, t_bloc tab_bloc[23][23])
+void zone_max_deplacement_3pm(BITMAP * buffer, int ligne_joueur, int colonne_joueur, t_bloc matrice[23][23])
 {
     /// dessin gros retangle central
     for(int j = ligne_joueur-1; j<= ligne_joueur +1; j++)
@@ -88,9 +88,9 @@ void zone_max_deplacement_3pm(BITMAP * buffer, int ligne_joueur, int colonne_jou
         for (int k = colonne_joueur -2; k <= colonne_joueur +2; k++)
         {
             ///condition affichage en vert cases disponibles
-            if (tab_bloc[j][k].accessible == 1 && tab_bloc[j][k].occuper == 0)
+            if (matrice[j][k].accessible == 1 && matrice[j][k].occuper == 0)
             {
-                dessin_bloc_unique(buffer, j, k, tab_bloc, 0, 255,0);
+                dessin_bloc_unique(buffer, j, k, matrice, 0, 255,0);
             }
         }
     }
@@ -98,36 +98,36 @@ void zone_max_deplacement_3pm(BITMAP * buffer, int ligne_joueur, int colonne_jou
     for (int k = colonne_joueur -1; k <= colonne_joueur +1; k++)
     {
         ///condition affichage en vert cases disponibles
-        if (tab_bloc[ligne_joueur+2][k].accessible == 1 && tab_bloc[ligne_joueur+2][k].occuper == 0)
+        if (matrice[ligne_joueur+2][k].accessible == 1 && matrice[ligne_joueur+2][k].occuper == 0)
         {
-            dessin_bloc_unique(buffer, ligne_joueur +2, k, tab_bloc, 0, 255, 0);
+            dessin_bloc_unique(buffer, ligne_joueur +2, k, matrice, 0, 255, 0);
         }
-        if (tab_bloc[ligne_joueur-2][k].accessible == 1 && tab_bloc[ligne_joueur-2][k].occuper == 0)
+        if (matrice[ligne_joueur-2][k].accessible == 1 && matrice[ligne_joueur-2][k].occuper == 0)
         {
-            dessin_bloc_unique(buffer, ligne_joueur -2, k, tab_bloc, 0, 255, 0);
+            dessin_bloc_unique(buffer, ligne_joueur -2, k, matrice, 0, 255, 0);
         }
 
     }
     /// dessin 4 blocs aux extremités
-    if (tab_bloc[ligne_joueur-3][colonne_joueur].accessible == 1 && tab_bloc[ligne_joueur-3][colonne_joueur].occuper == 0 && (ligne_joueur-3 >=0 && ligne_joueur-3 <= 22) && (colonne_joueur >= 0 && colonne_joueur <= 22))
+    if (matrice[ligne_joueur-3][colonne_joueur].accessible == 1 && matrice[ligne_joueur-3][colonne_joueur].occuper == 0 && (ligne_joueur-3 >=0 && ligne_joueur-3 <= 22) && (colonne_joueur >= 0 && colonne_joueur <= 22))
     {
-        dessin_bloc_unique(buffer, ligne_joueur-3, colonne_joueur, tab_bloc, 0, 255, 0);
+        dessin_bloc_unique(buffer, ligne_joueur-3, colonne_joueur, matrice, 0, 255, 0);
     }
-    if (tab_bloc[ligne_joueur+3][colonne_joueur].accessible == 1 && tab_bloc[ligne_joueur+3][colonne_joueur].occuper == 0 && (ligne_joueur+3 >=0 && ligne_joueur+3 <= 22) && (colonne_joueur >= 0 && colonne_joueur <= 22))
+    if (matrice[ligne_joueur+3][colonne_joueur].accessible == 1 && matrice[ligne_joueur+3][colonne_joueur].occuper == 0 && (ligne_joueur+3 >=0 && ligne_joueur+3 <= 22) && (colonne_joueur >= 0 && colonne_joueur <= 22))
     {
-        dessin_bloc_unique(buffer, ligne_joueur+3, colonne_joueur, tab_bloc, 0, 255, 0);
+        dessin_bloc_unique(buffer, ligne_joueur+3, colonne_joueur, matrice, 0, 255, 0);
     }
-    if (tab_bloc[ligne_joueur][colonne_joueur-3].accessible == 1 && tab_bloc[ligne_joueur][colonne_joueur-3].occuper == 0&& (ligne_joueur >=0 && ligne_joueur <= 22) && (colonne_joueur -3 >= 0 && colonne_joueur -3 <= 22))
+    if (matrice[ligne_joueur][colonne_joueur-3].accessible == 1 && matrice[ligne_joueur][colonne_joueur-3].occuper == 0&& (ligne_joueur >=0 && ligne_joueur <= 22) && (colonne_joueur -3 >= 0 && colonne_joueur -3 <= 22))
     {
-        dessin_bloc_unique(buffer, ligne_joueur, colonne_joueur-3, tab_bloc, 0, 255, 0);
+        dessin_bloc_unique(buffer, ligne_joueur, colonne_joueur-3, matrice, 0, 255, 0);
     }
-    if (tab_bloc[ligne_joueur][colonne_joueur+3].accessible == 1 && tab_bloc[ligne_joueur][colonne_joueur+3].occuper == 0 && (ligne_joueur >=0 && ligne_joueur <= 22) && (colonne_joueur +3 >= 0 && colonne_joueur +3 <= 22))
+    if (matrice[ligne_joueur][colonne_joueur+3].accessible == 1 && matrice[ligne_joueur][colonne_joueur+3].occuper == 0 && (ligne_joueur >=0 && ligne_joueur <= 22) && (colonne_joueur +3 >= 0 && colonne_joueur +3 <= 22))
     {
-        dessin_bloc_unique(buffer, ligne_joueur, colonne_joueur +3, tab_bloc, 0, 255, 0);
+        dessin_bloc_unique(buffer, ligne_joueur, colonne_joueur +3, matrice, 0, 255, 0);
     }
 }
 
-void anomalie_case_deplacement(BITMAP * buffer_pixels, BITMAP * buffer, int ligne_joueur, int colonne_joueur, t_bloc tab_bloc[23][23])
+void anomalie_case_deplacement(BITMAP * buffer_pixels, BITMAP * buffer, int ligne_joueur, int colonne_joueur, t_bloc matrice[23][23])
 {
     int affiche = 1 ;
     int ligne_final = ligne_joueur;
@@ -140,7 +140,7 @@ void anomalie_case_deplacement(BITMAP * buffer_pixels, BITMAP * buffer, int lign
             printf("i = %d  ", i);
             printf("j = %d\n", j);
             /// si le pixel du centre de la case i, j, est vert, je regarde si il y a bien un chemin pour y parvenir
-            if(getg(getpixel(buffer, tab_bloc[i][j].x_bloc, tab_bloc[i][j].y_bloc)) == 255)
+            if(getg(getpixel(buffer, matrice[i][j].x_bloc, matrice[i][j].y_bloc)) == 255)
             {
                 int colonne_temp = colonne_joueur;
                 int ligne_temp = ligne_joueur;
@@ -151,7 +151,7 @@ void anomalie_case_deplacement(BITMAP * buffer_pixels, BITMAP * buffer, int lign
                     while(colonne_temp != j)
                     {
                         colonne_temp--;
-                        if (tab_bloc[ligne_temp][colonne_temp].occuper == 1)
+                        if (matrice[ligne_temp][colonne_temp].occuper == 1)
                         {
                             affiche = 0;
                             break;
@@ -163,7 +163,7 @@ void anomalie_case_deplacement(BITMAP * buffer_pixels, BITMAP * buffer, int lign
                     while(colonne_temp != j)
                     {
                         colonne_temp++;
-                        if (tab_bloc[ligne_temp][colonne_temp].occuper == 1)
+                        if (matrice[ligne_temp][colonne_temp].occuper == 1)
                         {
                             affiche = 0;
                             break;
@@ -177,7 +177,7 @@ void anomalie_case_deplacement(BITMAP * buffer_pixels, BITMAP * buffer, int lign
                         while(ligne_temp != i)
                         {
                             ligne_temp--;
-                            if (tab_bloc[ligne_temp][colonne_temp].occuper == 1)
+                            if (matrice[ligne_temp][colonne_temp].occuper == 1)
                             {
                                 affiche = 0;
                                 break;
@@ -189,7 +189,7 @@ void anomalie_case_deplacement(BITMAP * buffer_pixels, BITMAP * buffer, int lign
                         while(ligne_temp != i)
                         {
                             ligne_temp++;
-                            if (tab_bloc[ligne_temp][colonne_temp].occuper == 1)
+                            if (matrice[ligne_temp][colonne_temp].occuper == 1)
                             {
                                 affiche = 0;
                                 break;
@@ -208,7 +208,7 @@ void anomalie_case_deplacement(BITMAP * buffer_pixels, BITMAP * buffer, int lign
                         while(ligne_temp != i)
                         {
                             ligne_temp--;
-                            if (tab_bloc[ligne_temp][colonne_temp].occuper == 1)
+                            if (matrice[ligne_temp][colonne_temp].occuper == 1)
                             {
                                 affiche = 0;
                                 break;
@@ -220,7 +220,7 @@ void anomalie_case_deplacement(BITMAP * buffer_pixels, BITMAP * buffer, int lign
                         while(ligne_temp != i)
                         {
                             ligne_temp++;
-                            if (tab_bloc[ligne_temp][colonne_temp].occuper == 1)
+                            if (matrice[ligne_temp][colonne_temp].occuper == 1)
                             {
                                 affiche = 0;
                                 break;
@@ -234,7 +234,7 @@ void anomalie_case_deplacement(BITMAP * buffer_pixels, BITMAP * buffer, int lign
                             while(colonne_temp != j)
                             {
                                 colonne_temp--;
-                                if (tab_bloc[ligne_temp][colonne_temp].occuper == 1)
+                                if (matrice[ligne_temp][colonne_temp].occuper == 1)
                                 {
                                     affiche = 0;
                                     break;
@@ -246,7 +246,7 @@ void anomalie_case_deplacement(BITMAP * buffer_pixels, BITMAP * buffer, int lign
                             while(colonne_temp != j)
                             {
                                 colonne_temp++;
-                                if (tab_bloc[ligne_temp][colonne_temp].occuper == 1)
+                                if (matrice[ligne_temp][colonne_temp].occuper == 1)
                                 {
                                     affiche = 0;
                                     break;
@@ -256,7 +256,7 @@ void anomalie_case_deplacement(BITMAP * buffer_pixels, BITMAP * buffer, int lign
                     }
                     if (affiche == 0)
                     {
-                        dessin_bloc_unique(buffer, i,j,tab_bloc, 255,255,255);
+                        dessin_bloc_unique(buffer, i,j,matrice, 255,255,255);
                     }
                 }
             }

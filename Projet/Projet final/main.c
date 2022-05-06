@@ -24,6 +24,7 @@ int main()
 {
     srand(time(NULL));
     int nb_joueurs;
+    SAMPLE* s; //definir un sample de son
     BITMAP *cursor;
     BITMAP *fond;
     BITMAP *buffer;
@@ -41,6 +42,22 @@ int main()
         exit(EXIT_FAILURE);
     }
 
+    if (install_sound(DIGI_AUTODETECT, MIDI_NONE, 0) != 0)
+    {
+        printf("Error initialising sound: %s\n", allegro_error);
+        return 1;
+    }
+
+    s=  load_wav("SOUND/sound_hub.wav"); //charger un wav
+
+    if (!s)   //blindage
+    {
+        printf("Error loading sound!");
+        return 1;
+    }
+
+    play_sample(s, 255, 128, 1000, 1); //lancer la musique en boucle
+
     cursor=load_bitmap("BITMAP/cursor.bmp",NULL);
     fond = load_bitmap("BITMAP/fond.bmp", NULL);
 
@@ -48,25 +65,28 @@ int main()
     clear_bitmap(buffer);
 
     char pseudo[4][20]; // creation pseudo temporaires qui seront stocker dans les structures joueurs
-    nb_joueurs = menu(buffer, fond, cursor, pseudo);
 
-    joueur = (t_joueur*)malloc(sizeof(t_joueur) * nb_joueurs); // allocation dynamiques des structures joueurs
-    if (joueur == NULL)
+    // Boucle du programme, tant qu'on ne clique pas sur quitter
+    while (1) /// changer la valeur du 1 en un boolen jeu qui passe par adresse dans le menu,
+              ///et si on clique sur quitter a la fin de la partie, on change la valeur du boolen pour quitter la boucle
     {
-        allegro_message("Erreur allocation dynamique");
-        allegro_exit();
-        exit(EXIT_FAILURE);
-    }
+        nb_joueurs = menu(buffer, fond, cursor, pseudo);
 
-    for (int i = 0; i < nb_joueurs; i++)
-    {
-        strcpy(joueur[i].pseudo, pseudo[i]);
-    }
-    creation_classes(joueur, nb_joueurs);
-    choix_classe(buffer, fond, cursor, joueur, nb_joueurs);
-    // Boucle d'animation (quand on arrive aux nombres de joueurs, ici 3, c'est que la selection pour chaque joueur a été faite)
-    while (key != KEY_ESC)
-    {
+        joueur = (t_joueur*)malloc(sizeof(t_joueur) * nb_joueurs); // allocation dynamiques des structures joueurs
+        if (joueur == NULL)
+        {
+            allegro_message("Erreur allocation dynamique");
+            allegro_exit();
+            exit(EXIT_FAILURE);
+        }
+
+        for (int i = 0; i < nb_joueurs; i++)
+        {
+            strcpy(joueur[i].pseudo, pseudo[i]);
+        }
+        creation_classes(joueur, nb_joueurs);
+        choix_classe(buffer, fond, cursor, joueur, nb_joueurs);
+        stop_sample(s);
         tour_joueur(buffer, cursor, joueur, nb_joueurs);
     }
     destroy_bitmap(cursor);

@@ -195,13 +195,13 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20])
                 {
 
                     nb_joueur = nb_joueur+1;
-                    rest(200);
+                    rest(100);
                 }
                 if (mouse_b&1 && mouse_x>=754 && mouse_x <= 870 && mouse_y >= 331 && mouse_y <= 436 && nb_joueur > 0)
                 {
 
                     nb_joueur = nb_joueur -1;
-                    rest(200);
+                    rest(100);
                 }
                 // On appuie sur ok
                 if ((mouse_b&1) && (mouse_x > 458) && (mouse_x < 833) && (mouse_y > 573) && (mouse_y < 654) && (nb_joueur >= 2))
@@ -214,7 +214,6 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20])
                     ok =1;
                 }
                 blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-                rest(20);
             }
 
             clear_bitmap(buffer);
