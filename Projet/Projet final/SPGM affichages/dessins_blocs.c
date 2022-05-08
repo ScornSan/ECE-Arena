@@ -66,14 +66,18 @@ void reperage_chemin(BITMAP * buffer, int x_joueur, int y_joueur, int x_souris, 
 
 void dessin_bloc_unique(BITMAP *buffer, int param1, int param2, t_bloc matrice[23][23], int r, int g, int b)
 {
-    for(int i = 0; i< 12; i++)
+    if (matrice[param1][param2].accessible || !matrice[param1][param2].occuper)
     {
-        line(buffer, matrice[param1][param2].x_bloc +2*i, matrice[param1][param2].y_bloc -12 +i, matrice[param1][param2].x_bloc+1 -2*i,matrice[param1][param2].y_bloc -12 +i, makecol(r,g,b));
+        for(int i = 0; i< 12; i++)
+        {
+            line(buffer, matrice[param1][param2].x_bloc +2*i, matrice[param1][param2].y_bloc -12 +i, matrice[param1][param2].x_bloc+1 -2*i,matrice[param1][param2].y_bloc -12 +i, makecol(r,g,b));
+        }
+        for(int i = 0; i< 12; i++)
+        {
+            line(buffer, matrice[param1][param2].x_bloc -22 +2*i, matrice[param1][param2].y_bloc +i, matrice[param1][param2].x_bloc +23 -2*i, matrice[param1][param2].y_bloc +i, makecol(r,g,b));
+        }
     }
-    for(int i = 0; i< 12; i++)
-    {
-        line(buffer, matrice[param1][param2].x_bloc -22 +2*i, matrice[param1][param2].y_bloc +i, matrice[param1][param2].x_bloc +23 -2*i, matrice[param1][param2].y_bloc +i, makecol(r,g,b));
-    }
+
 }
 
 void effacement_bloc_unique(BITMAP *buffer_pixels, BITMAP * buffer, int param1, int param2, t_bloc matrice[23][23])

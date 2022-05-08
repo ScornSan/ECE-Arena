@@ -1,6 +1,18 @@
 #include "../prototypes.h"
 #include "../structures.h"
 
+void affichage_joueurs(BITMAP *buffer, t_joueur* joueur, int i, int nb_joueurs, t_bloc matrice[23][23])
+{
+    for (int j = 0; j< nb_joueurs; j++)
+    {
+        if (joueur[j].vivant)
+        {
+            //couleur_sous_joueur(buffer, joueur[j].x, joueur[j].y, matrice);
+            masked_blit(joueur[j].classe.deplacement[0][0], buffer, 0, 0, matrice[joueur[j].x][joueur[j].y].x_bloc - 22, matrice[joueur[j].x][joueur[j].y].y_bloc - 52, 49, 64);
+        }
+    }
+}
+
 void encadrement_souris(BITMAP * buffer, int rouge, int vert, int bleu)
 {
     for(int i = 0; i< 12; i++)

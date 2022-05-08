@@ -49,6 +49,11 @@ void creation_icones_classes(t_joueur* joueur)
                 sprintf(sorts_mage, "BITMAP/sort%d_mage.bmp", j + 1);
                 joueur[i].classe.spell[j].description = load_bitmap(classe_mage, NULL);
                 joueur[i].classe.spell[j].logo = load_bitmap(sorts_mage, NULL);
+                for (k = 0; k < NB_BITMAPS_D; k++)
+                {
+                    sprintf(mvt_guerrier, "SPRITES/GUERRIER/MARCHE/walking_%d_%d.bmp", j, k);
+                    joueur[i].classe.deplacement[j][k] = load_bitmap(mvt_guerrier, NULL);
+                }
                 if (!joueur[i].classe.spell[j].description || !joueur[i].classe.spell[j].logo)
                 {
                     allegro_message("erreur creation classe mage");
@@ -64,6 +69,11 @@ void creation_icones_classes(t_joueur* joueur)
                 sprintf(sorts_mutant, "BITMAP/sort%d_mutant.bmp", j + 1);
                 joueur[i].classe.spell[j].description = load_bitmap(classe_mutant, NULL);
                 joueur[i].classe.spell[j].logo = load_bitmap(sorts_mutant, NULL);
+                for (k = 0; k < NB_BITMAPS_D; k++)
+                {
+                    sprintf(mvt_guerrier, "SPRITES/GUERRIER/MARCHE/walking_%d_%d.bmp", j, k);
+                    joueur[i].classe.deplacement[j][k] = load_bitmap(mvt_guerrier, NULL);
+                }
                 if (!joueur[i].classe.spell[j].description || !joueur[i].classe.spell[j].logo)
                 {
                     allegro_message("erreur creation classe vampire");
@@ -79,6 +89,11 @@ void creation_icones_classes(t_joueur* joueur)
                 sprintf(sorts_assassin, "BITMAP/sort%d_assassin.bmp", j + 1);
                 joueur[i].classe.spell[j].description = load_bitmap(classe_assassin, NULL);
                 joueur[i].classe.spell[j].logo = load_bitmap(sorts_assassin, NULL);
+                for (k = 0; k < NB_BITMAPS_D; k++)
+                {
+                    sprintf(mvt_guerrier, "SPRITES/GUERRIER/MARCHE/walking_%d_%d.bmp", j, k);
+                    joueur[i].classe.deplacement[j][k] = load_bitmap(mvt_guerrier, NULL);
+                }
                 if (!joueur[i].classe.spell[j].description || !joueur[i].classe.spell[j].logo)
                 {
                     allegro_message("erreur creation classe assassin");

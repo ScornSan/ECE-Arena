@@ -34,6 +34,21 @@
 		<Unit filename="Animations/animation_deplacement.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="Combats/selection_sort.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Combats/sorts_assassin.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Combats/sorts_guerrier.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Combats/sorts_mage.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Combats/sorts_vampire.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="Menu_et_choix/choix_classes.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -50,6 +65,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Partie_en_cours/position_depart_joueurs.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="SPGM affichages/afffichage_hud.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="SPGM affichages/affichage_elements.c">
