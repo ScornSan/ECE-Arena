@@ -34,3 +34,32 @@
 	"../prototypes.h"
 	"../structures.h"
 
+1651782042 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\main.c
+	"structures.h"
+	"prototypes.h"
+
+1651782042 c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\structures.h
+	<allegro.h>
+
+1651782042 c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\prototypes.h
+	<stdio.h>
+	<stdlib.h>
+	<allegro.h>
+	<time.h>
+
+1651782042 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\menu_et_choix\choix_classes.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651782042 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\menu_et_choix\creation_classes.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651782042 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\partie_en_cours\deplacement_joueur.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651782042 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\partie_en_cours\tour_joueur.c
+	"../prototypes.h"
+	"../structures.h"
+
