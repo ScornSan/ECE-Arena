@@ -144,6 +144,7 @@ void sort3_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_b
 void sort4_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice[23][23], int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts)
 {
     int attaque = 0;
+
     //time_t start = time(NULL);
     /// tant qu'on ne clique pas sur l'icone de l'attaque de base, ou qu'on a lancé l'attaque
     while (!attaque)
@@ -156,7 +157,7 @@ void sort4_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_b
         display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
         // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
-        if (matrice[x_souris][y_souris].x_bloc == matrice[joueur[ennemi1 % nb_joueurs].x][joueur[ennemi1 % nb_joueurs].y].x_bloc && matrice[x_souris][y_souris].y_bloc == matrice[joueur[ennemi1 % nb_joueurs].x][joueur[ennemi1 % nb_joueurs].y].y_bloc && mouse_b&1)
+        if(1)
         {
             circlefill(buffer, 400, 500, 9, makecol(0, 0, 0));
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
