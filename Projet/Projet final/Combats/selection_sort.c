@@ -22,7 +22,6 @@ void attaque_de_base(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_
         dessin_bloc_unique(buffer, joueur[i].x - 1, joueur[i].y, matrice, 250, 140, 0);
         dessin_bloc_unique(buffer, joueur[i].x, joueur[i].y + 1, matrice, 250, 140, 0);
         affichage_joueurs(buffer, joueur, i, nb_joueurs, matrice);
-
         display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
         // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
@@ -49,16 +48,19 @@ void attaque_de_base(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_
         }
         if (mouse_x >= 300 && mouse_x <= 330 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1)
         {
+            //animation_attaque_de_base(buffer, map, joueur, i, )
             attaque = 1; // le joueur a annulé son attaque, l'attaque est considéré comme faite mais sans dégâts
         }
     }
 }
 
-void sort1(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice [23][23], BITMAP *desc_sorts, int x_souris, int y_souris, BITMAP *cursor)
+
+void sort1(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice [23][23], BITMAP *desc_sorts, int x_souris, int y_souris, BITMAP *cursor, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP* map)
 {
     switch(joueur[i].id_classe)
     {
     case 1: // GUERRIER
+        sort1_guerrier(joueur, i, nb_joueurs, buffer, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
         break;
     case 2: // MAGE
         break;
@@ -69,11 +71,12 @@ void sort1(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matri
     }
 }
 
-void sort2(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice [23][23], BITMAP *desc_sorts, int x_souris, int y_souris, BITMAP *cursor)
+void sort2(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice [23][23], BITMAP *desc_sorts, int x_souris, int y_souris, BITMAP *cursor, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP* map)
 {
     switch(joueur[i].id_classe)
     {
     case 1: // GUERRIER
+        sort2_guerrier(joueur, i, nb_joueurs, buffer, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
         break;
     case 2: // MAGE
         break;
@@ -84,11 +87,12 @@ void sort2(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matri
     }
 }
 
-void sort3(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice [23][23], BITMAP *desc_sorts, int x_souris, int y_souris, BITMAP *cursor)
+void sort3(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice [23][23], BITMAP *desc_sorts, int x_souris, int y_souris, BITMAP *cursor, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP* map)
 {
     switch(joueur[i].id_classe)
     {
     case 1: // GUERRIER
+        sort3_guerrier(joueur, i, nb_joueurs, buffer, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
         break;
     case 2: // MAGE
         break;
@@ -99,11 +103,11 @@ void sort3(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matri
     }
 }
 
-void sort4(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice [23][23], BITMAP *desc_sorts, int x_souris, int y_souris, BITMAP *cursor)
-{
+void sort4(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice [23][23], BITMAP *desc_sorts, int x_souris, int y_souris, BITMAP *cursor, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP* map){
     switch(joueur[i].id_classe)
     {
     case 1: // GUERRIER
+        sort4_guerrier(joueur, i, nb_joueurs, buffer, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
         break;
     case 2: // MAGE
         break;
@@ -116,6 +120,7 @@ void sort4(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matri
 
 void selection_sort(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice [23][23], BITMAP *desc_sorts, int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone)
 {
+    /// On met des rest avant et après l'appel du programme pour bien qu'il y ait un clique : la pause est suffisante pour stopper un moment sans repasser dans la boucle
     if (mouse_x >= 300 && mouse_x <= 330 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1) // attaque de base
     {
         rest(80);
@@ -124,25 +129,26 @@ void selection_sort(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_b
     }
     if (mouse_x >= 335 && mouse_x <= 365 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1) // sort 1
     {
-        masked_blit(desc_sorts, buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage bitmap description
-        masked_blit(joueur[i].classe.spell[0].description, buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage description sort 1
-
+        rest(80);
+        sort1(joueur, i, nb_joueurs, buffer, matrice, desc_sorts, x_souris, y_souris, cursor, hud_joueur, icone_classes, hud_icone, map);
+        rest(80);
     }
     if (mouse_x >= 370 && mouse_x <= 400 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1) // sort 2
     {
-        masked_blit(desc_sorts, buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage stats sorts
-        masked_blit(joueur[i].classe.spell[1].description, buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage bitmap description sort 2
-
+        rest(80);
+        sort2(joueur, i, nb_joueurs, buffer, matrice, desc_sorts, x_souris, y_souris, cursor, hud_joueur, icone_classes, hud_icone, map);
+        rest(80);
     }
     if (mouse_x >= 405 && mouse_x <= 435 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1) // sort 3
     {
-        masked_blit(desc_sorts, buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage stats sorts
-        masked_blit(joueur[i].classe.spell[2].description, buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage description sort 3
-
+        rest(80);
+        sort3(joueur, i, nb_joueurs, buffer, matrice, desc_sorts, x_souris, y_souris, cursor, hud_joueur, icone_classes, hud_icone, map);
+        rest(80);
     }
     if (mouse_x >= 440 && mouse_x <= 470 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1) // sort 4
     {
-        masked_blit(desc_sorts, buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage stats sort
-        masked_blit(joueur[i].classe.spell[3].description, buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage description sort 4
+        rest(80);
+        sort4(joueur, i, nb_joueurs, buffer, matrice, desc_sorts, x_souris, y_souris, cursor, hud_joueur, icone_classes, hud_icone, map);
+        rest(80);
     }
 }

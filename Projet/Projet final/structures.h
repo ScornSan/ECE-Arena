@@ -55,6 +55,7 @@ typedef struct Players
     char pseudo[20];
     int id_classe;
     BITMAP* skin;
+    int direction;
     int x;
     int y;
     int nb_pm;

@@ -34,5 +34,16 @@ void zone_max_deplacement_1pm();
 void zone_max_deplacement_2pm();
 void zone_max_deplacement_3pm();
 void anomalie_case_deplacement();
+void affichage_general();
+void affichage_joueurs();
+void animation_deplacement();
+void affichage_emplacement_depart();
+void condition_positionnement_depart();
+void couleur_sous_joueur();
+void selection_sort();
+void sort1_guerrier();
+void sort2_guerrier();
+void sort3_guerrier();
+void sort4_guerrier();
 
 #endif // PROTOTYOPES_H_INCLUDED

@@ -12,8 +12,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
     FONT *kristen12;
     FONT *fixedsys;
 
-    BITMAP * buffer_pixels; // LE 2
-    BITMAP * buffer_map; // LE 1
+    BITMAP * buffer_map;
     BITMAP * croix_rouge;
     BITMAP * croix_bleue;
 
@@ -34,7 +33,6 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
 
     buffer =create_bitmap(SCREEN_W,SCREEN_H);
     buffer_map =create_bitmap(SCREEN_W,SCREEN_H);
-    buffer_pixels =create_bitmap(SCREEN_W,SCREEN_H);
     croix_rouge = load_bitmap("BITMAP/croix_rouge.bmp", NULL);
     croix_bleue = load_bitmap("BITMAP/croix_bleue.bmp", NULL);
 
@@ -75,7 +73,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
     }
 
     clear_bitmap(buffer);
-    time_t start = time(NULL);
+    //time_t start = time(NULL);
 
     textout_ex(desc_sorts, font, "DEGATS:", 18, 20, makecol(255, 0, 0), -1);
     textout_ex(desc_sorts, font, "PA:", 18, 34, makecol(60, 0, 255), -1);
@@ -90,23 +88,18 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
     int green_mouse, red_mouse, blue_mouse, green_mouse2, red_mouse2, blue_mouse2;
     int joueur_en_vie = nb_joueurs;
     int autorisation_dep = 0;
-    time_t chrono1 = time (NULL);
-    time_t chrono2 = time (NULL);
 
-    int erreur1 = 0;
-    int erreur2 = 0;
-    int clic = 0;
     int deplacement_effectuer = 0;
-    int nombre_pm = 3;
 
     /// initialisation des coordonnées de chaque jour a la case x = 0, y = 0
     for (int i = 0; i<nb_joueurs; i++)
     {
         joueur[i].x = i;
         joueur[i].y =  i;
+        joueur[i].direction = 0;
     }
     int fini = 0, choix1= 0, choix2= 0, choix3= 0, choix4= 0;
-
+    i = 0;
     /// tant que tous les joueurs ne sont pas positionnés
     while(fini != nb_joueurs)
     {
@@ -120,7 +113,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
         condition_positionnement_depart(&fini, ligne_souris, colonne_souris, matrice, joueur, &choix1, &choix2, &choix3, &choix4, red_mouse2, green_mouse2, blue_mouse2);
 
         textprintf_ex(buffer, font, 500, 100, makecol(255,255,255), -1, "%s, choisissez votre emplacement de depart", joueur[i].pseudo);
-        reperage_bloc_souris(&ligne_souris, &colonne_souris, red_mouse, green_mouse, blue_mouse, matrice, &autorisation_dep);
+        reperage_bloc_souris(&ligne_souris, &colonne_souris, red_mouse, green_mouse, blue_mouse, matrice);
         ///affichage de tous les joueurs en meme temps
         for (int j = 0; j< nb_joueurs; j++)
         {
@@ -144,21 +137,16 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
             affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
             textprintf_ex(buffer, font, 0, 0, makecol(0, 0, 0), -1, "Mouse X : %d", mouse_x);
             textprintf_ex(buffer, font, 0, 10, makecol(0, 0, 0), -1, "Mouse Y : %d", mouse_y);
-            textprintf_ex(buffer, font, 0, 20, makecol(0, 0, 0), -1, "Temps: %f", (float)((time(NULL)) - start));
-            rectfill(buffer, 1000, 650, 1000 - (int)((time(NULL)) - start) * 5, 673, makecol(255, 0, 0)); // barre de temps
+            //textprintf_ex(buffer, font, 0, 20, makecol(0, 0, 0), -1, "Temps: %f", (float)((time(NULL)) - start));
+            //rectfill(buffer, 1000, 650, 1000 - (int)((time(NULL)) - start) * 5, 673, makecol(255, 0, 0)); // barre de temps
 
             lecture_pixels_buffer_map(buffer_map, &red_mouse, &green_mouse, &blue_mouse);
-            reperage_bloc_souris(&ligne_souris, &colonne_souris, red_mouse, green_mouse, blue_mouse, matrice, &autorisation_dep, joueur, i);
+            reperage_bloc_souris(&ligne_souris, &colonne_souris, red_mouse, green_mouse, blue_mouse, matrice, joueur, i);
             reperage_chemin(buffer, joueur[i].x, joueur[i].y, ligne_souris, colonne_souris, matrice, joueur, i, &autorisation_dep);
             selection_sort(joueur, i, nb_joueurs, buffer, matrice, desc_sorts, ligne_souris, colonne_souris, cursor, map, hud_joueur, icone_classes, hud_icone);
 
             if(autorisation_dep == 1)
             {
-                /*/// variables contenant les parametres de la souris au moment du clic
-                lecture_pixels_buffer_map(buffer_map, &red_mouse, &green_mouse, &blue_mouse);
-                /// recherche du bloc correspondant sous la souris au moment du clic
-                reperage_bloc_souris(&ligne_souris, &colonne_souris, red_mouse, green_mouse, blue_mouse, matrice, &autorisation_dep);*/
-
                 /*/// condition si la souris clic sur un bloc valable
                 if (matrice[ligne_souris][colonne_souris].accessible == 0)
                 {
@@ -189,13 +177,13 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
             //deplacement_nombre_pm(buffer_pixels, buffer, joueur[i].x, joueur[i].y, matrice, &nombre_pm, &clic, cursor);
             affichage_joueurs(buffer, joueur, i, nb_joueurs, matrice);
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-            if ((int)(time(NULL) - start >= TEMPS_TOUR))
+            /*if ((int)(time(NULL) - start >= TEMPS_TOUR))
             {
                 start = time(NULL);
                 joueur[i].pm = 3; // on remet les pm et pa du joueur au nombre initial
                 joueur[i].pa = 6;
                 i = (i + 1) % nb_joueurs; // On boucle car temps finis ou on a cliqué sur le bouton
-            }
+            }*/
         }
         else
         {
@@ -216,6 +204,6 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
         }
     }
     destroy_bitmap(map);
-    destroy_bitmap(hud_joueur);
+    destroy_bitmap(*hud_joueur);
     destroy_bitmap(hud_icone);
 }

@@ -36,30 +36,30 @@ void affichage_autres_joueurs(t_joueur* j, BITMAP *buffer, int i, int nb_joueurs
     }
 }
 
-void animation_deplacement(BITMAP *buffer, BITMAP *bg, t_joueur* j, int i, int direction, t_bloc matrice[23][23], int nb_joueurs)
+void animation_deplacement(BITMAP *buffer, BITMAP *bg, t_joueur* j, int i, t_bloc matrice[23][23], int nb_joueurs)
 {
     int x_depart = 0;
     int y_depart = 0;
     int x_arrive = 22;
     int y_arrive = 13;
     int num_bitmap = 0;
-    int k;
     while (x_depart <= x_arrive && y_depart <= y_arrive)
     {
-        switch (direction)
+        printf("while nord ouest inf\n");
+        switch (j[i].direction)
         {
-        case 0: // sud ouest
+        case 0: /// sud ouest
             // matrice de matrice[j[i].x][j[i].y].x_bloc
             // matrice de matrice[j[i].x][j[i].y].y_bloc
             // milieu du matrice : 23 pixel en x jusqu'au milieu, 13 en y
             // augmente de 2 en x, 1 en y
-
+            printf("while sud ouest inf\n");
             // 1)  EFFACER BUFFER, en appliquant décor  (pas de clear_bitmap)
             blit(bg,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
             // 2) DETERMINER NOUVELLEs POSITIONs
 
             // 3) AFFICHAGE NOUVELLEs POSITIONs SUR LE BUFFER
-            draw_sprite(buffer, j[i].classe.deplacement[direction][num_bitmap], matrice[j[i].x][j[i].y].x_bloc - 22 - x_depart, matrice[j[i].x][j[i].y].y_bloc - 52 + y_depart);
+            draw_sprite(buffer, j[i].classe.deplacement[j[i].direction][num_bitmap], matrice[j[i].x][j[i].y].x_bloc - 22 - x_depart, matrice[j[i].x][j[i].y].y_bloc - 52 + y_depart);
             affichage_autres_joueurs(j, buffer, i,nb_joueurs, matrice);
             num_bitmap = (num_bitmap + 1) % NB_BITMAPS_D;
             x_depart = x_depart + 4;
@@ -68,19 +68,19 @@ void animation_deplacement(BITMAP *buffer, BITMAP *bg, t_joueur* j, int i, int d
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             rest(80);
             break;
-        case 1: // nord ouest
+        case 1: /// nord ouest
             // matrice de matrice[j[i].x][j[i].y].x_bloc
             // matrice de matrice[j[i].x][j[i].y].y_bloc
             // milieu du matrice : 23 pixel en x jusqu'au milieu, 13 en y
             // augmente de 2 en x, 1 en y
-
+            printf("while nord ouest inf\n");
             // 1)  EFFACER BUFFER, en appliquant décor  (pas de clear_bitmap)
             blit(bg,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
 
             // 2) DETERMINER NOUVELLEs POSITIONs
 
             // 3) AFFICHAGE NOUVELLEs POSITIONs SUR LE BUFFER
-            draw_sprite(buffer, j[i].classe.deplacement[direction][num_bitmap], matrice[j[i].x][j[i].y].x_bloc - 22 - x_depart, matrice[j[i].x][j[i].y].y_bloc - 52 - y_depart);
+            draw_sprite(buffer, j[i].classe.deplacement[j[i].direction][num_bitmap], matrice[j[i].x][j[i].y].x_bloc - 22 - x_depart, matrice[j[i].x][j[i].y].y_bloc - 52 - y_depart);
             affichage_autres_joueurs(j, buffer, i,nb_joueurs, matrice);
             num_bitmap = (num_bitmap + 1) % NB_BITMAPS_D;
             x_depart = x_depart + 4;
@@ -89,19 +89,19 @@ void animation_deplacement(BITMAP *buffer, BITMAP *bg, t_joueur* j, int i, int d
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             rest(80);
             break;
-        case 2: // nord est
+        case 2: /// nord est
             // matrice de matrice[j[i].x][j[i].y].x_bloc
             // matrice de matrice[j[i].x][j[i].y].y_bloc
             // milieu du matrice : 23 pixel en x jusqu'au milieu, 13 en y
             // augmente de 2 en x, 1 en y
-
+            printf("while nord est inf\n");
             // 1)  EFFACER BUFFER, en appliquant décor  (pas de clear_bitmap)
             blit(bg,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
 
             // 2) DETERMINER NOUVELLEs POSITIONs
 
             // 3) AFFICHAGE NOUVELLEs POSITIONs SUR LE BUFFER
-            draw_sprite(buffer, j[i].classe.deplacement[direction][num_bitmap], matrice[j[i].x][j[i].y].x_bloc - 22 + x_depart, matrice[j[i].x][j[i].y].y_bloc - 52 - y_depart);
+            draw_sprite(buffer, j[i].classe.deplacement[j[i].direction][num_bitmap], matrice[j[i].x][j[i].y].x_bloc - 22 + x_depart, matrice[j[i].x][j[i].y].y_bloc - 52 - y_depart);
             affichage_autres_joueurs(j, buffer, i,nb_joueurs, matrice);
             num_bitmap = (num_bitmap + 1) % NB_BITMAPS_D;
             x_depart = x_depart + 4;
@@ -111,19 +111,19 @@ void animation_deplacement(BITMAP *buffer, BITMAP *bg, t_joueur* j, int i, int d
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             rest(80);
             break;
-        case 3: // sud est
+        case 3: /// sud est
             // matrice de matrice[j[i].x][j[i].y].x_bloc
             // matrice de matrice[j[i].x][j[i].y].y_bloc
             // milieu du matrice : 23 pixel en x jusqu'au milieu, 13 en y
             // augmente de 2 en x, 1 en y
-
+            printf("while sud est inf\n");
             // 1)  EFFACER BUFFER, en appliquant décor  (pas de clear_bitmap)
             blit(bg,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
 
             // 2) DETERMINER NOUVELLEs POSITIONs
 
             // 3) AFFICHAGE NOUVELLEs POSITIONs SUR LE BUFFER
-            draw_sprite(buffer, j[i].classe.deplacement[direction][num_bitmap], matrice[j[i].x][j[i].y].x_bloc - 22 + x_depart, matrice[j[i].x][j[i].y].y_bloc - 52 + y_depart);
+            draw_sprite(buffer, j[i].classe.deplacement[j[i].direction][num_bitmap], matrice[j[i].x][j[i].y].x_bloc - 22 + x_depart, matrice[j[i].x][j[i].y].y_bloc - 52 + y_depart);
             affichage_autres_joueurs(j, buffer, i,nb_joueurs, matrice);
             num_bitmap = (num_bitmap + 1) % NB_BITMAPS_D;
             x_depart = x_depart + 4;

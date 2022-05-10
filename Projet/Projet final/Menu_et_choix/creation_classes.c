@@ -5,16 +5,13 @@ void creation_icones_classes(t_joueur* joueur)
 {
     char classe_guerrier[50];
     char sorts_guerrier[50];
-    char mvt_guerrier[50];
+    char mvt[50];
     char classe_mage[50];
     char sorts_mage[50];
-    char mvt_mage[50];
     char classe_mutant[50];
     char sorts_mutant[50];
-    char mvt_mutant[50];
     char classe_assassin[50];
     char sorts_assassin[50];
-    char mvt_assassin[50];
     int i;
     int j;
     int k;
@@ -31,8 +28,8 @@ void creation_icones_classes(t_joueur* joueur)
                 joueur[i].classe.spell[j].logo = load_bitmap(sorts_guerrier, NULL);
                 for (k = 0; k < NB_BITMAPS_D; k++)
                 {
-                    sprintf(mvt_guerrier, "SPRITES/GUERRIER/MARCHE/walking_%d_%d.bmp", j, k);
-                    joueur[i].classe.deplacement[j][k] = load_bitmap(mvt_guerrier, NULL);
+                    sprintf(mvt, "SPRITES/CHEVALIER/MARCHE/walking_%d_%d.bmp", j, k);
+                    joueur[i].classe.deplacement[j][k] = load_bitmap(mvt, NULL);
                 }
                 if (!joueur[i].classe.spell[j].description || !joueur[i].classe.spell[j].logo || !joueur[i].classe.deplacement[j][0])
                 {
@@ -51,8 +48,8 @@ void creation_icones_classes(t_joueur* joueur)
                 joueur[i].classe.spell[j].logo = load_bitmap(sorts_mage, NULL);
                 for (k = 0; k < NB_BITMAPS_D; k++)
                 {
-                    sprintf(mvt_guerrier, "SPRITES/GUERRIER/MARCHE/walking_%d_%d.bmp", j, k);
-                    joueur[i].classe.deplacement[j][k] = load_bitmap(mvt_guerrier, NULL);
+                    sprintf(mvt, "SPRITES/MAGE/MARCHE/walk_%d_%d.bmp", j, k);
+                    joueur[i].classe.deplacement[j][k] = load_bitmap(mvt, NULL);
                 }
                 if (!joueur[i].classe.spell[j].description || !joueur[i].classe.spell[j].logo)
                 {
@@ -71,8 +68,8 @@ void creation_icones_classes(t_joueur* joueur)
                 joueur[i].classe.spell[j].logo = load_bitmap(sorts_mutant, NULL);
                 for (k = 0; k < NB_BITMAPS_D; k++)
                 {
-                    sprintf(mvt_guerrier, "SPRITES/GUERRIER/MARCHE/walking_%d_%d.bmp", j, k);
-                    joueur[i].classe.deplacement[j][k] = load_bitmap(mvt_guerrier, NULL);
+                    sprintf(mvt, "SPRITES/VAMPIRE/MARCHE/walk_%d_%d.bmp", j, k);
+                    joueur[i].classe.deplacement[j][k] = load_bitmap(mvt, NULL);
                 }
                 if (!joueur[i].classe.spell[j].description || !joueur[i].classe.spell[j].logo)
                 {
@@ -91,8 +88,8 @@ void creation_icones_classes(t_joueur* joueur)
                 joueur[i].classe.spell[j].logo = load_bitmap(sorts_assassin, NULL);
                 for (k = 0; k < NB_BITMAPS_D; k++)
                 {
-                    sprintf(mvt_guerrier, "SPRITES/GUERRIER/MARCHE/walking_%d_%d.bmp", j, k);
-                    joueur[i].classe.deplacement[j][k] = load_bitmap(mvt_guerrier, NULL);
+                    sprintf(mvt, "SPRITES/NINJA/MARCHE/walk_%d_%d.bmp", j, k);
+                    joueur[i].classe.deplacement[j][k] = load_bitmap(mvt, NULL);
                 }
                 if (!joueur[i].classe.spell[j].description || !joueur[i].classe.spell[j].logo)
                 {

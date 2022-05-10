@@ -130,8 +130,6 @@ void zone_max_deplacement_3pm(BITMAP * buffer, int ligne_joueur, int colonne_jou
 void anomalie_case_deplacement(BITMAP * buffer_pixels, BITMAP * buffer, int ligne_joueur, int colonne_joueur, t_bloc matrice[23][23])
 {
     int affiche = 1 ;
-    int ligne_final = ligne_joueur;
-    int colonne_final = colonne_joueur;
     /// for un carre de taille 3x3 autour de la case du joueur
     for (int i = ligne_joueur -3; i < ligne_joueur+3; i++)
     {

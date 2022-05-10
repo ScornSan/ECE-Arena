@@ -29,7 +29,6 @@ void deplacement_personnage(BITMAP * buffer,BITMAP * fond, t_joueur* joueur, int
 
     int x_augmente;
     int y_augmente;
-    int direction;
 
     if (joueur[i].x <= ligne_souris)
         x_augmente = 1;
@@ -42,13 +41,15 @@ void deplacement_personnage(BITMAP * buffer,BITMAP * fond, t_joueur* joueur, int
 
     while ((joueur[i].x != ligne_souris || joueur[i].y != colonne_souris) && (abs(joueur[i].x - ligne_souris) + abs(joueur[i].y - colonne_souris)) <= joueur[i].pm && !matrice[ligne_souris][colonne_souris].occuper && matrice[ligne_souris][colonne_souris].accessible)
     {
+        printf("while principal\n");
         clear_bitmap(buffer);
         /// le joueur va vers le sud est
         while(x_augmente && joueur[i].x != ligne_souris && !matrice[joueur[i].x + 1][joueur[i].y].occuper)
         {
-            direction = 3;
+            printf("while sud est\n");
+            joueur[i].direction = 3;
             blit(fond, buffer, 0, 0, 0, 0, fond->w, fond->h);
-            animation_deplacement(buffer, fond, joueur, i, direction, matrice, nb_joueurs);
+            animation_deplacement(buffer, fond, joueur, i, matrice, nb_joueurs);
             joueur[i].x = joueur[i].x +1;
             //joueur[i].pm--;
             //masked_blit(joueur[i].classe.deplacement[direction][0], buffer, matrice[joueur[i].x][joueur[i].y].x_bloc, matrice[joueur[i].x][joueur[i].y].y_bloc, matrice[joueur[i].x][joueur[i].y].x_bloc + 49, matrice[joueur[i].x][joueur[i].y].y_bloc + 64, SCREEN_W, SCREEN_H);
@@ -58,10 +59,11 @@ void deplacement_personnage(BITMAP * buffer,BITMAP * fond, t_joueur* joueur, int
         /// le joueur va vers le nord ouest
         while(!x_augmente && joueur[i].x != ligne_souris && !matrice[joueur[i].x - 1][joueur[i].y].occuper)
         {
-            direction = 1;
+            printf("while nord ouest\n");
+            joueur[i].direction = 1;
             blit(fond, buffer, 0, 0, 0, 0, fond->w, fond->h);
             circlefill(buffer, matrice[joueur[i].x][joueur[i].y].x_bloc, matrice[joueur[i].x][joueur[i].y].y_bloc, 9, makecol(0,0,0));
-            animation_deplacement(buffer, fond, joueur, i, direction, matrice, nb_joueurs);
+            animation_deplacement(buffer, fond, joueur, i, matrice, nb_joueurs);
             joueur[i].x = joueur[i].x -1;
             //joueur[i].pm--;
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
@@ -69,10 +71,11 @@ void deplacement_personnage(BITMAP * buffer,BITMAP * fond, t_joueur* joueur, int
         /// le joueur va vers le nord est
         while(y_augmente && joueur[i].y != colonne_souris && !matrice[joueur[i].x][joueur[i].y + 1].occuper)
         {
-            direction = 2;
+            printf("while nord est\n");
+            joueur[i].direction = 2;
             blit(fond, buffer, 0, 0, 0, 0, fond->w, fond->h);
             circlefill(buffer, matrice[joueur[i].x][joueur[i].y].x_bloc, matrice[joueur[i].x][joueur[i].y].y_bloc, 9, makecol(0,0,0));
-            animation_deplacement(buffer, fond, joueur, i, direction, matrice, nb_joueurs);
+            animation_deplacement(buffer, fond, joueur, i, matrice, nb_joueurs);
             joueur[i].y = joueur[i].y +1;
             //joueur[i].pm--;
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
@@ -80,9 +83,10 @@ void deplacement_personnage(BITMAP * buffer,BITMAP * fond, t_joueur* joueur, int
         /// le joueur va vers le sud ouest
         while(!y_augmente && joueur[i].y != colonne_souris && !matrice[joueur[i].x][joueur[i].y - 1].occuper)
         {
-            direction = 0;
+            printf("while sud ouest\n");
+            joueur[i].direction = 0;
             blit(fond, buffer, 0, 0, 0, 0, fond->w, fond->h);
-            animation_deplacement(buffer, fond, joueur, i, direction, matrice, nb_joueurs);
+            animation_deplacement(buffer, fond, joueur, i, matrice, nb_joueurs);
             circlefill(buffer, matrice[joueur[i].x][joueur[i].y].x_bloc, matrice[joueur[i].x][joueur[i].y].y_bloc, 9, makecol(0,0,0));
             joueur[i].y = joueur[i].y -1;
 
