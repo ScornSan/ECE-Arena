@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1651417995 source:c:\users\sasab\documents\informatique\projet2\menu\change\main.c
+	<stdio.h>
+	<stdlib.h>
+	<allegro.h>
+	<string.h>
+	<time.h>
+
