@@ -22,7 +22,7 @@ void affichage_son(BITMAP *buffer, BITMAP *cursor, SAMPLE* s, int* clic )
 }
 
 
-void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BITMAP *cursor, int i, int y)
+void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BITMAP *cursor, int* num, int y, int*clic, SAMPLE* son_menu, BITMAP* son_on, BITMAP* son_off)
 {
     int x = 498;
     int touche;
@@ -40,14 +40,23 @@ void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BI
         stop = 1;
 
     poscarac = 0;
-    textprintf_ex(buffer,font,405,y, makecol(255,255,255),-1,"joueur %d :", i+1);
+    textprintf_ex(buffer,font,405,y, makecol(255,255,255),-1,"joueur %d :", (*num)+1);
 
 
     /// AFFICHAGE DES LETTRES QUE L'ON TAPE AU CLAVIER
     while (stop != 1)
     {
-        //display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
         textprintf_ex(buffer,font,96,36,makecol(0,255,0), makecol(0,0,0),"%4d %4d",mouse_x,mouse_y);
+        affichage_son(buffer, cursor, son_menu, &(*clic));
+
+        if (*clic)
+        {
+            draw_sprite(buffer, son_off, 0, 0);
+        }
+        else
+        {
+            draw_sprite(buffer, son_on, 0, 0);
+        }
         if (keypressed())
         {
 
@@ -58,7 +67,7 @@ void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BI
             if( carac != '\r' && !key[KEY_BACKSPACE] )
             {
                 textprintf_ex(buffer,font,x+poscarac,y,makecol(255,255,255),makecol(0,0,0),"%c",carac);
-                pseudo[i][place] = carac;
+                pseudo[*num][place] = carac;
                 poscarac = poscarac+8;
             }
 
@@ -67,7 +76,7 @@ void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BI
                 if(x+poscarac == 506)
                 {
                     poscarac=poscarac-8;
-                    pseudo[i][place] = ' ';
+                    pseudo[*num][place] = ' ';
                     textprintf_ex(buffer,font,x+poscarac,y,makecol(255,255,255),makecol(0,0,0)," ");
                     place = place-2;
                 }
@@ -75,7 +84,7 @@ void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BI
                 {
                     nb = nb +1;
                     poscarac=poscarac-8;
-                    pseudo[i][place-1] = ' ';
+                    pseudo[*num][place-1] = ' ';
                     textprintf_ex(buffer,font,x+poscarac,y,makecol(255,255,255),makecol(0,0,0)," ");
                     place = place-2;
                 }
@@ -86,6 +95,7 @@ void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BI
             {
                 y+=10;
                 stop=1;
+                *num = *num +1;
             }
             place = place+1;
             //display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
@@ -95,6 +105,7 @@ void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BI
             blit(fond, buffer, 0,0,0,0, SCREEN_W, SCREEN_H);
 
         }
+
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     }
 }
@@ -136,11 +147,12 @@ void menu_principal(BITMAP *buffer, BITMAP *accueil, BITMAP *cursor,  FONT* myfo
 }
 
 
-int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPLE* son_menu, FONT* myfont)
+int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPLE* son_menu, FONT* myfont, BITMAP* son_on, BITMAP* son_off)
 {
     int fin;
     int ok;
     int nb_joueur = 0;
+    int nb = 0;
     int y = 314;
     int installation_clavier = 0;
     int clic = 0;
@@ -149,11 +161,10 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
     BITMAP *nom_joueurs;
     BITMAP *accueil;
     FONT* font_nbjoueur;
-    BITMAP *son_on;
-    BITMAP *son_off;
 
-    son_on=load_bitmap("BITMAP/son_on.bmp", NULL);
-    son_off=load_bitmap("BITMAP/son_off.bmp", NULL);
+
+
+
 
     // init. variable de sortie boucle interactive
     fin=0;
@@ -184,6 +195,7 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
         //textprintf_ex(buffer,font,96,36,makecol(0,255,0), makecol(0,0,0),"%4d %4d",mouse_x,mouse_y);
         menu_principal(buffer, accueil, cursor, myfont);
         affichage_son(buffer, cursor, son_menu, &clic);
+
         if (clic)
         {
             draw_sprite(buffer, son_off, 0, 0);
@@ -200,8 +212,20 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
         {
             while(!key[KEY_ESC] && !(mouse_b&2))
             {
+
                 blit(creators,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
+                affichage_son(buffer, cursor, son_menu, &clic);
+                if (clic)
+                {
+                    draw_sprite(buffer, son_off, 0, 0);
+                }
+                else
+                {
+                    draw_sprite(buffer, son_on, 0, 0);
+                }
+                display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
                 blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+                rest(20);
             }
         }
 
@@ -223,6 +247,16 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
             {
                 clear_bitmap(buffer);
                 blit(choix_nb_joueurs,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
+                affichage_son(buffer, cursor, son_menu, &clic);
+                if (clic)
+                {
+                    draw_sprite(buffer, son_off, 0, 0);
+                }
+                else
+                {
+                    draw_sprite(buffer, son_on, 0, 0);
+                }
+
                 //textprintf_ex(buffer,font,96,36,makecol(255,0,255), makecol(0,0,0),"%4d %4d",mouse_x,mouse_y);
                 textprintf_ex(buffer, font_nbjoueur, 744,198,makecol(0,0,0),-1,"%d",nb_joueur);
                 display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
@@ -243,7 +277,6 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
                 if ((mouse_b&1) && (mouse_x > 458) && (mouse_x < 833) && (mouse_y > 573) && (mouse_y < 654) && (nb_joueur >= 2))
                 {
                     ok = 1;
-                    //blit(buffer, screen, 0, 0, 0, 0, SCREEN_W / 2, SCREEN_H);
                 }
                 if(key[KEY_ESC] || mouse_b&2)
                 {
@@ -256,6 +289,7 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
             clear_bitmap(buffer);
             blit(nom_joueurs,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
             textprintf_ex(buffer,font,500,270, makecol(255,255,255),-1, " Veuillez entrez vos pseudos :");
+
             //display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
             /*while(!key[KEY_BACKSPACE])
             {
@@ -264,10 +298,13 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
             rest(200);
 
 
-            for (int i = 0; i < nb_joueur; i++)
+            while(nb != nb_joueur)
             {
-                prenom(&nb_joueur, buffer, pseudo, fond, cursor, i, y);
+
+                prenom(&nb_joueur, buffer, pseudo, fond, cursor, &nb, y, &clic, son_menu, son_on, son_off);
+                display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
                 y = y + 15;
+
             }
             fin = 1;
 

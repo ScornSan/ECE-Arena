@@ -28,7 +28,7 @@ void tour_joueur_alea( t_joueur* joueur, int nb_joueurs)
 
 }
 
-void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueurs)
+void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueurs, SAMPLE* son_battle, BITMAP *son_on, BITMAP *son_off)
 {
     // Déclaration du pointeur sur BITMAP devant recevoir l'image
     BITMAP *map;
@@ -38,11 +38,14 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
     BITMAP *desc_sorts;
     FONT *kristen12;
     FONT *fixedsys;
-
+    int clic_son = 0;
     BITMAP * buffer_pixels; // LE 2
     BITMAP * buffer_map; // LE 1
     BITMAP * croix_rouge;
     BITMAP * croix_bleue;
+
+   // play_sample(son_combat, 255, 128, 1000, 1);
+
 
     int i = 0;
     int j;
@@ -137,6 +140,16 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
     while(fini != nb_joueurs)
     {
         blit(map, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+        affichage_son(buffer, cursor, son_battle, &clic_son);
+        if (clic_son)
+        {
+            draw_sprite(buffer, son_off, 0, 0);
+        }
+        else
+        {
+            draw_sprite(buffer, son_on, 0, 0);
+        }
+
         /// dessin des zones de placement
         affichage_emplacement_depart(buffer, nb_joueurs, matrice, joueur);
 
