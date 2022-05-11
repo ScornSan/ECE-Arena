@@ -1,7 +1,7 @@
 #include "../prototypes.h"
 #include "../structures.h"
 
-void zone_nombre_pm(BITMAP* buffer_pixels, BITMAP * buffer, int ligne_joueur, int colonne_joueur, t_bloc matrice[23][23], int *nombre_pm, int *clic, BITMAP *cursor)
+void deplacement_nombre_pm(BITMAP* buffer_pixels, BITMAP * buffer, int ligne_joueur, int colonne_joueur, t_bloc matrice[23][23], int *nombre_pm, int *clic, BITMAP *cursor)
 {
     switch(*nombre_pm)
     {
@@ -11,6 +11,7 @@ void zone_nombre_pm(BITMAP* buffer_pixels, BITMAP * buffer, int ligne_joueur, in
     case 1:
         if (*clic == 1)
         {
+            //*nombre_pm = *nombre_pm -1;
             *clic = 0;
         }
         else
@@ -21,6 +22,7 @@ void zone_nombre_pm(BITMAP* buffer_pixels, BITMAP * buffer, int ligne_joueur, in
     case 2:
         if (*clic == 1)
         {
+            //*nombre_pm = *nombre_pm -2;
             *clic = 0;
         }
         else
@@ -31,11 +33,12 @@ void zone_nombre_pm(BITMAP* buffer_pixels, BITMAP * buffer, int ligne_joueur, in
     case 3:
         if (*clic == 1)
         {
+            //*nombre_pm = *nombre_pm -3;
             *clic = 0;
         }
         else
         {
-            zone_max_deplacement_3pm(buffer, ligne_joueur, colonne_joueur, matrice);
+            //zone_max_deplacement_3pm(buffer, ligne_joueur, colonne_joueur, matrice);
             anomalie_case_deplacement(buffer_pixels,buffer, ligne_joueur, colonne_joueur, matrice);
         }
         break;

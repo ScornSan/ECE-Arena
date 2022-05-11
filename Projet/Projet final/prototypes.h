@@ -13,7 +13,7 @@ void reperage_bloc_souris();
 void reperage_chemin();
 void lecture_pixels_buffer_map();
 void sleep();
-void zone_nombre_pm();
+void deplacement_nombre_pm();
 void display_cursor();
 void choix_classe();
 void creation_classes();

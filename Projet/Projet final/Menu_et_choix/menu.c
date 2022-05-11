@@ -81,7 +81,7 @@ void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BI
         if ( mouse_b&1 && mouse_x>= 553 && mouse_x <= 729 && mouse_y >= 540 && mouse_y <= 591)
         {
             blit(fond, buffer, 0,0,0,0, SCREEN_W, SCREEN_H);
-            stop = 1;
+
         }
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     }
@@ -119,6 +119,7 @@ void menu_principal(BITMAP *buffer, BITMAP *accueil, BITMAP *cursor)
         textprintf_ex(buffer,font,600, 597, makecol(255,255,255),-1,"QUITTER");
     }
     blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+    rest(20);
 }
 
 
@@ -206,13 +207,11 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20])
                 if ((mouse_b&1) && (mouse_x > 458) && (mouse_x < 833) && (mouse_y > 573) && (mouse_y < 654) && (nb_joueur >= 2))
                 {
                     ok = 1;
-                    rest(100);
                     //blit(buffer, screen, 0, 0, 0, 0, SCREEN_W / 2, SCREEN_H);
                 }
                 if(key[KEY_ESC] || mouse_b&2)
                 {
                     ok =1;
-                    rest(100);
                 }
                 blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             }
@@ -225,6 +224,8 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20])
             {
                 prenom(nb_joueur, buffer, joueur, fond, cursor);
             }*/
+            rest(200);
+
             for (int i = 0; i < nb_joueur; i++)
             {
                 prenom(&nb_joueur, buffer, pseudo, fond, cursor, i, y);

@@ -103,27 +103,14 @@ void definition_occuper(t_bloc matrice[23][23])
     matrice[6][10].occuper = 1;
     matrice[6][11].occuper = 1;
 
+    matrice[6][11].occuper = 1;
+    matrice[6][11].occuper = 1;
+    matrice[6][11].occuper = 1;
+    matrice[6][11].occuper = 1;
+
     matrice[15][8].occuper = 1;
     matrice[15][9].occuper = 1;
     matrice[16][7].occuper = 1;
-    matrice[7][14].occuper = 1;
-
-    matrice[7][18].occuper = 1;
-    matrice[9][22].occuper = 1;
-    matrice[12][16].occuper = 1;
-    matrice[11][16].occuper = 1;
-
-    matrice[11][10].occuper = 1;
-    matrice[11][0].occuper = 1;
-    //matrice[11][1].occuper = 1;
-    matrice[12][0].occuper = 1;
-
-    matrice[12][1].occuper = 1;
-    matrice[5][14].occuper = 1;
-    matrice[5][13].occuper = 1;
-    matrice[15][15].occuper = 1;
-
-    matrice[16][15].occuper = 1;
 
     for (int i = 0; i<23; i++)
     {
