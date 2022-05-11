@@ -73,7 +73,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
     }
 
     clear_bitmap(buffer);
-    //time_t start = time(NULL);
+    time_t start = time(NULL);
 
     textout_ex(desc_sorts, font, "DEGATS:", 18, 20, makecol(255, 0, 0), -1);
     textout_ex(desc_sorts, font, "PA:", 18, 34, makecol(60, 0, 255), -1);
@@ -127,6 +127,8 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     }
 
+    tour_joueur_alea(joueur, nb_joueurs);
+
     // Boucle d'animation
     while (joueur_en_vie != 1)
     {
@@ -177,13 +179,13 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
             //deplacement_nombre_pm(buffer_pixels, buffer, joueur[i].x, joueur[i].y, matrice, &nombre_pm, &clic, cursor);
             affichage_joueurs(buffer, joueur, i, nb_joueurs, matrice);
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-            /*if ((int)(time(NULL) - start >= TEMPS_TOUR))
+            if ((int)(time(NULL) - start >= TEMPS_TOUR))
             {
                 start = time(NULL);
                 joueur[i].pm = 3; // on remet les pm et pa du joueur au nombre initial
                 joueur[i].pa = 6;
                 i = (i + 1) % nb_joueurs; // On boucle car temps finis ou on a cliqué sur le bouton
-            }*/
+            }
         }
         else
         {

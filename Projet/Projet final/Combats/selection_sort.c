@@ -48,7 +48,7 @@ void attaque_de_base(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_
         }
         if (mouse_x >= 300 && mouse_x <= 330 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1)
         {
-            //animation_attaque_de_base(buffer, map, joueur, i, )
+            animation_attaque_de_base(buffer, map, joueur, i, matrice, nb_joueurs);
             attaque = 1; // le joueur a annulé son attaque, l'attaque est considéré comme faite mais sans dégâts
         }
     }

@@ -3,7 +3,7 @@
 
 void deplacement_personnage(BITMAP * buffer,BITMAP * fond, t_joueur* joueur, int i, int ligne_souris, int colonne_souris, t_bloc matrice[23][23], int *deplacement_effectuer, int nb_joueurs)
 {
-
+    int compteur = 0;
     /// affichage du message d'erreur apres changement de prog et avec chrono :::::: A REGLER
     /*while(1)
     {
@@ -41,15 +41,17 @@ void deplacement_personnage(BITMAP * buffer,BITMAP * fond, t_joueur* joueur, int
 
     while ((joueur[i].x != ligne_souris || joueur[i].y != colonne_souris) && (abs(joueur[i].x - ligne_souris) + abs(joueur[i].y - colonne_souris)) <= joueur[i].pm && !matrice[ligne_souris][colonne_souris].occuper && matrice[ligne_souris][colonne_souris].accessible)
     {
+        compteur++;
         printf("while principal\n");
         clear_bitmap(buffer);
         /// le joueur va vers le sud est
-        while(x_augmente && joueur[i].x != ligne_souris && !matrice[joueur[i].x + 1][joueur[i].y].occuper)
+        while(x_augmente && joueur[i].x != ligne_souris && matrice[joueur[i].x + 1][joueur[i].y].accessible)
         {
             printf("while sud est\n");
             joueur[i].direction = 3;
             blit(fond, buffer, 0, 0, 0, 0, fond->w, fond->h);
             animation_deplacement(buffer, fond, joueur, i, matrice, nb_joueurs);
+            printf("sortie de fonction\n");
             joueur[i].x = joueur[i].x +1;
             //joueur[i].pm--;
             //masked_blit(joueur[i].classe.deplacement[direction][0], buffer, matrice[joueur[i].x][joueur[i].y].x_bloc, matrice[joueur[i].x][joueur[i].y].y_bloc, matrice[joueur[i].x][joueur[i].y].x_bloc + 49, matrice[joueur[i].x][joueur[i].y].y_bloc + 64, SCREEN_W, SCREEN_H);
@@ -57,41 +59,45 @@ void deplacement_personnage(BITMAP * buffer,BITMAP * fond, t_joueur* joueur, int
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
         }
         /// le joueur va vers le nord ouest
-        while(!x_augmente && joueur[i].x != ligne_souris && !matrice[joueur[i].x - 1][joueur[i].y].occuper)
+        while(!x_augmente && joueur[i].x != ligne_souris && matrice[joueur[i].x - 1][joueur[i].y].accessible)
         {
             printf("while nord ouest\n");
             joueur[i].direction = 1;
             blit(fond, buffer, 0, 0, 0, 0, fond->w, fond->h);
-            circlefill(buffer, matrice[joueur[i].x][joueur[i].y].x_bloc, matrice[joueur[i].x][joueur[i].y].y_bloc, 9, makecol(0,0,0));
             animation_deplacement(buffer, fond, joueur, i, matrice, nb_joueurs);
+            printf("sortie de fonction\n");
             joueur[i].x = joueur[i].x -1;
             //joueur[i].pm--;
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
         }
         /// le joueur va vers le nord est
-        while(y_augmente && joueur[i].y != colonne_souris && !matrice[joueur[i].x][joueur[i].y + 1].occuper)
+        while(y_augmente && joueur[i].y != colonne_souris && matrice[joueur[i].x][joueur[i].y + 1].accessible)
         {
             printf("while nord est\n");
             joueur[i].direction = 2;
             blit(fond, buffer, 0, 0, 0, 0, fond->w, fond->h);
-            circlefill(buffer, matrice[joueur[i].x][joueur[i].y].x_bloc, matrice[joueur[i].x][joueur[i].y].y_bloc, 9, makecol(0,0,0));
             animation_deplacement(buffer, fond, joueur, i, matrice, nb_joueurs);
+            printf("sortie de fonction\n");
             joueur[i].y = joueur[i].y +1;
             //joueur[i].pm--;
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
         }
         /// le joueur va vers le sud ouest
-        while(!y_augmente && joueur[i].y != colonne_souris && !matrice[joueur[i].x][joueur[i].y - 1].occuper)
+        while(!y_augmente && joueur[i].y != colonne_souris && matrice[joueur[i].x][joueur[i].y - 1].accessible)
         {
             printf("while sud ouest\n");
             joueur[i].direction = 0;
             blit(fond, buffer, 0, 0, 0, 0, fond->w, fond->h);
             animation_deplacement(buffer, fond, joueur, i, matrice, nb_joueurs);
-            circlefill(buffer, matrice[joueur[i].x][joueur[i].y].x_bloc, matrice[joueur[i].x][joueur[i].y].y_bloc, 9, makecol(0,0,0));
+            printf("sortie de fonction\n");
             joueur[i].y = joueur[i].y -1;
 
             //joueur[i].pm--;
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+        }
+        if (compteur == 2)
+        {
+            break;
         }
         *deplacement_effectuer = *deplacement_effectuer +1;
     }

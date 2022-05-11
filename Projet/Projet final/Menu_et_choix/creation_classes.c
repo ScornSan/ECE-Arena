@@ -3,15 +3,8 @@
 
 void creation_icones_classes(t_joueur* joueur)
 {
-    char classe_guerrier[50];
-    char sorts_guerrier[50];
+    char chargement[80];
     char mvt[50];
-    char classe_mage[50];
-    char sorts_mage[50];
-    char classe_mutant[50];
-    char sorts_mutant[50];
-    char classe_assassin[50];
-    char sorts_assassin[50];
     int i;
     int j;
     int k;
@@ -22,13 +15,15 @@ void creation_icones_classes(t_joueur* joueur)
         case 1: // creation d'une classe guerrier
             for (j = 0; j < NB_SORTS; j++)
             {
-                sprintf(classe_guerrier, "BITMAP/DESC_SORTS/desc_guerrier_sort%d.bmp", j + 1);
-                sprintf(sorts_guerrier, "BITMAP/sort%d_guerrier.bmp", j + 1);
-                joueur[i].classe.spell[j].description = load_bitmap(classe_guerrier, NULL);
-                joueur[i].classe.spell[j].logo = load_bitmap(sorts_guerrier, NULL);
+                sprintf(chargement, "BITMAP/DESC_SORTS/desc_guerrier_sort%d.bmp", j + 1);
+                joueur[i].classe.spell[j].description = load_bitmap(chargement, NULL);
+                sprintf(chargement, "BITMAP/sort%d_guerrier.bmp", j + 1);
+                joueur[i].classe.spell[j].logo = load_bitmap(chargement, NULL);
+                sprintf(chargement, "SPRITES/CHEVALIER/ATTAQUE/attack_%d.bmp", j);
+                joueur[i].classe.anim_attaques[1][j][0] = load_bitmap(chargement, NULL);
                 for (k = 0; k < NB_BITMAPS_D; k++)
                 {
-                    sprintf(mvt, "SPRITES/CHEVALIER/MARCHE/walking_%d_%d.bmp", j, k);
+                    sprintf(mvt, "SPRITES/CHEVALIER/MARCHE/walking_%d_%d.bmp", j, k + 1);
                     joueur[i].classe.deplacement[j][k] = load_bitmap(mvt, NULL);
                 }
                 if (!joueur[i].classe.spell[j].description || !joueur[i].classe.spell[j].logo || !joueur[i].classe.deplacement[j][0])
@@ -42,13 +37,15 @@ void creation_icones_classes(t_joueur* joueur)
         case 2: // creation d'une classe mage
             for (j = 0; j < 4; j++)
             {
-                sprintf(classe_mage, "BITMAP/DESC_SORTS/desc_mage_sort%d.bmp", j + 1);
-                sprintf(sorts_mage, "BITMAP/sort%d_mage.bmp", j + 1);
-                joueur[i].classe.spell[j].description = load_bitmap(classe_mage, NULL);
-                joueur[i].classe.spell[j].logo = load_bitmap(sorts_mage, NULL);
+                sprintf(chargement, "BITMAP/DESC_SORTS/desc_mage_sort%d.bmp", j + 1);
+                joueur[i].classe.spell[j].description = load_bitmap(chargement, NULL);
+                sprintf(chargement, "BITMAP/sort%d_mage.bmp", j + 1);
+                joueur[i].classe.spell[j].logo = load_bitmap(chargement, NULL);
+                sprintf(chargement, "SPRITES/MAGE/ATTAQUE/attack_%d_%d.bmp", j, j % 2);
+                joueur[i].classe.anim_attaques[2][j][j] = load_bitmap(chargement, NULL);
                 for (k = 0; k < NB_BITMAPS_D; k++)
                 {
-                    sprintf(mvt, "SPRITES/MAGE/MARCHE/walk_%d_%d.bmp", j, k);
+                    sprintf(mvt, "SPRITES/MAGE/MARCHE/walk_%d_%d.bmp", j, k + 1);
                     joueur[i].classe.deplacement[j][k] = load_bitmap(mvt, NULL);
                 }
                 if (!joueur[i].classe.spell[j].description || !joueur[i].classe.spell[j].logo)
@@ -62,13 +59,15 @@ void creation_icones_classes(t_joueur* joueur)
         case 3: // creation d'une classe mutant
             for (j = 0; j < 4; j++)
             {
-                sprintf(classe_mutant, "BITMAP/DESC_SORTS/desc_mutant_sort%d.bmp", j + 1);
-                sprintf(sorts_mutant, "BITMAP/sort%d_mutant.bmp", j + 1);
-                joueur[i].classe.spell[j].description = load_bitmap(classe_mutant, NULL);
-                joueur[i].classe.spell[j].logo = load_bitmap(sorts_mutant, NULL);
+                sprintf(chargement, "BITMAP/DESC_SORTS/desc_mutant_sort%d.bmp", j + 1);
+                joueur[i].classe.spell[j].description = load_bitmap(chargement, NULL);
+                sprintf(chargement, "BITMAP/sort%d_mutant.bmp", j + 1);
+                joueur[i].classe.spell[j].logo = load_bitmap(chargement, NULL);
+                sprintf(chargement, "SPRITES/VAMPIRE/ATTAQUE/attack_%d.bmp", j);
+                joueur[i].classe.anim_attaques[3][j][j] = load_bitmap(chargement, NULL);
                 for (k = 0; k < NB_BITMAPS_D; k++)
                 {
-                    sprintf(mvt, "SPRITES/VAMPIRE/MARCHE/walk_%d_%d.bmp", j, k);
+                    sprintf(mvt, "SPRITES/VAMPIRE/MARCHE/walk_%d_%d.bmp", j, k + 1);
                     joueur[i].classe.deplacement[j][k] = load_bitmap(mvt, NULL);
                 }
                 if (!joueur[i].classe.spell[j].description || !joueur[i].classe.spell[j].logo)
@@ -82,13 +81,15 @@ void creation_icones_classes(t_joueur* joueur)
         case 4: // creation d'une classe assassin
             for (j = 0; j < 4; j++)
             {
-                sprintf(classe_assassin,"BITMAP/DESC_SORTS/desc_assassin_sort%d.bmp", j + 1);
-                sprintf(sorts_assassin, "BITMAP/sort%d_assassin.bmp", j + 1);
-                joueur[i].classe.spell[j].description = load_bitmap(classe_assassin, NULL);
-                joueur[i].classe.spell[j].logo = load_bitmap(sorts_assassin, NULL);
+                sprintf(chargement,"BITMAP/DESC_SORTS/desc_assassin_sort%d.bmp", j + 1);
+                joueur[i].classe.spell[j].description = load_bitmap(chargement, NULL);
+                sprintf(chargement, "BITMAP/sort%d_assassin.bmp", j + 1);
+                joueur[i].classe.spell[j].logo = load_bitmap(chargement, NULL);
+                sprintf(chargement, "SPRITES/NINJA/ATTAQUE/attack_%d.bmp", j);
+                joueur[i].classe.anim_attaques[4][j][j] = load_bitmap(chargement, NULL);
                 for (k = 0; k < NB_BITMAPS_D; k++)
                 {
-                    sprintf(mvt, "SPRITES/NINJA/MARCHE/walk_%d_%d.bmp", j, k);
+                    sprintf(mvt, "SPRITES/NINJA/MARCHE/walk_%d_%d.bmp", j, k + 1);
                     joueur[i].classe.deplacement[j][k] = load_bitmap(mvt, NULL);
                 }
                 if (!joueur[i].classe.spell[j].description || !joueur[i].classe.spell[j].logo)

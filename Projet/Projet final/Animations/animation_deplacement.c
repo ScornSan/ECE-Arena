@@ -11,26 +11,26 @@ void affichage_autres_joueurs(t_joueur* j, BITMAP *buffer, int i, int nb_joueurs
     {
     case 2:
         if (j[joueur_suivant1].vivant){
-            draw_sprite(buffer, j[joueur_suivant1].classe.deplacement[0][0], matrice[j[joueur_suivant1].x][j[joueur_suivant1].y].x_bloc - 22, matrice[j[joueur_suivant1].x][j[joueur_suivant1].y].y_bloc - 52);
+            draw_sprite(buffer, j[joueur_suivant1].classe.deplacement[j[joueur_suivant1].direction][0], matrice[j[joueur_suivant1].x][j[joueur_suivant1].y].x_bloc - 22, matrice[j[joueur_suivant1].x][j[joueur_suivant1].y].y_bloc - 52);
         }
         break;
     case 3:
         if (j[joueur_suivant1].vivant){
-            draw_sprite(buffer, j[joueur_suivant1].classe.deplacement[0][0], matrice[j[joueur_suivant1].x][j[joueur_suivant1].y].x_bloc - 22, matrice[j[joueur_suivant1].x][j[joueur_suivant1].y].y_bloc - 52);
+            draw_sprite(buffer, j[joueur_suivant1].classe.deplacement[j[joueur_suivant1].direction][0], matrice[j[joueur_suivant1].x][j[joueur_suivant1].y].x_bloc - 22, matrice[j[joueur_suivant1].x][j[joueur_suivant1].y].y_bloc - 52);
         }
         if (j[joueur_suivant2].vivant){
-            draw_sprite(buffer, j[joueur_suivant2].classe.deplacement[0][0], matrice[j[joueur_suivant2].x][j[joueur_suivant2].y].x_bloc - 22, matrice[j[joueur_suivant2].x][j[joueur_suivant2].y].y_bloc - 52 );
+            draw_sprite(buffer, j[joueur_suivant2].classe.deplacement[j[joueur_suivant2].direction][0], matrice[j[joueur_suivant2].x][j[joueur_suivant2].y].x_bloc - 22, matrice[j[joueur_suivant2].x][j[joueur_suivant2].y].y_bloc - 52 );
         }
         break;
     case 4:
         if (j[joueur_suivant1].vivant){
-            draw_sprite(buffer, j[joueur_suivant1].classe.deplacement[0][0], matrice[j[joueur_suivant1].x][j[joueur_suivant1].y].x_bloc - 22, matrice[j[joueur_suivant1].x][j[joueur_suivant1].y].y_bloc - 52);
+            draw_sprite(buffer, j[joueur_suivant1].classe.deplacement[j[joueur_suivant1].direction][0], matrice[j[joueur_suivant1].x][j[joueur_suivant1].y].x_bloc - 22, matrice[j[joueur_suivant1].x][j[joueur_suivant1].y].y_bloc - 52);
         }
         if (j[joueur_suivant2].vivant){
-            draw_sprite(buffer, j[joueur_suivant2].classe.deplacement[0][0], matrice[j[joueur_suivant2].x][j[joueur_suivant2].y].x_bloc - 22, matrice[j[joueur_suivant2].x][j[joueur_suivant2].y].y_bloc - 52 );
+            draw_sprite(buffer, j[joueur_suivant2].classe.deplacement[j[joueur_suivant2].direction][0], matrice[j[joueur_suivant2].x][j[joueur_suivant2].y].x_bloc - 22, matrice[j[joueur_suivant2].x][j[joueur_suivant2].y].y_bloc - 52 );
         }
         if (j[joueur_suivant3].vivant){
-            draw_sprite(buffer, j[joueur_suivant3].classe.deplacement[0][0], matrice[j[joueur_suivant3].x][j[joueur_suivant3].y].x_bloc - 22, matrice[j[joueur_suivant3].x][j[joueur_suivant3].y].y_bloc - 52);
+            draw_sprite(buffer, j[joueur_suivant3].classe.deplacement[j[joueur_suivant3].direction][0], matrice[j[joueur_suivant3].x][j[joueur_suivant3].y].x_bloc - 22, matrice[j[joueur_suivant3].x][j[joueur_suivant3].y].y_bloc - 52);
         }
         break;
     }
@@ -45,7 +45,7 @@ void animation_deplacement(BITMAP *buffer, BITMAP *bg, t_joueur* j, int i, t_blo
     int num_bitmap = 0;
     while (x_depart <= x_arrive && y_depart <= y_arrive)
     {
-        printf("while nord ouest inf\n");
+        printf("avant le switch\n");
         switch (j[i].direction)
         {
         case 0: /// sud ouest
@@ -107,7 +107,6 @@ void animation_deplacement(BITMAP *buffer, BITMAP *bg, t_joueur* j, int i, t_blo
             x_depart = x_depart + 4;
             y_depart = y_depart + 2;
 
-
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             rest(80);
             break;
@@ -133,5 +132,7 @@ void animation_deplacement(BITMAP *buffer, BITMAP *bg, t_joueur* j, int i, t_blo
             rest(80);
             break;
         }
+        printf("fin de while\n");
     }
+    printf("sortie de while\n");
 }

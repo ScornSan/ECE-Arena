@@ -8,7 +8,9 @@ void affichage_joueurs(BITMAP *buffer, t_joueur* joueur, int i, int nb_joueurs, 
         if (joueur[j].vivant)
         {
             //couleur_sous_joueur(buffer, joueur[j].x, joueur[j].y, matrice);
-            masked_blit(joueur[j].classe.deplacement[joueur[j].direction][0], buffer, 0, 0, matrice[joueur[j].x][joueur[j].y].x_bloc - 22, matrice[joueur[j].x][joueur[j].y].y_bloc - 52, 49, 64);
+            draw_sprite(buffer, joueur[j].classe.deplacement[joueur[j].direction][0],  matrice[joueur[j].x][joueur[j].y].x_bloc - 22, matrice[joueur[j].x][joueur[j].y].y_bloc - 52);
+
+            //masked_blit(joueur[j].classe.deplacement[joueur[j].direction][1], buffer, 0, 0, matrice[joueur[j].x][joueur[j].y].x_bloc - 22, matrice[joueur[j].x][joueur[j].y].y_bloc - 52, 49, 64);
         }
     }
 }
