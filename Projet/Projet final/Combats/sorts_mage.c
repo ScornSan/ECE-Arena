@@ -53,7 +53,6 @@ void sort_tremblement_terre(BITMAP *buffer_map, BITMAP * map,BITMAP * cursor, BI
     {
         dessin_bloc_unique(buffer_pixels, joueur[i].x, joueur[i].y +3, matrice, 0, 255, 0);
     }
-
     int num_bitmap = 0;
     while(sort_lance == 0 && annulation == 0)
     {
