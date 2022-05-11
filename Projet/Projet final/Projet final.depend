@@ -9,7 +9,7 @@
 	<allegro.h>
 	<time.h>
 
-1652266966 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\choix_classes.c
+1652281420 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\choix_classes.c
 	"../prototypes.h"
 	"../structures.h"
 
@@ -17,7 +17,7 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1652223033 c:\repos\ece-arena\projet\projet final\structures.h
+1652283259 c:\repos\ece-arena\projet\projet final\structures.h
 	<allegro.h>
 
 1652203171 c:\repos\ece-arena\projet\projet final\prototypes.h
@@ -27,7 +27,7 @@
 	<time.h>
 	<string.h>
 
-1652279373 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\tour_joueur.c
+1652282740 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\tour_joueur.c
 	"../prototypes.h"
 	"../structures.h"
 
@@ -49,7 +49,7 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1652221380 source:c:\repos\ece-arena\projet\projet final\spgm affichages\dessins_blocs.c
+1652281984 source:c:\repos\ece-arena\projet\projet final\spgm affichages\dessins_blocs.c
 	"../prototypes.h"
 	"../structures.h"
 
@@ -151,7 +151,7 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1652222880 source:c:\repos\ece-arena\projet\projet final\combats\selection_sort.c
+1652283413 source:c:\repos\ece-arena\projet\projet final\combats\selection_sort.c
 	"../prototypes.h"
 	"../structures.h"
 
@@ -159,11 +159,11 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1652206731 source:c:\repos\ece-arena\projet\projet final\combats\sorts_guerrier.c
+1652281940 source:c:\repos\ece-arena\projet\projet final\combats\sorts_guerrier.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652047214 source:c:\repos\ece-arena\projet\projet final\combats\sorts_mage.c
+1652283602 source:c:\repos\ece-arena\projet\projet final\combats\sorts_mage.c
 	"../prototypes.h"
 	"../structures.h"
 

@@ -145,7 +145,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
             lecture_pixels_buffer_map(buffer_map, &red_mouse, &green_mouse, &blue_mouse);
             reperage_bloc_souris(&ligne_souris, &colonne_souris, red_mouse, green_mouse, blue_mouse, matrice, joueur, i);
             reperage_chemin(buffer, joueur[i].x, joueur[i].y, ligne_souris, colonne_souris, matrice, joueur, i, &autorisation_dep);
-            selection_sort(joueur, i, nb_joueurs, buffer, matrice, desc_sorts, ligne_souris, colonne_souris, cursor, map, hud_joueur, icone_classes, hud_icone);
+            selection_sort(buffer_map,&ligne_souris, &colonne_souris,&red_mouse, &green_mouse, &blue_mouse, joueur, i, nb_joueurs, buffer, matrice, desc_sorts, ligne_souris, colonne_souris, cursor, map, hud_joueur, icone_classes, hud_icone);
 
             if(autorisation_dep == 1)
             {

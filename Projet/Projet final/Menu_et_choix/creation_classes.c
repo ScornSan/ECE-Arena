@@ -43,6 +43,8 @@ void creation_icones_classes(t_joueur* joueur)
                 joueur[i].classe.spell[j].logo = load_bitmap(chargement, NULL);
                 sprintf(chargement, "SPRITES/MAGE/ATTAQUE/attack_%d_%d.bmp", j, j % 2);
                 joueur[i].classe.anim_attaques[2][j][j] = load_bitmap(chargement, NULL);
+                sprintf(chargement, "SPRITES/MAGE/SORTS/meteorite_%d.bmp", j);
+                joueur[i].classe.spell[3].animation_sort[j] = load_bitmap(chargement, NULL); // sort 4
                 for (k = 0; k < NB_BITMAPS_D; k++)
                 {
                     sprintf(mvt, "SPRITES/MAGE/MARCHE/walk_%d_%d.bmp", j, k + 1);

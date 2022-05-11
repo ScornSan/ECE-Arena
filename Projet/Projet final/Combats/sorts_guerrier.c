@@ -157,13 +157,6 @@ void sort4_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_b
         display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
         // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
-        if(1)
-        {
-            circlefill(buffer, 400, 500, 9, makecol(0, 0, 0));
-            blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-            rest(1000);
-            attaque = 1; // on a attaqué, on peut sortir de la boucle en infligeant les dégâts, avec le % de chance
-        }
 
         if (mouse_x >= 440 && mouse_x <= 470 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1)
         {

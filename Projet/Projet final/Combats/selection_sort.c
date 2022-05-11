@@ -103,13 +103,15 @@ void sort3(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matri
     }
 }
 
-void sort4(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice [23][23], BITMAP *desc_sorts, int x_souris, int y_souris, BITMAP *cursor, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP* map){
+void sort4(BITMAP * buffer_map, BITMAP *map,int *ligne_souris, int *colonne_souris, int *red_mouse, int * green_mouse, int *blue_mouse, t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice [23][23], BITMAP *desc_sorts, int x_souris, int y_souris, BITMAP *cursor, BITMAP **hud_joueur, BITMAP *hud_icone, BITMAP **icone_classes)
+{
     switch(joueur[i].id_classe)
     {
     case 1: // GUERRIER
         sort4_guerrier(joueur, i, nb_joueurs, buffer, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
         break;
     case 2: // MAGE
+        sort4_mage(buffer_map, map, cursor, buffer, joueur, i, matrice, red_mouse, green_mouse, blue_mouse, ligne_souris, colonne_souris,nb_joueurs, hud_icone, desc_sorts, hud_joueur, icone_classes);
         break;
     case 3: // VAMPIRE
         break;
@@ -118,7 +120,7 @@ void sort4(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matri
     }
 }
 
-void selection_sort(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice [23][23], BITMAP *desc_sorts, int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone)
+void selection_sort(BITMAP * buffer_map,int *ligne_souris, int *colonne_souris,int *red_mouse, int *green_mouse, int *blue_mouse, t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice [23][23], BITMAP *desc_sorts, int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone)
 {
     /// On met des rest avant et après l'appel du programme pour bien qu'il y ait un clique : la pause est suffisante pour stopper un moment sans repasser dans la boucle
     if (mouse_x >= 300 && mouse_x <= 330 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1) // attaque de base
@@ -148,7 +150,7 @@ void selection_sort(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_b
     if (mouse_x >= 440 && mouse_x <= 470 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1) // sort 4
     {
         rest(80);
-        sort4(joueur, i, nb_joueurs, buffer, matrice, desc_sorts, x_souris, y_souris, cursor, hud_joueur, icone_classes, hud_icone, map);
+        sort4(buffer_map, map,ligne_souris,colonne_souris, red_mouse, green_mouse, blue_mouse,joueur, i, nb_joueurs, buffer, matrice, desc_sorts, x_souris, y_souris, cursor, hud_joueur, hud_icone, icone_classes);
         rest(80);
     }
 }

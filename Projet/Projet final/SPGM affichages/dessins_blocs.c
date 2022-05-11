@@ -96,7 +96,7 @@ void reperage_chemin(BITMAP * buffer, int x_joueur, int y_joueur, int x_souris, 
 
 void dessin_bloc_unique(BITMAP *buffer, int param1, int param2, t_bloc matrice[23][23], int r, int g, int b)
 {
-    if (matrice[param1][param2].accessible || !matrice[param1][param2].occuper)
+    if (matrice[param1][param2].accessible)
     {
         for(int i = 0; i< 12; i++)
         {

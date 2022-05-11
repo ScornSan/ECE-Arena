@@ -31,7 +31,7 @@ typedef struct sorts
     int degats_max;
     int chance;
     BITMAP* logo;
-    BITMAP* animation_sort;
+    BITMAP* animation_sort[4];
     BITMAP* description;
 }t_sort;
 
