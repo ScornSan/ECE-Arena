@@ -1,7 +1,6 @@
 #include "structures.h"
 #include "prototypes.h"
 
-//ss prgm Chrono
 void chrono()
 {
     time_t start = time (NULL);

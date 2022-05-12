@@ -106,7 +106,7 @@ void menu_principal(BITMAP *buffer, BITMAP *accueil, BITMAP *cursor,  FONT* myfo
     blit(accueil,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
 
 
-    display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
+
     //textprintf_ex(buffer,font,96,36,makecol(0,255,0), makecol(0,0,0),"%4d %4d",mouse_x,mouse_y);
     textprintf_ex(buffer,myfont,575,243, makecol(0,0,0),-1,"STANDARD");
     textprintf_ex(buffer,myfont,585, 362, makecol(0,0,0),-1,"DOUBLE");
@@ -192,6 +192,7 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
         {
             draw_sprite(buffer, son_on, 0, 0);
         }
+        display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
         rest(20);
 
