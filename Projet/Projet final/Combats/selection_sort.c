@@ -105,6 +105,7 @@ void sort2(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP *buff
     case 2: // MAGE
         break;
     case 3: // VAMPIRE
+        sort2_vampire(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
         break;
     case 4: // ASSASSIN
         break;

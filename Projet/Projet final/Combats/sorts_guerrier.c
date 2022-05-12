@@ -44,6 +44,7 @@ void sort2_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BIT
         clear_bitmap(buffer);
         affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
         dessin_ligne(joueur, i, nb_joueurs, buffer, buffer_pixels, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, 2);
+        dessin_diagonales(joueur, i, nb_joueurs, buffer, buffer_pixels, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, 1);
         affichage_joueurs(buffer, joueur, i, nb_joueurs, matrice);
 
         display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);

@@ -16,6 +16,22 @@ void dessin_ligne(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMA
     }
 }
 
+void dessin_diagonales(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP* buffer_pixels, t_bloc matrice[23][23], int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts, int longueur_ligne)
+{
+    for(int j = 1; j <= longueur_ligne; j++)
+    {
+        dessin_bloc_unique(buffer, joueur[i].x + j, joueur[i].y + j, matrice, 250, 140, 0);
+        dessin_bloc_unique(buffer, joueur[i].x + j, joueur[i].y - j, matrice, 250, 140, 0);
+        dessin_bloc_unique(buffer, joueur[i].x - j, joueur[i].y - j, matrice, 250, 140, 0);
+        dessin_bloc_unique(buffer, joueur[i].x - j, joueur[i].y + j, matrice, 250, 140, 0);
+        dessin_bloc_unique(buffer_pixels, joueur[i].x + j, joueur[i].y + j, matrice, 250, 140, 0);
+        dessin_bloc_unique(buffer_pixels, joueur[i].x + j, joueur[i].y - j, matrice, 250, 140, 0);
+        dessin_bloc_unique(buffer_pixels, joueur[i].x - j, joueur[i].y + j, matrice, 250, 140, 0);
+        dessin_bloc_unique(buffer_pixels, joueur[i].x - j, joueur[i].y - j, matrice, 250, 140, 0);
+    }
+}
+
+
 void animation_attaque_de_base(BITMAP *buffer, BITMAP *bg, t_joueur* j, int i, t_bloc matrice[23][23], int nb_joueurs, int direction)
 {
     printf("%d ptn\n", direction);
