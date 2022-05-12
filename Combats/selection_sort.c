@@ -100,6 +100,7 @@ void sort2(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matri
         sort2_guerrier(joueur, i, nb_joueurs, buffer, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
         break;
     case 2: // MAGE
+        sort2_mage(joueur, i, nb_joueurs, buffer, map, matrice, x_souris, y_souris, cursor, map,hud_joueur, icone_classes, hud_icone,desc_sorts);
         break;
     case 3: // VAMPIRE
         break;
