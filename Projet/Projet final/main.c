@@ -73,9 +73,8 @@ int main()
     char pseudo[4][20]; // creation pseudo temporaires qui seront stocker dans les structures joueurs
 
     // Boucle du programme, tant qu'on ne clique pas sur quitter
-    while (1) /// changer la valeur du 1 en un boolen jeu qui passe par adresse dans le menu,
+/// changer la valeur du 1 en un boolen jeu qui passe par adresse dans le menu,
               ///et si on clique sur quitter a la fin de la partie, on change la valeur du boolen pour quitter la boucle
-    {
         nb_joueurs = menu(buffer, fond, cursor, pseudo, son_menu, myfont, myfont2 );
 
 
@@ -93,13 +92,18 @@ int main()
         }
         creation_classes(joueur, nb_joueurs);
         choix_classe(buffer, fond, cursor, joueur, nb_joueurs, myfont, myfont2);
-        tour_joueur_alea(joueur, nb_joueurs);
+      //  tour_joueur_alea(joueur, nb_joueurs);
         stop_sample(son_menu);
         tour_joueur(buffer, cursor, joueur, nb_joueurs);
-    }
-    destroy_bitmap(cursor);
-    destroy_bitmap(buffer);
-    free(joueur);
+
+        int classement[nb_joueurs];
+        int compteur_fin = nb_joueurs;
+
+        compteur_fin = classement_fin(screen, buffer, joueur, nb_joueurs, compteur_fin, classement);
+    //destroy_bitmap(cursor);
+    //destroy_bitmap(buffer);
+    //free(joueur);
+    rest(3000);
     return 0;
 }
 END_OF_MAIN();

@@ -34,5 +34,6 @@ void zone_max_deplacement_1pm();
 void zone_max_deplacement_2pm();
 void zone_max_deplacement_3pm();
 void anomalie_case_deplacement();
+int classement_fin();
 
 #endif // PROTOTYOPES_H_INCLUDED
