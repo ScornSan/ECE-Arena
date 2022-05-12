@@ -144,12 +144,13 @@ void affichage_classe(t_joueur* joueur, BITMAP* buffer, BITMAP *bg, BITMAP* clas
     }
 }
 
-void choix_classe(BITMAP *buffer, BITMAP *fond, BITMAP* cursor, t_joueur* joueur, int nb_joueurs,  FONT* myfont, FONT* myfont2)
+void choix_classe(BITMAP *buffer, BITMAP *fond, BITMAP* cursor, t_joueur* joueur, int nb_joueurs,  FONT* myfont, FONT* myfont2, SAMPLE* son_menu, BITMAP* son_on, BITMAP* son_off)
 {
     // Déclaration du pointeur sur BITMAP devant recevoir l'image
     BITMAP *classe[4];
     int nb = 0;
     char nom_perso[20];
+    int clic = 0;
 
     // Chargement de l'image (l'allocation a lieu en même temps)
 
@@ -173,6 +174,15 @@ void choix_classe(BITMAP *buffer, BITMAP *fond, BITMAP* cursor, t_joueur* joueur
     {
         clear_bitmap(buffer);
         affichage_classe(joueur, buffer, fond, classe, &nb, myfont, myfont2);
+        affichage_son(buffer, cursor, son_menu, &clic);
+        if (clic)
+        {
+            draw_sprite(buffer, son_off, 0, 0);
+        }
+        else
+        {
+            draw_sprite(buffer, son_on, 0, 0);
+        }
         display_cursor(cursor, buffer, mouse_x, mouse_y);
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 

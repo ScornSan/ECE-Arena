@@ -45,7 +45,6 @@ void animation_deplacement(BITMAP *buffer, BITMAP *bg, t_joueur* j, int i, t_blo
     int num_bitmap = 0;
     while (x_depart <= x_arrive && y_depart <= y_arrive)
     {
-        printf("avant le switch\n");
         switch (j[i].direction)
         {
         case 0: /// sud ouest
@@ -53,7 +52,6 @@ void animation_deplacement(BITMAP *buffer, BITMAP *bg, t_joueur* j, int i, t_blo
             // matrice de matrice[j[i].x][j[i].y].y_bloc
             // milieu du matrice : 23 pixel en x jusqu'au milieu, 13 en y
             // augmente de 2 en x, 1 en y
-            printf("while sud ouest inf\n");
             // 1)  EFFACER BUFFER, en appliquant décor  (pas de clear_bitmap)
             blit(bg,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
             // 2) DETERMINER NOUVELLEs POSITIONs
@@ -73,7 +71,6 @@ void animation_deplacement(BITMAP *buffer, BITMAP *bg, t_joueur* j, int i, t_blo
             // matrice de matrice[j[i].x][j[i].y].y_bloc
             // milieu du matrice : 23 pixel en x jusqu'au milieu, 13 en y
             // augmente de 2 en x, 1 en y
-            printf("while nord ouest inf\n");
             // 1)  EFFACER BUFFER, en appliquant décor  (pas de clear_bitmap)
             blit(bg,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
 
@@ -94,7 +91,6 @@ void animation_deplacement(BITMAP *buffer, BITMAP *bg, t_joueur* j, int i, t_blo
             // matrice de matrice[j[i].x][j[i].y].y_bloc
             // milieu du matrice : 23 pixel en x jusqu'au milieu, 13 en y
             // augmente de 2 en x, 1 en y
-            printf("while nord est inf\n");
             // 1)  EFFACER BUFFER, en appliquant décor  (pas de clear_bitmap)
             blit(bg,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
 
@@ -115,7 +111,6 @@ void animation_deplacement(BITMAP *buffer, BITMAP *bg, t_joueur* j, int i, t_blo
             // matrice de matrice[j[i].x][j[i].y].y_bloc
             // milieu du matrice : 23 pixel en x jusqu'au milieu, 13 en y
             // augmente de 2 en x, 1 en y
-            printf("while sud est inf\n");
             // 1)  EFFACER BUFFER, en appliquant décor  (pas de clear_bitmap)
             blit(bg,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
 
@@ -132,7 +127,5 @@ void animation_deplacement(BITMAP *buffer, BITMAP *bg, t_joueur* j, int i, t_blo
             rest(80);
             break;
         }
-        printf("fin de while\n");
     }
-    printf("sortie de while\n");
 }

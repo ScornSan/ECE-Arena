@@ -58,7 +58,12 @@ typedef struct Players
     int pv;
     int pm;
     int pa;
-    int statut;
+    int brulure;
+    int gel;
+    int mortel;
+    int lucide;
+    int bouclier;
+    int chauve_souris;
     int vivant;
     int red;
     int green;

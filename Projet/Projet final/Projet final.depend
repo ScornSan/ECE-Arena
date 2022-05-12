@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1652280968 source:c:\repos\ece-arena\projet\projet final\main.c
+1652292571 source:c:\repos\ece-arena\projet\projet final\main.c
 	"structures.h"
 	"prototypes.h"
 
@@ -9,15 +9,15 @@
 	<allegro.h>
 	<time.h>
 
-1652281420 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\choix_classes.c
+1652291955 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\choix_classes.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652264270 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\creation_classes.c
+1652291016 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\creation_classes.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652283259 c:\repos\ece-arena\projet\projet final\structures.h
+1652284546 c:\repos\ece-arena\projet\projet final\structures.h
 	<allegro.h>
 
 1652203171 c:\repos\ece-arena\projet\projet final\prototypes.h
@@ -27,17 +27,15 @@
 	<time.h>
 	<string.h>
 
-1652282740 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\tour_joueur.c
+1652292054 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\tour_joueur.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652221246 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\deplacement_joueur.c
+1652286406 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\deplacement_joueur.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652280627 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\menu.c
-	"../structures.h"
-	"../prototypes.h"
+1652291928 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\menu.c
 	"../structures.h"
 	"../prototypes.h"
 
@@ -49,7 +47,7 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1652281984 source:c:\repos\ece-arena\projet\projet final\spgm affichages\dessins_blocs.c
+1652291495 source:c:\repos\ece-arena\projet\projet final\spgm affichages\dessins_blocs.c
 	"../prototypes.h"
 	"../structures.h"
 
@@ -69,7 +67,7 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1652264277 source:c:\repos\ece-arena\projet\projet final\animations\animation_deplacement.c
+1652291480 source:c:\repos\ece-arena\projet\projet final\animations\animation_deplacement.c
 	"../prototypes.h"
 	"../structures.h"
 
@@ -151,11 +149,11 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1652283413 source:c:\repos\ece-arena\projet\projet final\combats\selection_sort.c
+1652291406 source:c:\repos\ece-arena\projet\projet final\combats\selection_sort.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652047212 source:c:\repos\ece-arena\projet\projet final\combats\sorts_assassin.c
+1652289935 source:c:\repos\ece-arena\projet\projet final\combats\sorts_assassin.c
 	"../prototypes.h"
 	"../structures.h"
 
@@ -167,11 +165,11 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1652047218 source:c:\repos\ece-arena\projet\projet final\combats\sorts_vampire.c
+1652290387 source:c:\repos\ece-arena\projet\projet final\combats\sorts_vampire.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652262425 source:c:\repos\ece-arena\projet\projet final\animations\anim_attaque_de_base.c
+1652291346 source:c:\repos\ece-arena\projet\projet final\animations\anim_attaque_de_base.c
 	"../prototypes.h"
 	"../structures.h"
 

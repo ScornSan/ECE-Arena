@@ -70,6 +70,9 @@
 		<Unit filename="Partie_en_cours/position_depart_joueurs.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="Partie_en_cours/tour_aleatoire.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="SPGM affichages/afffichage_hud.c">
 			<Option compilerVar="CC" />
 		</Unit>
