@@ -1,8 +1,10 @@
 #include "../prototypes.h"
 #include "../structures.h"
 
-void sort1_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice[23][23], int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts)
+void sort1_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP *buffer_map, t_bloc matrice[23][23], int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts)
 {
+    BITMAP *buffer_pixels;
+    buffer_pixels = create_bitmap(SCREEN_W,SCREEN_H);
     int attaque = 0;
     //time_t start = time(NULL);
     /// tant qu'on ne clique pas sur l'icone de l'attaque de base, ou qu'on a lancé l'attaque
@@ -23,8 +25,10 @@ void sort1_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_b
     }
 }
 
-void sort2_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice[23][23], int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts)
+void sort2_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP *buffer_map, t_bloc matrice[23][23], int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts)
 {
+    BITMAP *buffer_pixels;
+    buffer_pixels = create_bitmap(SCREEN_W,SCREEN_H);
     int attaque = 0;
     int ennemi1 = i + 1;
     int ennemi2;
@@ -39,18 +43,7 @@ void sort2_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_b
     {
         clear_bitmap(buffer);
         affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
-        dessin_bloc_unique(buffer, joueur[i].x + 1, joueur[i].y, matrice, 250, 140, 0);
-        dessin_bloc_unique(buffer, joueur[i].x, joueur[i].y - 1, matrice, 250, 140, 0);
-        dessin_bloc_unique(buffer, joueur[i].x - 1, joueur[i].y, matrice, 250, 140, 0);
-        dessin_bloc_unique(buffer, joueur[i].x, joueur[i].y + 1, matrice, 250, 140, 0);
-        dessin_bloc_unique(buffer, joueur[i].x + 1, joueur[i].y + 1, matrice, 250, 140, 0);
-        dessin_bloc_unique(buffer, joueur[i].x - 1, joueur[i].y + 1, matrice, 250, 140, 0);
-        dessin_bloc_unique(buffer, joueur[i].x + 1, joueur[i].y - 1, matrice, 250, 140, 0);
-        dessin_bloc_unique(buffer, joueur[i].x - 1, joueur[i].y - 1, matrice, 250, 140, 0);
-        dessin_bloc_unique(buffer, joueur[i].x, joueur[i].y + 2, matrice, 250, 140, 0);
-        dessin_bloc_unique(buffer, joueur[i].x, joueur[i].y - 2, matrice, 250, 140, 0);
-        dessin_bloc_unique(buffer, joueur[i].x + 2, joueur[i].y, matrice, 250, 140, 0);
-        dessin_bloc_unique(buffer, joueur[i].x - 2, joueur[i].y, matrice, 250, 140, 0);
+        dessin_ligne(joueur, i, nb_joueurs, buffer, buffer_pixels, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, 2);
         affichage_joueurs(buffer, joueur, i, nb_joueurs, matrice);
 
         display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
@@ -84,7 +77,7 @@ void sort2_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_b
     }
 }
 
-void sort3_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice[23][23], int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts)
+void sort3_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP *buffer_map, t_bloc matrice[23][23], int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts)
 {
     int attaque = 0;
     int ennemi1 = i + 1;

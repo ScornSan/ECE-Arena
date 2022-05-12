@@ -4,7 +4,7 @@
 void attaque_de_base(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP* buffer_map, t_bloc matrice[23][23], int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts)
 {
     BITMAP *buffer_pixels;
-    buffer_pixels = create_bitmap(1280,720);
+    buffer_pixels = create_bitmap(SCREEN_W,SCREEN_H);
     int red_temp, green_temp,blue_temp;
     int attaque = 0;
     int ennemi1 = i + 1;
@@ -76,12 +76,31 @@ void attaque_de_base(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BI
 }
 
 
-void sort1(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice [23][23], BITMAP *desc_sorts, int x_souris, int y_souris, BITMAP *cursor, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP* map)
+void sort1(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP *buffer_map, t_bloc matrice [23][23], BITMAP *desc_sorts, int x_souris, int y_souris, BITMAP *cursor, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP* map)
 {
     switch(joueur[i].id_classe)
     {
     case 1: // GUERRIER
-        sort1_guerrier(joueur, i, nb_joueurs, buffer, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
+        sort1_guerrier(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
+        break;
+    case 2: // MAGE
+        sort1_mage(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
+        break;
+    case 3: // VAMPIRE
+        sort1_vampire(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
+        break;
+    case 4: // ASSASSIN
+        sort1_assassin(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
+        break;
+    }
+}
+
+void sort2(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP *buffer_map, t_bloc matrice [23][23], BITMAP *desc_sorts, int x_souris, int y_souris, BITMAP *cursor, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP* map)
+{
+    switch(joueur[i].id_classe)
+    {
+    case 1: // GUERRIER
+        sort2_guerrier(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
         break;
     case 2: // MAGE
         break;
@@ -92,28 +111,12 @@ void sort1(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matri
     }
 }
 
-void sort2(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice [23][23], BITMAP *desc_sorts, int x_souris, int y_souris, BITMAP *cursor, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP* map)
+void sort3(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP *buffer_map, t_bloc matrice [23][23], BITMAP *desc_sorts, int x_souris, int y_souris, BITMAP *cursor, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP* map)
 {
     switch(joueur[i].id_classe)
     {
     case 1: // GUERRIER
-        sort2_guerrier(joueur, i, nb_joueurs, buffer, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
-        break;
-    case 2: // MAGE
-        break;
-    case 3: // VAMPIRE
-        break;
-    case 4: // ASSASSIN
-        break;
-    }
-}
-
-void sort3(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice [23][23], BITMAP *desc_sorts, int x_souris, int y_souris, BITMAP *cursor, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP* map)
-{
-    switch(joueur[i].id_classe)
-    {
-    case 1: // GUERRIER
-        sort3_guerrier(joueur, i, nb_joueurs, buffer, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
+        sort3_guerrier(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
         break;
     case 2: // MAGE
         break;
@@ -155,19 +158,19 @@ void selection_sort(BITMAP * buffer_map,int *ligne_souris, int *colonne_souris,i
     if (mouse_x >= 335 && mouse_x <= 365 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1) // sort 1
     {
         rest(80);
-        sort1(joueur, i, nb_joueurs, buffer, matrice, desc_sorts, x_souris, y_souris, cursor, hud_joueur, icone_classes, hud_icone, map);
+        sort1(joueur, i, nb_joueurs, buffer, buffer_map, matrice, desc_sorts, x_souris, y_souris, cursor, hud_joueur, icone_classes, hud_icone, map);
         rest(80);
     }
     if (mouse_x >= 370 && mouse_x <= 400 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1) // sort 2
     {
         rest(80);
-        sort2(joueur, i, nb_joueurs, buffer, matrice, desc_sorts, x_souris, y_souris, cursor, hud_joueur, icone_classes, hud_icone, map);
+        sort2(joueur, i, nb_joueurs, buffer, buffer_map, matrice, desc_sorts, x_souris, y_souris, cursor, hud_joueur, icone_classes, hud_icone, map);
         rest(80);
     }
     if (mouse_x >= 405 && mouse_x <= 435 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1) // sort 3
     {
         rest(80);
-        sort3(joueur, i, nb_joueurs, buffer, matrice, desc_sorts, x_souris, y_souris, cursor, hud_joueur, icone_classes, hud_icone, map);
+        sort3(joueur, i, nb_joueurs, buffer, buffer_map, matrice, desc_sorts, x_souris, y_souris, cursor, hud_joueur, icone_classes, hud_icone, map);
         rest(80);
     }
     if (mouse_x >= 440 && mouse_x <= 470 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1) // sort 4

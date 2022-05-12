@@ -192,11 +192,15 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
             i = (i + 1) % nb_joueurs; // On boucle car le joueur est mort
         }
         rest(20);
+        if (mouse_b & 1 && mouse_x < 100)
+        {
+            break;
+        }
     }
     /// On fera une espèce d'animation de fin de jeu, on affiche le classement et on appuie sur un bouton quand on veut continuer
     /// on revient donc au menu (insérez le programme de Sarah)
 
-    for (int i = 0; i < 4; i++)
+    /*for (int i = 0; i < 4; i++)
     {
         destroy_bitmap(joueur[i].classe.logo_attaque);
         for (int j = 0; j < NB_SORTS; j++)
@@ -204,8 +208,8 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
             destroy_bitmap(joueur[i].classe.spell[j].description);
             destroy_bitmap(joueur[i].classe.spell[j].logo);
         }
-    }
-    destroy_bitmap(map);
-    destroy_bitmap(*hud_joueur);
-    destroy_bitmap(hud_icone);
+    }*/
+    //destroy_bitmap(map);
+    //destroy_bitmap(*hud_joueur);
+    //destroy_bitmap(hud_icone);
 }

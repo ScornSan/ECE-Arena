@@ -1,6 +1,28 @@
 #include "../prototypes.h"
 #include "../structures.h"
 
+void sort1_assassin(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice[23][23], int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts)
+{
+    int attaque = 0;
+    //time_t start = time(NULL);
+    /// tant qu'on ne clique pas sur l'icone de l'attaque de base, ou qu'on a lancé l'attaque
+    while (!attaque)
+    {
+        clear_bitmap(buffer);
+        affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
+        dessin_bloc_unique(buffer, joueur[i].x, joueur[i].y, matrice, 0, 220, 0);
+        affichage_joueurs(buffer, joueur, i, nb_joueurs, matrice);
+
+        display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
+        blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+        // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
+        if (mouse_x >= 335 && mouse_x <= 365 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1)
+        {
+            attaque = 1; // le joueur a annulé son attaque, l'attaque est considéré comme faite mais sans dégâts
+        }
+    }
+}
+
 
 void sort4_assassin(BITMAP *buffer_map, BITMAP * map,BITMAP * cursor, BITMAP *buffer, t_joueur* joueur, int i, t_bloc matrice[23][23], int *red_mouse, int * green_mouse, int *blue_mouse, int *ligne_souris,
                              int *colonne_souris, int nb_joueurs, BITMAP * hud_icone, BITMAP * desc_sorts, BITMAP **hud_joueur, BITMAP **icone_classes)
