@@ -126,6 +126,13 @@ void creation_classes(t_joueur* joueur, int nb_joueurs)
         joueur[i].pa = 6;
         joueur[i].classe.attaque = 5;
         joueur[i].vivant = 1;
+        joueur[i].elimine = 0;
+        joueur[i].bouclier = 0;
+        joueur[i].brulure = 0;
+        joueur[i].chauve_souris = 0;
+        joueur[i].gel = 0;
+        joueur[i].lucide = 0;
+        joueur[i].mortel = 0;
         joueur[i].classe.logo_attaque = load_bitmap("BITMAP/sort_attaque.bmp", NULL);
         if (i == 2)
         {

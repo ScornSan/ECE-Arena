@@ -50,7 +50,6 @@ typedef struct Players
 {
     char pseudo[20];
     int id_classe;
-    BITMAP* skin;
     int direction;
     int x;
     int y;
@@ -65,6 +64,7 @@ typedef struct Players
     int bouclier;
     int chauve_souris;
     int vivant;
+    int elimine;
     int red;
     int green;
     int blue;

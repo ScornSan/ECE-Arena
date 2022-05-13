@@ -18,6 +18,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
 
     int i = 0;
     int j;
+    int compteur_mort = 1;
     t_bloc matrice[23][23];
 
     hud_joueur = (BITMAP **)malloc(sizeof(BITMAP *) * nb_joueurs);
@@ -101,6 +102,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
     int fini = 0, choix1= 0, choix2= 0, choix3= 0, choix4= 0;
     i = 0;
     /// tant que tous les joueurs ne sont pas positionnés
+    play_sample(son_battle, 255, 128, 1000, 1);
     while(fini != nb_joueurs)
     {
         blit(map, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
@@ -189,6 +191,11 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
         }
         else
         {
+            if (joueur[i].elimine == 0)
+            {
+                joueur[i].elimine = compteur_mort;
+                compteur_mort++;
+            }
             i = (i + 1) % nb_joueurs; // On boucle car le joueur est mort
         }
         rest(20);

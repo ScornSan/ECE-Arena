@@ -23,6 +23,43 @@ void sort1_assassin(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_b
     }
 }
 
+void sort2_assassin(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP* buffer_map, t_bloc matrice[23][23], int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts)
+{
+    int attaque = 0;
+    BITMAP *buffer_pixels;
+    buffer_pixels = create_bitmap(1280,720);
+    int sort_lance = 0;
+    int annulation = 0;
+    int red_temp, green_temp, blue_temp;
+    int longueur_ligne = 4;
+
+    while(!attaque)
+    {
+        clear_bitmap(buffer);
+
+        blit(map, buffer, 0,0,0,0, SCREEN_W,SCREEN_H);
+        affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
+        ///dessin limite zone d'attaque autour du perso
+        dessin_ligne(joueur, i, nb_joueurs, buffer, buffer_pixels, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, longueur_ligne);
+        affichage_joueurs(buffer, joueur, i, nb_joueurs, matrice);
+        display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
+
+        blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+
+        lecture_pixels_buffer_map(buffer_map, &red_temp, &green_temp,&blue_temp); /// recupere position de la souris par rapport aux couleurs sur le buffer
+        reperage_bloc_souris(&x_souris, &y_souris, red_temp, green_temp, blue_temp, matrice, joueur, i); /// repere la couleur du bloc sous la souris grace a la ligne d avant
+        lecture_pixels_buffer_map(buffer_pixels, &red_temp, &green_temp,&blue_temp); /// lis la couleur des pixels sur le buffer pixels, sert a verifier la bonne position de la souris
+        if (matrice[x_souris][y_souris].occuper && mouse_b&1 && green_temp == 140)
+        {
+            attaque = 1;
+        }
+        if (mouse_x >= 370 && mouse_x <= 400 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1)
+        {
+            attaque = 1; // le joueur a annulé son attaque, l'attaque est considéré comme faite mais sans dégâts
+        }
+    }
+}
+
 
 void sort4_assassin(BITMAP *buffer_map, BITMAP * map,BITMAP * cursor, BITMAP *buffer, t_joueur* joueur, int i, t_bloc matrice[23][23], int *red_mouse, int * green_mouse, int *blue_mouse, int *ligne_souris,
                              int *colonne_souris, int nb_joueurs, BITMAP * hud_icone, BITMAP * desc_sorts, BITMAP **hud_joueur, BITMAP **icone_classes)

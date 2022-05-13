@@ -34,7 +34,7 @@ int main()
     t_joueur* joueur;
     FONT* myfont;
     FONT* myfont2;
-    int compteur_fin = nb_joueurs;
+    int quitter = 0;
     // Lancer allegro et le mode graphique
     allegro_init();
     install_mouse();
@@ -79,29 +79,31 @@ int main()
     // Boucle du programme, tant qu'on ne clique pas sur quitter
     /// changer la valeur du 1 en un boolen jeu qui passe par adresse dans le menu,
     ///et si on clique sur quitter a la fin de la partie, on change la valeur du boolen pour quitter la boucle
-    nb_joueurs = menu(buffer, fond, cursor, pseudo, son_menu, myfont, son_on, son_off);
-    int classement[nb_joueurs];
-
-    joueur = (t_joueur*)malloc(sizeof(t_joueur) * nb_joueurs); // allocation dynamiques des structures joueurs
-    if (joueur == NULL)
+    while (!quitter)
     {
-        allegro_message("Erreur allocation dynamique");
-        allegro_exit();
-        exit(EXIT_FAILURE);
-    }
+        nb_joueurs = menu(buffer, fond, cursor, pseudo, son_menu, myfont, son_on, son_off);
+        int classement[nb_joueurs];
 
-    for (int i = 0; i < nb_joueurs; i++)
-    {
-        strcpy(joueur[i].pseudo, pseudo[i]);
+        joueur = (t_joueur*)malloc(sizeof(t_joueur) * nb_joueurs); // allocation dynamiques des structures joueurs
+        if (joueur == NULL)
+        {
+            allegro_message("Erreur allocation dynamique");
+            allegro_exit();
+            exit(EXIT_FAILURE);
+        }
+
+        for (int i = 0; i < nb_joueurs; i++)
+        {
+            strcpy(joueur[i].pseudo, pseudo[i]);
+        }
+        creation_classes(joueur, nb_joueurs);
+        choix_classe(buffer, fond, cursor, joueur, nb_joueurs, myfont, myfont2, son_menu, son_on, son_off);
+        //tour_joueur_alea(joueur, nb_joueurs);
+        stop_sample(son_menu);
+        tour_joueur(buffer, cursor, joueur, nb_joueurs, son_battle, son_on, son_off);
+        stop_sample(son_battle);
+        classement_fin(buffer, joueur, nb_joueurs, classement);
     }
-    creation_classes(joueur, nb_joueurs);
-    choix_classe(buffer, fond, cursor, joueur, nb_joueurs, myfont, myfont2, son_menu, son_on, son_off);
-    //tour_joueur_alea(joueur, nb_joueurs);
-    stop_sample(son_menu);
-    play_sample(son_battle, 255, 128, 1000, 1);
-    tour_joueur(buffer, cursor, joueur, nb_joueurs, son_battle, son_on, son_off);
-    stop_sample(son_battle);
-    compteur_fin = classement_fin(buffer, joueur, nb_joueurs, compteur_fin, classement);
 
     destroy_bitmap(cursor);
     destroy_bitmap(buffer);

@@ -1,10 +1,12 @@
 #include "../prototypes.h"
 #include "../structures.h"
 
-int classement_fin(BITMAP * buffer, t_joueur * joueur, int nb_joueurs, int compteur_fin, int classement[])
+void classement_fin(BITMAP * buffer, t_joueur * joueur, int nb_joueurs, int classement[])
 {
     BITMAP *ecran_fin = NULL;
     int y_affiche = 40;
+    int elimine = 1;
+    int compteur_fin = nb_joueurs - 1;
     ecran_fin=load_bitmap("BITMAP/GAMEOVER.bmp",NULL);
     if (!ecran_fin)
     {
@@ -15,17 +17,29 @@ int classement_fin(BITMAP * buffer, t_joueur * joueur, int nb_joueurs, int compt
     blit(ecran_fin, buffer, 0,0,0,0,SCREEN_W, SCREEN_H);
     blit(buffer, screen,0,0,0,0, SCREEN_W, SCREEN_H);
 
+    while (elimine != nb_joueurs - 1)
+    {
+        for (int i = 0; i < nb_joueurs; i++)
+        {
+            if (joueur[i].elimine == elimine)
+            {
+                classement[compteur_fin] = i;
+                compteur_fin--; // Ce compteur est égal à nb_joueur - 1 au début
+                /// 1 - 4eme
+                /// 2 - 3eme
+                /// 3 - 2eme
+                /// 4 - 1er
+                /// (dans le cas des 4 joueurs)
+            }
+        }
+        elimine++;
+    }
+    /// Test pour le joueur pas éliminé, qui sera premier
     for (int i = 0; i < nb_joueurs; i++)
     {
-        if (joueur[i].vivant == 0)
+        if (joueur[i].elimine == 0) // le joueur i n'est pas éliminé car pas mort
         {
             classement[compteur_fin] = i;
-            compteur_fin--; // Ce compteur est égal à nb_joueur au début
-            /// 1 - 4eme
-            /// 2 - 3eme
-            /// 3 - 2eme
-            /// 4 - 1er
-            /// (dans le cas des 4 joueurs)
         }
     }
 
@@ -51,7 +65,4 @@ int classement_fin(BITMAP * buffer, t_joueur * joueur, int nb_joueurs, int compt
     }
     // Après ces étapes, nous sommes censé obtenir un tableau classement de la taille de nb_joueurs
     // qui contient la numéro du joueur en fonction de sa place (ordre du tableau : case 0, premier)
-
-    return compteur_fin;
-
 }
