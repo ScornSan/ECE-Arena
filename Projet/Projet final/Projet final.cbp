@@ -31,6 +31,9 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Animations/anim_attaque_de_base.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="Animations/animation_deplacement.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -49,6 +52,9 @@
 		<Unit filename="Combats/sorts_vampire.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="Fin_de_partie/classement_fin.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="Menu_et_choix/choix_classes.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -65,6 +71,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Partie_en_cours/position_depart_joueurs.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Partie_en_cours/tour_aleatoire.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="SPGM affichages/afffichage_hud.c">

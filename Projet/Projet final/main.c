@@ -24,14 +24,19 @@ int main()
 {
     srand(time(NULL));
     int nb_joueurs;
-    SAMPLE* s; //definir un sample de son
+    SAMPLE* son_menu; //definir un sample de son
+    SAMPLE* son_battle;
     BITMAP *cursor;
     BITMAP *fond;
     BITMAP *buffer;
+    BITMAP *son_on;
+    BITMAP *son_off;
     t_joueur* joueur;
+    FONT* myfont;
+    FONT* myfont2;
+    int quitter = 0;
     // Lancer allegro et le mode graphique
     allegro_init();
-    install_keyboard();
     install_mouse();
 
     set_color_depth(desktop_color_depth());
@@ -48,15 +53,20 @@ int main()
         return 1;
     }
 
-    s=  load_wav("SOUND/sound_hub.wav"); //charger un wav
+    son_menu=  load_wav("SOUND/sound_hub.wav"); //charger un wav
+    son_battle= load_wav("SOUND/sound_battle.wav"); //charger un wav
+    son_on = load_bitmap("BITMAP/son_on.bmp", NULL);
+    son_off = load_bitmap("BITMAP/son_off.bmp", NULL);
+    myfont = load_font("FONT/tempus.pcx", NULL, NULL);
+    myfont2 = load_font("FONT/franklin.pcx", NULL, NULL);
 
-    if (!s)   //blindage
+    if (!son_menu)   //blindage
     {
         printf("Error loading sound!");
         return 1;
     }
 
-    play_sample(s, 255, 128, 1000, 1); //lancer la musique en boucle
+    play_sample(son_menu, 255, 128, 1000, 1); //lancer la musique en boucle
 
     cursor=load_bitmap("BITMAP/cursor.bmp",NULL);
     fond = load_bitmap("BITMAP/fond.bmp", NULL);
@@ -67,10 +77,12 @@ int main()
     char pseudo[4][20]; // creation pseudo temporaires qui seront stocker dans les structures joueurs
 
     // Boucle du programme, tant qu'on ne clique pas sur quitter
-    while (1) /// changer la valeur du 1 en un boolen jeu qui passe par adresse dans le menu,
-              ///et si on clique sur quitter a la fin de la partie, on change la valeur du boolen pour quitter la boucle
+    /// changer la valeur du 1 en un boolen jeu qui passe par adresse dans le menu,
+    ///et si on clique sur quitter a la fin de la partie, on change la valeur du boolen pour quitter la boucle
+    while (!quitter)
     {
-        nb_joueurs = menu(buffer, fond, cursor, pseudo);
+        nb_joueurs = menu(buffer, fond, cursor, pseudo, son_menu, myfont, son_on, son_off);
+        int classement[nb_joueurs];
 
         joueur = (t_joueur*)malloc(sizeof(t_joueur) * nb_joueurs); // allocation dynamiques des structures joueurs
         if (joueur == NULL)
@@ -85,10 +97,14 @@ int main()
             strcpy(joueur[i].pseudo, pseudo[i]);
         }
         creation_classes(joueur, nb_joueurs);
-        choix_classe(buffer, fond, cursor, joueur, nb_joueurs);
-        stop_sample(s);
-        tour_joueur(buffer, cursor, joueur, nb_joueurs);
+        choix_classe(buffer, fond, cursor, joueur, nb_joueurs, myfont, myfont2, son_menu, son_on, son_off);
+        //tour_joueur_alea(joueur, nb_joueurs);
+        stop_sample(son_menu);
+        tour_joueur(buffer, cursor, joueur, nb_joueurs, son_battle, son_on, son_off);
+        stop_sample(son_battle);
+        classement_fin(buffer, joueur, nb_joueurs, classement);
     }
+
     destroy_bitmap(cursor);
     destroy_bitmap(buffer);
     free(joueur);

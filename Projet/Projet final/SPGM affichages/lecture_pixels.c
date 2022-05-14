@@ -8,16 +8,19 @@ void lecture_pixels_buffer_map(BITMAP * buffer_map, int *red_mouse, int *green_m
     *blue_mouse = getb(getpixel(buffer_map, mouse_x, mouse_y));
 }
 
-void reperage_bloc_souris(int *ligne_souris, int *colonne_souris, int red_mouse, int green_mouse, int blue_mouse, t_bloc matrice[23][23])
+void reperage_bloc_souris(int *ligne_souris, int *colonne_souris, int red_mouse, int green_mouse, int blue_mouse, t_bloc matrice[23][23], t_joueur* j, int i)
 {
-    for (int j = 0; j<23; j++)
+    if (red_mouse != 0 && green_mouse != 0 && blue_mouse != 0)
     {
-        for (int k = 0; k<23; k++)
+        for (int j = 0; j<23; j++)
         {
-            if (matrice[j][k].red == red_mouse && matrice[j][k].green == green_mouse && matrice[j][k].blue == blue_mouse)
+            for (int k = 0; k<23; k++)
             {
-                *ligne_souris = j;
-                *colonne_souris = k;
+                if (matrice[j][k].red == red_mouse && matrice[j][k].green == green_mouse && matrice[j][k].blue == blue_mouse)
+                {
+                    *ligne_souris = j;
+                    *colonne_souris = k;
+                }
             }
         }
     }

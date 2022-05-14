@@ -7,14 +7,9 @@
 #define DIRECTIONS 4
 #define NB_BITMAPS_D 4
 #define NB_BITMAPS_R 4
+#define NB_BITMAPS_A 4
+#define NB_CLASSES 4
 
-typedef struct Acteur
-{
-    int x; // depart du tracage de l'image (Ex du guerrier : En 0 pour le premier mvt, en 49 pour le second...)
-    int y; // depart du tracage de l'image (Ex du guerrier : reste à 0 car meme taille d'image pour 1 direction)
-    int tx; // dimension de la taille de l'acteur en x (49)
-    int ty; // dimension de la taille de l'acteur en y (64)
-}t_acteurs;
 
 typedef struct bloc
 {
@@ -44,6 +39,7 @@ typedef struct classes
 {
     int attaque;
     BITMAP *logo_attaque;
+    BITMAP *anim_attaques[NB_CLASSES][DIRECTIONS][NB_BITMAPS_A];
     BITMAP *respiration[NB_BITMAPS_R];
     BITMAP *deplacement[DIRECTIONS][NB_BITMAPS_D];
     t_sort spell[NB_SORTS];
@@ -54,15 +50,21 @@ typedef struct Players
 {
     char pseudo[20];
     int id_classe;
-    BITMAP* skin;
+    int direction;
     int x;
     int y;
     int nb_pm;
     int pv;
     int pm;
     int pa;
-    int statut;
+    int brulure;
+    int gel;
+    int mortel;
+    int lucide;
+    int bouclier;
+    int chauve_souris;
     int vivant;
+    int elimine;
     int red;
     int green;
     int blue;

@@ -56,61 +56,61 @@ void definition_accessible(t_bloc matrice[23][23])
 
 void definition_occuper(t_bloc matrice[23][23])
 {
-    matrice[0][13].occuper = 1;
-    matrice[7][6].occuper = 1;
-    matrice[8][4].occuper = 1;
-    matrice[12][22].occuper = 1;
+    matrice[0][13].accessible = 0;
+    matrice[7][6].accessible = 0;
+    matrice[8][4].accessible = 0;
+    matrice[12][22].accessible = 0;
 
-    matrice[15][16].occuper = 1;
-    matrice[21][13].occuper = 1;
-    matrice[17][14].occuper = 1;
-    matrice[18][14].occuper = 1;
+    matrice[15][16].accessible = 0;
+    matrice[21][13].accessible = 0;
+    matrice[17][14].accessible = 0;
+    matrice[18][14].accessible = 0;
 
-    matrice[7][15].occuper = 1;
-    matrice[8][14].occuper = 1;
-    matrice[5][16].occuper = 1;
-    matrice[6][16].occuper = 1;
+    matrice[7][15].accessible = 0;
+    matrice[8][14].accessible = 0;
+    matrice[5][16].accessible = 0;
+    matrice[6][16].accessible = 0;
 
-    matrice[7][16].occuper = 1;
-    matrice[9][12].occuper = 1;
-    matrice[9][13].occuper = 1;
-    matrice[9][14].occuper = 1;
+    matrice[7][16].accessible = 0;
+    matrice[9][12].accessible = 0;
+    matrice[9][13].accessible = 0;
+    matrice[9][14].accessible = 0;
 
-    matrice[11][11].occuper = 1;
-    matrice[11][12].occuper = 1;
-    matrice[12][10].occuper = 1;
-    matrice[12][11].occuper = 1;
+    matrice[11][11].accessible = 0;
+    matrice[11][12].accessible = 0;
+    matrice[12][10].accessible = 0;
+    matrice[12][11].accessible = 0;
 
-    matrice[13][9].occuper = 1;
-    matrice[13][10].occuper = 1;
-    matrice[13][11].occuper = 1;
-    matrice[15][7].occuper = 1;
+    matrice[13][9].accessible = 0;
+    matrice[13][10].accessible = 0;
+    matrice[13][11].accessible = 0;
+    matrice[15][7].accessible = 0;
 
-    matrice[12][2].occuper = 1;
-    matrice[12][3].occuper = 1;
-    matrice[13][2].occuper = 1;
-    matrice[13][3].occuper = 1;
+    matrice[12][2].accessible = 0;
+    matrice[12][3].accessible = 0;
+    matrice[13][2].accessible = 0;
+    matrice[13][3].accessible = 0;
 
-    matrice[20][9].occuper = 1;
-    matrice[20][10].occuper = 1;
-    matrice[21][9].occuper = 1;
-    matrice[21][10].occuper = 1;
-    matrice[19][9].occuper = 1;
-    matrice[19][10].occuper = 1;
+    matrice[20][9].accessible = 0;
+    matrice[20][10].accessible = 0;
+    matrice[21][9].accessible = 0;
+    matrice[21][10].accessible = 0;
+    matrice[19][9].accessible = 0;
+    matrice[19][10].accessible = 0;
 
-    matrice[5][10].occuper = 1;
-    matrice[5][11].occuper = 1;
-    matrice[6][10].occuper = 1;
-    matrice[6][11].occuper = 1;
+    matrice[5][10].accessible = 0;
+    matrice[5][11].accessible = 0;
+    matrice[6][10].accessible = 0;
+    matrice[6][11].accessible = 0;
 
-    matrice[6][11].occuper = 1;
-    matrice[6][11].occuper = 1;
-    matrice[6][11].occuper = 1;
-    matrice[6][11].occuper = 1;
+    matrice[6][11].accessible = 0;
+    matrice[6][11].accessible = 0;
+    matrice[6][11].accessible = 0;
+    matrice[6][11].accessible = 0;
 
-    matrice[15][8].occuper = 1;
-    matrice[15][9].occuper = 1;
-    matrice[16][7].occuper = 1;
+    matrice[15][8].accessible = 0;
+    matrice[15][9].accessible = 0;
+    matrice[16][7].accessible = 0;
 
     for (int i = 0; i<23; i++)
     {
@@ -118,11 +118,11 @@ void definition_occuper(t_bloc matrice[23][23])
         {
             if ((i >= 1 && i<= 3) &&(j >= 9 && j <= 11))
             {
-                matrice[i][j].occuper = 1;
+                matrice[i][j].accessible = 0;
             }
             if ((i == 7 && j >= 19 && j<= 21) || (i == 8 && j >= 19 && j<= 21))
             {
-                matrice[i][j].occuper = 1;
+                matrice[i][j].accessible = 0;
             }
         }
     }
