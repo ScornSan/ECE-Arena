@@ -16,6 +16,10 @@ void sort1_mage(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP 
         display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
         // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
+        if (matrice[x_souris][y_souris].occuper != matrice[joueur[i].x][joueur[i].y].occuper && matrice[x_souris][y_souris].occuper != 0 && mouse_b&1)
+        {
+
+        }
         if (mouse_x >= 335 && mouse_x <= 365 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1)
         {
             attaque = 1; // le joueur a annulé son attaque, l'attaque est considéré comme faite mais sans dégâts
@@ -32,6 +36,7 @@ void sort2_mage(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP*
     int annulation = 0;
     int red_temp, green_temp, blue_temp;
     int longueur_ligne = 4;
+    int id_ennemi;
 
     while(!attaque)
     {
@@ -48,11 +53,33 @@ void sort2_mage(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP*
 
         lecture_pixels_buffer_map(buffer_map, &red_temp, &green_temp,&blue_temp); /// recupere position de la souris par rapport aux couleurs sur le buffer
         reperage_bloc_souris(&x_souris, &y_souris, red_temp, green_temp, blue_temp, matrice, joueur, i); /// repere la couleur du bloc sous la souris grace a la ligne d avant
-        lecture_pixels_buffer_map(buffer_pixels, &red_temp, &green_temp,&blue_temp); /// lis la couleur des pixels sur le buffer pixels, sert a verifier la bonne position de la souris
-        if (matrice[x_souris][y_souris].occuper && mouse_b&1 && green_temp == 140)
+        if (matrice[x_souris][y_souris].occuper != matrice[joueur[i].x][joueur[i].y].occuper && matrice[x_souris][y_souris].occuper != 0 && mouse_b&1)
         {
+            id_ennemi = matrice[x_souris][y_souris].occuper - 1;
+            if (x_souris < joueur[matrice[x_souris][y_souris].occuper - 1].x && y_souris == joueur[matrice[x_souris][y_souris].occuper - 1].y)
+            {
+                animation_attaque_de_base(buffer, map, joueur, i, matrice, nb_joueurs, 1);
+            }
+            /// SUD EST
+            if (x_souris > joueur[matrice[x_souris][y_souris].occuper - 1].x && y_souris == joueur[matrice[x_souris][y_souris].occuper - 1].y)
+            {
+                animation_attaque_de_base(buffer, map, joueur, i, matrice, nb_joueurs, 3);
+            }
+            /// SUD OUEST
+            if (x_souris == joueur[matrice[x_souris][y_souris].occuper - 1].x && y_souris < joueur[matrice[x_souris][y_souris].occuper - 1].y)
+            {
+                animation_attaque_de_base(buffer, map, joueur, i, matrice, nb_joueurs, 0);
+            }
+            /// NORD EST
+            if (x_souris == joueur[matrice[x_souris][y_souris].occuper - 1].x && y_souris > joueur[matrice[x_souris][y_souris].occuper - 1].y)
+            {
+                animation_attaque_de_base(buffer, map, joueur, i, matrice, nb_joueurs, 2);
+            }
+            joueur[id_ennemi].brulure = 1;
             attaque = 1;
         }
+        textprintf_ex(buffer, font, 0, 5, makecol(0, 0, 0), -1, "Occuper souris : %d", matrice[x_souris][y_souris].occuper);
+        textprintf_ex(buffer, font, 0, 15, makecol(0, 0, 0), -1, "Occuper joueur: %d", matrice[joueur[(i + 1) % nb_joueurs].x][joueur[(i + 1) % nb_joueurs].y].occuper);
         if (mouse_x >= 370 && mouse_x <= 400 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1)
         {
             attaque = 1; // le joueur a annulé son attaque, l'attaque est considéré comme faite mais sans dégâts
@@ -86,9 +113,8 @@ void sort3_mage(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP*
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
         lecture_pixels_buffer_map(buffer_map, &red_temp, &green_temp,&blue_temp);
         reperage_bloc_souris(&x_souris, &y_souris, red_temp, green_temp, blue_temp, matrice, joueur, i);
-        lecture_pixels_buffer_map(buffer_pixels, &red_temp, &green_temp,&blue_temp);
         // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
-        if (matrice[x_souris][y_souris].occuper && mouse_b&1 && green_temp == 140)
+        if (matrice[x_souris][y_souris].occuper != matrice[joueur[i].x][joueur[i].y].occuper && matrice[x_souris][y_souris].occuper != 0 && mouse_b&1)
         {
             /// NORD OUEST
             if (x_souris < joueur[matrice[x_souris][y_souris].occuper - 1].x && y_souris == joueur[matrice[x_souris][y_souris].occuper - 1].y)

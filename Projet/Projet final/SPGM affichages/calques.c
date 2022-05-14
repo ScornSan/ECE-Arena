@@ -47,14 +47,14 @@ void distribution_couleur_blocs(BITMAP * buffer_map, t_bloc matrice[23][23])
 }
 
 
-void couleur_sous_joueur(BITMAP * buffer, int ligne_joueur, int colonne_joueur, t_bloc matrice[23][23])
+void couleur_sous_joueur(BITMAP * buffer, int ligne_joueur, int colonne_joueur, t_bloc matrice[23][23], t_joueur* j, int k)
 {
     for(int i = 0; i< 12; i++)
     {
-        line(buffer, matrice[ligne_joueur][colonne_joueur].x_bloc +2*i, matrice[ligne_joueur][colonne_joueur].y_bloc-12 +i, matrice[ligne_joueur][colonne_joueur].x_bloc+1 -2*i,matrice[ligne_joueur][colonne_joueur].y_bloc -12 +i, makecol(0,255, 255));
+        line(buffer, matrice[ligne_joueur][colonne_joueur].x_bloc +2*i, matrice[ligne_joueur][colonne_joueur].y_bloc-12 +i, matrice[ligne_joueur][colonne_joueur].x_bloc+1 -2*i,matrice[ligne_joueur][colonne_joueur].y_bloc -12 +i, makecol(j[k].red,j[k].green, j[k].blue));
     }
     for(int i = 0; i< 12; i++)
     {
-        line(buffer, matrice[ligne_joueur][colonne_joueur].x_bloc -22 +2*i, matrice[ligne_joueur][colonne_joueur].y_bloc +i, matrice[ligne_joueur][colonne_joueur].x_bloc +23 -2*i, matrice[ligne_joueur][colonne_joueur].y_bloc +i, makecol(0, 255,255));
+        line(buffer, matrice[ligne_joueur][colonne_joueur].x_bloc -22 +2*i, matrice[ligne_joueur][colonne_joueur].y_bloc +i, matrice[ligne_joueur][colonne_joueur].x_bloc +23 -2*i, matrice[ligne_joueur][colonne_joueur].y_bloc +i, makecol(j[k].red, j[k].green,j[k].blue));
     }
 }

@@ -48,8 +48,7 @@ void sort2_assassin(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BIT
 
         lecture_pixels_buffer_map(buffer_map, &red_temp, &green_temp,&blue_temp); /// recupere position de la souris par rapport aux couleurs sur le buffer
         reperage_bloc_souris(&x_souris, &y_souris, red_temp, green_temp, blue_temp, matrice, joueur, i); /// repere la couleur du bloc sous la souris grace a la ligne d avant
-        lecture_pixels_buffer_map(buffer_pixels, &red_temp, &green_temp,&blue_temp); /// lis la couleur des pixels sur le buffer pixels, sert a verifier la bonne position de la souris
-        if (matrice[x_souris][y_souris].occuper && mouse_b&1 && green_temp == 140)
+        if (matrice[x_souris][y_souris].occuper && mouse_b&1)
         {
             attaque = 1;
         }

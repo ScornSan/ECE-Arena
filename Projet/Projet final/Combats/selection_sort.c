@@ -137,7 +137,7 @@ void sort4(BITMAP * buffer_map, BITMAP *map,int *ligne_souris, int *colonne_sour
     switch(joueur[i].id_classe)
     {
     case 1: // GUERRIER
-        sort4_guerrier(joueur, i, nb_joueurs, buffer, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
+        sort4_guerrier(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
         break;
     case 2: // MAGE
         sort4_mage(buffer_map, map, cursor, buffer, joueur, i, matrice, red_mouse, green_mouse, blue_mouse, ligne_souris, colonne_souris,nb_joueurs, hud_icone, desc_sorts, hud_joueur, icone_classes);

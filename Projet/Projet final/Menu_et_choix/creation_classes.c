@@ -32,7 +32,10 @@ void creation_icones_classes(t_joueur* joueur)
                     allegro_exit();
                     exit(EXIT_FAILURE);
                 }
+                /// initialisation degats :
             }
+            joueur[i].classe.spell[1].degats_max = 12;
+            joueur[i].classe.spell[1].degats_min = 6;
             break;
         case 2: // creation d'une classe mage
             for (j = 0; j < 4; j++)
@@ -57,6 +60,12 @@ void creation_icones_classes(t_joueur* joueur)
                     exit(EXIT_FAILURE);
                 }
             }
+            /// HEAL du mage
+            joueur[i].classe.spell[0].degats_max = 10;
+            joueur[i].classe.spell[0].degats_min = 4;
+            /// Sol grondant
+            joueur[i].classe.spell[3].degats_max = 10;
+            joueur[i].classe.spell[3].degats_min = 5;
             break;
         case 3: // creation d'une classe mutant
             for (j = 0; j < 4; j++)

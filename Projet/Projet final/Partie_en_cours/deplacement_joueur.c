@@ -40,7 +40,7 @@ void deplacement_personnage(BITMAP * buffer,BITMAP * fond, t_joueur* joueur, int
         y_augmente = 0;
 
     matrice[joueur[i].x][joueur[i].y].occuper = 0;
-    while ((joueur[i].x != ligne_souris || joueur[i].y != colonne_souris) && (abs(joueur[i].x - ligne_souris) + abs(joueur[i].y - colonne_souris)) <= joueur[i].pm && !matrice[ligne_souris][colonne_souris].occuper && matrice[ligne_souris][colonne_souris].accessible)
+    while (!joueur[i].gel && (joueur[i].x != ligne_souris || joueur[i].y != colonne_souris) && (abs(joueur[i].x - ligne_souris) + abs(joueur[i].y - colonne_souris)) <= joueur[i].pm && !matrice[ligne_souris][colonne_souris].occuper && matrice[ligne_souris][colonne_souris].accessible)
     {
         compteur++;
         clear_bitmap(buffer);
@@ -92,8 +92,9 @@ void deplacement_personnage(BITMAP * buffer,BITMAP * fond, t_joueur* joueur, int
             break;
         }
         *deplacement_effectuer = *deplacement_effectuer +1;
-        matrice[joueur[i].x][joueur[i].y].occuper = i + 1;
     }
+    matrice[joueur[i].x][joueur[i].y].occuper = i + 1;
+    rest(20);
 }
 
 /*void deplacement_joueur(BITMAP *buffer, BITMAP *buffer_pixels, BITMAP *buffer_map, BITMAP *fond, BITMAP *cursor, t_joueur* joueur, t_bloc matrice[23][23], BITMAP * croix_rouge, BITMAP * croix_bleue, int ligne_joueur, int colonne_joueur, int ligne_souris, int colonne_souris, int i)
