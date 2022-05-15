@@ -55,6 +55,9 @@
 		<Unit filename="Combats/sorts_vampire.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="Combats/test_effet_tour_suivant.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="Fin_de_partie/classement_fin.c">
 			<Option compilerVar="CC" />
 		</Unit>

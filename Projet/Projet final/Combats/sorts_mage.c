@@ -44,7 +44,6 @@ void sort1_mage(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP 
             // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
         }
     }
-
 }
 
 void sort2_mage(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP* buffer_map, t_bloc matrice[23][23], int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts)

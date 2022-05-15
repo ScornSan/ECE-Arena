@@ -68,5 +68,6 @@ int pourcentage_de_chance();
 void affichage_son();
 void affichage_joueurs();
 void affichage_joueurs_respiration();
+int random();
 
 #endif // PROTOTYOPES_H_INCLUDED

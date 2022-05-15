@@ -177,6 +177,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
         matrice[joueur[i].x][joueur[i].y].occuper = i + 1;
         respiration_joueur[i] = i * 5;
     }
+    i = random(0, 3);
     // Boucle d'animation
     while (joueur_en_vie != 1)
     {
@@ -244,15 +245,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
                 start = time(NULL);
                 joueur[i].pm = 3; // on remet les pm et pa du joueur au nombre initial
                 joueur[i].pa = 6;
-                if (joueur[i].bouclier && joueur[i].compteur_bouclier >= 1)
-                {
-                    joueur[i].bouclier = 0;
-                    joueur[i].compteur_bouclier = 0;
-                }
-                else
-                {
-                    joueur[i].compteur_bouclier = joueur[i].compteur_bouclier + 1;
-                }
+
                 i = (i + 1) % nb_joueurs; // On boucle car temps finis ou on a cliqué sur le bouton
             }
         }

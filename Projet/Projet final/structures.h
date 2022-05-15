@@ -71,8 +71,6 @@ typedef struct Players
     int compteur_lucide;
     int bouclier;
     int compteur_bouclier;
-    int chauve_souris;
-    int compteur_chauve_souris;
     int vivant;
     int elimine;
     int red;

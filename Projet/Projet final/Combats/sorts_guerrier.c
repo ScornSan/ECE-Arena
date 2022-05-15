@@ -30,6 +30,7 @@ void sort2_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BIT
     BITMAP *buffer_pixels;
     buffer_pixels = create_bitmap(SCREEN_W,SCREEN_H);
     int red_temp, green_temp,blue_temp;
+    int red_temp1, green_temp1,blue_temp1;
     int attaque = 0;
     int ennemi1 = i + 1;
     int ennemi2;
@@ -50,19 +51,22 @@ void sort2_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BIT
 
         display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+        /// recupere la place de la souris sur la map (le bloc)
         lecture_pixels_buffer_map(buffer_map, &red_temp, &green_temp,&blue_temp);
         reperage_bloc_souris(&x_souris, &y_souris, red_temp, green_temp, blue_temp, matrice, joueur, i);
+        lecture_pixels_buffer_map(buffer_map, &red_temp1, &green_temp1,&blue_temp1);
         // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
-        if (matrice[x_souris][y_souris].occuper != matrice[joueur[i].x][joueur[i].y].occuper && matrice[x_souris][y_souris].occuper != 0 && mouse_b&1)
+        if (matrice[x_souris][y_souris].occuper != matrice[joueur[i].x][joueur[i].y].occuper && matrice[x_souris][y_souris].occuper != 0 && mouse_b&1 && green_temp1 == 140)
         {
             int id_ennemi = matrice[x_souris][y_souris].occuper - 1;
-            if (pourcentage_de_chance() < 9)
+            int degats = random(joueur[i].classe.spell[1].degats_min, joueur[i].classe.spell[1].degats_max);
+            if (pourcentage_de_chance() < 9 && joueur[i].pa <= 4)
             {
-                textprintf_ex(buffer, font, mouse_x - 10, mouse_y - 70, makecol(joueur[i].red, joueur[i].green, joueur[i].blue), -1, "- %d", joueur[i].classe.spell[1].degats_max);
+                textprintf_ex(buffer, font, matrice[joueur[id_ennemi].x][joueur[id_ennemi].y].x_bloc - 10, matrice[joueur[id_ennemi].x][joueur[id_ennemi].y].y_bloc  - 70, makecol(joueur[i].red, joueur[i].green, joueur[i].blue), -1, "- %d", joueur[i].classe.spell[1].degats_max);
             }
             else
             {
-                textprintf_ex(buffer, font, mouse_x - 10, mouse_y - 70, makecol(joueur[i].red, joueur[i].green, joueur[i].blue), -1, "Attaque manqué");
+                textprintf_ex(buffer, font, matrice[joueur[id_ennemi].x][joueur[id_ennemi].y].x_bloc - 10, matrice[joueur[id_ennemi].x][joueur[id_ennemi].y].y_bloc  - 70, makecol(joueur[i].red, joueur[i].green, joueur[i].blue), -1, "Attaque manqué");
             }
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             rest(300);

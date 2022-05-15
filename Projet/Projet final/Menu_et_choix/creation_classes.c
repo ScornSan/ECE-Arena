@@ -164,8 +164,6 @@ void creation_classes(t_joueur* joueur, int nb_joueurs)
         joueur[i].bouclier = 0;
         joueur[i].brulure = 0;
         joueur[i].compteur_brulure = 0;
-        joueur[i].chauve_souris = 0;
-        joueur[i].compteur_chauve_souris = 0;
         joueur[i].gel = 0;
         joueur[i].compteur_gel = 0;
         joueur[i].lucide = 0;
