@@ -23,20 +23,26 @@ void sort1_assassin(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_b
     }
 }
 
-void sort2_assassin(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP* buffer_map, t_bloc matrice[23][23], int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts)
+void sort2_assassin(time_t start, t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP* buffer_map, t_bloc matrice[23][23], int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts)
 {
-    int attaque = 0;
+    int attaque = 3;
     BITMAP *buffer_pixels;
-    buffer_pixels = create_bitmap(1280,720);
+    buffer_pixels = create_bitmap(SCREEN_W,SCREEN_H);
     int sort_lance = 0;
     int annulation = 0;
     int red_temp, green_temp, blue_temp;
     int longueur_ligne = 4;
+    int mess = 0, chance;
+    int temps, compteur = 0;
+    int x_augmente = 0, x_temp;
+    int y_augmente = 0, y_temp;
+    int num_bitmap = 0;
+    int pos_x_ennemi;
+    int pos_y_ennemi;
 
-    while(!attaque)
+    while(attaque == 3 || mess == 0)
     {
         clear_bitmap(buffer);
-
         blit(map, buffer, 0,0,0,0, SCREEN_W,SCREEN_H);
         affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
         ///dessin limite zone d'attaque autour du perso
@@ -44,18 +50,70 @@ void sort2_assassin(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BIT
         affichage_joueurs(buffer, joueur, i, nb_joueurs, matrice);
         display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
 
-        blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-
         lecture_pixels_buffer_map(buffer_map, &red_temp, &green_temp,&blue_temp); /// recupere position de la souris par rapport aux couleurs sur le buffer
         reperage_bloc_souris(&x_souris, &y_souris, red_temp, green_temp, blue_temp, matrice, joueur, i); /// repere la couleur du bloc sous la souris grace a la ligne d avant
-        if (matrice[x_souris][y_souris].occuper && mouse_b&1)
+        lecture_pixels_buffer_map(buffer, &red_temp, &green_temp,&blue_temp); /// lis la couleur des pixels sur le buffer pixels, sert a verifier la bonne position de la souris
+        if (matrice[x_souris][y_souris].occuper != matrice[joueur[i].x][joueur[i].y].occuper && matrice[x_souris][y_souris].occuper != 0 && mouse_b&1 && attaque == 3)
         {
-            attaque = 1;
+            printf("nombre de fois");
+            chance = random(1,10);
+            if(chance < 9)
+            {   /// attaque reussie
+                chance = random(4,8);
+                x_temp = x_souris;
+                y_temp = y_souris;
+                joueur[matrice[x_souris][y_souris].occuper -1].pv = joueur[matrice[x_souris][y_souris].occuper -1].pv - chance;
+                pos_x_ennemi = joueur[matrice[x_souris][y_souris].occuper -1].x;
+                pos_y_ennemi = joueur[matrice[x_souris][y_souris].occuper -1].y;
+                attaque = 1;
+                if (matrice[joueur[i].x][joueur[i].y].x_bloc < matrice[x_souris][y_souris].x_bloc)
+                    x_augmente = 2;
+                else if(matrice[joueur[i].x][joueur[i].y].x_bloc > matrice[x_souris][y_souris].x_bloc)
+                    x_augmente = -2;
+                if (matrice[joueur[i].x][joueur[i].y].y_bloc < matrice[x_souris][y_souris].y_bloc)
+                    y_augmente = 1;
+                else if(matrice[joueur[i].x][joueur[i].y].y_bloc > matrice[x_souris][y_souris].y_bloc)
+                    y_augmente = -1;
+                temps = (float)((time(NULL)) - start);
+            }
+            else
+            {
+                /// attaque manquée
+                attaque = 2;
+                temps = (float)((time(NULL)) - start);
+            }
         }
-        if (mouse_x >= 370 && mouse_x <= 400 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1)
+        else if (mouse_x >= 370 && mouse_x <= 400 && mouse_y >= 670 && mouse_y <= 700 && mouse_b &&1 && attaque == 3)
         {
-            attaque = 1; // le joueur a annulé son attaque, l'attaque est considéré comme faite mais sans dégâts
+            attaque = 0;// le joueur a annulé son attaque, l'attaque est considéré comme faite mais sans dégâts
+            mess = 1;
         }
+        if(attaque == 1)
+        {
+            int cond1 = matrice[joueur[i].x][joueur[i].y].x_bloc + compteur*x_augmente;
+            int cond2 = matrice[joueur[i].x][joueur[i].y].x_bloc + compteur*y_augmente;
+            if ((cond1 <= matrice[x_temp][y_temp].x_bloc -2 - 5*x_augmente|| cond1 >= matrice[x_temp][y_temp].x_bloc - 5*x_augmente +2) && (cond2 <= matrice[x_temp][y_temp].y_bloc -2 -10*y_augmente|| cond2 >= matrice[x_temp][y_temp].y_bloc -10*y_augmente +2))
+            {
+                compteur++;
+                draw_sprite(buffer, joueur[i].classe.spell[1].animation_sort[num_bitmap], matrice[joueur[i].x][joueur[i].y].x_bloc + compteur*x_augmente -29,  matrice[joueur[i].x][joueur[i].y].y_bloc + compteur*y_augmente -42);
+                num_bitmap = (num_bitmap + 1) % 2;
+                rest(40);
+            }
+            textout_ex(buffer, font,"ATTAQUE REUSSIE !!", matrice[pos_x_ennemi][pos_y_ennemi].x_bloc - 15, matrice[pos_x_ennemi][pos_y_ennemi].y_bloc - 80, makecol(255,0,0), -1);
+            if(temps +3 == (float)((time(NULL)) - start))
+            {
+                mess = 1;
+            }
+        }
+        else if(attaque == 2)
+        {
+            textout_ex(buffer, font,"ATTAQUE MANQUEE !!", matrice[pos_x_ennemi][pos_y_ennemi].x_bloc - 15, matrice[pos_x_ennemi][pos_y_ennemi].y_bloc - 80, makecol(0,0,0), -1);
+            if(temps +3 == (float)((time(NULL)) - start))
+            {
+                mess = 1;
+            }
+        }
+        blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     }
 }
 

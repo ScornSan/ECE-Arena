@@ -77,6 +77,7 @@ void sort2_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BIT
 
 void sort3_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP *buffer_map, t_bloc matrice[23][23], int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts)
 {
+    BITMAP *buffer_pixels = create_bitmap(SCREEN_W, SCREEN_H);
     int attaque = 0;
     int red_temp, green_temp,blue_temp;
     int ennemi1 = i + 1;
@@ -92,14 +93,7 @@ void sort3_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BIT
     {
         clear_bitmap(buffer);
         affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
-        dessin_bloc_unique(buffer, joueur[i].x + 1, joueur[i].y, matrice, 250, 140, 0);
-        dessin_bloc_unique(buffer, joueur[i].x, joueur[i].y - 1, matrice, 250, 140, 0);
-        dessin_bloc_unique(buffer, joueur[i].x - 1, joueur[i].y, matrice, 250, 140, 0);
-        dessin_bloc_unique(buffer, joueur[i].x, joueur[i].y + 1, matrice, 250, 140, 0);
-        dessin_bloc_unique(buffer, joueur[i].x, joueur[i].y + 2, matrice, 250, 140, 0);
-        dessin_bloc_unique(buffer, joueur[i].x, joueur[i].y - 2, matrice, 250, 140, 0);
-        dessin_bloc_unique(buffer, joueur[i].x + 2, joueur[i].y, matrice, 250, 140, 0);
-        dessin_bloc_unique(buffer, joueur[i].x - 2, joueur[i].y, matrice, 250, 140, 0);
+        dessin_ligne(joueur, i, nb_joueurs, buffer, buffer_pixels, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, 2);
         affichage_joueurs(buffer, joueur, i, nb_joueurs, matrice);
 
         display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
@@ -111,11 +105,11 @@ void sort3_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BIT
         {
             if (pourcentage_de_chance() < 8)
             {
-                textprintf_ex(buffer, font, mouse_x, mouse_y + 50, makecol(joueur[i].red, joueur[i].green, joueur[i].blue), -1, "Inflige hémmorragie");
+                textprintf_ex(buffer, font, mouse_x - 5, mouse_y - 50, makecol(joueur[i].red, joueur[i].green, joueur[i].blue), -1, "Inflige hemorragie");
             }
             else
             {
-                textprintf_ex(buffer, font, mouse_x, mouse_y + 50, makecol(joueur[i].red, joueur[i].green, joueur[i].blue), -1, "Attaque manqué");
+                textprintf_ex(buffer, font, mouse_x - 5, mouse_y - 50, makecol(joueur[i].red, joueur[i].green, joueur[i].blue), -1, "Attaque manque");
             }
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             rest(300);
@@ -127,32 +121,37 @@ void sort3_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BIT
     }
 }
 
-void sort4_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP *buffer_map, t_bloc matrice[23][23], int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts)
+void sort4_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP *buffer_map, t_bloc matrice[23][23], int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts, int respiration_joueur[])
 {
     int attaque = 0;
     int red_temp, green_temp,blue_temp;
     //time_t start = time(NULL);
-    /// tant qu'on ne clique pas sur l'icone de l'attaque de base, ou qu'on a lancé l'attaque
-    while (!attaque)
+    clear_bitmap(buffer);
+    affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
+    /// ANIMATION A FAIRE
+    //dessin_bloc_unique(buffer, joueur[i].x, joueur[i].y, matrice, 0, 220, 0);
+    affichage_joueurs_respiration(buffer, joueur, i, nb_joueurs, matrice, respiration_joueur, i);
+    if (!joueur[i].rage)
     {
-        clear_bitmap(buffer);
-        affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
-        dessin_bloc_unique(buffer, joueur[i].x, joueur[i].y, matrice, 0, 220, 0);
-        affichage_joueurs(buffer, joueur, i, nb_joueurs, matrice);
-
+        joueur[i].rage = 1;
+        joueur[i].compteur_rage = 1;
+        textprintf_ex(buffer, font, matrice[joueur[i].x][joueur[i].y].x_bloc - 5, matrice[joueur[i].x][joueur[i].y].y_bloc - 50, makecol(joueur[i].red, joueur[i].green, joueur[i].blue), -1, "Effet de rage!");
         display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+        rest(300);
         lecture_pixels_buffer_map(buffer_map, &red_temp, &green_temp,&blue_temp); /// recupere position de la souris par rapport aux couleurs sur le buffer
         reperage_bloc_souris(&x_souris, &y_souris, red_temp, green_temp, blue_temp, matrice, joueur, i); /// repere la couleur du bloc sous la souris grace a la ligne d avant
-        // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
-        if (matrice[x_souris][y_souris].occuper != matrice[joueur[i].x][joueur[i].y].occuper && matrice[x_souris][y_souris].occuper != 0 && mouse_b&1)
-        {
-
-        }
-
-        if (mouse_x >= 440 && mouse_x <= 470 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1)
-        {
-            attaque = 1; // le joueur a annulé son attaque, l'attaque est considéré comme faite mais sans dégâts
-        }
     }
+    else
+    {
+        textprintf_ex(buffer, font, matrice[joueur[i].x][joueur[i].y].x_bloc - 5, matrice[joueur[i].x][joueur[i].y].y_bloc - 50, makecol(joueur[i].red, joueur[i].green, joueur[i].blue), -1, "Effet de rage!");
+        display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
+        blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+        rest(300);
+        lecture_pixels_buffer_map(buffer_map, &red_temp, &green_temp,&blue_temp); /// recupere position de la souris par rapport aux couleurs sur le buffer
+        reperage_bloc_souris(&x_souris, &y_souris, red_temp, green_temp, blue_temp, matrice, joueur, i); /// repere la couleur du bloc sous la souris grace a la ligne d avant
+    }
+
+    // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
+
 }

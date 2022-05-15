@@ -1,6 +1,14 @@
 #include "structures.h"
 #include "prototypes.h"
 
+int random(int min, int max)
+{
+    srand(time(NULL));
+    int resultat;
+    resultat = min + rand()%(min - max +1);
+    return resultat;
+}
+
 void chrono()
 {
     time_t start = time (NULL);
@@ -66,8 +74,6 @@ int main()
         return 1;
     }
 
-    play_sample(son_menu, 255, 128, 1000, 1); //lancer la musique en boucle
-
     cursor=load_bitmap("BITMAP/cursor.bmp",NULL);
     fond = load_bitmap("BITMAP/fond.bmp", NULL);
 
@@ -81,6 +87,7 @@ int main()
     ///et si on clique sur quitter a la fin de la partie, on change la valeur du boolen pour quitter la boucle
     while (!quitter)
     {
+        play_sample(son_menu, 255, 128, 1000, 1); //lancer la musique en boucle
         nb_joueurs = menu(buffer, fond, cursor, pseudo, son_menu, myfont, son_on, son_off);
         int classement[nb_joueurs];
 

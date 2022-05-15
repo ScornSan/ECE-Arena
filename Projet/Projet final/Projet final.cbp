@@ -37,6 +37,9 @@
 		<Unit filename="Animations/animation_deplacement.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="Combats/compteur_effets.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="Combats/selection_sort.c">
 			<Option compilerVar="CC" />
 		</Unit>

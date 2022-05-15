@@ -26,10 +26,10 @@ typedef struct sorts
 {
     int portee_min;
     int portee_max;
-    int cout_pa;
     int degats_min;
     int degats_max;
     int chance;
+    int dispo;
     BITMAP* logo;
     BITMAP* animation_sort[4];
     BITMAP* description;
@@ -40,7 +40,7 @@ typedef struct classes
     int attaque;
     BITMAP *logo_attaque;
     BITMAP *anim_attaques[NB_CLASSES][DIRECTIONS][NB_BITMAPS_A];
-    BITMAP *respiration[NB_BITMAPS_R];
+    BITMAP *respiration[DIRECTIONS][2];
     BITMAP *deplacement[DIRECTIONS][NB_BITMAPS_D];
     t_sort spell[NB_SORTS];
 }t_classe;
@@ -57,12 +57,22 @@ typedef struct Players
     int pv;
     int pm;
     int pa;
+    int rage;
+    int compteur_rage;
+    int hemorragie;
+    int compteur_hemorragie;
     int brulure;
+    int compteur_brulure;
     int gel;
+    int compteur_gel;
     int mortel;
+    int compteur_mortel;
     int lucide;
+    int compteur_lucide;
     int bouclier;
+    int compteur_bouclier;
     int chauve_souris;
+    int compteur_chauve_souris;
     int vivant;
     int elimine;
     int red;
