@@ -131,14 +131,14 @@ void placement_aleatoire(int *fini, t_bloc matrice[23][23], t_joueur* joueur, in
         matrice[joueur[1].x][joueur[1].y].occuper = 1;
     }
 
-    if(!joueur[2].place_manuellement !=1)
+    if(joueur[2].place_manuellement !=1)
     {
         joueur[2].x = 20;
         joueur[2].y = 11;
         matrice[joueur[2].x][joueur[2].y].occuper = 1;
     }
 
-    if(!joueur[3].place_manuellement !=1)
+    if(joueur[3].place_manuellement !=1)
     {
         joueur[3].x = 11;
         joueur[3].y = 2;
