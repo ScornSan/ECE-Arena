@@ -45,5 +45,28 @@ void sort1_guerrier();
 void sort2_guerrier();
 void sort3_guerrier();
 void sort4_guerrier();
+void sort1_mage();
+void sort2_mage();
+void sort3_mage();
+void sort4_mage();
+void sort1_vampire();
+void sort2_vampire();
+void sort3_vampire();
+void sort4_vampire();
+void sort1_assassin();
+void sort2_assassin();
+void sort3_assassin();
+void sort4_assassin();
+void dessin_ligne();
+void dessin_diagonales();
+void animation_attaque_de_base();
+void affichage_autres_joueurs();
+void affichage_hud_sorts();
+void affichage_hud_joueur();
+void classement_fin();
+int pourcentage_de_chance();
+void affichage_son();
+void affichage_joueurs();
+void affichage_joueurs_respiration();
 
 #endif // PROTOTYOPES_H_INCLUDED

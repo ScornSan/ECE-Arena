@@ -1,6 +1,14 @@
 #include "structures.h"
 #include "prototypes.h"
 
+int random(int min, int max)
+{
+    srand(time(NULL));
+    int resultat;
+    resultat = min + rand()%(min - max +1);
+    return resultat;
+}
+
 void chrono()
 {
     time_t start = time (NULL);
@@ -34,6 +42,7 @@ int main()
     t_joueur* joueur;
     FONT* myfont;
     FONT* myfont2;
+    int quitter = 0;
     // Lancer allegro et le mode graphique
     allegro_init();
     install_mouse();
@@ -65,8 +74,6 @@ int main()
         return 1;
     }
 
-    play_sample(son_menu, 255, 128, 1000, 1); //lancer la musique en boucle
-
     cursor=load_bitmap("BITMAP/cursor.bmp",NULL);
     fond = load_bitmap("BITMAP/fond.bmp", NULL);
 
@@ -76,10 +83,13 @@ int main()
     char pseudo[4][20]; // creation pseudo temporaires qui seront stocker dans les structures joueurs
 
     // Boucle du programme, tant qu'on ne clique pas sur quitter
-    while (1) /// changer la valeur du 1 en un boolen jeu qui passe par adresse dans le menu,
-              ///et si on clique sur quitter a la fin de la partie, on change la valeur du boolen pour quitter la boucle
+    /// changer la valeur du 1 en un boolen jeu qui passe par adresse dans le menu,
+    ///et si on clique sur quitter a la fin de la partie, on change la valeur du boolen pour quitter la boucle
+    while (!quitter)
     {
+        play_sample(son_menu, 255, 128, 1000, 1); //lancer la musique en boucle
         nb_joueurs = menu(buffer, fond, cursor, pseudo, son_menu, myfont, son_on, son_off);
+        int classement[nb_joueurs];
 
         joueur = (t_joueur*)malloc(sizeof(t_joueur) * nb_joueurs); // allocation dynamiques des structures joueurs
         if (joueur == NULL)
@@ -95,12 +105,12 @@ int main()
         }
         creation_classes(joueur, nb_joueurs);
         choix_classe(buffer, fond, cursor, joueur, nb_joueurs, myfont, myfont2, son_menu, son_on, son_off);
-        //tour_joueur_alea(joueur, nb_joueurs);
         stop_sample(son_menu);
-        play_sample(son_battle, 255, 128, 1000, 1);
         tour_joueur(buffer, cursor, joueur, nb_joueurs, son_battle, son_on, son_off);
         stop_sample(son_battle);
+        classement_fin(buffer, joueur, nb_joueurs, classement);
     }
+
     destroy_bitmap(cursor);
     destroy_bitmap(buffer);
     free(joueur);

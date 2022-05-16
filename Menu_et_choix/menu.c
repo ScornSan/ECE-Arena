@@ -9,14 +9,16 @@ void affichage_son(BITMAP *buffer, BITMAP *cursor, SAMPLE* s, int* clic )
     {
         rest(100);
         *clic = 1;
-        stop_sample(s);
+        //stop_sample(s);
+        adjust_sample(s, 0, 0, 1000, 1);
 
     }
     if (mouse_b&1 && mouse_x>= 0 && mouse_x <= 65 && mouse_y >= 0&& mouse_y <= 50 && *clic)
     {
         rest(100);
         *clic = 0;
-        play_sample(s, 255, 128, 1000, 1);
+        adjust_sample(s, 255, 128, 1000, 1);
+        //play_sample(s, 255, 128, 1000, 1);
 
     }
 }
@@ -47,7 +49,7 @@ void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BI
     while (stop != 1)
     {
         textprintf_ex(buffer,font,96,36,makecol(0,255,0), makecol(0,0,0),"%4d %4d",mouse_x,mouse_y);
-       /* affichage_son(buffer, cursor, son_menu, &(*clic));
+        affichage_son(buffer, cursor, son_menu, &(*clic));
 
         if (*clic)
         {
@@ -56,7 +58,7 @@ void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BI
         else
         {
             draw_sprite(buffer, son_on, 0, 0);
-        }*/
+        }
         if (keypressed())
         {
 
@@ -196,7 +198,6 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
         menu_principal(buffer, accueil, cursor, myfont);
         affichage_son(buffer, cursor, son_menu, &clic);
 
-
         if (clic)
         {
             draw_sprite(buffer, son_off, 0, 0);
@@ -205,7 +206,7 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
         {
             draw_sprite(buffer, son_on, 0, 0);
         }
-         display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
+        display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
         rest(20);
 
@@ -320,7 +321,6 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
                 blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             }
         }
-
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     }
     destroy_bitmap(creators);

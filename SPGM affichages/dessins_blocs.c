@@ -19,10 +19,8 @@ void reperage_chemin(BITMAP * buffer, int x_joueur, int y_joueur, int x_souris, 
     else
         y_augmente = 0;
 
-    printf("x du joueur : %d\n", x_joueur);
-    printf("y du joueur : %d\n", y_joueur);
 /// tant que le x et le y du joueur sont différents de celui de la souris ET seulement si la case est accessible la ou pointe la souris
-    while((x_joueur != x_souris || y_joueur != y_souris) && (abs(x_joueur - x_souris) + abs(y_joueur - y_souris)) <= j[i].pm && matrice[x_souris][y_souris].accessible)
+    while(!j[i].gel && (x_joueur != x_souris || y_joueur != y_souris) && (abs(x_joueur - x_souris) + abs(y_joueur - y_souris)) <= j[i].pm && matrice[x_souris][y_souris].accessible)
     {
         compteur++;
         while (x_joueur != x_souris) // le x du joueur différent de la souris, alors

@@ -76,7 +76,9 @@ void condition_positionnement_depart(int *fini, int ligne_souris, int colonne_so
         *choix1 = 1;
         joueur[0].x = ligne_souris;
         joueur[0].y = colonne_souris;
+        joueur[0].place_manuellement = 1;
         matrice[joueur[0].x][joueur[0].y].occuper = 1;
+
         rest(200);
     }
     else if (mouse_b &1 && matrice[ligne_souris][colonne_souris].accessible == 1 && matrice[ligne_souris][colonne_souris].occuper == 0 && blue_mouse2 == 170 && *choix2 == 0)
@@ -86,6 +88,7 @@ void condition_positionnement_depart(int *fini, int ligne_souris, int colonne_so
         joueur[1].x = ligne_souris;
         joueur[1].y = colonne_souris;
         matrice[joueur[1].x][joueur[1].y].occuper = 1;
+        joueur[1].place_manuellement = 1;
         rest(200);
     }
     else if (mouse_b &1 && matrice[ligne_souris][colonne_souris].accessible == 1 && matrice[ligne_souris][colonne_souris].occuper == 0 && green_mouse2 == 170 && *choix3 == 0)
@@ -95,6 +98,7 @@ void condition_positionnement_depart(int *fini, int ligne_souris, int colonne_so
         joueur[2].x = ligne_souris;
         joueur[2].y = colonne_souris;
         matrice[joueur[2].x][joueur[2].y].occuper = 1;
+        joueur[2].place_manuellement = 1;
         rest(200);
     }
     else if (mouse_b &1 && matrice[ligne_souris][colonne_souris].accessible == 1 && matrice[ligne_souris][colonne_souris].occuper == 0 && green_mouse2 == 230 && *choix4 == 0)
@@ -104,6 +108,46 @@ void condition_positionnement_depart(int *fini, int ligne_souris, int colonne_so
         joueur[3].x = ligne_souris;
         joueur[3].y = colonne_souris;
         matrice[joueur[3].x][joueur[3].y].occuper = 1;
+        joueur[3].place_manuellement = 1;
         rest(200);
     }
 }
+
+
+void placement_aleatoire(int *fini, t_bloc matrice[23][23], t_joueur* joueur, int nb_joueur)
+{
+
+    if(joueur[0].place_manuellement != 1)
+    {
+        joueur[0].x = 2 ;
+        joueur[0].y = 12 ;
+        matrice[joueur[0].x][joueur[0].y].occuper = 1;
+    }
+
+    if(joueur[1].place_manuellement !=1)
+    {
+        joueur[1].x = 10;
+        joueur[1].y = 20;
+        matrice[joueur[1].x][joueur[1].y].occuper = 1;
+    }
+
+    if(!joueur[2].place_manuellement !=1)
+    {
+        joueur[2].x = 20;
+        joueur[2].y = 11;
+        matrice[joueur[2].x][joueur[2].y].occuper = 1;
+    }
+
+    if(!joueur[3].place_manuellement !=1)
+    {
+        joueur[3].x = 11;
+        joueur[3].y = 2;
+        matrice[joueur[3].x][joueur[3].y].occuper = 1;
+    }
+
+   *fini = nb_joueur;
+
+
+}
+
+
