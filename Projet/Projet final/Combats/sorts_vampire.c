@@ -7,13 +7,6 @@ void sort1_vampire(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITM
     buffer_pixels = create_bitmap(1280,720);
     int red_temp, green_temp,blue_temp;
     int attaque = 0;
-    int ennemi1 = i + 1;
-    int ennemi2;
-    int ennemi3;
-    if (nb_joueurs == 3)
-        ennemi2 = i + 2;
-    if (nb_joueurs == 4)
-        ennemi3 = i + 3;
     //time_t start = time(NULL);
     /// tant qu'on ne clique pas sur l'icone de l'attaque de base, ou qu'on a lancé l'attaque
     while (!attaque)
@@ -74,13 +67,6 @@ void sort2_vampire(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITM
     buffer_pixels = create_bitmap(1280,720);
     int red_temp, green_temp,blue_temp;
     int attaque = 0;
-    int ennemi1 = i + 1;
-    int ennemi2;
-    int ennemi3;
-    if (nb_joueurs == 3)
-        ennemi2 = i + 2;
-    if (nb_joueurs == 4)
-        ennemi3 = i + 3;
     //time_t start = time(NULL);
     /// tant qu'on ne clique pas sur l'icone de l'attaque de base, ou qu'on a lancé l'attaque
     while (!attaque)
@@ -140,13 +126,6 @@ void sort3_vampire(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITM
     buffer_pixels = create_bitmap(SCREEN_W,SCREEN_H);
     int red_temp, green_temp,blue_temp;
     int attaque = 0;
-    int ennemi1 = i + 1;
-    int ennemi2;
-    int ennemi3;
-    if (nb_joueurs == 3)
-        ennemi2 = i + 2;
-    if (nb_joueurs == 4)
-        ennemi3 = i + 3;
     //time_t start = time(NULL);
     /// tant qu'on ne clique pas sur l'icone de l'attaque de base, ou qu'on a lancé l'attaque
     while (!attaque)
@@ -274,7 +253,6 @@ void sort4_vampire(BITMAP *buffer_map, BITMAP * map,BITMAP * cursor, BITMAP *buf
         dessin_bloc_unique(buffer_pixels, joueur[i].x, joueur[i].y +3, matrice, 0, 255, 0);
     }
 
-    int num_bitmap = 0;
     while(sort_lance == 0 && annulation == 0)
     {
         lecture_pixels_buffer_map(buffer_pixels, &red_mouse2, &green_mouse2, &blue_mouse2);

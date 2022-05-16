@@ -1,76 +1,79 @@
 #include "../prototypes.h"
 #include "../structures.h"
 
-void compteur_effet(t_joueur* joueur, int i)
+void compteur_effet(t_joueur* joueur, int nb_joueurs)
 {
-    /// BOUCLIER
-    if (joueur[i].bouclier && joueur[i].compteur_bouclier >= 2)
+    for (int j = 0; j < nb_joueurs; j++)
     {
-        joueur[i].bouclier = 0;
-        joueur[i].compteur_bouclier = 0;
-    }
-    else
-    {
-        joueur[i].compteur_bouclier = joueur[i].compteur_bouclier + 1;
-    }
-    /// BRULURE
-    if (joueur[i].brulure && joueur[i].compteur_bouclier >= 3)
-    {
-        joueur[i].brulure = 0;
-        joueur[i].compteur_brulure = 0;
-    }
-    else
-    {
-        joueur[i].compteur_brulure = joueur[i].compteur_brulure + 1;
-    }
-    /// GEL
-    if (joueur[i].gel && joueur[i].compteur_gel >= 2)
-    {
-        joueur[i].gel = 0;
-        joueur[i].compteur_gel = 0;
-    }
-    else
-    {
-        joueur[i].compteur_gel = joueur[i].compteur_gel + 1;
-    }
-    /// HEMORRAGIE
-    if (joueur[i].hemorragie && joueur[i].compteur_hemorragie >= 2)
-    {
-        joueur[i].hemorragie = 0;
-        joueur[i].compteur_hemorragie = 0;
-    }
-    else
-    {
-        joueur[i].compteur_hemorragie = joueur[i].compteur_hemorragie + 1;
-    }
-    /// LUCIDE
-    if (joueur[i].lucide && joueur[i].compteur_lucide >= 2)
-    {
-        joueur[i].lucide = 0;
-        joueur[i].compteur_lucide = 0;
-    }
-    else
-    {
-        joueur[i].compteur_lucide = joueur[i].compteur_lucide + 1;
-    }
-    /// MORTEL
-    if (joueur[i].mortel && joueur[i].compteur_mortel >= 2)
-    {
-        joueur[i].mortel = 0;
-        joueur[i].compteur_mortel = 0;
-    }
-    else
-    {
-        joueur[i].compteur_mortel = joueur[i].compteur_mortel + 1;
-    }
-    /// LUCIDE
-    if (joueur[i].rage && joueur[i].compteur_rage >= 2)
-    {
-        joueur[i].rage = 0;
-        joueur[i].compteur_rage = 0;
-    }
-    else
-    {
-        joueur[i].compteur_rage = joueur[i].compteur_rage + 1;
+        /// BOUCLIER
+        if (joueur[j].bouclier && joueur[j].compteur_bouclier > nb_joueurs)
+        {
+            joueur[j].bouclier = 0;
+            joueur[j].compteur_bouclier = 0;
+        }
+        else
+        {
+            joueur[j].compteur_bouclier = joueur[j].compteur_bouclier + 1;
+        }
+        /// BRULURE
+        if (joueur[j].brulure && joueur[j].compteur_bouclier >= 3 * nb_joueurs)
+        {
+            joueur[j].brulure = 0;
+            joueur[j].compteur_brulure = 0;
+        }
+        else
+        {
+            joueur[j].compteur_brulure = joueur[j].compteur_brulure + 1;
+        }
+        /// GEL
+        if (joueur[j].gel && joueur[j].compteur_gel >= 2)
+        {
+            joueur[j].gel = 0;
+            joueur[j].compteur_gel = 0;
+        }
+        else
+        {
+            joueur[j].compteur_gel = joueur[j].compteur_gel + 1;
+        }
+        /// HEMORRAGIE
+        if (joueur[j].hemorragie && joueur[j].compteur_hemorragie >= 2)
+        {
+            joueur[j].hemorragie = 0;
+            joueur[j].compteur_hemorragie = 0;
+        }
+        else
+        {
+            joueur[j].compteur_hemorragie = joueur[j].compteur_hemorragie + 1;
+        }
+        /// LUCIDE
+        if (joueur[j].lucide && joueur[j].compteur_lucide >= 2)
+        {
+            joueur[j].lucide = 0;
+            joueur[j].compteur_lucide = 0;
+        }
+        else
+        {
+            joueur[j].compteur_lucide = joueur[j].compteur_lucide + 1;
+        }
+        /// MORTEL
+        if (joueur[j].mortel && joueur[j].compteur_mortel >= 2)
+        {
+            joueur[j].mortel = 0;
+            joueur[j].compteur_mortel = 0;
+        }
+        else
+        {
+            joueur[j].compteur_mortel = joueur[j].compteur_mortel + 1;
+        }
+        /// RAGE
+        if (joueur[j].rage && joueur[j].compteur_rage >= 2)
+        {
+            joueur[j].rage = 0;
+            joueur[j].compteur_rage = 0;
+        }
+        else
+        {
+            joueur[j].compteur_rage = joueur[j].compteur_rage + 1;
+        }
     }
 }

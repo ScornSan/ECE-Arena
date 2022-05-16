@@ -3,7 +3,7 @@
 
 void creation_icones_classes(t_joueur* joueur)
 {
-    char chargement[80];
+    char chargement[100];
     char mvt[50];
     char respiration[100];
     int i;
@@ -20,14 +20,14 @@ void creation_icones_classes(t_joueur* joueur)
                 joueur[i].classe.spell[j].description = load_bitmap(chargement, NULL);
                 sprintf(chargement, "BITMAP/sort%d_guerrier.bmp", j + 1);
                 joueur[i].classe.spell[j].logo = load_bitmap(chargement, NULL);
-                sprintf(chargement, "SPRITES/CHEVALIER/ATTAQUE/attack_%d.bmp", j);
-                joueur[i].classe.anim_attaques[0][j][0] = load_bitmap(chargement, NULL);
                 for (k = 0; k < NB_BITMAPS_D; k++)
                 {
                     sprintf(mvt, "SPRITES/CHEVALIER/MARCHE/walking_%d_%d.bmp", j, k + 1);
                     joueur[i].classe.deplacement[j][k] = load_bitmap(mvt, NULL);
                     if (k < 2)
                     {
+                        sprintf(chargement, "SPRITES/CHEVALIER/ATTAQUE/attack_%d.bmp", j);
+                        joueur[i].classe.anim_attaques[0][j][k] = load_bitmap(chargement, NULL);
                         sprintf(respiration, "SPRITES/CHEVALIER/RESPIRATION/breath_%d_%d.bmp", j, k);
                         joueur[i].classe.respiration[j][k] = load_bitmap(respiration, NULL);
                     }
@@ -62,11 +62,15 @@ void creation_icones_classes(t_joueur* joueur)
                     {
                         sprintf(chargement, "SPRITES/MAGE/ATTAQUE/attack_%d_%d.bmp", j, k);
                         joueur[i].classe.anim_attaques[1][j][k] = load_bitmap(chargement, NULL);
+                        sprintf(chargement, "SPRITES/MAGE/BOULE_DE_FEU/fireball_%d_%d.bmp", j, k);
+                        joueur[i].classe.spell[1].anim_attaque_cible[j][k] = load_bitmap(chargement, NULL);
+                        sprintf(chargement, "SPRITES/MAGE/BOULE_DE_FEU/iceball_%d_%d.bmp", j, k);
+                        joueur[i].classe.spell[2].anim_attaque_cible[j][k] = load_bitmap(chargement, NULL);
                         sprintf(respiration, "SPRITES/MAGE/RESPIRATION/breath_%d_%d.bmp", j, k);
                         joueur[i].classe.respiration[j][k] = load_bitmap(respiration, NULL);
                     }
                 }
-                if (!joueur[i].classe.spell[j].description || !joueur[i].classe.spell[j].logo || !joueur[i].classe.respiration[j][0])
+                if (!joueur[i].classe.spell[j].description || !joueur[i].classe.spell[j].logo || !joueur[i].classe.respiration[j][0] || !joueur[i].classe.spell[1].anim_attaque_cible[j][0])
                 {
                     allegro_message("erreur creation classe mage");
                     allegro_exit();
@@ -159,6 +163,7 @@ void creation_classes(t_joueur* joueur, int nb_joueurs)
         joueur[i].pm = 3;
         joueur[i].pa = 6;
         joueur[i].classe.attaque = 5;
+        joueur[i].direction = 0;
         joueur[i].vivant = 1;
         joueur[i].elimine = 0;
         joueur[i].bouclier = 0;
@@ -172,6 +177,8 @@ void creation_classes(t_joueur* joueur, int nb_joueurs)
         joueur[i].compteur_mortel = 0;
         joueur[i].hemorragie = 0;
         joueur[i].compteur_hemorragie = 0;
+        joueur[i].bouclier = 0;
+        joueur[i].compteur_bouclier = 0;
         joueur[i].classe.logo_attaque = load_bitmap("BITMAP/sort_attaque.bmp", NULL);
         if (i == 2)
         {
@@ -185,6 +192,7 @@ void creation_classes(t_joueur* joueur, int nb_joueurs)
             joueur[3].green = 230;
             joueur[3].blue = 230;
         }
+        joueur[i].shield = load_bitmap("SPRITES/CHEVALIER/BOUCLIER/shield_0.bmp", NULL);
     }
     //creation des couleurs joueurs
     joueur[0].red = 170;

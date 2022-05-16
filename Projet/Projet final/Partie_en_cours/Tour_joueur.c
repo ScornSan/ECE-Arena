@@ -127,7 +127,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
     for (int i = 0; i<nb_joueurs; i++)
     {
         joueur[i].x = i;
-        joueur[i].y =  i;
+        joueur[i].y = i;
         joueur[i].direction = 0;
     }
     int fini = 0, choix1= 0, choix2= 0, choix3= 0, choix4= 0;
@@ -135,6 +135,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
     i = 0;
     /// tant que tous les joueurs ne sont pas positionnés
     play_sample(son_battle, 255, 128, 1000, 1);
+    time_t debut = time(NULL);
     while(fini != nb_joueurs)
     {
         blit(map, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
@@ -167,10 +168,13 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
         textprintf_ex(buffer,font,96,36,makecol(0,255,0), makecol(0,0,0),"%4d %4d",mouse_x,mouse_y);
         //affichage_croix_bleue(buffer, croix_bleue, ligne_souris, colonne_souris, matrice);
         //affichage_croix_rouge(buffer, croix_rouge, ligne_souris, colonne_souris, matrice);
+        if ((int)(time(NULL) - debut >= TEMPS_CHOIX))
+        {
+            placement_aleatoire(&fini, matrice, joueur, nb_joueurs);
+        }
         display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     }
-
     //tour_joueur_alea(joueur, nb_joueurs);
     for (int i = 0; i<nb_joueurs; i++)
     {
@@ -245,7 +249,8 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
                 start = time(NULL);
                 joueur[i].pm = 3; // on remet les pm et pa du joueur au nombre initial
                 joueur[i].pa = 6;
-
+                compteur_effet(joueur, nb_joueurs);
+                test_effets(joueur, nb_joueurs);
                 i = (i + 1) % nb_joueurs; // On boucle car temps finis ou on a cliqué sur le bouton
             }
         }
@@ -256,10 +261,14 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
                 joueur[i].elimine = compteur_mort;
                 compteur_mort++;
             }
+            joueur[i].pm = 3; // on remet les pm et pa du joueur au nombre initial
+            joueur[i].pa = 6;
+            compteur_effet(joueur, nb_joueurs);
+            test_effets(joueur, nb_joueurs);
             i = (i + 1) % nb_joueurs; // On boucle car le joueur est mort
         }
         rest(20);
-        if (mouse_b & 1 && mouse_x < 100)
+        if (mouse_b & 1 && mouse_x < 1)
         {
             break;
         }

@@ -1,24 +1,35 @@
 #include "../prototypes.h"
 #include "../structures.h"
 
-void sort1_assassin(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice[23][23], int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts)
+void sort1_assassin(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice[23][23], int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts, int respiration_joueur)
 {
-    int attaque = 0;
-    //time_t start = time(NULL);
+    time_t start = (int)(time(NULL));
     /// tant qu'on ne clique pas sur l'icone de l'attaque de base, ou qu'on a lancé l'attaque
-    while (!attaque)
+    if (pourcentage_de_chance() < 9)
     {
-        clear_bitmap(buffer);
-        affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
-        dessin_bloc_unique(buffer, joueur[i].x, joueur[i].y, matrice, 0, 220, 0);
-        affichage_joueurs(buffer, joueur, i, nb_joueurs, matrice);
-
-        display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
-        blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-        // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
-        if (mouse_x >= 335 && mouse_x <= 365 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1)
+        if (joueur[i].pa >= 6 || joueur[i].pm >= 3)
         {
-            attaque = 1; // le joueur a annulé son attaque, l'attaque est considéré comme faite mais sans dégâts
+            textprintf_ex(buffer, font, mouse_x - 10, mouse_y - 70, makecol(joueur[i].red, joueur[i].green, joueur[i].blue), -1, "PV MAX atteints !");
+        }
+        else
+        {
+            joueur[i].pa += 3;
+            joueur[i].pm += 2;
+            if (joueur[i].pa >= 6 || joueur[i].pm >= 3)
+            {
+                joueur[i].pa = 6;
+                joueur[i].pm = 3;
+            }
+            while ((int)(time(NULL) - start < 2))
+            {
+                clear_bitmap(buffer);
+                affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
+                //dessin_bloc_unique(buffer, joueur[i].x, joueur[i].y, matrice, 0, 220, 0);
+                affichage_joueurs_respiration(buffer, joueur, i, nb_joueurs, matrice, respiration_joueur, 5);
+                display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
+                blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+                rest(80);
+            }
         }
     }
 }
@@ -28,8 +39,6 @@ void sort2_assassin(time_t start, t_joueur* joueur, int i, int nb_joueurs, BITMA
     int attaque = 3;
     BITMAP *buffer_pixels;
     buffer_pixels = create_bitmap(SCREEN_W,SCREEN_H);
-    int sort_lance = 0;
-    int annulation = 0;
     int red_temp, green_temp, blue_temp;
     int longueur_ligne = 4;
     int mess = 0, chance;
@@ -172,7 +181,6 @@ void sort4_assassin(BITMAP *buffer_map, BITMAP * map,BITMAP * cursor, BITMAP *bu
         dessin_bloc_unique(buffer_pixels, joueur[i].x, joueur[i].y +3, matrice, 0, 255, 0);
     }
 
-    int num_bitmap = 0;
     while(sort_lance == 0 && annulation == 0)
     {
         lecture_pixels_buffer_map(buffer_pixels, &red_mouse2, &green_mouse2, &blue_mouse2);
