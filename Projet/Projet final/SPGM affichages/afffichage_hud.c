@@ -40,7 +40,20 @@ void affichage_hud_sorts(t_joueur* joueur, int i, int nb_joueurs, BITMAP* buffer
 
 void affichage_hud_joueur(BITMAP* buffer, BITMAP** hud, t_joueur* joueur, int i, BITMAP **icone_classes)
 {
-    rectfill(buffer, 72, 650, 74 + joueur[i].pv * 3, 673, makecol(255, 0, 0)); // rectangle pv a reduire quand il perd des hp
+    /// Status : (shieldé, marqué) change la couleur des pv
+    if (joueur[i].bouclier == 1)
+    {
+        rectfill(buffer, 72, 650, 74 + 55 * 3, 673, makecol(200,190,10)); // rectangle pv a reduire quand il perd des hp
+    }
+    else if (joueur[i].pv <= 55)
+    {
+        rectfill(buffer, 72, 650, 74 + joueur[i].pv * 3, 673, makecol(255, 0, 0)); // rectangle pv a reduire quand il perd des hp
+        joueur[i].bouclier = 0;
+    }
+    else
+    {
+        rectfill(buffer, 72, 650, 74 + 55 * 3, 673, makecol(200,190,10));
+    }
     rectfill(buffer, 68, 675, 70 + joueur[i].pa * 30, 685, makecol(0, 0, 255)); // rectangle pa a reduire quand il perd des hp
     rectfill(buffer, 66, 685, 70 + joueur[i].pm * 60, 695, makecol(0, 255, 0)); // rectangle pm a reduire quand il perd des hp
     masked_blit(icone_classes[joueur[i].id_classe - 1], buffer, 0, 0, 3, 640, SCREEN_W, SCREEN_H);

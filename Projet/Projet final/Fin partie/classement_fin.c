@@ -41,14 +41,9 @@ int classement_fin(BITMAP * screen, BITMAP * buffer, t_joueur * joueur, int nb_j
             textprintf_ex(buffer,font,96,y_affiche,makecol(0,255,0), makecol(0,0,0),"%deme : Joueur %d", i, classement[i]);
             y_affiche += 10;
         }
-        blit(buffer, screen,0,0,0,0, SCREEN_W, SCREEN_H);
     }
-
-
     // Après ces étapes, nous sommes censé obtenir un tableau classement de la taille de nb_joueurs
     // qui contient la numéro du joueur en fonction de sa place (ordre du tableau : case 0, premier)
 
-
     return compteur_fin;
-
 }
