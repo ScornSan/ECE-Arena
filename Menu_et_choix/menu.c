@@ -49,16 +49,7 @@ void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BI
     while (stop != 1)
     {
         textprintf_ex(buffer,font,96,36,makecol(0,255,0), makecol(0,0,0),"%4d %4d",mouse_x,mouse_y);
-        affichage_son(buffer, cursor, son_menu, &(*clic));
 
-        if (*clic)
-        {
-            draw_sprite(buffer, son_off, 0, 0);
-        }
-        else
-        {
-            draw_sprite(buffer, son_on, 0, 0);
-        }
         if (keypressed())
         {
 
@@ -100,13 +91,9 @@ void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BI
                 *num = *num +1;
             }
             place = place+1;
-            //display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
-        }
-        if ( mouse_b&1 && mouse_x>= 553 && mouse_x <= 729 && mouse_y >= 540 && mouse_y <= 591)
-        {
-            blit(fond, buffer, 0,0,0,0, SCREEN_W, SCREEN_H);
 
         }
+
 
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     }
@@ -239,6 +226,7 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
             allegro_message("Merci d'avoir joue !");
             allegro_exit();
             exit(0);
+             rest(20);
         }
 
         /// si on appui sur standard
@@ -280,12 +268,15 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
                 if ((mouse_b&1) && (mouse_x > 458) && (mouse_x < 833) && (mouse_y > 573) && (mouse_y < 654) && (nb_joueur >= 2))
                 {
                     ok = 1;
+                    rest(100);
                 }
                 if(key[KEY_ESC] || mouse_b&2)
                 {
                     ok =1;
+                    rest(100);
                 }
                 blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+                rest(100);
             }
 
             install_keyboard();
@@ -310,6 +301,7 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
 
             }
             fin = 1;
+            rest(100);
 
         }
         /// si on appuie sur double
@@ -319,6 +311,7 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
             {
                 blit(fond,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
                 blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+                rest(200);
             }
         }
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
