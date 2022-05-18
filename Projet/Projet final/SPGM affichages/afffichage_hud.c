@@ -51,13 +51,25 @@ void affichage_hud_joueur(BITMAP* buffer, BITMAP** hud, t_joueur* joueur, int i,
     rectfill(buffer, 68, 675, 70 + joueur[i].pa * 30, 685, makecol(0, 0, 255)); // rectangle pa a reduire quand il perd des hp
     rectfill(buffer, 66, 685, 70 + joueur[i].pm * 60, 695, makecol(0, 255, 0)); // rectangle pm a reduire quand il perd des hp
     masked_blit(icone_classes[joueur[i].id_classe - 1], buffer, 0, 0, 3, 640, SCREEN_W, SCREEN_H);
-    masked_blit(hud[i], buffer, 0, 0, 3, 640, SCREEN_W, SCREEN_H);
+    if (joueur[i].choix_double)
+    {
+        if (i == 0 || i == 2)
+        {
+            masked_blit(hud[0], buffer, 0, 0, 3, 640, SCREEN_W, SCREEN_H);
+        }
+        else
+        {
+            masked_blit(hud[2], buffer, 0, 0, 3, 640, SCREEN_W, SCREEN_H);
+        }
+    }
+    else
+        masked_blit(hud[i], buffer, 0, 0, 3, 640, SCREEN_W, SCREEN_H);
     textprintf_ex(buffer, font, 120, 658, makecol(255, 255, 255), -1, "PV : %d/55", joueur[i].pv);
     textprintf_ex(buffer, font, 120, 676, makecol(255, 255, 255), -1, "PA : %d/6", joueur[i].pa);
     textprintf_ex(buffer, font, 120, 687, makecol(255, 255, 255), -1, "PM : %d/3", joueur[i].pm);
 }
 
-void affichage_general(BITMAP *buffer, BITMAP *map, t_joueur* joueur, int i, int nb_joueurs, BITMAP** hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts)
+void affichage_general(BITMAP *buffer, BITMAP *map, t_joueur* joueur, int i, int nb_joueurs, BITMAP** hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts, int choix_double)
 {
     // Affichage de la map
     blit(map, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);

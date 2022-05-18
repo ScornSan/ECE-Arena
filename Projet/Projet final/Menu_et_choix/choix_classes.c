@@ -185,5 +185,7 @@ void choix_classe(BITMAP *buffer, BITMAP *fond, BITMAP* cursor, t_joueur* joueur
 
         // 4) ON FAIT UNE PETITE PAUSE à chaque fois sinon ça va trop vite...
         //rest(20);
+        rest(20);
     }
+    rest(50);
 }

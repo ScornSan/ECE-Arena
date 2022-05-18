@@ -1,7 +1,7 @@
 #include "../prototypes.h"
 #include "../structures.h"
 
-void deplacement_personnage(BITMAP * buffer,BITMAP * fond, t_joueur* joueur, int i, int ligne_souris, int colonne_souris, t_bloc matrice[23][23], int *deplacement_effectuer, int nb_joueurs, int respiration_joueur[])
+void deplacement_personnage(BITMAP * buffer,BITMAP * fond, t_joueur* joueur, int i, int ligne_souris, int colonne_souris, t_bloc matrice[23][23], int *deplacement_effectuer, int nb_joueurs, int respiration_joueur[], int choix_double)
 {
     int compteur = 0;
     /// affichage du message d'erreur apres changement de prog et avec chrono :::::: A REGLER
@@ -93,6 +93,14 @@ void deplacement_personnage(BITMAP * buffer,BITMAP * fond, t_joueur* joueur, int
         }
         *deplacement_effectuer = *deplacement_effectuer +1;
     }
-    matrice[joueur[i].x][joueur[i].y].occuper = i + 1;
+    if (choix_double)
+    {
+        matrice[joueur[i].x][joueur[i].y].occuper = (i % 2) + 1;
+    }
+    else
+    {
+        matrice[joueur[i].x][joueur[i].y].occuper = i + 1;
+    }
+
     rest(20);
 }

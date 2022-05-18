@@ -1,7 +1,7 @@
 #include "../prototypes.h"
 #include "../structures.h"
 
-void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueurs, SAMPLE* son_battle, BITMAP *son_on, BITMAP *son_off)
+void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueurs, SAMPLE* son_battle, BITMAP *son_on, BITMAP *son_off, int choix_double)
 {
     // Déclaration du pointeur sur BITMAP devant recevoir l'image
     BITMAP *map;
@@ -136,8 +136,10 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
     /// tant que tous les joueurs ne sont pas positionnés
     play_sample(son_battle, 255, 128, 1000, 1);
     time_t debut = time(NULL);
+
     while(fini != nb_joueurs)
     {
+        printf("tour joueur 1\n");
         blit(map, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
         affichage_son(buffer, cursor, son_battle, &clic_son);
         if (clic_son)
@@ -150,12 +152,15 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
         }
         /// dessin des zones de placement
         affichage_emplacement_depart(buffer, nb_joueurs, matrice, joueur);
+        printf("tour joueur 2\n");
 
         lecture_pixels_buffer_map(buffer_map, &red_mouse, &green_mouse, &blue_mouse);
+        printf("tour joueur 3\n");
         lecture_pixels_buffer_map(buffer, &red_mouse2, &green_mouse2, &blue_mouse2);
-        /// condition de placement
+        printf("tour joueur 34\n");
+        /// condition de placement (CRASH QUAND ON MANTIENT LE CLIC)
         condition_positionnement_depart(&fini, ligne_souris, colonne_souris, matrice, joueur, &choix1, &choix2, &choix3, &choix4, red_mouse2, green_mouse2, blue_mouse2);
-
+        printf("tour joueur 34\n");
         textprintf_ex(buffer, font, 500, 100, makecol(255,255,255), -1, "%s, choisissez votre emplacement de depart", joueur[i].pseudo);
         reperage_bloc_souris(&ligne_souris, &colonne_souris, red_mouse, green_mouse, blue_mouse, matrice);
         ///affichage de tous les joueurs en meme temps
@@ -173,12 +178,16 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
             placement_aleatoire(&fini, matrice, joueur, nb_joueurs);
         }
         display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
+        rest(20);
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     }
     //tour_joueur_alea(joueur, nb_joueurs);
     for (int i = 0; i<nb_joueurs; i++)
     {
-        matrice[joueur[i].x][joueur[i].y].occuper = i + 1;
+        if (choix_double)
+            matrice[joueur[i].x][joueur[i].y].occuper = (i % 2) + 1;
+        else
+            matrice[joueur[i].x][joueur[i].y].occuper = i + 1;
         respiration_joueur[i] = i * 5;
     }
     i = random(0, 3);
@@ -233,7 +242,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
                 }
                 else
                 {*/
-                deplacement_personnage(buffer, map, joueur, i, ligne_souris, colonne_souris, matrice, &deplacement_effectuer, nb_joueurs, respiration_joueur);
+                deplacement_personnage(buffer, map, joueur, i, ligne_souris, colonne_souris, matrice, &deplacement_effectuer, nb_joueurs, respiration_joueur, choix_double);
                 autorisation_dep = 0;
                 //}
             }

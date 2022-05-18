@@ -9,7 +9,7 @@
 #define NB_BITMAPS_R 4
 #define NB_BITMAPS_A 4
 #define NB_CLASSES 4
-#define TEMPS_CHOIX 1
+#define TEMPS_CHOIX 15
 
 typedef struct bloc
 {
@@ -78,6 +78,7 @@ typedef struct Players
     int green;
     int blue;
     int place_manuellement;
+    int choix_double;
     BITMAP *shield;
     t_classe classe;
 }t_joueur;
