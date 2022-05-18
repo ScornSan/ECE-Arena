@@ -9,25 +9,25 @@
 	<allegro.h>
 	<time.h>
 
-1652630651 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\choix_classes.c
+1652631133 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\choix_classes.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652627158 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\creation_classes.c
+1652738606 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\creation_classes.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652629960 c:\repos\ece-arena\projet\projet final\structures.h
+1652796704 c:\repos\ece-arena\projet\projet final\structures.h
 	<allegro.h>
 
-1652555077 c:\repos\ece-arena\projet\projet final\prototypes.h
+1652738469 c:\repos\ece-arena\projet\projet final\prototypes.h
 	<stdio.h>
 	<stdlib.h>
 	<allegro.h>
 	<time.h>
 	<string.h>
 
-1652620277 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\tour_joueur.c
+1652738399 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\tour_joueur.c
 	"../prototypes.h"
 	"../structures.h"
 
@@ -35,11 +35,11 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1652548429 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\menu.c
+1652738592 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\menu.c
 	"../structures.h"
 	"../prototypes.h"
 
-1652621523 source:c:\repos\ece-arena\projet\projet final\spgm affichages\affichage_elements.c
+1652737383 source:c:\repos\ece-arena\projet\projet final\spgm affichages\affichage_elements.c
 	"../prototypes.h"
 	"../structures.h"
 
@@ -67,11 +67,11 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1652616713 source:c:\repos\ece-arena\projet\projet final\animations\animation_deplacement.c
+1652718292 source:c:\repos\ece-arena\projet\projet final\animations\animation_deplacement.c
 	"../prototypes.h"
 	"../structures.h"
 
-1651852848 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\position_depart_joueurs.c
+1652706531 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\position_depart_joueurs.c
 	"../prototypes.h"
 	"../structures.h"
 
@@ -145,31 +145,31 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1652031100 source:c:\repos\ece-arena\projet\projet final\spgm affichages\afffichage_hud.c
+1652631556 source:c:\repos\ece-arena\projet\projet final\spgm affichages\afffichage_hud.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652626162 source:c:\repos\ece-arena\projet\projet final\combats\selection_sort.c
+1652800657 source:c:\repos\ece-arena\projet\projet final\combats\selection_sort.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652625886 source:c:\repos\ece-arena\projet\projet final\combats\sorts_assassin.c
+1652738517 source:c:\repos\ece-arena\projet\projet final\combats\sorts_assassin.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652617837 source:c:\repos\ece-arena\projet\projet final\combats\sorts_guerrier.c
+1652738546 source:c:\repos\ece-arena\projet\projet final\combats\sorts_guerrier.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652630128 source:c:\repos\ece-arena\projet\projet final\combats\sorts_mage.c
+1652727339 source:c:\repos\ece-arena\projet\projet final\combats\sorts_mage.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652471996 source:c:\repos\ece-arena\projet\projet final\combats\sorts_vampire.c
+1652800669 source:c:\repos\ece-arena\projet\projet final\combats\sorts_vampire.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652368952 source:c:\repos\ece-arena\projet\projet final\animations\anim_attaque_de_base.c
+1652710535 source:c:\repos\ece-arena\projet\projet final\animations\anim_attaque_de_base.c
 	"../prototypes.h"
 	"../structures.h"
 
@@ -177,121 +177,145 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1652389491 source:c:\repos\ece-arena\projet\projet final\fin_de_partie\classement_fin.c
+1652632679 source:c:\repos\ece-arena\projet\projet final\fin_de_partie\classement_fin.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652619442 source:c:\repos\ece-arena\projet\projet final\combats\compteur_effets.c
+1652738042 source:c:\repos\ece-arena\projet\projet final\combats\compteur_effets.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652630910 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\animations\anim_attaque_de_base.c
+1652738426 source:c:\repos\ece-arena\projet\projet final\combats\test_effet_tour_suivant.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652695459 c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\prototypes.h
+1652723576 source:c:\repos\ece-arena\projet\projet final\animations\animation_sort_mage.c
+	"../prototypes.h"
+	"../structures.h"
+
+1652798979 source:c:\repos\ece-arena\projet\projet final\animations\animation_sort_vampire.c
+	"../prototypes.h"
+	"../structures.h"
+
+1652864475 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\animations\anim_attaque_de_base.c
+	"../prototypes.h"
+	"../structures.h"
+
+1652864475 c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\prototypes.h
 	<stdio.h>
 	<stdlib.h>
 	<allegro.h>
 	<time.h>
 	<string.h>
 
-1652702462 c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\structures.h
+1652889288 c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\structures.h
 	<allegro.h>
 
-1652706463 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\animations\animation_deplacement.c
+1652864475 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\animations\animation_deplacement.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652630910 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\combats\compteur_effets.c
+1652864475 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\animations\animation_sort_mage.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652709695 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\combats\selection_sort.c
+1652864475 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\animations\animation_sort_vampire.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652709695 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\combats\sorts_assassin.c
+1652864475 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\combats\compteur_effets.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652709735 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\combats\sorts_guerrier.c
+1652864475 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\combats\selection_sort.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652699780 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\combats\sorts_mage.c
+1652892550 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\combats\sorts_assassin.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652699780 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\combats\sorts_vampire.c
+1652892550 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\combats\sorts_guerrier.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652630910 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\fin_de_partie\classement_fin.c
+1652892556 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\combats\sorts_mage.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652702053 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\main.c
+1652892550 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\combats\sorts_vampire.c
+	"../prototypes.h"
+	"../structures.h"
+
+1652864475 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\combats\test_effet_tour_suivant.c
+	"../prototypes.h"
+	"../structures.h"
+
+1652890414 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\fin_de_partie\classement_fin.c
+	"../prototypes.h"
+	"../structures.h"
+
+1652869504 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\main.c
 	"structures.h"
 	"prototypes.h"
 
-1652630910 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\menu_et_choix\choix_classes.c
+1652864475 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\menu_et_choix\choix_classes.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652630910 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\menu_et_choix\creation_classes.c
+1652864475 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\menu_et_choix\creation_classes.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652630910 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\menu_et_choix\menu.c
+1652864475 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\menu_et_choix\menu.c
 	"../structures.h"
 	"../prototypes.h"
 
-1652703343 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\partie_en_cours\deplacement_joueur.c
+1652864475 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\partie_en_cours\deplacement_joueur.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652630910 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\partie_en_cours\position_depart_joueurs.c
+1652864475 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\partie_en_cours\position_depart_joueurs.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652630910 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\partie_en_cours\tour_aleatoire.c
+1652864475 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\partie_en_cours\tour_aleatoire.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652707868 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\partie_en_cours\tour_joueur.c
+1652869505 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\partie_en_cours\tour_joueur.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652706463 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\spgm affichages\afffichage_hud.c
+1652864475 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\spgm affichages\afffichage_hud.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652708217 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\spgm affichages\affichage_elements.c
+1652864475 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\spgm affichages\affichage_elements.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652630910 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\spgm affichages\calques.c
+1652864475 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\spgm affichages\calques.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652630910 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\spgm affichages\dessins_blocs.c
+1652864475 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\spgm affichages\dessins_blocs.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652630910 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\spgm affichages\initialisations_tab.c
+1652864475 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\spgm affichages\initialisations_tab.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652630910 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\spgm affichages\lecture_pixels.c
+1652864475 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\spgm affichages\lecture_pixels.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652630910 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\spgm affichages\quadrilages.c
+1652864475 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\spgm affichages\quadrilages.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652630910 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\spgm affichages\zone_deplacement.c
+1652864475 source:c:\users\garfl\desktop\dofus arena - dossier projet\projet depot\ece-arena\projet\projet final\spgm affichages\zone_deplacement.c
 	"../prototypes.h"
 	"../structures.h"
 

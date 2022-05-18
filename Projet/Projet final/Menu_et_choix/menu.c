@@ -156,17 +156,12 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
     int nb_joueur = 0;
     int nb = 0;
     int y = 314;
-    int installation_clavier = 0;
     int clic = 0;
     BITMAP *creators;
     BITMAP *choix_nb_joueurs;
     BITMAP *nom_joueurs;
     BITMAP *accueil;
     FONT* font_nbjoueur;
-
-
-
-
 
     // init. variable de sortie boucle interactive
     fin=0;

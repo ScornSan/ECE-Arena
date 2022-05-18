@@ -87,7 +87,6 @@ int main()
     ///et si on clique sur quitter a la fin de la partie, on change la valeur du boolen pour quitter la boucle
     while (!quitter)
     {
-
         play_sample(son_menu, 255, 128, 1000, 1); //lancer la musique en boucle
         nb_joueurs = menu(buffer, fond, cursor, pseudo, son_menu, myfont, son_on, son_off);
         int classement[nb_joueurs];
@@ -108,7 +107,7 @@ int main()
         choix_classe(buffer, fond, cursor, joueur, nb_joueurs, myfont, myfont2, son_menu, son_on, son_off);
         //tour_joueur_alea(joueur, nb_joueurs);
         stop_sample(son_menu);
-        tour_joueur(buffer, cursor, joueur, nb_joueurs, son_battle, son_on, son_off);
+        tour_joueur(buffer, cursor, joueur, nb_joueurs, son_battle, son_on, son_off, classement);
         stop_sample(son_battle);
         classement_fin(buffer, joueur, nb_joueurs, classement);
     }

@@ -3,10 +3,6 @@
 
 void sort1_assassin(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice[23][23], int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts, int respiration_joueur)
 {
-    int attaque = 0;
-    BITMAP *buffer_pixels;
-    buffer_pixels = create_bitmap(SCREEN_W,SCREEN_H);
-    int num_bitmap = 0;
     time_t start = (int)(time(NULL));
     /// tant qu'on ne clique pas sur l'icone de l'attaque de base, ou qu'on a lancé l'attaque
     if (pourcentage_de_chance() < 9)
@@ -18,7 +14,12 @@ void sort1_assassin(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_b
         else
         {
             joueur[i].pa += 3;
-            joueur[i].pm += 3;
+            joueur[i].pm += 2;
+            if (joueur[i].pa >= 6 || joueur[i].pm >= 3)
+            {
+                joueur[i].pa = 6;
+                joueur[i].pm = 3;
+            }
             while ((int)(time(NULL) - start < 2))
             {
                 clear_bitmap(buffer);
@@ -30,7 +31,6 @@ void sort1_assassin(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_b
                 rest(80);
             }
         }
-
     }
 }
 
@@ -39,8 +39,6 @@ void sort2_assassin(time_t start, t_joueur* joueur, int i, int nb_joueurs, BITMA
     int attaque = 3;
     BITMAP *buffer_pixels;
     buffer_pixels = create_bitmap(SCREEN_W,SCREEN_H);
-    int sort_lance = 0;
-    int annulation = 0;
     int red_temp, green_temp, blue_temp;
     int longueur_ligne = 4;
     int mess = 0, chance;
@@ -71,6 +69,7 @@ void sort2_assassin(time_t start, t_joueur* joueur, int i, int nb_joueurs, BITMA
             if(chance < 9)
             {   /// attaque reussie
                 chance = random(4,8);
+                joueur[i].degatstotal += chance;
                 x_temp = x_souris;
                 y_temp = y_souris;
                 joueur[matrice[x_souris][y_souris].occuper -1].pv = joueur[matrice[x_souris][y_souris].occuper -1].pv - chance;
@@ -183,7 +182,6 @@ void sort4_assassin(BITMAP *buffer_map, BITMAP * map,BITMAP * cursor, BITMAP *bu
         dessin_bloc_unique(buffer_pixels, joueur[i].x, joueur[i].y +3, matrice, 0, 255, 0);
     }
 
-    int num_bitmap = 0;
     while(sort_lance == 0 && annulation == 0)
     {
         lecture_pixels_buffer_map(buffer_pixels, &red_mouse2, &green_mouse2, &blue_mouse2);

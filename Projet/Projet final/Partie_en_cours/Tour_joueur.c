@@ -1,7 +1,7 @@
 #include "../prototypes.h"
 #include "../structures.h"
 
-void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueurs, SAMPLE* son_battle, BITMAP *son_on, BITMAP *son_off)
+void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueurs, SAMPLE* son_battle, BITMAP *son_on, BITMAP *son_off, int classement[])
 {
     // Déclaration du pointeur sur BITMAP devant recevoir l'image
     BITMAP *map;
@@ -17,7 +17,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
     int clic_son = 0;
     int i = 0;
     int j;
-    int compteur_mort = 1;
+    int n = nb_joueurs-1;
     t_bloc matrice[23][23];
 
     hud_joueur = (BITMAP **)malloc(sizeof(BITMAP *) * nb_joueurs);
@@ -127,7 +127,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
     for (int i = 0; i<nb_joueurs; i++)
     {
         joueur[i].x = i;
-        joueur[i].y =  i;
+        joueur[i].y = i;
         joueur[i].direction = 0;
     }
     int fini = 0, choix1= 0, choix2= 0, choix3= 0, choix4= 0;
@@ -135,6 +135,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
     i = 0;
     /// tant que tous les joueurs ne sont pas positionnés
     play_sample(son_battle, 255, 128, 1000, 1);
+    time_t debut = time(NULL);
     while(fini != nb_joueurs)
     {
         blit(map, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
@@ -167,21 +168,32 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
         textprintf_ex(buffer,font,96,36,makecol(0,255,0), makecol(0,0,0),"%4d %4d",mouse_x,mouse_y);
         //affichage_croix_bleue(buffer, croix_bleue, ligne_souris, colonne_souris, matrice);
         //affichage_croix_rouge(buffer, croix_rouge, ligne_souris, colonne_souris, matrice);
+        if ((int)(time(NULL) - debut >= TEMPS_CHOIX))
+        {
+            placement_aleatoire(&fini, matrice, joueur, nb_joueurs);
+        }
         display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     }
-
     //tour_joueur_alea(joueur, nb_joueurs);
     for (int i = 0; i<nb_joueurs; i++)
     {
         matrice[joueur[i].x][joueur[i].y].occuper = i + 1;
         respiration_joueur[i] = i * 5;
     }
+    i = random(0, 3);
     // Boucle d'animation
     while (joueur_en_vie != 1)
     {
         if (joueur[i].vivant) // on fait joueur le joueur i car il est vivant
         {
+            // Si il est le dernier vivant
+            if (n == 0)
+            {
+                classement[n] = i; //classement[0] = i
+                break; // On break pour aller dans le classement fin (dans le main)
+
+            }
             clear_bitmap(buffer);
             /// Affichage general qui est constamment présent meme pendant les actions du joueur
             affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
@@ -198,7 +210,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
             //textprintf_ex(buffer, font, 0, 10, makecol(0, 0, 0), -1, "Mouse Y : %d", mouse_y);
             //textprintf_ex(buffer, font, 0, 20, makecol(0, 0, 0), -1, "Temps: %f", (float)((time(NULL)) - start));
             //rectfill(buffer, 1000, 650, 1000 - (int)((time(NULL)) - start) * 5, 673, makecol(255, 0, 0)); // barre de temps
-            int aff_shield = 1; // pour ne pas afficher le shield quand le perso se déplace
+
             lecture_pixels_buffer_map(buffer_map, &red_mouse, &green_mouse, &blue_mouse);
             reperage_bloc_souris(&ligne_souris, &colonne_souris, red_mouse, green_mouse, blue_mouse, matrice, joueur, i);
             reperage_chemin(buffer, joueur[i].x, joueur[i].y, ligne_souris, colonne_souris, matrice, joueur, i, &autorisation_dep);
@@ -206,7 +218,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
             textprintf_ex(buffer, font, 0, 5, makecol(0, 0, 0), -1, "Occuper souris : %d", matrice[ligne_souris][colonne_souris].occuper);
             //printf("%d\n", matrice[joueur[i].x][joueur[i].y].x_bloc);
             //printf("%d\n", matrice[joueur[i].x][joueur[i].y].y_bloc);
-            affichage_joueurs_respiration(buffer, joueur, i, nb_joueurs, matrice, respiration_joueur, 5, aff_shield);
+            affichage_joueurs_respiration(buffer, joueur, i, nb_joueurs, matrice, respiration_joueur, 5);
             display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             if(autorisation_dep == 1)
@@ -244,14 +256,8 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
                 start = time(NULL);
                 joueur[i].pm = 3; // on remet les pm et pa du joueur au nombre initial
                 joueur[i].pa = 6;
-                if (joueur[i].bouclier && joueur[i].compteur_bouclier >= 1)
-                {
-                    joueur[i].compteur_bouclier = 0;
-                }
-                else
-                {
-                    joueur[i].compteur_bouclier = joueur[i].compteur_bouclier + 1;
-                }
+                compteur_effet(joueur, nb_joueurs);
+                test_effets(joueur, nb_joueurs);
                 i = (i + 1) % nb_joueurs; // On boucle car temps finis ou on a cliqué sur le bouton
             }
         }
@@ -259,13 +265,18 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
         {
             if (joueur[i].elimine == 0)
             {
-                joueur[i].elimine = compteur_mort;
-                compteur_mort++;
+                classement[n] = i;
+                n--;
+                // Boucle qui permet de voir si le joueur est éliminé, si il l'est, il passe à la n ième case du tableau
             }
+            joueur[i].pm = 3; // on remet les pm et pa du joueur au nombre initial
+            joueur[i].pa = 6;
+            compteur_effet(joueur, nb_joueurs);
+            test_effets(joueur, nb_joueurs);
             i = (i + 1) % nb_joueurs; // On boucle car le joueur est mort
         }
         rest(20);
-        if (mouse_b & 1 && mouse_x < 100)
+        if (mouse_b & 1 && mouse_x < 1)
         {
             break;
         }

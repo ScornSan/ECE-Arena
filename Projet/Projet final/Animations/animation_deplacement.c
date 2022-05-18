@@ -3,12 +3,9 @@
 
 void affichage_autres_joueurs(t_joueur* j, BITMAP *buffer, int i, int nb_joueurs, t_bloc matrice[23][23])
 {
-    BITMAP * shield;
-    shield = load_bitmap("SPRITES/CHEVALIER/BOUCLIER/shield_0.bmp", NULL);
     int joueur_suivant1 = (i + 1) % nb_joueurs;
     int joueur_suivant2 = (i + 2) % nb_joueurs;
     int joueur_suivant3 = (i + 3) % nb_joueurs;
-
     /// animation de respiration plus tard
     switch (nb_joueurs)
     {
@@ -54,7 +51,7 @@ void animation_deplacement(BITMAP *buffer, BITMAP *bg, t_joueur* j, int i, t_blo
             // matrice de matrice[j[i].x][j[i].y].x_bloc
             // matrice de matrice[j[i].x][j[i].y].y_bloc
             // milieu du matrice : 23 pixel en x jusqu'au milieu, 13 en y
-            // augmente de 2 en x, 1 en y
+            // augmente de 2 en x, 1 en ya
             // 1)  EFFACER BUFFER, en appliquant décor  (pas de clear_bitmap)
             blit(bg,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
             // 2) DETERMINER NOUVELLEs POSITIONs

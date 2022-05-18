@@ -14,18 +14,11 @@ void affichage_joueurs(BITMAP *buffer, t_joueur* joueur, int i, int nb_joueurs, 
     }
 }
 
-void affichage_joueurs_respiration(BITMAP *buffer, t_joueur* joueur, int i, int nb_joueurs, t_bloc matrice[23][23], int respiration_joueur[], int joueur_deplace, int aff_shield)
+void affichage_joueurs_respiration(BITMAP *buffer, t_joueur* joueur, int i, int nb_joueurs, t_bloc matrice[23][23], int respiration_joueur[], int id_joueur_deplace)
 {
-    BITMAP * shield;
-    shield = load_bitmap("SPRITES/CHEVALIER/BOUCLIER/shield_0.bmp", NULL);
-    if (shield == NULL)
-    {
-        allegro_message("erreur shield");
-    }
-
     for (int j = 0; j < nb_joueurs; j++)
     {
-        if (joueur_deplace != j)
+        if (id_joueur_deplace != j) // On ne fait pas respirer le joueur qui se déplace
         {
             if (respiration_joueur[j] < 15)
             {
@@ -35,16 +28,14 @@ void affichage_joueurs_respiration(BITMAP *buffer, t_joueur* joueur, int i, int 
             {
                 draw_sprite(buffer, joueur[j].classe.respiration[joueur[j].direction][1],  matrice[joueur[j].x][joueur[j].y].x_bloc - 22, matrice[joueur[j].x][joueur[j].y].y_bloc - 52);
             }
+            if (joueur[j].bouclier)
+            {
+                masked_blit(joueur[j].shield, buffer,0,0,matrice[joueur[j].x][joueur[j].y].x_bloc - 21,matrice[joueur[j].x][joueur[j].y].y_bloc - 93, SCREEN_W, SCREEN_H);
+            }
         }
         respiration_joueur[j] = (respiration_joueur[j] + 1) % 30;
-        if (joueur[j].bouclier == 1 && aff_shield == 1)
-        {
-            masked_blit(shield, buffer,0,0,matrice[joueur[j].x][joueur[j].y].x_bloc - 21,matrice[joueur[j].x][joueur[j].y].y_bloc - 93, SCREEN_W, SCREEN_H);
-            aff_shield == 0;
-        }
     }
 }
-
 
 /*void respiration(t_joueur* joueur, int id_joueur, BITMAP *buffer, t_bloc matrice[23][23])
 {
