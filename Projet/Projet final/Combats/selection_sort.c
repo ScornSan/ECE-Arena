@@ -123,7 +123,8 @@ void sort3(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP *buff
         sort3_mage(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, respiration);
         break;
     case 3: // VAMPIRE
-        sort3_vampire(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
+        printf("On rentre\n");
+        sort3_vampire(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, respiration);
         break;
     case 4: // ASSASSIN
         break;

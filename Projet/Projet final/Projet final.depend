@@ -13,11 +13,11 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1652738309 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\creation_classes.c
+1652738606 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\creation_classes.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652737322 c:\repos\ece-arena\projet\projet final\structures.h
+1652796704 c:\repos\ece-arena\projet\projet final\structures.h
 	<allegro.h>
 
 1652738469 c:\repos\ece-arena\projet\projet final\prototypes.h
@@ -35,7 +35,7 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1652548429 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\menu.c
+1652738592 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\menu.c
 	"../structures.h"
 	"../prototypes.h"
 
@@ -149,7 +149,7 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1652727123 source:c:\repos\ece-arena\projet\projet final\combats\selection_sort.c
+1652800657 source:c:\repos\ece-arena\projet\projet final\combats\selection_sort.c
 	"../prototypes.h"
 	"../structures.h"
 
@@ -165,7 +165,7 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1652738578 source:c:\repos\ece-arena\projet\projet final\combats\sorts_vampire.c
+1652800669 source:c:\repos\ece-arena\projet\projet final\combats\sorts_vampire.c
 	"../prototypes.h"
 	"../structures.h"
 
@@ -190,6 +190,10 @@
 	"../structures.h"
 
 1652723576 source:c:\repos\ece-arena\projet\projet final\animations\animation_sort_mage.c
+	"../prototypes.h"
+	"../structures.h"
+
+1652798979 source:c:\repos\ece-arena\projet\projet final\animations\animation_sort_vampire.c
 	"../prototypes.h"
 	"../structures.h"
 

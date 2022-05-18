@@ -120,16 +120,20 @@ void sort2_vampire(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITM
     }
 }
 
-void sort3_vampire(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP* buffer_map, t_bloc matrice[23][23], int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts)
+void sort3_vampire(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP* buffer_map, t_bloc matrice[23][23], int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts, int respiration[])
 {
     BITMAP *buffer_pixels;
     buffer_pixels = create_bitmap(SCREEN_W,SCREEN_H);
     int red_temp, green_temp,blue_temp;
+    int red_temp1, green_temp1,blue_temp1;
     int attaque = 0;
+    int id_ennemi;
     //time_t start = time(NULL);
     /// tant qu'on ne clique pas sur l'icone de l'attaque de base, ou qu'on a lancé l'attaque
+    printf("On rentre\n");
     while (!attaque)
     {
+        printf("On rentre\n");
         clear_bitmap(buffer);
         affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
         for (int j = -3; j <= 3; j++)
@@ -139,50 +143,20 @@ void sort3_vampire(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITM
                 dessin_bloc_unique(buffer, joueur[i].x + h, joueur[i].y + j, matrice, 255, 140, 0);
                 dessin_bloc_unique(buffer_pixels, joueur[i].x + h, joueur[i].y + j, matrice, 255, 140, 0);
             }
-
         }
 
-        affichage_joueurs(buffer, joueur, i, nb_joueurs, matrice);
+        affichage_joueurs_respiration(buffer, joueur, i, nb_joueurs, matrice, respiration, 5);
         display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
         lecture_pixels_buffer_map(buffer_map, &red_temp, &green_temp,&blue_temp);
         reperage_bloc_souris(&x_souris, &y_souris, red_temp, green_temp, blue_temp, matrice, joueur, i);
+        lecture_pixels_buffer_map(buffer_pixels, &red_temp1, &green_temp1,&blue_temp1);
         // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
-        if (matrice[x_souris][y_souris].occuper != matrice[joueur[i].x][joueur[i].y].occuper && matrice[x_souris][y_souris].occuper != 0 && mouse_b&1)
+        if (matrice[x_souris][y_souris].occuper != matrice[joueur[i].x][joueur[i].y].occuper && matrice[x_souris][y_souris].occuper != 0 && mouse_b&1 && green_temp1 == 140)
         {
-            int id_ennemi = matrice[x_souris][y_souris].occuper - 1;
-            /// NORD OUEST
-            if (x_souris < joueur[matrice[x_souris][y_souris].occuper - 1].x && y_souris == joueur[matrice[x_souris][y_souris].occuper - 1].y)
-            {
-                circlefill(buffer, joueur[matrice[x_souris][y_souris].occuper - 1].x, joueur[matrice[x_souris][y_souris].occuper - 1].y, 5, makecol(0,0,0));
-                rest(2000);
-                //animation_attaque_de_base(buffer, map, joueur, i, matrice, nb_joueurs, 1);
-            }
-            /// SUD EST
-            if (x_souris > joueur[matrice[x_souris][y_souris].occuper - 1].x && y_souris == joueur[matrice[x_souris][y_souris].occuper - 1].y)
-            {
-                circlefill(buffer, joueur[matrice[x_souris][y_souris].occuper - 1].x, joueur[matrice[x_souris][y_souris].occuper - 1].y, 5, makecol(0,0,0));
-                rest(2000);
-                //animation_attaque_de_base(buffer, map, joueur, i, matrice, nb_joueurs, 3);
-            }
-            /// SUD OUEST
-            if (x_souris == joueur[matrice[x_souris][y_souris].occuper - 1].x && y_souris < joueur[matrice[x_souris][y_souris].occuper - 1].y)
-            {
-                circlefill(buffer, joueur[matrice[x_souris][y_souris].occuper - 1].x, joueur[matrice[x_souris][y_souris].occuper - 1].y, 5, makecol(0,0,0));
-                rest(2000);
-                //animation_attaque_de_base(buffer, map, joueur, i, matrice, nb_joueurs, 0);
-            }
-            /// NORD EST
-            if (x_souris == joueur[matrice[x_souris][y_souris].occuper - 1].x && y_souris > joueur[matrice[x_souris][y_souris].occuper - 1].y)
-            {
-                circlefill(buffer, joueur[matrice[x_souris][y_souris].occuper - 1].x, joueur[matrice[x_souris][y_souris].occuper - 1].y, 5, makecol(0,0,0));
-                rest(2000);
-                //animation_attaque_de_base(buffer, map, joueur, i, matrice, nb_joueurs, 2);
-            }
+            id_ennemi = matrice[x_souris][y_souris].occuper - 1;
             joueur[id_ennemi].mortel = 1;
-
-            blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-            rest(20);
+            joueur[id_ennemi].compteur_mortel = 1;
             attaque = 1; // on a attaqué, on peut sortir de la boucle en infligeant les dégâts, avec le % de chance
         }
 

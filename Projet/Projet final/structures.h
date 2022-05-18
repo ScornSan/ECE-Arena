@@ -9,7 +9,7 @@
 #define NB_BITMAPS_R 4
 #define NB_BITMAPS_A 4
 #define NB_CLASSES 4
-#define TEMPS_CHOIX 5
+#define TEMPS_CHOIX 1
 
 typedef struct bloc
 {
