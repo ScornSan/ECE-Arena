@@ -135,7 +135,7 @@ void choix_classe(BITMAP *buffer, BITMAP *fond, BITMAP* cursor, t_joueur* joueur
     BITMAP *desc_classe[4];
     int nb = 0;
     char nom_perso[20];
-    char nom_classe[20];
+    char nom_classe[40];
     int clic = 0;
 
     // Chargement de l'image (l'allocation a lieu en même temps)

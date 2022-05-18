@@ -49,7 +49,16 @@ void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BI
     while (stop != 1)
     {
         textprintf_ex(buffer,font,96,36,makecol(0,255,0), makecol(0,0,0),"%4d %4d",mouse_x,mouse_y);
+        affichage_son(buffer, cursor, son_menu, &(*clic));
 
+        if (*clic)
+        {
+            draw_sprite(buffer, son_off, 0, 0);
+        }
+        else
+        {
+            draw_sprite(buffer, son_on, 0, 0);
+        }
         if (keypressed())
         {
 
@@ -91,9 +100,13 @@ void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BI
                 *num = *num +1;
             }
             place = place+1;
+            //display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
+        }
+        if ( mouse_b&1 && mouse_x>= 553 && mouse_x <= 729 && mouse_y >= 540 && mouse_y <= 591)
+        {
+            blit(fond, buffer, 0,0,0,0, SCREEN_W, SCREEN_H);
 
         }
-
 
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     }
@@ -143,17 +156,12 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
     int nb_joueur = 0;
     int nb = 0;
     int y = 314;
-    int installation_clavier = 0;
     int clic = 0;
     BITMAP *creators;
     BITMAP *choix_nb_joueurs;
     BITMAP *nom_joueurs;
     BITMAP *accueil;
     FONT* font_nbjoueur;
-
-
-
-
 
     // init. variable de sortie boucle interactive
     fin=0;
@@ -226,16 +234,19 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
             allegro_message("Merci d'avoir joue !");
             allegro_exit();
             exit(0);
-             rest(20);
         }
+
+        int sortir;
 
         /// si on appui sur standard
         if (mouse_b&1 && mouse_x>= 423 && mouse_x <= 834 && mouse_y >= 223 && mouse_y <= 300)
         {
             ok = 0;
+            sortir = 0;
 
-            while(ok!=1)
+            while(ok!=1 && sortir!=1)
             {
+
                 clear_bitmap(buffer);
                 blit(choix_nb_joueurs,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
                 affichage_son(buffer, cursor, son_menu, &clic);
@@ -268,21 +279,26 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
                 if ((mouse_b&1) && (mouse_x > 458) && (mouse_x < 833) && (mouse_y > 573) && (mouse_y < 654) && (nb_joueur >= 2))
                 {
                     ok = 1;
-                    rest(100);
                 }
-                if(key[KEY_ESC] || mouse_b&2)
+                if(mouse_b&2)
                 {
-                    ok =1;
-                    rest(100);
-                }
-                blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-                rest(100);
-            }
+                    //ok=1;
+                    sortir = 1;
 
-            install_keyboard();
-            clear_bitmap(buffer);
-            blit(nom_joueurs,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
-            textprintf_ex(buffer,font,500,270, makecol(255,255,255),-1, " Veuillez entrez vos pseudos :");
+                }
+
+
+                blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+
+            }
+            if(sortir != 1)
+            {
+                install_keyboard();
+                clear_bitmap(buffer);
+                blit(nom_joueurs,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
+                textprintf_ex(buffer,font,500,270, makecol(255,255,255),-1, " Veuillez entrez vos pseudos :");
+
+
 
             //display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
             /*while(!key[KEY_BACKSPACE])
@@ -301,7 +317,7 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
 
             }
             fin = 1;
-            rest(100);
+            }
 
         }
         /// si on appuie sur double
@@ -311,7 +327,6 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
             {
                 blit(fond,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
                 blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-                rest(200);
             }
         }
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);

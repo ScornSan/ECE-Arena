@@ -105,6 +105,7 @@ int main()
         }
         creation_classes(joueur, nb_joueurs);
         choix_classe(buffer, fond, cursor, joueur, nb_joueurs, myfont, myfont2, son_menu, son_on, son_off);
+        //tour_joueur_alea(joueur, nb_joueurs);
         stop_sample(son_menu);
         tour_joueur(buffer, cursor, joueur, nb_joueurs, son_battle, son_on, son_off);
         stop_sample(son_battle);

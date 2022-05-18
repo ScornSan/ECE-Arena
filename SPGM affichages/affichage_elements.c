@@ -14,11 +14,11 @@ void affichage_joueurs(BITMAP *buffer, t_joueur* joueur, int i, int nb_joueurs, 
     }
 }
 
-void affichage_joueurs_respiration(BITMAP *buffer, t_joueur* joueur, int i, int nb_joueurs, t_bloc matrice[23][23], int respiration_joueur[], int joueur_deplace)
+void affichage_joueurs_respiration(BITMAP *buffer, t_joueur* joueur, int i, int nb_joueurs, t_bloc matrice[23][23], int respiration_joueur[], int id_joueur_deplace)
 {
     for (int j = 0; j < nb_joueurs; j++)
     {
-        if (joueur_deplace != j)
+        if (id_joueur_deplace != j) // On ne fait pas respirer le joueur qui se déplace
         {
             if (respiration_joueur[j] < 15)
             {
@@ -27,6 +27,10 @@ void affichage_joueurs_respiration(BITMAP *buffer, t_joueur* joueur, int i, int 
             else
             {
                 draw_sprite(buffer, joueur[j].classe.respiration[joueur[j].direction][1],  matrice[joueur[j].x][joueur[j].y].x_bloc - 22, matrice[joueur[j].x][joueur[j].y].y_bloc - 52);
+            }
+            if (joueur[j].bouclier)
+            {
+                masked_blit(joueur[j].shield, buffer,0,0,matrice[joueur[j].x][joueur[j].y].x_bloc - 21,matrice[joueur[j].x][joueur[j].y].y_bloc - 93, SCREEN_W, SCREEN_H);
             }
         }
         respiration_joueur[j] = (respiration_joueur[j] + 1) % 30;

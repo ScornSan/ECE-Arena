@@ -1,6 +1,5 @@
 #include "../prototypes.h"
 #include "../structures.h"
-#define TEMPS_CHOIX 20
 
 void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueurs, SAMPLE* son_battle, BITMAP *son_on, BITMAP *son_off)
 {
@@ -128,7 +127,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
     for (int i = 0; i<nb_joueurs; i++)
     {
         joueur[i].x = i;
-        joueur[i].y =  i;
+        joueur[i].y = i;
         joueur[i].direction = 0;
     }
     int fini = 0, choix1= 0, choix2= 0, choix3= 0, choix4= 0;
@@ -136,6 +135,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
     i = 0;
     /// tant que tous les joueurs ne sont pas positionnés
     play_sample(son_battle, 255, 128, 1000, 1);
+    time_t debut = time(NULL);
     while(fini != nb_joueurs)
     {
         blit(map, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
@@ -149,152 +149,143 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
             draw_sprite(buffer, son_on, 0, 0);
         }
         /// dessin des zones de placement
+        affichage_emplacement_depart(buffer, nb_joueurs, matrice, joueur);
 
-        if ((int)(time(NULL) - start <= TEMPS_CHOIX))
+        lecture_pixels_buffer_map(buffer_map, &red_mouse, &green_mouse, &blue_mouse);
+        lecture_pixels_buffer_map(buffer, &red_mouse2, &green_mouse2, &blue_mouse2);
+        /// condition de placement
+        condition_positionnement_depart(&fini, ligne_souris, colonne_souris, matrice, joueur, &choix1, &choix2, &choix3, &choix4, red_mouse2, green_mouse2, blue_mouse2);
+
+        textprintf_ex(buffer, font, 500, 100, makecol(255,255,255), -1, "%s, choisissez votre emplacement de depart", joueur[i].pseudo);
+        reperage_bloc_souris(&ligne_souris, &colonne_souris, red_mouse, green_mouse, blue_mouse, matrice);
+        ///affichage de tous les joueurs en meme temps
+        for (int j = 0; j< nb_joueurs; j++)
         {
-            affichage_emplacement_depart(buffer, nb_joueurs, matrice, joueur);
-            lecture_pixels_buffer_map(buffer_map, &red_mouse, &green_mouse, &blue_mouse);
-            lecture_pixels_buffer_map(buffer, &red_mouse2, &green_mouse2, &blue_mouse2);
-
-            /// condition de placement
-            condition_positionnement_depart(&fini, ligne_souris, colonne_souris, matrice, joueur, &choix1, &choix2, &choix3, &choix4, red_mouse2, green_mouse2, blue_mouse2);
-            textprintf_ex(buffer, font, 500, 100, makecol(255,255,255), -1, "%s, choisissez votre emplacement de depart", joueur[i].pseudo);
-            reperage_bloc_souris(&ligne_souris, &colonne_souris, red_mouse, green_mouse, blue_mouse, matrice);
-
+            couleur_sous_joueur(buffer, joueur[j].x, joueur[j].y, matrice, joueur, j);
+            affichage_joueurs(buffer, joueur, i, nb_joueurs, matrice);
+            //circlefill(buffer, matrice[joueur[j].x][joueur[j].y].x_bloc, matrice[joueur[j].x][joueur[j].y].y_bloc, 9, makecol(joueur[j].red,joueur[j].green,joueur[j].blue));
         }
-        else
+        textprintf_ex(buffer,font,96,36,makecol(0,255,0), makecol(0,0,0),"%4d %4d",mouse_x,mouse_y);
+        //affichage_croix_bleue(buffer, croix_bleue, ligne_souris, colonne_souris, matrice);
+        //affichage_croix_rouge(buffer, croix_rouge, ligne_souris, colonne_souris, matrice);
+        if ((int)(time(NULL) - debut >= TEMPS_CHOIX))
         {
-             placement_aleatoire(&fini, matrice, joueur, nb_joueurs);
+            placement_aleatoire(&fini, matrice, joueur, nb_joueurs);
         }
-
-
-            ///affichage de tous les joueurs en meme temps
-            for (int j = 0; j< nb_joueurs; j++)                   /// dessin des joueurs a cote du plateau avant debut
+        display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
+        blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+    }
+    //tour_joueur_alea(joueur, nb_joueurs);
+    for (int i = 0; i<nb_joueurs; i++)
+    {
+        matrice[joueur[i].x][joueur[i].y].occuper = i + 1;
+        respiration_joueur[i] = i * 5;
+    }
+    i = random(0, 3);
+    // Boucle d'animation
+    while (joueur_en_vie != 1)
+    {
+        if (joueur[i].vivant) // on fait joueur le joueur i car il est vivant
+        {
+            clear_bitmap(buffer);
+            /// Affichage general qui est constamment présent meme pendant les actions du joueur
+            affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
+            affichage_son(buffer, cursor, son_battle, &clic_son);
+            if (clic_son)
             {
-                couleur_sous_joueur(buffer, joueur[j].x, joueur[j].y, matrice, joueur, j);
-                affichage_joueurs(buffer, joueur, j, nb_joueurs, matrice);
-                //circlefill(buffer, matrice[joueur[j].x][joueur[j].y].x_bloc, matrice[joueur[j].x][joueur[j].y].y_bloc, 9, makecol(joueur[j].red,joueur[j].green,joueur[j].blue));
-            }
-
-            textprintf_ex(buffer,font,96,36,makecol(0,255,0), makecol(0,0,0),"%4d %4d",mouse_x,mouse_y);
-            //affichage_croix_bleue(buffer, croix_bleue, ligne_souris, colonne_souris, matrice);
-            //affichage_croix_rouge(buffer, croix_rouge, ligne_souris, colonne_souris, matrice);
-            display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
-            blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-        }
-
-        //tour_joueur_alea(joueur, nb_joueurs);
-        for (int i = 0; i<nb_joueurs; i++)
-        {
-            matrice[joueur[i].x][joueur[i].y].occuper = i + 1;
-            respiration_joueur[i] = i * 5;
-        }
-        // Boucle d'animation
-        while (joueur_en_vie != 1)
-        {
-            if (joueur[i].vivant) // on fait joueur le joueur i car il est vivant
-            {
-                clear_bitmap(buffer);
-                /// Affichage general qui est constamment présent meme pendant les actions du joueur
-                affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
-                affichage_son(buffer, cursor, son_battle, &clic_son);
-                if (clic_son)
-                {
-                    draw_sprite(buffer, son_off, 0, 0);
-                }
-                else
-                {
-                    draw_sprite(buffer, son_on, 0, 0);
-                }
-                //textprintf_ex(buffer, font, 0, 0, makecol(0, 0, 0), -1, "Mouse X : %d", mouse_x);
-                //textprintf_ex(buffer, font, 0, 10, makecol(0, 0, 0), -1, "Mouse Y : %d", mouse_y);
-                //textprintf_ex(buffer, font, 0, 20, makecol(0, 0, 0), -1, "Temps: %f", (float)((time(NULL)) - start));
-                //rectfill(buffer, 1000, 650, 1000 - (int)((time(NULL)) - start) * 5, 673, makecol(255, 0, 0)); // barre de temps
-
-                lecture_pixels_buffer_map(buffer_map, &red_mouse, &green_mouse, &blue_mouse);
-                reperage_bloc_souris(&ligne_souris, &colonne_souris, red_mouse, green_mouse, blue_mouse, matrice, joueur, i);
-                reperage_chemin(buffer, joueur[i].x, joueur[i].y, ligne_souris, colonne_souris, matrice, joueur, i, &autorisation_dep);
-                selection_sort(buffer_map,&ligne_souris, &colonne_souris,&red_mouse, &green_mouse, &blue_mouse, joueur, i, nb_joueurs, buffer, matrice, desc_sorts, ligne_souris, colonne_souris, cursor, map, hud_joueur, icone_classes, hud_icone, start, respiration_joueur);
-                textprintf_ex(buffer, font, 0, 5, makecol(0, 0, 0), -1, "Occuper souris : %d", matrice[ligne_souris][colonne_souris].occuper);
-                //printf("%d\n", matrice[joueur[i].x][joueur[i].y].x_bloc);
-                //printf("%d\n", matrice[joueur[i].x][joueur[i].y].y_bloc);
-                affichage_joueurs_respiration(buffer, joueur, i, nb_joueurs, matrice, respiration_joueur, 5);
-                display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
-                blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-                if(autorisation_dep == 1)
-                {
-                    /*/// condition si la souris clic sur un bloc valable
-                    if (matrice[ligne_souris][colonne_souris].accessible == 0)
-                    {
-                        textout_ex(screen, font,"Vous ne pouvez pas vous deplacer en dehors de la carte !! ",15, 30, makecol(255,0,0), -1); /////// A CHANGER PLUS TARD
-                        sleep(3); ///////// A CHANGER PLUS TARD
-                        chrono1 = time(NULL);
-                        erreur1 =1;
-                    }
-                    else if (matrice[ligne_souris][colonne_souris].occuper == 1)
-                    {
-                        textout_ex(screen, font,"Cette case est deja occupee par un joueur ou un obstacle !! ", 800, 30, makecol(255,255,0), -1); /////// A CHANGER PLUS TARD
-                        sleep(3); ///////// A CHANGER PLUS TARD
-                        chrono2 = time(NULL);
-                        erreur2 =1;
-                    }
-                    else
-                    {*/
-                    deplacement_personnage(buffer, map, joueur, i, ligne_souris, colonne_souris, matrice, &deplacement_effectuer, nb_joueurs, respiration_joueur);
-                    autorisation_dep = 0;
-                    //}
-                }
-                //lecture_pixels_buffer_map(buffer_map, &red_mouse, &green_mouse, &blue_mouse); // ca bug
-                //quadrillage_test(buffer);
-                //encadrement_souris(buffer, red_mouse, green_mouse, blue_mouse);
-                //affichage_croix_bleue(buffer, croix_bleue, &ligne_souris, &colonne_souris, matrice); // bug avec classe chevalier // assassin
-                //affichage_croix_rouge(buffer, croix_rouge, &ligne_souris, &colonne_souris, matrice); // bug avec classe chevalier // assassin
-                //blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-                if ((int)(time(NULL) - start >= TEMPS_TOUR))
-                {
-                    start = time(NULL);
-                    joueur[i].pm = 3; // on remet les pm et pa du joueur au nombre initial
-                    joueur[i].pa = 6;
-                    if (joueur[i].bouclier && joueur[i].compteur_bouclier >= 1)
-                    {
-                        joueur[i].bouclier = 0;
-                        joueur[i].compteur_bouclier = 0;
-                    }
-                    else
-                    {
-                        joueur[i].compteur_bouclier = joueur[i].compteur_bouclier + 1;
-                    }
-                    i = (i + 1) % nb_joueurs; // On boucle car temps finis ou on a cliqué sur le bouton
-                }
+                draw_sprite(buffer, son_off, 0, 0);
             }
             else
             {
-                if (joueur[i].elimine == 0)
-                {
-                    joueur[i].elimine = compteur_mort;
-                    compteur_mort++;
-                }
-                i = (i + 1) % nb_joueurs; // On boucle car le joueur est mort
+                draw_sprite(buffer, son_on, 0, 0);
             }
-            rest(20);
-            if (mouse_b & 1 && mouse_x < 100)
+            //textprintf_ex(buffer, font, 0, 0, makecol(0, 0, 0), -1, "Mouse X : %d", mouse_x);
+            //textprintf_ex(buffer, font, 0, 10, makecol(0, 0, 0), -1, "Mouse Y : %d", mouse_y);
+            //textprintf_ex(buffer, font, 0, 20, makecol(0, 0, 0), -1, "Temps: %f", (float)((time(NULL)) - start));
+            //rectfill(buffer, 1000, 650, 1000 - (int)((time(NULL)) - start) * 5, 673, makecol(255, 0, 0)); // barre de temps
+
+            lecture_pixels_buffer_map(buffer_map, &red_mouse, &green_mouse, &blue_mouse);
+            reperage_bloc_souris(&ligne_souris, &colonne_souris, red_mouse, green_mouse, blue_mouse, matrice, joueur, i);
+            reperage_chemin(buffer, joueur[i].x, joueur[i].y, ligne_souris, colonne_souris, matrice, joueur, i, &autorisation_dep);
+            selection_sort(buffer_map,&ligne_souris, &colonne_souris,&red_mouse, &green_mouse, &blue_mouse, joueur, i, nb_joueurs, buffer, matrice, desc_sorts, ligne_souris, colonne_souris, cursor, map, hud_joueur, icone_classes, hud_icone, start, respiration_joueur);
+            textprintf_ex(buffer, font, 0, 5, makecol(0, 0, 0), -1, "Occuper souris : %d", matrice[ligne_souris][colonne_souris].occuper);
+            //printf("%d\n", matrice[joueur[i].x][joueur[i].y].x_bloc);
+            //printf("%d\n", matrice[joueur[i].x][joueur[i].y].y_bloc);
+            affichage_joueurs_respiration(buffer, joueur, i, nb_joueurs, matrice, respiration_joueur, 5);
+            display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
+            blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+            if(autorisation_dep == 1)
             {
-                break;
+                /*/// condition si la souris clic sur un bloc valable
+                if (matrice[ligne_souris][colonne_souris].accessible == 0)
+                {
+                    textout_ex(screen, font,"Vous ne pouvez pas vous deplacer en dehors de la carte !! ",15, 30, makecol(255,0,0), -1); /////// A CHANGER PLUS TARD
+                    sleep(3); ///////// A CHANGER PLUS TARD
+                    chrono1 = time(NULL);
+                    erreur1 =1;
+                }
+                else if (matrice[ligne_souris][colonne_souris].occuper == 1)
+                {
+                    textout_ex(screen, font,"Cette case est deja occupee par un joueur ou un obstacle !! ", 800, 30, makecol(255,255,0), -1); /////// A CHANGER PLUS TARD
+                    sleep(3); ///////// A CHANGER PLUS TARD
+                    chrono2 = time(NULL);
+                    erreur2 =1;
+                }
+                else
+                {*/
+                deplacement_personnage(buffer, map, joueur, i, ligne_souris, colonne_souris, matrice, &deplacement_effectuer, nb_joueurs, respiration_joueur);
+                autorisation_dep = 0;
+                //}
+            }
+            //lecture_pixels_buffer_map(buffer_map, &red_mouse, &green_mouse, &blue_mouse); // ca bug
+            //quadrillage_test(buffer);
+            //encadrement_souris(buffer, red_mouse, green_mouse, blue_mouse);
+            //affichage_croix_bleue(buffer, croix_bleue, &ligne_souris, &colonne_souris, matrice); // bug avec classe chevalier // assassin
+            //affichage_croix_rouge(buffer, croix_rouge, &ligne_souris, &colonne_souris, matrice); // bug avec classe chevalier // assassin
+
+            //blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+            if ((int)(time(NULL) - start >= TEMPS_TOUR))
+            {
+                start = time(NULL);
+                joueur[i].pm = 3; // on remet les pm et pa du joueur au nombre initial
+                joueur[i].pa = 6;
+                compteur_effet(joueur, nb_joueurs);
+                test_effets(joueur, nb_joueurs);
+                i = (i + 1) % nb_joueurs; // On boucle car temps finis ou on a cliqué sur le bouton
             }
         }
-        /// On fera une espèce d'animation de fin de jeu, on affiche le classement et on appuie sur un bouton quand on veut continuer
-        /// on revient donc au menu (insérez le programme de Sarah)
-
-        /*for (int i = 0; i < 4; i++)
+        else
         {
-            destroy_bitmap(joueur[i].classe.logo_attaque);
-            for (int j = 0; j < NB_SORTS; j++)
+            if (joueur[i].elimine == 0)
             {
-                destroy_bitmap(joueur[i].classe.spell[j].description);
-                destroy_bitmap(joueur[i].classe.spell[j].logo);
+                joueur[i].elimine = compteur_mort;
+                compteur_mort++;
             }
-        }*/
-        //destroy_bitmap(map);
-        //destroy_bitmap(*hud_joueur);
-        //destroy_bitmap(hud_icone);
+            joueur[i].pm = 3; // on remet les pm et pa du joueur au nombre initial
+            joueur[i].pa = 6;
+            compteur_effet(joueur, nb_joueurs);
+            test_effets(joueur, nb_joueurs);
+            i = (i + 1) % nb_joueurs; // On boucle car le joueur est mort
+        }
+        rest(20);
+        if (mouse_b & 1 && mouse_x < 1)
+        {
+            break;
+        }
     }
+    /// On fera une espèce d'animation de fin de jeu, on affiche le classement et on appuie sur un bouton quand on veut continuer
+    /// on revient donc au menu (insérez le programme de Sarah)
+
+    /*for (int i = 0; i < 4; i++)
+    {
+        destroy_bitmap(joueur[i].classe.logo_attaque);
+        for (int j = 0; j < NB_SORTS; j++)
+        {
+            destroy_bitmap(joueur[i].classe.spell[j].description);
+            destroy_bitmap(joueur[i].classe.spell[j].logo);
+        }
+    }*/
+    //destroy_bitmap(map);
+    //destroy_bitmap(*hud_joueur);
+    //destroy_bitmap(hud_icone);
+}
