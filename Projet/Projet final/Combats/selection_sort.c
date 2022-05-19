@@ -9,6 +9,8 @@ void attaque_de_base(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BI
     int red_temp1, green_temp1,blue_temp1;
     int attaque = 0;
     int id_ennemi;
+    int degats;
+    time_t start;
     //time_t start = time(NULL);
     /// tant qu'on ne clique pas sur l'icone de l'attaque de base, ou qu'on a lancé l'attaque
     while (!attaque)
@@ -25,6 +27,7 @@ void attaque_de_base(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BI
         // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
         if (matrice[x_souris][y_souris].occuper != matrice[joueur[i].x][joueur[i].y].occuper && matrice[x_souris][y_souris].occuper != 0 && mouse_b&1 && green_temp1 == 140)
         {
+            start = start = time(NULL);
             id_ennemi = matrice[x_souris][y_souris].id_case - 1;
             joueur[i].pa = joueur[i].pa - 2;
             //printf("Ennemi : %d\n", id_ennemi);
@@ -52,8 +55,29 @@ void attaque_de_base(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BI
                 animation_attaque_de_base(buffer, map, joueur, i, matrice, nb_joueurs, 2, respiration);
                 blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             }
-            joueur[id_ennemi].pv = joueur[id_ennemi].pv - random(1, 5);
-            attaque = 1; // on a attaqué, on peut sortir de la boucle en infligeant les dégâts, avec le % de chance
+            if (pourcentage_de_chance() < 9)
+            {
+                degats = random(1, 5);
+                joueur[id_ennemi].pv = joueur[id_ennemi].pv - degats;
+                attaque = 1; // on a attaqué, on peut sortir de la boucle en infligeant les dégâts, avec le % de chance
+            }
+            else
+            {
+                attaque = 2;
+            }
+            while ((int)time(NULL) - start < 3)
+            {
+                clear_bitmap(buffer);
+                affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
+                affichage_joueurs_respiration(buffer, joueur, i, nb_joueurs, matrice, respiration, 5);
+                if (attaque == 1)
+                    textprintf_ex(buffer, font, matrice[joueur[id_ennemi].x][joueur[id_ennemi].y].x_bloc - 10, matrice[joueur[id_ennemi].x][joueur[id_ennemi].y].y_bloc  - 70, makecol(joueur[i].red, joueur[i].green, joueur[i].blue), -1, "- %d", degats);
+                else if (attaque == 2)
+                    textprintf_ex(buffer, font, matrice[joueur[id_ennemi].x][joueur[id_ennemi].y].x_bloc - 10, matrice[joueur[id_ennemi].x][joueur[id_ennemi].y].y_bloc  - 70, makecol(joueur[i].red, joueur[i].green, joueur[i].blue), -1, "Attaque manque");
+                display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
+                blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+            }
+
         }
         if (mouse_x >= 300 && mouse_x <= 330 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1)
         {

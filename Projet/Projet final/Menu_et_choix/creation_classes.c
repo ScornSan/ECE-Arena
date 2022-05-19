@@ -172,8 +172,8 @@ void creation_classes(t_joueur* joueur, int nb_joueurs, int choix_double)
     for (i = 0; i < nb_joueurs; i++)
     {
         joueur[i].pv = PV_JOUEUR;
-        joueur[i].pm = 0;
-        joueur[i].pa = 2;
+        joueur[i].pm = 3;
+        joueur[i].pa = 6;
         joueur[i].classe.attaque = 5;
         joueur[i].direction = 0;
         joueur[i].vivant = 1;

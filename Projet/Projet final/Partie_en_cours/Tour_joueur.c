@@ -260,7 +260,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
             joueur[i].pm = 3; // on remet les pm et pa du joueur au nombre initial
             joueur[i].pa = 6;
             compteur_effet(joueur, nb_joueurs);
-            test_effets(joueur, nb_joueurs);
+            test_effets(joueur, i);
             i = (i + 1) % nb_joueurs; // On boucle car le joueur est mort
         }
         rest(20);
