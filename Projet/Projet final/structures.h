@@ -60,6 +60,7 @@ typedef struct Players
     int pa;
     int rage;
     int compteur_rage;
+    int facteur_rage;
     int hemorragie;
     int compteur_hemorragie;
     int brulure;

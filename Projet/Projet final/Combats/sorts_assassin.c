@@ -4,6 +4,7 @@
 void sort1_assassin(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice[23][23], int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts, int respiration_joueur)
 {
     time_t start = (int)(time(NULL));
+    int num_bitmap = 0;
     /// tant qu'on ne clique pas sur l'icone de l'attaque de base, ou qu'on a lancé l'attaque
     if (pourcentage_de_chance() < 9)
     {
@@ -19,20 +20,37 @@ void sort1_assassin(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_b
             {
                 joueur[i].pa = 6;
                 joueur[i].pm = 3;
+                while ((int)(time(NULL) - start < 2))
+                {
+                    clear_bitmap(buffer);
+                    affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
+                    //dessin_bloc_unique(buffer, joueur[i].x, joueur[i].y, matrice, 0, 220, 0);
+                    draw_sprite(buffer, joueur[i].classe.spell[0].animation_sort[num_bitmap], matrice[joueur[i].x][joueur[i].y].x_bloc - 20,  matrice[joueur[i].x][joueur[i].y].y_bloc - 60);
+                    num_bitmap = (num_bitmap + 1) % 4;
+                    affichage_joueurs_respiration(buffer, joueur, i, nb_joueurs, matrice, respiration_joueur, 5);
+                    display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
+                    blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+                    rest(80);
+                }
             }
-            while ((int)(time(NULL) - start < 2))
+            else
             {
-                clear_bitmap(buffer);
-                affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
-                //dessin_bloc_unique(buffer, joueur[i].x, joueur[i].y, matrice, 0, 220, 0);
-                affichage_joueurs_respiration(buffer, joueur, i, nb_joueurs, matrice, respiration_joueur, 5);
-                display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
-                blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-                rest(80);
+                while ((int)(time(NULL) - start < 2))
+                {
+                    clear_bitmap(buffer);
+                    affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
+                    //dessin_bloc_unique(buffer, joueur[i].x, joueur[i].y, matrice, 0, 220, 0);
+                    affichage_joueurs_respiration(buffer, joueur, i, nb_joueurs, matrice, respiration_joueur, 5);
+                    textout_ex(buffer, font,"SORT MANQUE !", matrice[joueur[i].x][joueur[i].y].x_bloc - 15, matrice[joueur[i].x][joueur[i].y].y_bloc - 80, makecol(0,0,0), -1);
+                    display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
+                    blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+                    // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
+                }
             }
         }
     }
 }
+
 
 void sort2_assassin(time_t start, t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP* buffer_map, t_bloc matrice[23][23], int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts)
 {
@@ -67,7 +85,8 @@ void sort2_assassin(time_t start, t_joueur* joueur, int i, int nb_joueurs, BITMA
             printf("nombre de fois");
             chance = random(1,10);
             if(chance < 9)
-            {   /// attaque reussie
+            {
+                /// attaque reussie
                 chance = random(4,8);
                 joueur[i].degatstotal += chance;
                 x_temp = x_souris;
@@ -129,7 +148,7 @@ void sort2_assassin(time_t start, t_joueur* joueur, int i, int nb_joueurs, BITMA
 
 
 void sort4_assassin(BITMAP *buffer_map, BITMAP * map,BITMAP * cursor, BITMAP *buffer, t_joueur* joueur, int i, t_bloc matrice[23][23], int *red_mouse, int * green_mouse, int *blue_mouse, int *ligne_souris,
-                             int *colonne_souris, int nb_joueurs, BITMAP * hud_icone, BITMAP * desc_sorts, BITMAP **hud_joueur, BITMAP **icone_classes)
+                    int *colonne_souris, int nb_joueurs, BITMAP * hud_icone, BITMAP * desc_sorts, BITMAP **hud_joueur, BITMAP **icone_classes)
 {
     int sort_lance = 0;
     int annulation = 0;
@@ -205,13 +224,13 @@ void sort4_assassin(BITMAP *buffer_map, BITMAP * map,BITMAP * cursor, BITMAP *bu
             lecture_pixels_buffer_map(buffer_pixels, &red_temp, &green_temp, &blue_temp);
             if(green_temp == 255)
             {
-               for(int k = *ligne_souris-3; k < *ligne_souris+4;k++)
+                for(int k = *ligne_souris-3; k < *ligne_souris+4; k++)
                 {
                     for (int l = *colonne_souris-3; l< *colonne_souris+4; l++)
                     {
                         if(matrice[k][l].accessible == 1 && (k >=0 && k <= 22) && (l >= 0 && l <= 22))
                         {
-                            dessin_bloc_unique(buffer, k , l, matrice, 213,210,117);
+                            dessin_bloc_unique(buffer, k, l, matrice, 213,210,117);
                         }
                     }
                 }
@@ -234,7 +253,7 @@ void sort4_assassin(BITMAP *buffer_map, BITMAP * map,BITMAP * cursor, BITMAP *bu
     {
         for(int l = 0; l< 5 ; l++)
         {
-            for (int k = 0; k < 2;k++)
+            for (int k = 0; k < 2; k++)
             {
                 blit(map, buffer, 0,0,0,0, SCREEN_W, SCREEN_H);
                 affichage_hud_sorts(joueur, i, nb_joueurs, buffer, hud_icone, desc_sorts); // Blit de 5 logos (les mêmes pour la barre d'action, à changer après...)

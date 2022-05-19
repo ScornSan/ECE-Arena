@@ -6,7 +6,7 @@ void compteur_effet(t_joueur* joueur, int nb_joueurs)
     for (int j = 0; j < nb_joueurs; j++)
     {
         /// BOUCLIER
-        if (joueur[j].bouclier && joueur[j].compteur_bouclier > nb_joueurs)
+       /* if (joueur[j].bouclier && joueur[j].compteur_bouclier > nb_joueurs)
         {
             joueur[j].bouclier = 0;
             joueur[j].compteur_bouclier = 0;
@@ -14,9 +14,9 @@ void compteur_effet(t_joueur* joueur, int nb_joueurs)
         else
         {
             joueur[j].compteur_bouclier = joueur[j].compteur_bouclier + 1;
-        }
+        }*/
         /// BRULURE
-        if (joueur[j].brulure && joueur[j].compteur_bouclier >= 3 * nb_joueurs)
+        if (joueur[j].brulure && joueur[j].compteur_bouclier >= 3)
         {
             joueur[j].brulure = 0;
             joueur[j].compteur_brulure = 0;
@@ -24,6 +24,7 @@ void compteur_effet(t_joueur* joueur, int nb_joueurs)
         else
         {
             joueur[j].compteur_brulure = joueur[j].compteur_brulure + 1;
+            // Le joueur se brule donc lon lui inflige des dégats ici
         }
         /// GEL
         if (joueur[j].gel && joueur[j].compteur_gel >= 2)
@@ -70,6 +71,7 @@ void compteur_effet(t_joueur* joueur, int nb_joueurs)
         {
             joueur[j].rage = 0;
             joueur[j].compteur_rage = 0;
+            joueur[j].facteur_rage = 0;
         }
         else
         {
