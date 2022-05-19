@@ -60,7 +60,7 @@ void sort2_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BIT
         // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
         if (matrice[x_souris][y_souris].occuper != matrice[joueur[i].x][joueur[i].y].occuper && matrice[x_souris][y_souris].occuper != 0 && mouse_b&1 && green_temp1 == 140)
         {
-            int id_ennemi = matrice[x_souris][y_souris].occuper - 1;
+            int id_ennemi = matrice[x_souris][y_souris].id_case - 1;
             int degats = random(joueur[i].classe.spell[1].degats_min, joueur[i].classe.spell[1].degats_max);
             if (pourcentage_de_chance() < 9 && joueur[i].pa >= 4)
             {
@@ -110,7 +110,7 @@ void sort3_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BIT
         // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
         if (matrice[x_souris][y_souris].occuper != matrice[joueur[i].x][joueur[i].y].occuper && matrice[x_souris][y_souris].occuper != 0 && mouse_b&1 && green_temp1 == 140)
         {
-            int id_ennemi = matrice[x_souris][y_souris].occuper - 1;
+            int id_ennemi = matrice[x_souris][y_souris].id_case - 1;
             if (pourcentage_de_chance() < 8 && joueur[i].pa >= 4)
             {
                 joueur[id_ennemi].hemorragie = 1;
@@ -160,7 +160,7 @@ void sort4_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BIT
     }
     else
     {
-        textprintf_ex(buffer, font, matrice[joueur[i].x][joueur[i].y].x_bloc - 5, matrice[joueur[i].x][joueur[i].y].y_bloc - 50, makecol(joueur[i].red, joueur[i].green, joueur[i].blue), -1, "Effet de rage!");
+        textprintf_ex(buffer, font, matrice[joueur[i].x][joueur[i].y].x_bloc - 5, matrice[joueur[i].x][joueur[i].y].y_bloc - 50, makecol(joueur[i].red, joueur[i].green, joueur[i].blue), -1, "Deja sous effet de rage !!");
         display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
         rest(300);

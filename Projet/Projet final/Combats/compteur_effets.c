@@ -16,7 +16,7 @@ void compteur_effet(t_joueur* joueur, int nb_joueurs)
             joueur[j].compteur_bouclier = joueur[j].compteur_bouclier + 1;
         }
         /// BRULURE
-        if (joueur[j].brulure && joueur[j].compteur_bouclier >= 3 * nb_joueurs)
+        if (joueur[j].brulure && joueur[j].compteur_brulure >= 3 * nb_joueurs)
         {
             joueur[j].brulure = 0;
             joueur[j].compteur_brulure = 0;

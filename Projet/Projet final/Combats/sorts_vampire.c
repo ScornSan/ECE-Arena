@@ -111,8 +111,6 @@ void sort2_vampire(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITM
         textprintf_ex(buffer, font, 0, 0, makecol(0, 0, 0), -1, "Mouse X : %d", x_souris);
         textprintf_ex(buffer, font, 0, 10, makecol(0, 0, 0), -1, "Mouse Y : %d", y_souris);
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-        printf("occuper : %d\n", matrice[x_souris][y_souris].occuper);
-        printf("occuper : %d\n", matrice[joueur[(i + 1) % nb_joueurs].x][joueur[(i + 1) % nb_joueurs].y].occuper);
         if (mouse_x >= 370 && mouse_x <= 400 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1)
         {
             attaque = 1; // le joueur a annulé son attaque, l'attaque est considéré comme faite mais sans dégâts
@@ -128,6 +126,7 @@ void sort3_vampire(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITM
     int red_temp1, green_temp1,blue_temp1;
     int attaque = 0;
     int id_ennemi;
+    int attaque_effectue = 0;
     //time_t start = time(NULL);
     /// tant qu'on ne clique pas sur l'icone de l'attaque de base, ou qu'on a lancé l'attaque
     printf("On rentre\n");
@@ -154,7 +153,31 @@ void sort3_vampire(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITM
         // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
         if (matrice[x_souris][y_souris].occuper != matrice[joueur[i].x][joueur[i].y].occuper && matrice[x_souris][y_souris].occuper != 0 && mouse_b&1 && green_temp1 == 140)
         {
-            id_ennemi = matrice[x_souris][y_souris].occuper - 1;
+            id_ennemi = matrice[x_souris][y_souris].id_case - 1;
+            /// NORD OUEST
+            if (x_souris < joueur[i].x && !attaque_effectue)
+            {
+                attaque_effectue = 1;
+                animation_sort3_vampire(buffer, map, joueur, i, matrice, nb_joueurs, 1, respiration);
+            }
+            /// SUD EST
+            if (x_souris > joueur[i].x && !attaque_effectue)
+            {
+                attaque_effectue = 1;
+                animation_sort3_vampire(buffer, map, joueur, i, matrice, nb_joueurs, 3, respiration);
+            }
+            /// SUD OUEST
+            if (y_souris < joueur[i].y && !attaque_effectue)
+            {
+                attaque_effectue = 1;
+                animation_sort3_vampire(buffer, map, joueur, i, matrice, nb_joueurs, 0, respiration);
+            }
+            /// NORD EST
+            if (y_souris > joueur[i].y && !attaque_effectue)
+            {
+                attaque_effectue = 1;
+                animation_sort3_vampire(buffer, map, joueur, i, matrice, nb_joueurs, 2, respiration);
+            }
             joueur[id_ennemi].mortel = 1;
             joueur[id_ennemi].compteur_mortel = 1;
             attaque = 1; // on a attaqué, on peut sortir de la boucle en infligeant les dégâts, avec le % de chance

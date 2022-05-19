@@ -40,7 +40,7 @@ void affichage_hud_sorts(t_joueur* joueur, int i, int nb_joueurs, BITMAP* buffer
 
 void affichage_hud_joueur(BITMAP* buffer, BITMAP** hud, t_joueur* joueur, int i, BITMAP **icone_classes)
 {
-    if (joueur[i].pv <= 55)
+    if (!joueur[i].bouclier)
     {
         rectfill(buffer, 72, 650, 74 + joueur[i].pv * 3, 673, makecol(255, 0, 0)); // rectangle pv a reduire quand il perd des hp
     }
@@ -69,7 +69,7 @@ void affichage_hud_joueur(BITMAP* buffer, BITMAP** hud, t_joueur* joueur, int i,
     textprintf_ex(buffer, font, 120, 687, makecol(255, 255, 255), -1, "PM : %d/3", joueur[i].pm);
 }
 
-void affichage_general(BITMAP *buffer, BITMAP *map, t_joueur* joueur, int i, int nb_joueurs, BITMAP** hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts, int choix_double)
+void affichage_general(BITMAP *buffer, BITMAP *map, t_joueur* joueur, int i, int nb_joueurs, BITMAP** hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts)
 {
     // Affichage de la map
     blit(map, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);

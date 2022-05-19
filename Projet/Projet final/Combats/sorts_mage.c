@@ -70,7 +70,7 @@ void sort2_mage(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP*
         lecture_pixels_buffer_map(buffer_pixels, &red_temp1, &green_temp1,&blue_temp1); /// recupere position de la souris par rapport aux couleurs sur le buffer
         if (matrice[x_souris][y_souris].occuper != matrice[joueur[i].x][joueur[i].y].occuper && matrice[x_souris][y_souris].occuper != 0 && mouse_b&1 && green_temp1 == 140)
         {
-            id_ennemi = matrice[x_souris][y_souris].occuper - 1;
+            id_ennemi = matrice[x_souris][y_souris].id_case - 1;
             //printf("Ennemi : %d\n", id_ennemi);
             /// NORD OUEST
             if (x_souris < joueur[i].x && y_souris == joueur[i].y)
@@ -124,7 +124,6 @@ void sort2_mage(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP*
             }
             attaque = 1; // on a attaqué, on peut sortir de la boucle en infligeant les dégâts, avec le % de chance
         }
-
         if (mouse_x >= 370 && mouse_x <= 400 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1)
         {
             attaque = 1; // le joueur a annulé son attaque, l'attaque est considéré comme faite mais sans dégâts
@@ -158,7 +157,7 @@ void sort3_mage(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP*
         lecture_pixels_buffer_map(buffer_pixels, &red_temp1, &green_temp1,&blue_temp1); /// recupere position de la souris par rapport aux couleurs sur le buffer
         if (matrice[x_souris][y_souris].occuper != matrice[joueur[i].x][joueur[i].y].occuper && matrice[x_souris][y_souris].occuper != 0 && mouse_b&1 && green_temp1 == 140)
         {
-            id_ennemi = matrice[x_souris][y_souris].occuper - 1;
+            id_ennemi = matrice[x_souris][y_souris].id_case - 1;
             //printf("Ennemi : %d\n", id_ennemi);
             /// NORD OUEST
             if (x_souris < joueur[i].x && y_souris == joueur[i].y)

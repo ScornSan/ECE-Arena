@@ -25,45 +25,38 @@ void attaque_de_base(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BI
         // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
         if (matrice[x_souris][y_souris].occuper != matrice[joueur[i].x][joueur[i].y].occuper && matrice[x_souris][y_souris].occuper != 0 && mouse_b&1 && green_temp1 == 140)
         {
-            id_ennemi = matrice[x_souris][y_souris].occuper - 1;
+            id_ennemi = matrice[x_souris][y_souris].id_case - 1;
+            joueur[i].pa = joueur[i].pa - 2;
             //printf("Ennemi : %d\n", id_ennemi);
             /// NORD OUEST
             if (x_souris < joueur[i].x && y_souris == joueur[i].y)
             {
-                printf("Nord ouest\n");
                 animation_attaque_de_base(buffer, map, joueur, i, matrice, nb_joueurs, 1, respiration);
                 blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             }
             /// SUD EST
             if (x_souris > joueur[i].x && y_souris == joueur[i].y)
             {
-                printf("Sud est\n");
                 animation_attaque_de_base(buffer, map, joueur, i, matrice, nb_joueurs, 3, respiration);
                 blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             }
             /// SUD OUEST
             if (x_souris == joueur[i].x && y_souris < joueur[i].y)
             {
-                printf("Sud ouest\n");
                 animation_attaque_de_base(buffer, map, joueur, i, matrice, nb_joueurs, 0, respiration);
                 blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             }
             /// NORD EST
             if (x_souris == joueur[i].x && y_souris > joueur[i].y)
             {
-                printf("Nord est\n");
                 animation_attaque_de_base(buffer, map, joueur, i, matrice, nb_joueurs, 2, respiration);
                 blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             }
+            joueur[id_ennemi].pv = joueur[id_ennemi].pv - random(1, 5);
             attaque = 1; // on a attaqué, on peut sortir de la boucle en infligeant les dégâts, avec le % de chance
         }
-
-        textprintf_ex(buffer, font, 0, 0, makecol(0, 0, 0), -1, "Mouse X : %d", x_souris);
-        textprintf_ex(buffer, font, 0, 10, makecol(0, 0, 0), -1, "Mouse Y : %d", y_souris);
-        textprintf_ex(buffer, font, 0, 20, makecol(0, 0, 0), -1, "Ennemi: %d et %d", joueur[id_ennemi].x, joueur[id_ennemi].y);
         if (mouse_x >= 300 && mouse_x <= 330 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1)
         {
-            animation_attaque_de_base(buffer, map, joueur, i, matrice, nb_joueurs, 0, respiration);
             attaque = 1; // le joueur a annulé son attaque, l'attaque est considéré comme faite mais sans dégâts
         }
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
@@ -123,7 +116,6 @@ void sort3(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP *buff
         sort3_mage(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, respiration);
         break;
     case 3: // VAMPIRE
-        printf("On rentre\n");
         sort3_vampire(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, respiration);
         break;
     case 4: // ASSASSIN

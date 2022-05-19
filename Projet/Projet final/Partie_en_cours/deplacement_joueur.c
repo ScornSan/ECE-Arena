@@ -1,7 +1,7 @@
 #include "../prototypes.h"
 #include "../structures.h"
 
-void deplacement_personnage(BITMAP * buffer,BITMAP * fond, t_joueur* joueur, int i, int ligne_souris, int colonne_souris, t_bloc matrice[23][23], int *deplacement_effectuer, int nb_joueurs, int respiration_joueur[], int choix_double)
+void deplacement_personnage(BITMAP * buffer,BITMAP * fond, t_joueur* joueur, int i, int ligne_souris, int colonne_souris, t_bloc matrice[23][23], int *deplacement_effectuer, int nb_joueurs, int respiration_joueur[])
 {
     int compteur = 0;
     /// affichage du message d'erreur apres changement de prog et avec chrono :::::: A REGLER
@@ -40,6 +40,7 @@ void deplacement_personnage(BITMAP * buffer,BITMAP * fond, t_joueur* joueur, int
         y_augmente = 0;
 
     matrice[joueur[i].x][joueur[i].y].occuper = 0;
+    matrice[joueur[i].x][joueur[i].y].id_case = 0;
     while (!joueur[i].gel && (joueur[i].x != ligne_souris || joueur[i].y != colonne_souris) && (abs(joueur[i].x - ligne_souris) + abs(joueur[i].y - colonne_souris)) <= joueur[i].pm && !matrice[ligne_souris][colonne_souris].occuper && matrice[ligne_souris][colonne_souris].accessible)
     {
         compteur++;
@@ -55,6 +56,7 @@ void deplacement_personnage(BITMAP * buffer,BITMAP * fond, t_joueur* joueur, int
             //masked_blit(joueur[i].classe.deplacement[direction][0], buffer, matrice[joueur[i].x][joueur[i].y].x_bloc, matrice[joueur[i].x][joueur[i].y].y_bloc, matrice[joueur[i].x][joueur[i].y].x_bloc + 49, matrice[joueur[i].x][joueur[i].y].y_bloc + 64, SCREEN_W, SCREEN_H);
             //circlefill(buffer, matrice[joueur[i].x][joueur[i].y].x_bloc, matrice[joueur[i].x][joueur[i].y].y_bloc, 9, makecol(0,0,0));
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+            joueur[i].casesparcourues += 1;
         }
         /// le joueur va vers le nord ouest
         while(!x_augmente && joueur[i].x != ligne_souris && matrice[joueur[i].x - 1][joueur[i].y].accessible)
@@ -65,6 +67,7 @@ void deplacement_personnage(BITMAP * buffer,BITMAP * fond, t_joueur* joueur, int
             joueur[i].x = joueur[i].x -1;
             //joueur[i].pm--;
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+            joueur[i].casesparcourues += 1;
         }
         /// le joueur va vers le nord est
         while(y_augmente && joueur[i].y != colonne_souris && matrice[joueur[i].x][joueur[i].y + 1].accessible)
@@ -75,6 +78,7 @@ void deplacement_personnage(BITMAP * buffer,BITMAP * fond, t_joueur* joueur, int
             joueur[i].y = joueur[i].y +1;
             //joueur[i].pm--;
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+            joueur[i].casesparcourues += 1;
         }
         /// le joueur va vers le sud ouest
         while(!y_augmente && joueur[i].y != colonne_souris && matrice[joueur[i].x][joueur[i].y - 1].accessible)
@@ -86,6 +90,7 @@ void deplacement_personnage(BITMAP * buffer,BITMAP * fond, t_joueur* joueur, int
 
             //joueur[i].pm--;
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+            joueur[i].casesparcourues += 1;
         }
         if (compteur == 2)
         {
@@ -93,7 +98,7 @@ void deplacement_personnage(BITMAP * buffer,BITMAP * fond, t_joueur* joueur, int
         }
         *deplacement_effectuer = *deplacement_effectuer +1;
     }
-    if (choix_double)
+    if (joueur[i].choix_double)
     {
         matrice[joueur[i].x][joueur[i].y].occuper = (i % 2) + 1;
     }
@@ -101,6 +106,7 @@ void deplacement_personnage(BITMAP * buffer,BITMAP * fond, t_joueur* joueur, int
     {
         matrice[joueur[i].x][joueur[i].y].occuper = i + 1;
     }
+    matrice[joueur[i].x][joueur[i].y].id_case = i + 1;
 
     rest(20);
 }

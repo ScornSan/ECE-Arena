@@ -24,7 +24,7 @@ void test_effets(t_joueur* joueur, int nb_joueurs)
         if (joueur[j].lucide)
         {
             joueur[j].pa = 8;
-            joueur[j].pa = 5;
+            joueur[j].pm = 5;
         }
         /// RAGE
         if (joueur[j].rage)
@@ -32,6 +32,10 @@ void test_effets(t_joueur* joueur, int nb_joueurs)
             joueur[j].classe.spell[1].degats_min = 8;
             joueur[j].classe.spell[1].degats_max = 12;
             joueur[j].pm = 4;
+        }
+        if (joueur[j].pv <= 0)
+        {
+            joueur[j].vivant = 0;
         }
     }
 }
