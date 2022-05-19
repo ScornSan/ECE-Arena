@@ -27,7 +27,7 @@ void creation_icones_classes(t_joueur* joueur)
                     if (k < 2)
                     {
                         sprintf(chargement, "SPRITES/CHEVALIER/ATTAQUE/attack_%d.bmp", j);
-                        joueur[i].classe.anim_attaques[0][j][k] = load_bitmap(chargement, NULL);
+                        joueur[i].classe.anim_attaques[0][j][0] = load_bitmap(chargement, NULL);
                         sprintf(respiration, "SPRITES/CHEVALIER/RESPIRATION/breath_%d_%d.bmp", j, k);
                         joueur[i].classe.respiration[j][k] = load_bitmap(respiration, NULL);
                     }
@@ -92,7 +92,9 @@ void creation_icones_classes(t_joueur* joueur)
                 sprintf(chargement, "BITMAP/sort%d_mutant.bmp", j + 1);
                 joueur[i].classe.spell[j].logo = load_bitmap(chargement, NULL);
                 sprintf(chargement, "SPRITES/VAMPIRE/ATTAQUE/attack_%d.bmp", j);
-                joueur[i].classe.anim_attaques[2][j][j] = load_bitmap(chargement, NULL);
+                joueur[i].classe.anim_attaques[2][j][0] = load_bitmap(chargement, NULL);
+                sprintf(chargement, "SPRITES/VAMPIRE/CONJURATION/conju_%d_0.bmp", j);
+                joueur[i].classe.spell[2].animation_sort_perso[j][0] = load_bitmap(chargement, NULL);
                 if(j<2)
                 {
                     sprintf(chargement, "SPRITES/VAMPIRE/SORTS/bats_%d.bmp", j);
@@ -124,7 +126,9 @@ void creation_icones_classes(t_joueur* joueur)
                 sprintf(chargement, "BITMAP/sort%d_assassin.bmp", j + 1);
                 joueur[i].classe.spell[j].logo = load_bitmap(chargement, NULL);
                 sprintf(chargement, "SPRITES/NINJA/ATTAQUE/attack_%d.bmp", j);
-                joueur[i].classe.anim_attaques[3][j][j] = load_bitmap(chargement, NULL);
+                joueur[i].classe.anim_attaques[3][j][0] = load_bitmap(chargement, NULL);
+                sprintf(chargement, "SPRITES/NINJA/LUCIDITE/aura_%d.bmp", j);
+                joueur[i].classe.spell[0].animation_sort[j] = load_bitmap(chargement, NULL);
                 if(j<2)
                 {
                     sprintf(chargement, "SPRITES/NINJA/SORTS/smoke_%d.bmp", j);
@@ -142,7 +146,7 @@ void creation_icones_classes(t_joueur* joueur)
                         joueur[i].classe.respiration[j][k] = load_bitmap(respiration, NULL);
                     }
                 }
-                if (!joueur[i].classe.spell[j].description || !joueur[i].classe.spell[j].logo || !joueur[i].classe.respiration[j][0])
+                if (!joueur[i].classe.spell[j].description || !joueur[i].classe.spell[j].logo || !joueur[i].classe.respiration[j][0] || !joueur[i].classe.spell[0].animation_sort[j])
                 {
                     allegro_message("erreur creation classe assassin");
                     allegro_exit();
@@ -154,17 +158,26 @@ void creation_icones_classes(t_joueur* joueur)
     }
 }
 
-void creation_classes(t_joueur* joueur, int nb_joueurs)
+void creation_classes(t_joueur* joueur, int nb_joueurs, int choix_double)
 {
     int i;
+    //creation des couleurs joueurs
+    joueur[0].red = 170;
+    joueur[0].green = 0;
+    joueur[0].blue = 0;
+
+    joueur[1].red = 0;
+    joueur[1].green = 0;
+    joueur[1].blue = 170;
     for (i = 0; i < nb_joueurs; i++)
     {
-        joueur[i].pv = 55;
+        joueur[i].pv = PV_JOUEUR;
         joueur[i].pm = 3;
         joueur[i].pa = 6;
         joueur[i].classe.attaque = 5;
         joueur[i].direction = 0;
         joueur[i].vivant = 1;
+        joueur[i].id_joueur = i + 1;
         joueur[i].elimine = 0;
         joueur[i].bouclier = 0;
         joueur[i].brulure = 0;
@@ -179,28 +192,46 @@ void creation_classes(t_joueur* joueur, int nb_joueurs)
         joueur[i].compteur_hemorragie = 0;
         joueur[i].bouclier = 0;
         joueur[i].compteur_bouclier = 0;
+        joueur[i].rage = 0;
+        joueur[i].compteur_rage = 0;
         joueur[i].classe.logo_attaque = load_bitmap("BITMAP/sort_attaque.bmp", NULL);
-        if (i == 2)
-        {
-            joueur[2].red = 0;
-            joueur[2].green = 170;
-            joueur[2].blue = 0;
-        }
-        if (i == 3)
-        {
-            joueur[3].red = 0;
-            joueur[3].green = 230;
-            joueur[3].blue = 230;
-        }
         joueur[i].shield = load_bitmap("SPRITES/CHEVALIER/BOUCLIER/shield_0.bmp", NULL);
-    }
-    //creation des couleurs joueurs
-    joueur[0].red = 170;
-    joueur[0].green = 0;
-    joueur[0].blue = 0;
+        joueur[i].skull = load_bitmap("SPRITES/VAMPIRE/CONJURATION/skull_0.bmp", NULL);
+        if (choix_double)
+        {
+            joueur[i].choix_double = 1;
+            joueur[0].red = 170;
+            joueur[0].green = 0;
+            joueur[0].blue = 0;
 
-    joueur[1].red = 0;
-    joueur[1].green = 0;
-    joueur[1].blue = 170;
+            joueur[1].red = 0;
+            joueur[1].green = 170;
+            joueur[1].blue = 0;
+
+            joueur[2].red = 170;
+            joueur[2].green = 0;
+            joueur[2].blue = 0;
+
+            joueur[3].red = 0;
+            joueur[3].green = 170;
+            joueur[3].blue = 0;
+        }
+        else
+        {
+            joueur[i].choix_double = 0;
+            if (i == 2)
+            {
+                joueur[2].red = 0;
+                joueur[2].green = 170;
+                joueur[2].blue = 0;
+            }
+            if (i == 3)
+            {
+                joueur[3].red = 0;
+                joueur[3].green = 230;
+                joueur[3].blue = 230;
+            }
+        }
+    }
 }
 

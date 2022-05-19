@@ -40,6 +40,7 @@ void deplacement_personnage(BITMAP * buffer,BITMAP * fond, t_joueur* joueur, int
         y_augmente = 0;
 
     matrice[joueur[i].x][joueur[i].y].occuper = 0;
+    matrice[joueur[i].x][joueur[i].y].id_case = 0;
     while (!joueur[i].gel && (joueur[i].x != ligne_souris || joueur[i].y != colonne_souris) && (abs(joueur[i].x - ligne_souris) + abs(joueur[i].y - colonne_souris)) <= joueur[i].pm && !matrice[ligne_souris][colonne_souris].occuper && matrice[ligne_souris][colonne_souris].accessible)
     {
         compteur++;
@@ -96,8 +97,16 @@ void deplacement_personnage(BITMAP * buffer,BITMAP * fond, t_joueur* joueur, int
             break;
         }
         *deplacement_effectuer = *deplacement_effectuer +1;
-
     }
-    matrice[joueur[i].x][joueur[i].y].occuper = i + 1;
+    if (joueur[i].choix_double)
+    {
+        matrice[joueur[i].x][joueur[i].y].occuper = (i % 2) + 1;
+    }
+    else
+    {
+        matrice[joueur[i].x][joueur[i].y].occuper = i + 1;
+    }
+    matrice[joueur[i].x][joueur[i].y].id_case = i + 1;
+
     rest(20);
 }

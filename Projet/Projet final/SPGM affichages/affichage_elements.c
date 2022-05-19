@@ -32,6 +32,10 @@ void affichage_joueurs_respiration(BITMAP *buffer, t_joueur* joueur, int i, int 
             {
                 masked_blit(joueur[j].shield, buffer,0,0,matrice[joueur[j].x][joueur[j].y].x_bloc - 21,matrice[joueur[j].x][joueur[j].y].y_bloc - 93, SCREEN_W, SCREEN_H);
             }
+            if (joueur[j].mortel)
+            {
+                masked_blit(joueur[j].skull, buffer,0,0,matrice[joueur[j].x][joueur[j].y].x_bloc - 21,matrice[joueur[j].x][joueur[j].y].y_bloc - 93, SCREEN_W, SCREEN_H);
+            }
         }
         respiration_joueur[j] = (respiration_joueur[j] + 1) % 30;
     }
