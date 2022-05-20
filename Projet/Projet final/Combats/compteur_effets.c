@@ -66,7 +66,7 @@ void compteur_effet(t_joueur* joueur, int nb_joueurs)
             joueur[j].compteur_mortel = joueur[j].compteur_mortel + 1;
         }
         /// RAGE
-        if (joueur[j].rage && joueur[j].compteur_rage >= 2)
+        if (joueur[j].rage && joueur[j].compteur_rage >= 2 *nb_joueurs)
         {
             joueur[j].rage = 0;
             joueur[j].compteur_rage = 0;

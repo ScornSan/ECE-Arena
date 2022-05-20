@@ -197,6 +197,8 @@ void creation_classes(t_joueur* joueur, int nb_joueurs, int choix_double)
         joueur[i].classe.logo_attaque = load_bitmap("BITMAP/sort_attaque.bmp", NULL);
         joueur[i].shield = load_bitmap("SPRITES/CHEVALIER/BOUCLIER/shield_0.bmp", NULL);
         joueur[i].skull = load_bitmap("SPRITES/VAMPIRE/CONJURATION/skull_0.bmp", NULL);
+        // Ajout rage
+        joueur[i].ragebmp = load_bitmap("SPRITES/CHEVALIER/RAGE/rage_0.bmp", NULL);
         if (choix_double)
         {
             joueur[i].choix_double = 1;

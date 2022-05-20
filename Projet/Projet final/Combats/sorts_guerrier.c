@@ -206,33 +206,41 @@ void sort3_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BIT
 
 void sort4_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP *buffer_map, t_bloc matrice[23][23], int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts, int respiration_joueur[])
 {
-    int red_temp, green_temp,blue_temp;
+    time_t start = (int)(time(NULL));
     //time_t start = time(NULL);
-    clear_bitmap(buffer);
-    affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
-    /// ANIMATION A FAIRE
-    //dessin_bloc_unique(buffer, joueur[i].x, joueur[i].y, matrice, 0, 220, 0);
-    affichage_joueurs_respiration(buffer, joueur, i, nb_joueurs, matrice, respiration_joueur, i);
-    if (!joueur[i].rage && joueur[i].pa >= 5 && pourcentage_de_chance() < 6)
+    /// tant qu'on ne clique pas sur l'icone de l'attaque de base, ou qu'on a lancé l'attaque
+    //L'attaque se une fois le while franchi
+    if (pourcentage_de_chance() < 6 && joueur[i].pa >= 5)
     {
+        joueur[i].pa = joueur[i].pa - 5;
         joueur[i].rage = 1;
         joueur[i].compteur_rage = 1;
-        textprintf_ex(buffer, font, matrice[joueur[i].x][joueur[i].y].x_bloc - 5, matrice[joueur[i].x][joueur[i].y].y_bloc - 50, makecol(joueur[i].red, joueur[i].green, joueur[i].blue), -1, "Effet de rage!");
-        display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
-        blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-        rest(300);
-        lecture_pixels_buffer_map(buffer_map, &red_temp, &green_temp,&blue_temp); /// recupere position de la souris par rapport aux couleurs sur le buffer
-        reperage_bloc_souris(&x_souris, &y_souris, red_temp, green_temp, blue_temp, matrice, joueur, i); /// repere la couleur du bloc sous la souris grace a la ligne d avant
+            while ((int)(time(NULL) - start < 1))
+            {
+                clear_bitmap(buffer);
+                affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
+                //dessin_bloc_unique(buffer, joueur[i].x, joueur[i].y, matrice, 0, 220, 0);
+                affichage_joueurs_respiration(buffer, joueur, i, nb_joueurs, matrice, respiration_joueur, 5);
+                textout_ex(buffer, font,"Rage !", matrice[joueur[i].x][joueur[i].y].x_bloc - 15, matrice[joueur[i].x][joueur[i].y].y_bloc - 80, makecol(0,0,0), -1);
+                display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
+                blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+                rest(80);
+                // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
+            }
+
     }
     else
     {
-        textprintf_ex(buffer, font, matrice[joueur[i].x][joueur[i].y].x_bloc - 5, matrice[joueur[i].x][joueur[i].y].y_bloc - 50, makecol(joueur[i].red, joueur[i].green, joueur[i].blue), -1, "Deja sous effet de rage !!");
-        display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
-        blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-        rest(300);
-        lecture_pixels_buffer_map(buffer_map, &red_temp, &green_temp,&blue_temp); /// recupere position de la souris par rapport aux couleurs sur le buffer
-        reperage_bloc_souris(&x_souris, &y_souris, red_temp, green_temp, blue_temp, matrice, joueur, i); /// repere la couleur du bloc sous la souris grace a la ligne d avant
+        while ((int)(time(NULL) - start < 2))
+        {
+            clear_bitmap(buffer);
+            affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
+            //dessin_bloc_unique(buffer, joueur[i].x, joueur[i].y, matrice, 0, 220, 0);
+            affichage_joueurs_respiration(buffer, joueur, i, nb_joueurs, matrice, respiration_joueur, 5);
+            textout_ex(buffer, font,"SORT MANQUE !", matrice[joueur[i].x][joueur[i].y].x_bloc - 15, matrice[joueur[i].x][joueur[i].y].y_bloc - 80, makecol(0,0,0), -1);
+            display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
+            blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+            // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
+        }
     }
-
-    // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
 }

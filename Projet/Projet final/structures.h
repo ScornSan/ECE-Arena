@@ -87,6 +87,7 @@ typedef struct Players
     int degatstotal;
     BITMAP *shield;
     BITMAP *skull;
+    BITMAP *ragebmp;
     t_classe classe;
 }t_joueur;
 

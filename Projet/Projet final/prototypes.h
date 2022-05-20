@@ -8,6 +8,7 @@
 #include <time.h>
 #include <string.h>
 
+
 void creation_icones_classes();
 void reperage_bloc_souris();
 void reperage_chemin();
