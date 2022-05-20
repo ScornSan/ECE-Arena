@@ -34,6 +34,7 @@ void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BI
     int  poscarac=0;
     int place= 0;
     int nb = 0;
+    int compteur = 0;
 
     fflush(stdin);
     if(stop != *nb_joueur)
@@ -66,11 +67,12 @@ void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BI
             carac = (char)touche;
 
             // afficher le caractère à une position x croissante
-            if( carac != '\r' && !key[KEY_BACKSPACE] )
+            if( carac != '\r' && !key[KEY_BACKSPACE] && compteur != 20)
             {
                 textprintf_ex(buffer,font,x+poscarac,y,makecol(255,255,255),makecol(0,0,0),"%c",carac);
                 pseudo[*num][place] = carac;
                 poscarac = poscarac+8;
+                compteur = compteur +1;
             }
 
             if (key[KEY_BACKSPACE] && x+poscarac >= 506)
@@ -81,6 +83,7 @@ void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BI
                     pseudo[*num][place] = ' ';
                     textprintf_ex(buffer,font,x+poscarac,y,makecol(255,255,255),makecol(0,0,0)," ");
                     place = place-2;
+                    compteur = compteur -1;
                 }
                 else
                 {
@@ -89,6 +92,7 @@ void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BI
                     pseudo[*num][place-1] = ' ';
                     textprintf_ex(buffer,font,x+poscarac,y,makecol(255,255,255),makecol(0,0,0)," ");
                     place = place-2;
+                    compteur = compteur -1;
                 }
             }
 
@@ -98,14 +102,10 @@ void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BI
                 y+=10;
                 stop=1;
                 *num = *num +1;
+
             }
             place = place+1;
             //display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
-        }
-        if ( mouse_b&1 && mouse_x>= 553 && mouse_x <= 729 && mouse_y >= 540 && mouse_y <= 591)
-        {
-            blit(fond, buffer, 0,0,0,0, SCREEN_W, SCREEN_H);
-
         }
 
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
@@ -151,6 +151,7 @@ void menu_principal(BITMAP *buffer, BITMAP *accueil, BITMAP *cursor,  FONT* myfo
 
 int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPLE* son_menu, FONT* myfont, BITMAP* son_on, BITMAP* son_off)
 {
+    int choix_double = 0;
     int fin;
     int ok;
     int nb_joueur = 0;
@@ -300,37 +301,46 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
 
 
 
-            //display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
-            /*while(!key[KEY_BACKSPACE])
-            {
-                prenom(nb_joueur, buffer, joueur, fond, cursor);
-            }*/
-            rest(200);
+                //display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
+                /*while(!key[KEY_BACKSPACE])
+                {
+                    prenom(nb_joueur, buffer, joueur, fond, cursor);
+                }*/
+                rest(200);
 
 
-            while(nb != nb_joueur)
-            {
+                while(nb != nb_joueur)
+                {
 
-                prenom(&nb_joueur, buffer, pseudo, fond, cursor, &nb, y, &clic, son_menu, son_on, son_off);
-                display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
-                y = y + 15;
+                    prenom(&nb_joueur, buffer, pseudo, fond, cursor, &nb, y, &clic, son_menu, son_on, son_off);
+                    display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
+                    y = y + 15;
 
-            }
-            fin = 1;
+                }
+                fin = 1;
             }
 
         }
         /// si on appuie sur double
         if(mouse_b&1 && mouse_x>= 423 && mouse_x <= 834 && mouse_y >= 338 && mouse_y <= 411 )
         {
-            while(!key[KEY_ESC] && !(mouse_b&2))
+            clear_bitmap(buffer);
+            choix_double = 1;
+            install_keyboard();
+            blit(nom_joueurs,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
+            textprintf_ex(buffer,font,500,270, makecol(255,255,255),-1, " Veuillez entrez vos pseudos :");
+            blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+            nb_joueur = 4;
+            while(nb != nb_joueur)
             {
-                blit(fond,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
-                blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+                prenom(&nb_joueur, buffer, pseudo, fond, cursor, &nb, y, &clic, son_menu, son_on, son_off);
+                display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
+                y = y + 15;
             }
+            fin = 1;
         }
-        blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     }
+    blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     destroy_bitmap(creators);
     destroy_bitmap(choix_nb_joueurs);
     return nb_joueur;

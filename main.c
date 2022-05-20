@@ -61,7 +61,7 @@ int main()
         return 1;
     }
 
-    son_menu=  load_wav("SOUND/sound_hub.wav"); //charger un wav
+    son_menu= load_wav("SOUND/sound_hub.wav"); //charger un wav
     son_battle= load_wav("SOUND/sound_battle.wav"); //charger un wav
     son_on = load_bitmap("BITMAP/son_on.bmp", NULL);
     son_off = load_bitmap("BITMAP/son_off.bmp", NULL);
