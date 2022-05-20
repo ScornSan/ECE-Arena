@@ -9,11 +9,81 @@ void affichage_joueurs(BITMAP *buffer, t_joueur* joueur, int i, int nb_joueurs, 
         {
             //couleur_sous_joueur(buffer, joueur[j].x, joueur[j].y, matrice);
             draw_sprite(buffer, joueur[j].classe.deplacement[joueur[j].direction][0],  matrice[joueur[j].x][joueur[j].y].x_bloc - 22, matrice[joueur[j].x][joueur[j].y].y_bloc - 52);
-
             //masked_blit(joueur[j].classe.deplacement[joueur[j].direction][1], buffer, 0, 0, matrice[joueur[j].x][joueur[j].y].x_bloc - 22, matrice[joueur[j].x][joueur[j].y].y_bloc - 52, 49, 64);
         }
     }
 }
+
+void affichage_joueurs_respiration(BITMAP *buffer, t_joueur* joueur, int i, int nb_joueurs, t_bloc matrice[23][23], int respiration_joueur[], int id_joueur_deplace)
+{
+    for (int j = 0; j < nb_joueurs; j++)
+    {
+        if (id_joueur_deplace != j) // On ne fait pas respirer le joueur qui se déplace
+        {
+            if (respiration_joueur[j] < 15)
+            {
+                draw_sprite(buffer, joueur[j].classe.respiration[joueur[j].direction][0],  matrice[joueur[j].x][joueur[j].y].x_bloc - 22, matrice[joueur[j].x][joueur[j].y].y_bloc - 52);
+            }
+            else
+            {
+                draw_sprite(buffer, joueur[j].classe.respiration[joueur[j].direction][1],  matrice[joueur[j].x][joueur[j].y].x_bloc - 22, matrice[joueur[j].x][joueur[j].y].y_bloc - 52);
+            }
+            if (joueur[j].bouclier)
+            {
+                masked_blit(joueur[j].shield, buffer,0,0,matrice[joueur[j].x][joueur[j].y].x_bloc - 21,matrice[joueur[j].x][joueur[j].y].y_bloc - 93, SCREEN_W, SCREEN_H);
+            }
+        }
+        respiration_joueur[j] = (respiration_joueur[j] + 1) % 30;
+    }
+}
+
+/*void respiration(t_joueur* joueur, int id_joueur, BITMAP *buffer, t_bloc matrice[23][23])
+{
+    switch(id_joueur)
+    {
+    case 0:
+        if (id_joueur < 15)
+        {
+            draw_sprite(buffer, joueur[id_joueur].classe.respiration[joueur[id_joueur].direction][0],  matrice[joueur[id_joueur].x][joueur[id_joueur].y].x_bloc - 22, matrice[joueur[id_joueur].x][joueur[id_joueur].y].y_bloc - 52);
+        }
+        else
+        {
+            draw_sprite(buffer, joueur[id_joueur].classe.respiration[joueur[id_joueur].direction][1],  matrice[joueur[id_joueur].x][joueur[id_joueur].y].x_bloc - 22, matrice[joueur[id_joueur].x][joueur[id_joueur].y].y_bloc - 52);
+        }
+        break;
+    case 1:
+        if (id_joueur < 15)
+        {
+            draw_sprite(buffer, joueur[id_joueur].classe.respiration[joueur[id_joueur].direction][0],  matrice[joueur[id_joueur].x][joueur[id_joueur].y].x_bloc - 22, matrice[joueur[id_joueur].x][joueur[id_joueur].y].y_bloc - 52);
+        }
+        else
+        {
+            draw_sprite(buffer, joueur[id_joueur].classe.respiration[joueur[id_joueur].direction][1],  matrice[joueur[id_joueur].x][joueur[id_joueur].y].x_bloc - 22, matrice[joueur[id_joueur].x][joueur[id_joueur].y].y_bloc - 52);
+        }
+        break;
+    case 2:
+        if (id_joueur < 15)
+        {
+            draw_sprite(buffer, joueur[id_joueur].classe.respiration[joueur[id_joueur].direction][0],  matrice[joueur[id_joueur].x][joueur[id_joueur].y].x_bloc - 22, matrice[joueur[id_joueur].x][joueur[id_joueur].y].y_bloc - 52);
+        }
+        else
+        {
+            draw_sprite(buffer, joueur[id_joueur].classe.respiration[joueur[id_joueur].direction][1],  matrice[joueur[id_joueur].x][joueur[id_joueur].y].x_bloc - 22, matrice[joueur[id_joueur].x][joueur[id_joueur].y].y_bloc - 52);
+        }
+        break;
+    case 3:
+        if (id_joueur < 15)
+        {
+            draw_sprite(buffer, joueur[id_joueur].classe.respiration[joueur[id_joueur].direction][0],  matrice[joueur[id_joueur].x][joueur[id_joueur].y].x_bloc - 22, matrice[joueur[id_joueur].x][joueur[id_joueur].y].y_bloc - 52);
+        }
+        else
+        {
+            draw_sprite(buffer, joueur[id_joueur].classe.respiration[joueur[id_joueur].direction][1],  matrice[joueur[id_joueur].x][joueur[id_joueur].y].x_bloc - 22, matrice[joueur[id_joueur].x][joueur[id_joueur].y].y_bloc - 52);
+        }
+        break;
+    }
+
+}*/
 
 void encadrement_souris(BITMAP * buffer, int rouge, int vert, int bleu)
 {

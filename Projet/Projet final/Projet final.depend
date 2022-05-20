@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1652391212 source:c:\repos\ece-arena\projet\projet final\main.c
+1652618357 source:c:\repos\ece-arena\projet\projet final\main.c
 	"structures.h"
 	"prototypes.h"
 
@@ -9,37 +9,37 @@
 	<allegro.h>
 	<time.h>
 
-1652291955 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\choix_classes.c
+1652631133 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\choix_classes.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652518984 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\creation_classes.c
+1652738309 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\creation_classes.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652388435 c:\repos\ece-arena\projet\projet final\structures.h
+1652737322 c:\repos\ece-arena\projet\projet final\structures.h
 	<allegro.h>
 
-1652453667 c:\repos\ece-arena\projet\projet final\prototypes.h
+1652738469 c:\repos\ece-arena\projet\projet final\prototypes.h
 	<stdio.h>
 	<stdlib.h>
 	<allegro.h>
 	<time.h>
 	<string.h>
 
-1652524733 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\tour_joueur.c
+1652738399 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\tour_joueur.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652518248 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\deplacement_joueur.c
+1652616608 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\deplacement_joueur.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652291928 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\menu.c
+1652548429 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\menu.c
 	"../structures.h"
 	"../prototypes.h"
 
-1652262818 source:c:\repos\ece-arena\projet\projet final\spgm affichages\affichage_elements.c
+1652737383 source:c:\repos\ece-arena\projet\projet final\spgm affichages\affichage_elements.c
 	"../prototypes.h"
 	"../structures.h"
 
@@ -67,11 +67,11 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1652291480 source:c:\repos\ece-arena\projet\projet final\animations\animation_deplacement.c
+1652718292 source:c:\repos\ece-arena\projet\projet final\animations\animation_deplacement.c
 	"../prototypes.h"
 	"../structures.h"
 
-1651852848 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\position_depart_joueurs.c
+1652706531 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\position_depart_joueurs.c
 	"../prototypes.h"
 	"../structures.h"
 
@@ -145,31 +145,31 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1652031100 source:c:\repos\ece-arena\projet\projet final\spgm affichages\afffichage_hud.c
+1652631556 source:c:\repos\ece-arena\projet\projet final\spgm affichages\afffichage_hud.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652472249 source:c:\repos\ece-arena\projet\projet final\combats\selection_sort.c
+1652727123 source:c:\repos\ece-arena\projet\projet final\combats\selection_sort.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652472040 source:c:\repos\ece-arena\projet\projet final\combats\sorts_assassin.c
+1652738517 source:c:\repos\ece-arena\projet\projet final\combats\sorts_assassin.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652520122 source:c:\repos\ece-arena\projet\projet final\combats\sorts_guerrier.c
+1652738546 source:c:\repos\ece-arena\projet\projet final\combats\sorts_guerrier.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652473900 source:c:\repos\ece-arena\projet\projet final\combats\sorts_mage.c
+1652727339 source:c:\repos\ece-arena\projet\projet final\combats\sorts_mage.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652471996 source:c:\repos\ece-arena\projet\projet final\combats\sorts_vampire.c
+1652738578 source:c:\repos\ece-arena\projet\projet final\combats\sorts_vampire.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652368952 source:c:\repos\ece-arena\projet\projet final\animations\anim_attaque_de_base.c
+1652710535 source:c:\repos\ece-arena\projet\projet final\animations\anim_attaque_de_base.c
 	"../prototypes.h"
 	"../structures.h"
 
@@ -177,113 +177,137 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1652389491 source:c:\repos\ece-arena\projet\projet final\fin_de_partie\classement_fin.c
+1652632679 source:c:\repos\ece-arena\projet\projet final\fin_de_partie\classement_fin.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652524787 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\animations\anim_attaque_de_base.c
+1652738042 source:c:\repos\ece-arena\projet\projet final\combats\compteur_effets.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652524787 c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\prototypes.h
+1652738426 source:c:\repos\ece-arena\projet\projet final\combats\test_effet_tour_suivant.c
+	"../prototypes.h"
+	"../structures.h"
+
+1652723576 source:c:\repos\ece-arena\projet\projet final\animations\animation_sort_mage.c
+	"../prototypes.h"
+	"../structures.h"
+
+1652974339 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\animations\anim_attaque_de_base.c
+	"../prototypes.h"
+	"../structures.h"
+
+1652738651 c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\prototypes.h
 	<stdio.h>
 	<stdlib.h>
 	<allegro.h>
 	<time.h>
 	<string.h>
 
-1652524787 c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\structures.h
+1652889630 c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\structures.h
 	<allegro.h>
 
-1652524787 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\animations\animation_deplacement.c
+1652738651 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\animations\animation_deplacement.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652529367 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\combats\selection_sort.c
+1652970946 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\animations\animation_sort_mage.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652544309 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\combats\sorts_assassin.c
+1652797145 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\combats\compteur_effets.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652524787 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\combats\sorts_guerrier.c
+1652964673 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\combats\selection_sort.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652524787 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\combats\sorts_mage.c
+1652968574 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\combats\sorts_assassin.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652533604 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\combats\sorts_vampire.c
+1652738651 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\combats\sorts_guerrier.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652524787 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\fin_de_partie\classement_fin.c
+1652974339 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\combats\sorts_mage.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652524787 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\main.c
+1652964663 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\combats\sorts_vampire.c
+	"../prototypes.h"
+	"../structures.h"
+
+1652738651 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\combats\test_effet_tour_suivant.c
+	"../prototypes.h"
+	"../structures.h"
+
+1652738651 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\fin_de_partie\classement_fin.c
+	"../prototypes.h"
+	"../structures.h"
+
+1652738651 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\main.c
 	"structures.h"
 	"prototypes.h"
 
-1652524787 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\menu_et_choix\choix_classes.c
+1652738651 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\menu_et_choix\choix_classes.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652540383 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\menu_et_choix\creation_classes.c
+1652973193 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\menu_et_choix\creation_classes.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652524787 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\menu_et_choix\menu.c
+1652738651 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\menu_et_choix\menu.c
 	"../structures.h"
 	"../prototypes.h"
 
-1652540356 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\partie_en_cours\deplacement_joueur.c
+1652738651 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\partie_en_cours\deplacement_joueur.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652524787 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\partie_en_cours\position_depart_joueurs.c
+1652738651 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\partie_en_cours\position_depart_joueurs.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652524787 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\partie_en_cours\tour_aleatoire.c
+1652738651 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\partie_en_cours\tour_aleatoire.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652540573 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\partie_en_cours\tour_joueur.c
+1652893226 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\partie_en_cours\tour_joueur.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652524787 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\spgm affichages\afffichage_hud.c
+1652738651 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\spgm affichages\afffichage_hud.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652524787 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\spgm affichages\affichage_elements.c
+1652738651 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\spgm affichages\affichage_elements.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652524787 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\spgm affichages\calques.c
+1652738651 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\spgm affichages\calques.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652529539 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\spgm affichages\dessins_blocs.c
+1652738651 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\spgm affichages\dessins_blocs.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652524787 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\spgm affichages\initialisations_tab.c
+1652738651 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\spgm affichages\initialisations_tab.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652524787 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\spgm affichages\lecture_pixels.c
+1652738651 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\spgm affichages\lecture_pixels.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652524787 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\spgm affichages\quadrilages.c
+1652738651 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\spgm affichages\quadrilages.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652524787 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\depot\ece-arena\projet\projet final\spgm affichages\zone_deplacement.c
+1652738651 source:c:\users\gendry\documents\benjamin\supérieur\ing1\info et prog\c\sem 2\projet sem2\ece-arena-e796a375ba52259f598e7e9851c3f142e64c417d\ece-arena-feature-yohan (10)\ece-arena-feature-yohan\projet\projet final\spgm affichages\zone_deplacement.c
 	"../prototypes.h"
 	"../structures.h"
 

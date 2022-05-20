@@ -86,14 +86,6 @@ void reperage_chemin(BITMAP * buffer, int x_joueur, int y_joueur, int x_souris, 
     }
 }
 
-int random(int min, int max)
-{
-    srand(time(NULL));
-    int resultat;
-    resultat = min + rand()%(min - max +1);
-    return resultat;
-}
-
 void dessin_bloc_unique(BITMAP *buffer, int param1, int param2, t_bloc matrice[23][23], int r, int g, int b)
 {
     if (matrice[param1][param2].accessible)

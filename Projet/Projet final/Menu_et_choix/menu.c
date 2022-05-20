@@ -9,14 +9,16 @@ void affichage_son(BITMAP *buffer, BITMAP *cursor, SAMPLE* s, int* clic )
     {
         rest(100);
         *clic = 1;
-        stop_sample(s);
+        //stop_sample(s);
+        adjust_sample(s, 0, 0, 1000, 1);
 
     }
     if (mouse_b&1 && mouse_x>= 0 && mouse_x <= 65 && mouse_y >= 0&& mouse_y <= 50 && *clic)
     {
         rest(100);
         *clic = 0;
-        play_sample(s, 255, 128, 1000, 1);
+        adjust_sample(s, 255, 128, 1000, 1);
+        //play_sample(s, 255, 128, 1000, 1);
 
     }
 }
@@ -154,17 +156,12 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
     int nb_joueur = 0;
     int nb = 0;
     int y = 314;
-    int installation_clavier = 0;
     int clic = 0;
     BITMAP *creators;
     BITMAP *choix_nb_joueurs;
     BITMAP *nom_joueurs;
     BITMAP *accueil;
     FONT* font_nbjoueur;
-
-
-
-
 
     // init. variable de sortie boucle interactive
     fin=0;
@@ -204,6 +201,7 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
         {
             draw_sprite(buffer, son_on, 0, 0);
         }
+        display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
         rest(20);
 

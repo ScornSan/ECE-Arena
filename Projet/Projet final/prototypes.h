@@ -63,5 +63,15 @@ void animation_attaque_de_base();
 void affichage_autres_joueurs();
 void affichage_hud_sorts();
 void affichage_hud_joueur();
+void classement_fin();
+int pourcentage_de_chance();
+void affichage_son();
+void affichage_joueurs();
+void affichage_joueurs_respiration();
+int random();
+void animation_sort_mage();
+void placement_aleatoire();
+void compteur_effet();
+void test_effets();
 
 #endif // PROTOTYOPES_H_INCLUDED
