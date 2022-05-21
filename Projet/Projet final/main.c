@@ -109,7 +109,7 @@ int main()
         //tour_joueur_alea(joueur, nb_joueurs);
         tour_joueur(buffer, cursor, joueur, nb_joueurs, son_battle, son_on, son_off, classement);
         stop_sample(son_battle);
-        //classement_fin2(buffer, joueur, nb_joueurs, classement);
+        classement_fin2(buffer, joueur, nb_joueurs, classement);
     }
 
     destroy_bitmap(cursor);

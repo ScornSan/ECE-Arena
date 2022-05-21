@@ -195,7 +195,11 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
     /// Boucle du jeu jusqu'a que la partie soit terminé
     while (joueur_en_vie != 1)
     {
-        if (joueur[i].vivant) // on fait joueur le joueur i car il est vivant
+        if (joueur[i].pv <= 0)
+        {
+            joueur[i].vivant = 0;
+        }
+        if (joueur[i].vivant == 1) // on fait joueur le joueur i car il est vivant
         {
             if (n == 0)
             {
@@ -226,6 +230,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
             selection_sort(buffer_map,&ligne_souris, &colonne_souris,&red_mouse, &green_mouse, &blue_mouse, joueur, i, nb_joueurs, buffer, matrice, desc_sorts, ligne_souris, colonne_souris, cursor, map, hud_joueur, icone_classes, hud_icone, start, respiration_joueur);
             textprintf_ex(buffer, font, 0, 5, makecol(0, 0, 0), -1, "Occuper souris : %d", matrice[ligne_souris][colonne_souris].occuper);
             textprintf_ex(buffer, font, 20, 20, makecol(0, 0, 0), -1, "id case joueur : %d", matrice[ligne_souris][colonne_souris].id_case);
+            textprintf_ex(buffer, font, 30, 30, makecol(0, 0, 0), -1, "Joueur en vie: %d", joueur[i].vivant);
             //printf("%d\n", matrice[ligne_souris][colonne_souris].occuper);
             //printf("%d\n", matrice[ligne_souris][colonne_souris].id_case);
             affichage_joueurs_respiration(buffer, joueur, i, nb_joueurs, matrice, respiration_joueur, 5);
@@ -250,12 +255,9 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
         }
         else
         {
-            if (joueur[i].elimine == 0)
-            {
-                classement[n] = i;
-                n--;
-                // Boucle qui permet de voir si le joueur est éliminé, si il l'est, il passe à la n ième case du tableau
-            }
+            classement[n] = i;
+            n--;
+            // Boucle qui permet de voir si le joueur est éliminé, si il l'est, il passe à la n ième case du tableau
             joueur[i].pm = 3; // on remet les pm et pa du joueur au nombre initial
             joueur[i].pa = 6;
             compteur_effet(joueur, nb_joueurs);

@@ -10,7 +10,7 @@
 #define NB_BITMAPS_A 4
 #define NB_CLASSES 4
 #define TEMPS_CHOIX 15
-#define PV_JOUEUR 55
+#define PV_JOUEUR 2
 
 typedef struct bloc
 {
