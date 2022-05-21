@@ -18,12 +18,6 @@ void test_effets(t_joueur* joueur, int j)
     {
         joueur[j].pv = joueur[j].pv - random(5, 10);
     }
-    /// LUCIDE
-    if (joueur[j].lucide)
-    {
-        joueur[j].pa = 8;
-        joueur[j].pm = 5;
-    }
     /// RAGE
     if (joueur[j].rage)
     {
@@ -35,4 +29,5 @@ void test_effets(t_joueur* joueur, int j)
     {
         joueur[j].vivant = 0;
     }
+    joueur[j].attaque_dispo = 1;
 }

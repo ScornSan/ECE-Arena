@@ -108,11 +108,10 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
     time_t start = time(NULL);
 
     textout_ex(desc_sorts, font, "DEGATS:", 18, 20, makecol(255, 0, 0), -1);
-    textout_ex(desc_sorts, font, "PA:", 18, 34, makecol(60, 0, 255), -1);
-    textout_ex(desc_sorts, font, "PM:", 18, 48, makecol(0, 255, 0), -1);
-    textout_ex(desc_sorts, font, "Portee:", 18, 62, makecol(255, 255, 255), -1);
-    textout_ex(desc_sorts, font, "%", 18, 76, makecol(0, 0, 0), -1);
-    textout_ex(desc_sorts, font, "chance:", 34, 76, makecol(0, 0, 0), -1);
+    textout_ex(desc_sorts, font, "PA:", 18, 40, makecol(60, 0, 255), -1);
+    textout_ex(desc_sorts, font, "Portee:", 18, 60, makecol(255, 255, 255), -1);
+    textout_ex(desc_sorts, font, "%", 18, 80, makecol(0, 0, 0), -1);
+    textout_ex(desc_sorts, font, "chance:", 34, 80, makecol(0, 0, 0), -1);
 
     //textprintf_ex(desc_sorts, font, 80, 16, makecol(255, 0, 0), -1, "%d-%d", 1, joueur[i].classe.attaque);
     int ligne_souris, colonne_souris;
@@ -216,6 +215,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
             {
                 draw_sprite(buffer, son_on, 0, 0);
             }
+            rectfill(buffer, 1080, 348, 1090, 348 +(int)((time(NULL)) - start) * 5, makecol(255, 0, 0)); // barre de temps
             //textprintf_ex(buffer, font, 0, 0, makecol(0, 0, 0), -1, "Mouse X : %d", mouse_x);
             //textprintf_ex(buffer, font, 0, 10, makecol(0, 0, 0), -1, "Mouse Y : %d", mouse_y);
             //textprintf_ex(buffer, font, 0, 20, makecol(0, 0, 0), -1, "Temps: %f", (float)((time(NULL)) - start));
@@ -224,11 +224,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
             lecture_pixels_buffer_map(buffer_map, &red_mouse, &green_mouse, &blue_mouse);
             reperage_bloc_souris(&ligne_souris, &colonne_souris, red_mouse, green_mouse, blue_mouse, matrice, joueur, i);
             reperage_chemin(buffer, joueur[i].x, joueur[i].y, ligne_souris, colonne_souris, matrice, joueur, i, &autorisation_dep);
-            selection_sort(buffer_map,&ligne_souris, &colonne_souris,&red_mouse, &green_mouse, &blue_mouse, joueur, i, nb_joueurs, buffer, matrice, desc_sorts, ligne_souris, colonne_souris, cursor, map, hud_joueur, icone_classes, hud_icone, start, respiration_joueur);
-            textprintf_ex(buffer, font, 0, 5, makecol(0, 0, 0), -1, "Occuper souris : %d", matrice[ligne_souris][colonne_souris].occuper);
-            textprintf_ex(buffer, font, 20, 20, makecol(0, 0, 0), -1, "id case joueur : %d", matrice[ligne_souris][colonne_souris].id_case);
-            //printf("%d\n", matrice[ligne_souris][colonne_souris].occuper);
-            //printf("%d\n", matrice[ligne_souris][colonne_souris].id_case);
+            selection_sort(buffer_map,&ligne_souris, &colonne_souris,&red_mouse, &green_mouse, &blue_mouse, joueur, i, nb_joueurs, buffer, matrice, desc_sorts, ligne_souris, colonne_souris, cursor, map, hud_joueur, icone_classes, hud_icone, respiration_joueur);
             affichage_joueurs_respiration(buffer, joueur, i, nb_joueurs, matrice, respiration_joueur, 5);
             display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
@@ -251,12 +247,6 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
         }
         else
         {
-            if (joueur[i].elimine == 0)
-            {
-                classement[n] = i;
-                n--;
-                // Boucle qui permet de voir si le joueur est éliminé, si il l'est, il passe à la n ième case du tableau
-            }
             joueur[i].pm = 3; // on remet les pm et pa du joueur au nombre initial
             joueur[i].pa = 6;
             compteur_effet(joueur, nb_joueurs);
@@ -270,7 +260,6 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
         }
     }
     /// On fera une espèce d'animation de fin de jeu, on affiche le classement et on appuie sur un bouton quand on veut continuer
-    /// on revient donc au menu (insérez le programme de Sarah)
 
     /*for (int i = 0; i < 4; i++)
     {

@@ -62,6 +62,7 @@ typedef struct Players
     int pv;
     int pm;
     int pa;
+    int attaque_dispo;
     int rage;
     int compteur_rage;
     int hemorragie;
@@ -76,6 +77,8 @@ typedef struct Players
     int compteur_lucide;
     int bouclier;
     int compteur_bouclier;
+    int invincible;
+    int compteur_invincible;
     int vivant;
     int elimine;
     int red;

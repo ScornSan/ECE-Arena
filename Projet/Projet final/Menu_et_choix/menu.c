@@ -19,8 +19,9 @@ void affichage_son(BITMAP *buffer, BITMAP *cursor, SAMPLE* s, int* clic )
         *clic = 0;
         adjust_sample(s, 255, 128, 1000, 1);
         //play_sample(s, 255, 128, 1000, 1);
-
     }
+
+
 }
 
 
@@ -34,6 +35,7 @@ void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BI
     int  poscarac=0;
     int place= 0;
     int nb = 0;
+    int compteur = 0;
 
     fflush(stdin);
     if(stop != *nb_joueur)
@@ -66,11 +68,12 @@ void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BI
             carac = (char)touche;
 
             // afficher le caractère à une position x croissante
-            if( carac != '\r' && !key[KEY_BACKSPACE] )
+            if( carac != '\r' && !key[KEY_BACKSPACE] && compteur != 19)
             {
                 textprintf_ex(buffer,font,x+poscarac,y,makecol(255,255,255),makecol(0,0,0),"%c",carac);
                 pseudo[*num][place] = carac;
                 poscarac = poscarac+8;
+                compteur = compteur +1;
             }
 
             if (key[KEY_BACKSPACE] && x+poscarac >= 506)
@@ -81,6 +84,7 @@ void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BI
                     pseudo[*num][place] = ' ';
                     textprintf_ex(buffer,font,x+poscarac,y,makecol(255,255,255),makecol(0,0,0)," ");
                     place = place-2;
+                    compteur = compteur -1;
                 }
                 else
                 {
@@ -89,6 +93,7 @@ void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BI
                     pseudo[*num][place-1] = ' ';
                     textprintf_ex(buffer,font,x+poscarac,y,makecol(255,255,255),makecol(0,0,0)," ");
                     place = place-2;
+                    compteur = compteur -1;
                 }
             }
 

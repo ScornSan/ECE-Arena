@@ -45,16 +45,6 @@ void compteur_effet(t_joueur* joueur, int nb_joueurs)
         {
             joueur[j].compteur_hemorragie = joueur[j].compteur_hemorragie + 1;
         }
-        /// LUCIDE
-        if (joueur[j].lucide && joueur[j].compteur_lucide >= 2)
-        {
-            joueur[j].lucide = 0;
-            joueur[j].compteur_lucide = 0;
-        }
-        else
-        {
-            joueur[j].compteur_lucide = joueur[j].compteur_lucide + 1;
-        }
         /// MORTEL
         if (joueur[j].mortel && joueur[j].compteur_mortel >= 2)
         {

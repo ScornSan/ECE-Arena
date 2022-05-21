@@ -129,10 +129,10 @@ void creation_icones_classes(t_joueur* joueur)
                 joueur[i].classe.anim_attaques[3][j][0] = load_bitmap(chargement, NULL);
                 sprintf(chargement, "SPRITES/NINJA/LUCIDITE/aura_%d.bmp", j);
                 joueur[i].classe.spell[0].animation_sort[j] = load_bitmap(chargement, NULL);
+                sprintf(chargement, "SPRITES/NINJA/SORTS/smoke_%d.bmp", j);
+                joueur[i].classe.spell[3].animation_sort[j] = load_bitmap(chargement, NULL);
                 if(j<2)
                 {
-                    sprintf(chargement, "SPRITES/NINJA/SORTS/smoke_%d.bmp", j);
-                    joueur[i].classe.spell[3].animation_sort[j] = load_bitmap(chargement, NULL);
                     sprintf(chargement, "SPRITES/NINJA/SHURIKEN/shuriken_%d.bmp", j);
                     joueur[i].classe.spell[1].animation_sort[j] = load_bitmap(chargement, NULL);
                 }
@@ -161,6 +161,7 @@ void creation_icones_classes(t_joueur* joueur)
 void creation_classes(t_joueur* joueur, int nb_joueurs, int choix_double)
 {
     int i;
+    int j;
     //creation des couleurs joueurs
     joueur[0].red = 170;
     joueur[0].green = 0;
@@ -172,9 +173,10 @@ void creation_classes(t_joueur* joueur, int nb_joueurs, int choix_double)
     for (i = 0; i < nb_joueurs; i++)
     {
         joueur[i].pv = PV_JOUEUR;
-        joueur[i].pm = 3;
-        joueur[i].pa = 6;
+        joueur[i].pm = 2;
+        joueur[i].pa = 5;
         joueur[i].classe.attaque = 5;
+        joueur[i].attaque_dispo = 1;
         joueur[i].direction = 0;
         joueur[i].vivant = 1;
         joueur[i].id_joueur = i + 1;
@@ -194,9 +196,16 @@ void creation_classes(t_joueur* joueur, int nb_joueurs, int choix_double)
         joueur[i].compteur_bouclier = 0;
         joueur[i].rage = 0;
         joueur[i].compteur_rage = 0;
+        joueur[i].invincible = 0;
+        joueur[i].compteur_invincible = 0;
+        joueur[i].degatstotal = 0;
         joueur[i].classe.logo_attaque = load_bitmap("BITMAP/sort_attaque.bmp", NULL);
         joueur[i].shield = load_bitmap("SPRITES/CHEVALIER/BOUCLIER/shield_0.bmp", NULL);
         joueur[i].skull = load_bitmap("SPRITES/VAMPIRE/CONJURATION/skull_0.bmp", NULL);
+        for (j = 0; j < 4; j++)
+        {
+            joueur[i].classe.spell[j].dispo = 1; /// Rendre les spells disponibles
+        }
         if (choix_double)
         {
             joueur[i].choix_double = 1;

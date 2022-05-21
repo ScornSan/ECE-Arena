@@ -9,25 +9,25 @@
 	<allegro.h>
 	<time.h>
 
-1652966282 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\choix_classes.c
+1653050635 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\choix_classes.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652972294 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\creation_classes.c
+1653147184 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\creation_classes.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652966108 c:\repos\ece-arena\projet\projet final\structures.h
+1653137478 c:\repos\ece-arena\projet\projet final\structures.h
 	<allegro.h>
 
-1652738469 c:\repos\ece-arena\projet\projet final\prototypes.h
+1653056968 c:\repos\ece-arena\projet\projet final\prototypes.h
 	<stdio.h>
 	<stdlib.h>
 	<allegro.h>
 	<time.h>
 	<string.h>
 
-1652973033 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\tour_joueur.c
+1653146007 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\tour_joueur.c
 	"../prototypes.h"
 	"../structures.h"
 
@@ -35,11 +35,11 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1652961969 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\menu.c
+1653144189 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\menu.c
 	"../structures.h"
 	"../prototypes.h"
 
-1652901482 source:c:\repos\ece-arena\projet\projet final\spgm affichages\affichage_elements.c
+1653147556 source:c:\repos\ece-arena\projet\projet final\spgm affichages\affichage_elements.c
 	"../prototypes.h"
 	"../structures.h"
 
@@ -145,27 +145,27 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1652970635 source:c:\repos\ece-arena\projet\projet final\spgm affichages\afffichage_hud.c
+1653137920 source:c:\repos\ece-arena\projet\projet final\spgm affichages\afffichage_hud.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652971708 source:c:\repos\ece-arena\projet\projet final\combats\selection_sort.c
+1653147910 source:c:\repos\ece-arena\projet\projet final\combats\selection_sort.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652971517 source:c:\repos\ece-arena\projet\projet final\combats\sorts_assassin.c
+1653148147 source:c:\repos\ece-arena\projet\projet final\combats\sorts_assassin.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652976635 source:c:\repos\ece-arena\projet\projet final\combats\sorts_guerrier.c
+1653148131 source:c:\repos\ece-arena\projet\projet final\combats\sorts_guerrier.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652965537 source:c:\repos\ece-arena\projet\projet final\combats\sorts_mage.c
+1653147961 source:c:\repos\ece-arena\projet\projet final\combats\sorts_mage.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652963430 source:c:\repos\ece-arena\projet\projet final\combats\sorts_vampire.c
+1653147970 source:c:\repos\ece-arena\projet\projet final\combats\sorts_vampire.c
 	"../prototypes.h"
 	"../structures.h"
 
@@ -183,11 +183,11 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1652968249 source:c:\repos\ece-arena\projet\projet final\combats\compteur_effets.c
+1653056689 source:c:\repos\ece-arena\projet\projet final\combats\compteur_effets.c
 	"../prototypes.h"
 	"../structures.h"
 
-1652973031 source:c:\repos\ece-arena\projet\projet final\combats\test_effet_tour_suivant.c
+1653138165 source:c:\repos\ece-arena\projet\projet final\combats\test_effet_tour_suivant.c
 	"../prototypes.h"
 	"../structures.h"
 
@@ -200,6 +200,14 @@
 	"../structures.h"
 
 1652974176 source:c:\repos\ece-arena\projet\projet final\animations\animation_sort_guerrier.c
+	"../prototypes.h"
+	"../structures.h"
+
+1653054815 source:c:\repos\ece-arena\projet\projet final\animations\animation_sort_assassin.c
+	"../prototypes.h"
+	"../structures.h"
+
+1653137042 source:c:\repos\ece-arena\projet\projet final\spgm affichages\affichage_stats.c
 	"../prototypes.h"
 	"../structures.h"
 
