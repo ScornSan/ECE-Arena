@@ -334,7 +334,6 @@ void sort4_vampire(BITMAP *buffer_map, BITMAP * map,BITMAP * cursor, BITMAP *buf
 {
     int sort_lance = 0;
     int annulation = 0;
-    int red_temp, green_temp, blue_temp;
     int tab[3] = {0,0,0};
     time_t start = time(NULL);
     if( !joueur[i].classe.spell[3].dispo)

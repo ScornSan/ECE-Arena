@@ -192,8 +192,8 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
         }
         respiration_joueur[i] = i * 90;
     }
-    //i = random(0, 3);
 
+    i = random(0, 3);
     /// Boucle du jeu jusqu'a que la partie soit terminé
     while (joueur_en_vie != 1)
     {

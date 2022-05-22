@@ -360,8 +360,6 @@ void sort4_assassin(BITMAP *buffer_map, BITMAP * map,BITMAP * cursor, BITMAP *bu
             int num_sprites = 0;
             int compteur = 0;
             time_t start = time(NULL);
-            int rand1;
-            int rand2;
             while((int)(time(NULL) - start < 4))
             {
                 blit(map, buffer, 0,0,0,0, SCREEN_W, SCREEN_H);
@@ -373,8 +371,6 @@ void sort4_assassin(BITMAP *buffer_map, BITMAP * map,BITMAP * cursor, BITMAP *bu
                 {
                     num_sprites = (num_sprites +1) % 4;
                     compteur = 0;
-                    rand1 = rand()%(10);
-                    rand2 = rand()%(10);
                 }
                 /*if (joueur[i].classe.spell[3].chance == 8)
                 {

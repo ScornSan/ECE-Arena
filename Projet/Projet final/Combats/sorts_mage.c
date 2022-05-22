@@ -401,7 +401,6 @@ void sort4_mage(BITMAP *buffer_map, BITMAP * map,BITMAP * cursor, BITMAP *buffer
         int compteur2 = 0;
         time_t start = time(NULL);
         int rand1;
-        int rand2;
         int animation_faite = 0;
         while((int)(time(NULL) - start < 4))
         {
@@ -422,7 +421,6 @@ void sort4_mage(BITMAP *buffer_map, BITMAP * map,BITMAP * cursor, BITMAP *buffer
                 num_sprites = (num_sprites +1) % 4;
                 compteur = 0;
                 rand1 = rand()%(20);
-                rand2 = rand()%(8);
             }
             compteur2++;
             draw_sprite(buffer, joueur[i].classe.spell[3].animation_sort[num_sprites], matrice[*ligne_souris][*colonne_souris].x_bloc - 161, matrice[*ligne_souris][*colonne_souris].y_bloc - 100);
