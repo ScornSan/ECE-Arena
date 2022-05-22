@@ -6,41 +6,57 @@ void sort1_mage(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP 
     int num_bitmap = 0;
     time_t start = (int)(time(NULL));
     //time_t start = time(NULL);
-    if (pourcentage_de_chance() < 9 && joueur[i].pa >= 2)
+    if (joueur[i].classe.spell[0].dispo && joueur[i].pa >= 2)
     {
-        joueur[i].pv = joueur[i].pv + random(4, 8);
-        joueur[i].pa = joueur[i].pa - 2;
-        if (joueur[i].pv > 55)
+        if (pourcentage_de_chance() < 9)
         {
-            joueur[i].pv = 55;
+            joueur[i].pv = joueur[i].pv + random(4, 8);
+            joueur[i].pa = joueur[i].pa - 2;
+            if (joueur[i].pv > 55)
+            {
+                joueur[i].pv = 55;
+            }
+            while ((int)(time(NULL) - start < 2))
+            {
+                clear_bitmap(buffer);
+                affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
+                //dessin_bloc_unique(buffer, joueur[i].x, joueur[i].y, matrice, 0, 220, 0);
+                affichage_joueurs_respiration(buffer, joueur, i, nb_joueurs, matrice, respiration_joueur, 5);
+                draw_sprite(buffer, joueur[i].classe.anim_attaques[1][joueur[i].direction][0], matrice[joueur[i].x][joueur[i].y].x_bloc - 22,  matrice[joueur[i].x][joueur[i].y].y_bloc - 52);
+                draw_sprite(buffer, joueur[i].classe.spell[0].animation_sort[num_bitmap], matrice[joueur[i].x][joueur[i].y].x_bloc - 20,  matrice[joueur[i].x][joueur[i].y].y_bloc - 60);
+                num_bitmap = (num_bitmap + 1) % 4;
+                display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
+                blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+                rest(80);
+                // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
+            }
         }
-        while ((int)(time(NULL) - start < 2))
+        else
         {
-            clear_bitmap(buffer);
-            affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
-            //dessin_bloc_unique(buffer, joueur[i].x, joueur[i].y, matrice, 0, 220, 0);
-            affichage_joueurs_respiration(buffer, joueur, i, nb_joueurs, matrice, respiration_joueur, 5);
-            draw_sprite(buffer, joueur[i].classe.anim_attaques[1][joueur[i].direction][0], matrice[joueur[i].x][joueur[i].y].x_bloc - 22,  matrice[joueur[i].x][joueur[i].y].y_bloc - 52);
-            draw_sprite(buffer, joueur[i].classe.spell[0].animation_sort[num_bitmap], matrice[joueur[i].x][joueur[i].y].x_bloc - 20,  matrice[joueur[i].x][joueur[i].y].y_bloc - 60);
-            num_bitmap = (num_bitmap + 1) % 4;
-            display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
-            blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-            rest(80);
-            // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
+            while ((int)(time(NULL) - start < 2))
+            {
+                clear_bitmap(buffer);
+                affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
+                //dessin_bloc_unique(buffer, joueur[i].x, joueur[i].y, matrice, 0, 220, 0);
+                affichage_joueurs_respiration(buffer, joueur, i, nb_joueurs, matrice, respiration_joueur, 5);
+                textout_ex(buffer, font,"SORT MANQUE !", matrice[joueur[i].x][joueur[i].y].x_bloc - 15, matrice[joueur[i].x][joueur[i].y].y_bloc - 80, makecol(0,0,0), -1);
+                display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
+                blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+                // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
+            }
         }
     }
     else
     {
-        while ((int)(time(NULL) - start < 2))
+        start = time(NULL);
+        while ((int)time(NULL) - start < 2)
         {
             clear_bitmap(buffer);
             affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
-            //dessin_bloc_unique(buffer, joueur[i].x, joueur[i].y, matrice, 0, 220, 0);
-            affichage_joueurs_respiration(buffer, joueur, i, nb_joueurs, matrice, respiration_joueur, 5);
-            textout_ex(buffer, font,"SORT MANQUE !", matrice[joueur[i].x][joueur[i].y].x_bloc - 15, matrice[joueur[i].x][joueur[i].y].y_bloc - 80, makecol(0,0,0), -1);
+            affichage_joueurs_respiration_ralenti(buffer, joueur, i, nb_joueurs, matrice, respiration_joueur, 5);
+            textprintf_ex(buffer, font, matrice[joueur[i].x][joueur[i].y].x_bloc - strlen("Attaque indisponible") - 30, matrice[joueur[i].x][joueur[i].y].y_bloc  - 70, makecol(joueur[i].red, joueur[i].green, joueur[i].blue), -1, "Attaque indisponible");
             display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-            // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
         }
     }
 }
@@ -265,8 +281,6 @@ void sort4_mage(BITMAP *buffer_map, BITMAP * map,BITMAP * cursor, BITMAP *buffer
 {
     int sort_lance = 0;
     int annulation = 0;
-    int red_temp, green_temp, blue_temp;
-    int id_ennemi;
     int tab[3] = {0,0,0};
     time_t start = time(NULL);
     if( !joueur[i].classe.spell[3].dispo)
@@ -291,7 +305,6 @@ void sort4_mage(BITMAP *buffer_map, BITMAP * map,BITMAP * cursor, BITMAP *buffer
                 if (pourcentage_de_chance() < 6 && joueur[i].pa >= 5)
                 {
                     sort_lance = 1;
-                    id_ennemi = matrice[*ligne_souris][*colonne_souris].occuper - 1;
                     /// NORD OUEST
                     if (*ligne_souris < joueur[i].x )
                     {

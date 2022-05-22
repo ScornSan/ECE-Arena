@@ -94,6 +94,7 @@ typedef struct Players
     BITMAP *skull;
     BITMAP *rageux;
     BITMAP *fin;
+    BITMAP *barre_temps;
     clock_t temps_tour;
     t_classe classe;
 }t_joueur;

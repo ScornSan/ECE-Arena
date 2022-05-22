@@ -31,7 +31,8 @@ void attaque_de_base(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BI
             {
                 start = time(NULL);
                 id_ennemi = matrice[x_souris][y_souris].id_case - 1;
-                joueur[i].pa = joueur[i].pa - 2;
+                joueur[i].pa = joueur[i].pa - 1;
+                joueur[i].attaque_dispo = 0;
                 /// NORD OUEST
                 if (x_souris < joueur[i].x && y_souris == joueur[i].y)
                 {
@@ -67,8 +68,6 @@ void attaque_de_base(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BI
                 {
                     attaque = 2;
                 }
-                joueur[i].pa = joueur[i].pa - 1;
-                joueur[i].attaque_dispo = 0;
                 while ((int)time(NULL) - start < 3)
                 {
                     clear_bitmap(buffer);
@@ -114,7 +113,7 @@ void sort1(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP *buff
     switch(joueur[i].id_classe)
     {
     case 1: // GUERRIER
-        sort1_guerrier(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
+        sort1_guerrier(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, respiration);
         break;
     case 2: // MAGE
         sort1_mage(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, respiration);
@@ -139,7 +138,7 @@ void sort2(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP *buff
         sort2_mage(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map,hud_joueur, icone_classes, hud_icone,desc_sorts, respiration);
         break;
     case 3: // VAMPIRE
-        sort2_vampire(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
+        sort2_vampire(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, respiration);
         break;
     case 4: // ASSASSIN
         sort2_assassin(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map,hud_joueur, icone_classes, hud_icone,desc_sorts, respiration);
@@ -152,7 +151,7 @@ void sort3(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP *buff
     switch(joueur[i].id_classe)
     {
     case 1: // GUERRIER
-        sort3_guerrier(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
+        sort3_guerrier(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, respiration);
         break;
     case 2: // MAGE
         sort3_mage(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, respiration);
@@ -174,13 +173,13 @@ void sort4(BITMAP * buffer_map, BITMAP *map,int *ligne_souris, int *colonne_sour
         sort4_guerrier(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, respiration);
         break;
     case 2: // MAGE
-        sort4_mage(buffer_map, map, cursor, buffer, joueur, i, matrice, red_mouse, green_mouse, blue_mouse, ligne_souris, colonne_souris,nb_joueurs, hud_icone, desc_sorts, hud_joueur, icone_classes);
+        sort4_mage(buffer_map, map, cursor, buffer, joueur, i, matrice, red_mouse, green_mouse, blue_mouse, ligne_souris, colonne_souris,nb_joueurs, hud_icone, desc_sorts, hud_joueur, icone_classes, respiration);
         break;
     case 3: // VAMPIRE
-        sort4_vampire(buffer_map, map, cursor, buffer, joueur, i, matrice, red_mouse, green_mouse, blue_mouse, ligne_souris,colonne_souris, nb_joueurs, hud_icone, desc_sorts, hud_joueur, icone_classes);
+        sort4_vampire(buffer_map, map, cursor, buffer, joueur, i, matrice, red_mouse, green_mouse, blue_mouse, ligne_souris,colonne_souris, nb_joueurs, hud_icone, desc_sorts, hud_joueur, icone_classes, respiration);
         break;
     case 4: // ASSASSIN
-        sort4_assassin(buffer_map, map, cursor, buffer, joueur, i, matrice, red_mouse, green_mouse, blue_mouse, ligne_souris, colonne_souris, nb_joueurs, hud_icone, desc_sorts, hud_joueur, icone_classes);
+        sort4_assassin(buffer_map, map, cursor, buffer, joueur, i, matrice, red_mouse, green_mouse, blue_mouse, ligne_souris, colonne_souris, nb_joueurs, hud_icone, desc_sorts, hud_joueur, icone_classes, respiration);
         break;
     }
 }
