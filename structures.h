@@ -10,6 +10,7 @@
 #define NB_BITMAPS_A 4
 #define NB_CLASSES 4
 #define TEMPS_CHOIX 15
+#define PV_JOUEUR 55
 
 typedef struct bloc
 {
@@ -20,6 +21,7 @@ typedef struct bloc
     int y_bloc;
     int accessible;
     int occuper;
+    int id_case;
 } t_bloc;
 
 typedef struct sorts
@@ -32,6 +34,7 @@ typedef struct sorts
     int dispo;
     BITMAP* logo;
     BITMAP* animation_sort[4];
+    BITMAP* animation_sort_perso[DIRECTIONS][4];
     BITMAP *anim_attaque_cible[DIRECTIONS][2];
     BITMAP* description;
 }t_sort;
@@ -51,6 +54,7 @@ typedef struct Players
 {
     char pseudo[20];
     int id_classe;
+    int id_joueur;
     int direction;
     int x;
     int y;
@@ -58,6 +62,7 @@ typedef struct Players
     int pv;
     int pm;
     int pa;
+    int attaque_dispo;
     int rage;
     int compteur_rage;
     int hemorragie;
@@ -72,6 +77,8 @@ typedef struct Players
     int compteur_lucide;
     int bouclier;
     int compteur_bouclier;
+    int invincible;
+    int compteur_invincible;
     int vivant;
     int elimine;
     int red;
@@ -79,7 +86,10 @@ typedef struct Players
     int blue;
     int place_manuellement;
     int choix_double;
+    int casesparcourues;
+    int degatstotal;
     BITMAP *shield;
+    BITMAP *skull;
     t_classe classe;
 }t_joueur;
 

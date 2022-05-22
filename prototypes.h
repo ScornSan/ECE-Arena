@@ -73,5 +73,7 @@ void animation_sort_mage();
 void placement_aleatoire();
 void compteur_effet();
 void test_effets();
+void animation_sort2_assassin();
+void animation_sort3_vampire();
 
 #endif // PROTOTYOPES_H_INCLUDED

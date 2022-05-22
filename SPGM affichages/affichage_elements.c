@@ -28,12 +28,45 @@ void affichage_joueurs_respiration(BITMAP *buffer, t_joueur* joueur, int i, int 
             {
                 draw_sprite(buffer, joueur[j].classe.respiration[joueur[j].direction][1],  matrice[joueur[j].x][joueur[j].y].x_bloc - 22, matrice[joueur[j].x][joueur[j].y].y_bloc - 52);
             }
-            if (joueur[j].bouclier)
-            {
-                masked_blit(joueur[j].shield, buffer,0,0,matrice[joueur[j].x][joueur[j].y].x_bloc - 21,matrice[joueur[j].x][joueur[j].y].y_bloc - 93, SCREEN_W, SCREEN_H);
-            }
+            textprintf_ex(buffer, font, matrice[joueur[j].x][joueur[j].y].x_bloc - strlen(joueur[j].pseudo) * 2,matrice[joueur[j].x][joueur[j].y].y_bloc - 63, makecol(joueur[j].red, joueur[j].green, joueur[j].blue), -1, "%s", joueur[j].pseudo);
+        }
+        if (joueur[j].bouclier)
+        {
+            masked_blit(joueur[j].shield, buffer,0,0,matrice[joueur[j].x][joueur[j].y].x_bloc - 21,matrice[joueur[j].x][joueur[j].y].y_bloc - 93, SCREEN_W, SCREEN_H);
+        }
+        if (joueur[j].mortel)
+        {
+            masked_blit(joueur[j].skull, buffer,0,0,matrice[joueur[j].x][joueur[j].y].x_bloc - 21,matrice[joueur[j].x][joueur[j].y].y_bloc - 93, SCREEN_W, SCREEN_H);
         }
         respiration_joueur[j] = (respiration_joueur[j] + 1) % 30;
+    }
+}
+
+void affichage_joueurs_respiration_ralenti(BITMAP *buffer, t_joueur* joueur, int i, int nb_joueurs, t_bloc matrice[23][23], int respiration_joueur[], int id_joueur_deplace)
+{
+    for (int j = 0; j < nb_joueurs; j++)
+    {
+        if (id_joueur_deplace != j) // On ne fait pas respirer le joueur qui se déplace
+        {
+            if (respiration_joueur[j] < 150)
+            {
+                draw_sprite(buffer, joueur[j].classe.respiration[joueur[j].direction][0],  matrice[joueur[j].x][joueur[j].y].x_bloc - 22, matrice[joueur[j].x][joueur[j].y].y_bloc - 52);
+            }
+            else
+            {
+                draw_sprite(buffer, joueur[j].classe.respiration[joueur[j].direction][1],  matrice[joueur[j].x][joueur[j].y].x_bloc - 22, matrice[joueur[j].x][joueur[j].y].y_bloc - 52);
+            }
+            textprintf_ex(buffer, font, matrice[joueur[j].x][joueur[j].y].x_bloc - strlen(joueur[j].pseudo) * 2,matrice[joueur[j].x][joueur[j].y].y_bloc - 63, makecol(joueur[j].red, joueur[j].green, joueur[j].blue), -1, "%s", joueur[j].pseudo);
+        }
+        if (joueur[j].bouclier)
+        {
+            masked_blit(joueur[j].shield, buffer,0,0,matrice[joueur[j].x][joueur[j].y].x_bloc - 21,matrice[joueur[j].x][joueur[j].y].y_bloc - 93, SCREEN_W, SCREEN_H);
+        }
+        if (joueur[j].mortel)
+        {
+            masked_blit(joueur[j].skull, buffer,0,0,matrice[joueur[j].x][joueur[j].y].x_bloc - 21,matrice[joueur[j].x][joueur[j].y].y_bloc - 93, SCREEN_W, SCREEN_H);
+        }
+        respiration_joueur[j] = (respiration_joueur[j] + 1) % 300;
     }
 }
 

@@ -19,8 +19,9 @@ void affichage_son(BITMAP *buffer, BITMAP *cursor, SAMPLE* s, int* clic )
         *clic = 0;
         adjust_sample(s, 255, 128, 1000, 1);
         //play_sample(s, 255, 128, 1000, 1);
-
     }
+
+
 }
 
 
@@ -67,7 +68,7 @@ void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BI
             carac = (char)touche;
 
             // afficher le caractère à une position x croissante
-            if( carac != '\r' && !key[KEY_BACKSPACE] && compteur != 20)
+            if( carac != '\r' && !key[KEY_BACKSPACE] && compteur != 19)
             {
                 textprintf_ex(buffer,font,x+poscarac,y,makecol(255,255,255),makecol(0,0,0),"%c",carac);
                 pseudo[*num][place] = carac;
@@ -102,7 +103,6 @@ void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BI
                 y+=10;
                 stop=1;
                 *num = *num +1;
-
             }
             place = place+1;
             //display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
@@ -149,9 +149,8 @@ void menu_principal(BITMAP *buffer, BITMAP *accueil, BITMAP *cursor,  FONT* myfo
 }
 
 
-int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPLE* son_menu, FONT* myfont, BITMAP* son_on, BITMAP* son_off)
+int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPLE* son_menu, FONT* myfont, BITMAP* son_on, BITMAP* son_off, int* choix_double)
 {
-    int choix_double = 0;
     int fin;
     int ok;
     int nb_joueur = 0;
@@ -244,7 +243,7 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
         {
             ok = 0;
             sortir = 0;
-
+            *choix_double = 0;
             while(ok!=1 && sortir!=1)
             {
 
@@ -325,7 +324,7 @@ int menu(BITMAP* buffer, BITMAP *fond, BITMAP *cursor, char pseudo[4][20], SAMPL
         if(mouse_b&1 && mouse_x>= 423 && mouse_x <= 834 && mouse_y >= 338 && mouse_y <= 411 )
         {
             clear_bitmap(buffer);
-            choix_double = 1;
+            *choix_double = 1;
             install_keyboard();
             blit(nom_joueurs,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
             textprintf_ex(buffer,font,500,270, makecol(255,255,255),-1, " Veuillez entrez vos pseudos :");

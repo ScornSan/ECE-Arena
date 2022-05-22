@@ -37,6 +37,12 @@
 		<Unit filename="Animations/animation_deplacement.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="Animations/animation_sort_assassin.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Animations/animation_sort_guerrier.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="Animations/animation_sort_mage.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -92,6 +98,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="SPGM affichages/affichage_elements.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="SPGM affichages/affichage_stats.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="SPGM affichages/calques.c">
