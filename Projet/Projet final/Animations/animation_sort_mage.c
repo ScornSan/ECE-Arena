@@ -18,6 +18,7 @@ void animation_sort_mage(BITMAP *buffer, BITMAP *bg, t_joueur* j, int i, t_bloc 
         case 0: /// SUD OUEST
             blit(bg,buffer,0,0,0,0,SCREEN_W,SCREEN_H);
             // 2) DETERMINER NOUVELLEs POSITIONs
+
             // 3) AFFICHAGE NOUVELLEs POSITIONs SUR LE BUFFER
             draw_sprite(buffer, j[i].classe.spell[num_spell].anim_attaque_cible[direction][k], matrice[j[i].x][j[i].y].x_bloc - 22 - x_depart, matrice[j[i].x][j[i].y].y_bloc - 52 + y_depart);
             affichage_joueurs_respiration(buffer, j, i, nb_joueurs, matrice, respiration_joueur, 5);
@@ -59,6 +60,7 @@ void animation_sort_mage(BITMAP *buffer, BITMAP *bg, t_joueur* j, int i, t_bloc 
             k = (k+1) % 2;
             break;
         }
+
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
         rest(60);
     }

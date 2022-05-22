@@ -7,6 +7,7 @@ void definition_accessible(t_bloc matrice[23][23])
     {
         for (int j = 0; j<23; j++)
         {
+            matrice[i][j].id_case = 0;
             /// partie supérieur droite et gauche en double rectancgle
 
             if (i <= 4 && (j <= 8 || j >= 16))

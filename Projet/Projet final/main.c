@@ -43,6 +43,7 @@ int main()
     FONT* myfont;
     FONT* myfont2;
     int quitter = 0;
+    int choix_double;
     // Lancer allegro et le mode graphique
     allegro_init();
     install_mouse();
@@ -61,7 +62,7 @@ int main()
         return 1;
     }
 
-    son_menu=  load_wav("SOUND/sound_hub.wav"); //charger un wav
+    son_menu= load_wav("SOUND/sound_hub.wav"); //charger un wav
     son_battle= load_wav("SOUND/sound_battle.wav"); //charger un wav
     son_on = load_bitmap("BITMAP/son_on.bmp", NULL);
     son_off = load_bitmap("BITMAP/son_off.bmp", NULL);
@@ -88,7 +89,7 @@ int main()
     while (!quitter)
     {
         play_sample(son_menu, 255, 128, 1000, 1); //lancer la musique en boucle
-        nb_joueurs = menu(buffer, fond, cursor, pseudo, son_menu, myfont, son_on, son_off);
+        nb_joueurs = menu(buffer, fond, cursor, pseudo, son_menu, myfont, son_on, son_off, &choix_double);
         int classement[nb_joueurs];
 
         joueur = (t_joueur*)malloc(sizeof(t_joueur) * nb_joueurs); // allocation dynamiques des structures joueurs
@@ -103,13 +104,12 @@ int main()
         {
             strcpy(joueur[i].pseudo, pseudo[i]);
         }
-        creation_classes(joueur, nb_joueurs);
+        creation_classes(joueur, nb_joueurs, choix_double);
         choix_classe(buffer, fond, cursor, joueur, nb_joueurs, myfont, myfont2, son_menu, son_on, son_off);
         //tour_joueur_alea(joueur, nb_joueurs);
-        stop_sample(son_menu);
-        tour_joueur(buffer, cursor, joueur, nb_joueurs, son_battle, son_on, son_off);
+        tour_joueur(buffer, cursor, joueur, nb_joueurs, son_battle, son_on, son_off, classement);
         stop_sample(son_battle);
-        classement_fin(buffer, joueur, nb_joueurs, classement);
+        //classement_fin2(buffer, joueur, nb_joueurs, classement);
     }
 
     destroy_bitmap(cursor);

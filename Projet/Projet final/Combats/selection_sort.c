@@ -9,62 +9,96 @@ void attaque_de_base(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BI
     int red_temp1, green_temp1,blue_temp1;
     int attaque = 0;
     int id_ennemi;
+    int degats;
+    time_t start;
     //time_t start = time(NULL);
     /// tant qu'on ne clique pas sur l'icone de l'attaque de base, ou qu'on a lancé l'attaque
     while (!attaque)
     {
-        clear_bitmap(buffer);
-        affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
-        dessin_ligne(joueur, i, nb_joueurs, buffer, buffer_pixels, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, 1);
-        affichage_joueurs(buffer, joueur, i, nb_joueurs, matrice);
-        display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
-        blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-        lecture_pixels_buffer_map(buffer_map, &red_temp, &green_temp,&blue_temp);
-        reperage_bloc_souris(&x_souris, &y_souris, red_temp, green_temp, blue_temp, matrice, joueur, i);
-        lecture_pixels_buffer_map(buffer_pixels, &red_temp1, &green_temp1,&blue_temp1);
-        // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
-        if (matrice[x_souris][y_souris].occuper != matrice[joueur[i].x][joueur[i].y].occuper && matrice[x_souris][y_souris].occuper != 0 && mouse_b&1 && green_temp1 == 140)
+        if (joueur[i].attaque_dispo && joueur[i].pa >= 1)
         {
-            id_ennemi = matrice[x_souris][y_souris].occuper - 1;
-            //printf("Ennemi : %d\n", id_ennemi);
-            /// NORD OUEST
-            if (x_souris < joueur[i].x && y_souris == joueur[i].y)
+            clear_bitmap(buffer);
+            affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
+            dessin_ligne(joueur, i, nb_joueurs, buffer, buffer_pixels, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, 1);
+            affichage_joueurs_respiration_ralenti(buffer, joueur, i, nb_joueurs, matrice, respiration, 5);
+            display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
+            blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+            lecture_pixels_buffer_map(buffer_map, &red_temp, &green_temp,&blue_temp);
+            reperage_bloc_souris(&x_souris, &y_souris, red_temp, green_temp, blue_temp, matrice, joueur, i);
+            lecture_pixels_buffer_map(buffer_pixels, &red_temp1, &green_temp1,&blue_temp1);
+            // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
+            if (matrice[x_souris][y_souris].occuper != matrice[joueur[i].x][joueur[i].y].occuper && matrice[x_souris][y_souris].occuper != 0 && mouse_b&1 && green_temp1 == 140)
             {
-                printf("Nord ouest\n");
-                animation_attaque_de_base(buffer, map, joueur, i, matrice, nb_joueurs, 1, respiration);
-                blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+                joueur[i].attaque_dispo = 0;
+                start = time(NULL);
+                id_ennemi = matrice[x_souris][y_souris].id_case - 1;
+                joueur[i].pa = joueur[i].pa - 2;
+                //printf("Ennemi : %d\n", id_ennemi);
+                /// NORD OUEST
+                if (x_souris < joueur[i].x && y_souris == joueur[i].y)
+                {
+                    animation_attaque_de_base(buffer, map, joueur, i, matrice, nb_joueurs, 1, respiration);
+                    blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+                }
+                /// SUD EST
+                if (x_souris > joueur[i].x && y_souris == joueur[i].y)
+                {
+                    animation_attaque_de_base(buffer, map, joueur, i, matrice, nb_joueurs, 3, respiration);
+                    blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+                }
+                /// SUD OUEST
+                if (x_souris == joueur[i].x && y_souris < joueur[i].y)
+                {
+                    animation_attaque_de_base(buffer, map, joueur, i, matrice, nb_joueurs, 0, respiration);
+                    blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+                }
+                /// NORD EST
+                if (x_souris == joueur[i].x && y_souris > joueur[i].y)
+                {
+                    animation_attaque_de_base(buffer, map, joueur, i, matrice, nb_joueurs, 2, respiration);
+                    blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+                }
+                if (pourcentage_de_chance() < 9)
+                {
+                    degats = random(1, 5);
+                    joueur[id_ennemi].pv = joueur[id_ennemi].pv - degats;
+                    attaque = 1; // on a attaqué, on peut sortir de la boucle en infligeant les dégâts, avec le % de chance
+                }
+                else
+                {
+                    attaque = 2;
+                }
+                while ((int)time(NULL) - start < 3)
+                {
+                    clear_bitmap(buffer);
+                    affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
+                    affichage_joueurs_respiration_ralenti(buffer, joueur, i, nb_joueurs, matrice, respiration, 5);
+                    if (attaque == 1)
+                        textprintf_ex(buffer, font, matrice[joueur[id_ennemi].x][joueur[id_ennemi].y].x_bloc - 10, matrice[joueur[id_ennemi].x][joueur[id_ennemi].y].y_bloc  - 70, makecol(joueur[i].red, joueur[i].green, joueur[i].blue), -1, "- %d", degats);
+                    else if (attaque == 2)
+                        textprintf_ex(buffer, font, matrice[joueur[id_ennemi].x][joueur[id_ennemi].y].x_bloc - 10, matrice[joueur[id_ennemi].x][joueur[id_ennemi].y].y_bloc  - 70, makecol(joueur[i].red, joueur[i].green, joueur[i].blue), -1, "Attaque manque");
+                    display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
+                    blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+                }
             }
-            /// SUD EST
-            if (x_souris > joueur[i].x && y_souris == joueur[i].y)
+            if (mouse_x >= 300 && mouse_x <= 330 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1)
             {
-                printf("Sud est\n");
-                animation_attaque_de_base(buffer, map, joueur, i, matrice, nb_joueurs, 3, respiration);
-                blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+                attaque = 1; // le joueur a annulé son attaque, l'attaque est considéré comme faite mais sans dégâts
             }
-            /// SUD OUEST
-            if (x_souris == joueur[i].x && y_souris < joueur[i].y)
-            {
-                printf("Sud ouest\n");
-                animation_attaque_de_base(buffer, map, joueur, i, matrice, nb_joueurs, 0, respiration);
-                blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-            }
-            /// NORD EST
-            if (x_souris == joueur[i].x && y_souris > joueur[i].y)
-            {
-                printf("Nord est\n");
-                animation_attaque_de_base(buffer, map, joueur, i, matrice, nb_joueurs, 2, respiration);
-                blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-            }
-            attaque = 1; // on a attaqué, on peut sortir de la boucle en infligeant les dégâts, avec le % de chance
         }
-
-        textprintf_ex(buffer, font, 0, 0, makecol(0, 0, 0), -1, "Mouse X : %d", x_souris);
-        textprintf_ex(buffer, font, 0, 10, makecol(0, 0, 0), -1, "Mouse Y : %d", y_souris);
-        textprintf_ex(buffer, font, 0, 20, makecol(0, 0, 0), -1, "Ennemi: %d et %d", joueur[id_ennemi].x, joueur[id_ennemi].y);
-        if (mouse_x >= 300 && mouse_x <= 330 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1)
+        else
         {
-            animation_attaque_de_base(buffer, map, joueur, i, matrice, nb_joueurs, 0, respiration);
-            attaque = 1; // le joueur a annulé son attaque, l'attaque est considéré comme faite mais sans dégâts
+            start = time(NULL);
+            while ((int)time(NULL) - start < 2)
+            {
+                clear_bitmap(buffer);
+                affichage_general(buffer, map, joueur, i, nb_joueurs, hud_joueur, icone_classes, hud_icone, desc_sorts);
+                affichage_joueurs_respiration_ralenti(buffer, joueur, i, nb_joueurs, matrice, respiration, 5);
+                textprintf_ex(buffer, font, matrice[joueur[i].x][joueur[i].y].x_bloc - strlen("Attaque indisponible") - 30, matrice[joueur[i].x][joueur[i].y].y_bloc  - 70, makecol(joueur[i].red, joueur[i].green, joueur[i].blue), -1, "Attaque indisponible");
+                display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
+                blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+            }
+            attaque = 1;
         }
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
         rest(20);
@@ -85,7 +119,7 @@ void sort1(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP *buff
         sort1_mage(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, respiration);
         break;
     case 3: // VAMPIRE
-        sort1_vampire(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
+        sort1_vampire(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, respiration);
         break;
     case 4: // ASSASSIN
         sort1_assassin(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, respiration);
@@ -93,7 +127,7 @@ void sort1(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP *buff
     }
 }
 
-void sort2(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP *buffer_map, t_bloc matrice [23][23], BITMAP *desc_sorts, int x_souris, int y_souris, BITMAP *cursor, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP* map, time_t start, int respiration[])
+void sort2(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP *buffer_map, t_bloc matrice [23][23], BITMAP *desc_sorts, int x_souris, int y_souris, BITMAP *cursor, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP* map, int respiration[])
 {
     switch(joueur[i].id_classe)
     {
@@ -107,7 +141,7 @@ void sort2(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP *buff
         sort2_vampire(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
         break;
     case 4: // ASSASSIN
-        sort2_assassin(start, joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map,hud_joueur, icone_classes, hud_icone,desc_sorts);
+        sort2_assassin(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map,hud_joueur, icone_classes, hud_icone,desc_sorts, respiration);
         break;
     }
 }
@@ -117,7 +151,7 @@ void sort3(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP *buff
     switch(joueur[i].id_classe)
     {
     case 1: // GUERRIER
-        sort3_guerrier(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, respiration);
+        sort3_guerrier(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
         break;
     case 2: // MAGE
         sort3_mage(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, respiration);
@@ -126,6 +160,7 @@ void sort3(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP *buff
         sort3_vampire(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, respiration);
         break;
     case 4: // ASSASSIN
+        sort3_assassin(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, respiration);
         break;
     }
 }
@@ -135,21 +170,21 @@ void sort4(BITMAP * buffer_map, BITMAP *map,int *ligne_souris, int *colonne_sour
     switch(joueur[i].id_classe)
     {
     case 1: // GUERRIER
-        sort4_guerrier(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, respiration);
+        sort4_guerrier(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
         break;
     case 2: // MAGE
-        sort4_mage(buffer_map, map, cursor, buffer, joueur, i, matrice, red_mouse, green_mouse, blue_mouse, ligne_souris, colonne_souris,nb_joueurs, hud_icone, desc_sorts, hud_joueur, icone_classes, respiration);
+        sort4_mage(buffer_map, map, cursor, buffer, joueur, i, matrice, red_mouse, green_mouse, blue_mouse, ligne_souris, colonne_souris,nb_joueurs, hud_icone, desc_sorts, hud_joueur, icone_classes);
         break;
     case 3: // VAMPIRE
-        sort4_vampire(buffer_map, map, cursor, buffer, joueur, i, matrice, red_mouse, green_mouse, blue_mouse, ligne_souris,colonne_souris, nb_joueurs, hud_icone, desc_sorts, hud_joueur, icone_classes, respiration);
+        sort4_vampire(buffer_map, map, cursor, buffer, joueur, i, matrice, red_mouse, green_mouse, blue_mouse, ligne_souris,colonne_souris, nb_joueurs, hud_icone, desc_sorts, hud_joueur, icone_classes);
         break;
     case 4: // ASSASSIN
-        sort4_assassin(buffer_map, map, cursor, buffer, joueur, i, matrice, red_mouse, green_mouse, blue_mouse, ligne_souris, colonne_souris, nb_joueurs, hud_icone, desc_sorts, hud_joueur, icone_classes, respiration);
+        sort4_assassin(buffer_map, map, cursor, buffer, joueur, i, matrice, red_mouse, green_mouse, blue_mouse, ligne_souris, colonne_souris, nb_joueurs, hud_icone, desc_sorts, hud_joueur, icone_classes);
         break;
     }
 }
 
-void selection_sort(BITMAP * buffer_map,int *ligne_souris, int *colonne_souris,int *red_mouse, int *green_mouse, int *blue_mouse, t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice [23][23], BITMAP *desc_sorts, int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, time_t start, int respiration_joueur[])
+void selection_sort(BITMAP * buffer_map,int *ligne_souris, int *colonne_souris,int *red_mouse, int *green_mouse, int *blue_mouse, t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, t_bloc matrice [23][23], BITMAP *desc_sorts, int x_souris, int y_souris, BITMAP *cursor, BITMAP *map, BITMAP **hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, int respiration_joueur[])
 {
     /// On met des rest avant et après l'appel du programme pour bien qu'il y ait un clique : la pause est suffisante pour stopper un moment sans repasser dans la boucle
     if (mouse_x >= 300 && mouse_x <= 330 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1) // attaque de base
@@ -167,7 +202,7 @@ void selection_sort(BITMAP * buffer_map,int *ligne_souris, int *colonne_souris,i
     if (mouse_x >= 370 && mouse_x <= 400 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1) // sort 2
     {
         rest(80);
-        sort2(joueur, i, nb_joueurs, buffer, buffer_map, matrice, desc_sorts, x_souris, y_souris, cursor, hud_joueur, icone_classes, hud_icone, map, start, respiration_joueur);
+        sort2(joueur, i, nb_joueurs, buffer, buffer_map, matrice, desc_sorts, x_souris, y_souris, cursor, hud_joueur, icone_classes, hud_icone, map, respiration_joueur);
         rest(80);
     }
     if (mouse_x >= 405 && mouse_x <= 435 && mouse_y >= 670 && mouse_y <= 700 && mouse_b&1) // sort 3

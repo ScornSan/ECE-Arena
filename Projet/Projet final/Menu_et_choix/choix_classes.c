@@ -68,7 +68,7 @@ void affichage_classe(t_joueur* joueur, BITMAP* buffer, BITMAP *bg, BITMAP* clas
 
     blit(bg, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     sprintf(texte, "%s, choisissez votre classe", joueur[*nb].pseudo);
-    textprintf_ex(buffer, myfont2, 500, 20, makecol(joueur[*nb].red, joueur[*nb].green, joueur[*nb].blue), -1, texte);
+    textprintf_ex(buffer, myfont2, 500 - strlen(joueur[*nb].pseudo), 20, makecol(joueur[*nb].red, joueur[*nb].green, joueur[*nb].blue), -1, texte);
     for (int i = 0; i < 4; i++)
     {
         reset_color(classe[0]);
@@ -185,5 +185,8 @@ void choix_classe(BITMAP *buffer, BITMAP *fond, BITMAP* cursor, t_joueur* joueur
 
         // 4) ON FAIT UNE PETITE PAUSE à chaque fois sinon ça va trop vite...
         //rest(20);
+        rest(20);
     }
+    stop_sample(son_menu);
+    rest(50);
 }

@@ -1,10 +1,11 @@
 #include "../prototypes.h"
 #include "../structures.h"
 
-void compteur_effet(t_joueur* joueur, int nb_joueurs)
+void compteur_effet(t_joueur* joueur, int nb_joueurs, int i)
 {
     for (int j = 0; j < nb_joueurs; j++)
     {
+
         /// BOUCLIER
         if (joueur[j].bouclier && joueur[j].compteur_bouclier > nb_joueurs)
         {
@@ -16,7 +17,7 @@ void compteur_effet(t_joueur* joueur, int nb_joueurs)
             joueur[j].compteur_bouclier = joueur[j].compteur_bouclier + 1;
         }
         /// BRULURE
-        if (joueur[j].brulure && joueur[j].compteur_bouclier >= 3 * nb_joueurs)
+        if (joueur[j].brulure && joueur[j].compteur_brulure >= 3 * nb_joueurs)
         {
             joueur[j].brulure = 0;
             joueur[j].compteur_brulure = 0;
@@ -45,16 +46,6 @@ void compteur_effet(t_joueur* joueur, int nb_joueurs)
         {
             joueur[j].compteur_hemorragie = joueur[j].compteur_hemorragie + 1;
         }
-        /// LUCIDE
-        if (joueur[j].lucide && joueur[j].compteur_lucide >= 2)
-        {
-            joueur[j].lucide = 0;
-            joueur[j].compteur_lucide = 0;
-        }
-        else
-        {
-            joueur[j].compteur_lucide = joueur[j].compteur_lucide + 1;
-        }
         /// MORTEL
         if (joueur[j].mortel && joueur[j].compteur_mortel >= 2)
         {
@@ -74,6 +65,15 @@ void compteur_effet(t_joueur* joueur, int nb_joueurs)
         else
         {
             joueur[j].compteur_rage = joueur[j].compteur_rage + 1;
+        }
+        /// ATTAQUE DISPONIBLE REMISE A 1
+        if (i != j) /// On remet l'attaque dispo a tout les joueurs sauf celui qui est en train de jouer
+        {
+            joueur[j].attaque_dispo = 1;
+            for (int k = 0; k < 4; k++)
+            {
+                joueur[j].classe.spell[k].dispo = 1;
+            }
         }
     }
 }

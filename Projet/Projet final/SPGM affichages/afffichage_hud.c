@@ -12,35 +12,42 @@ void affichage_hud_sorts(t_joueur* joueur, int i, int nb_joueurs, BITMAP* buffer
     if (mouse_x >= 300 && mouse_x <= 330 && mouse_y >= 670 && mouse_y <= 700) // attaque de bas
     {
         masked_blit(desc_sorts, buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H);
+        textprintf_ex(buffer, font, 355, 580, makecol(255,0,0), -1, "1-5");
+        textprintf_ex(buffer, font, 323, 600, makecol(0,0,255), -1, "1");
+        textprintf_ex(buffer, font, 355, 620, makecol(255,255,255), -1, "1");
+        textprintf_ex(buffer, font, 370, 640, makecol(0,0,0), -1, "90%");
     }
     if (mouse_x >= 335 && mouse_x <= 365 && mouse_y >= 670 && mouse_y <= 700) // sort 1
     {
         masked_blit(desc_sorts, buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage bitmap description
         masked_blit(joueur[i].classe.spell[0].description, buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage description sort 1
-
+        desc_sort1(joueur,i,buffer);
     }
     if (mouse_x >= 370 && mouse_x <= 400 && mouse_y >= 670 && mouse_y <= 700) // sort 2
     {
         masked_blit(desc_sorts, buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage stats sorts
         masked_blit(joueur[i].classe.spell[1].description, buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage bitmap description sort 2
+        desc_sort2(joueur,i,buffer);
 
     }
     if (mouse_x >= 405 && mouse_x <= 435 && mouse_y >= 670 && mouse_y <= 700) // sort 3
     {
         masked_blit(desc_sorts, buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage stats sorts
         masked_blit(joueur[i].classe.spell[2].description, buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage description sort 3
+        desc_sort3(joueur,i,buffer);
 
     }
     if (mouse_x >= 440 && mouse_x <= 470 && mouse_y >= 670 && mouse_y <= 700) // sort 4
     {
         masked_blit(desc_sorts, buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage stats sort
         masked_blit(joueur[i].classe.spell[3].description, buffer, 0, 0, 279, 560, SCREEN_W, SCREEN_H); // affichage description sort 4
+        desc_sort4(joueur,i,buffer);
     }
 }
 
 void affichage_hud_joueur(BITMAP* buffer, BITMAP** hud, t_joueur* joueur, int i, BITMAP **icone_classes)
 {
-    if (joueur[i].pv <= 55)
+    if (!joueur[i].bouclier)
     {
         rectfill(buffer, 72, 650, 74 + joueur[i].pv * 3, 673, makecol(255, 0, 0)); // rectangle pv a reduire quand il perd des hp
     }
@@ -48,10 +55,23 @@ void affichage_hud_joueur(BITMAP* buffer, BITMAP** hud, t_joueur* joueur, int i,
     {
         rectfill(buffer, 72, 650, 74 + 55 * 3, 673, makecol(250, 240, 0)); // rectangle pv a reduire quand il perd des hp
     }
+    masked_blit(icone_classes[joueur[i].id_classe - 1], buffer, 0, 0, 3, 640, SCREEN_W, SCREEN_H);
     rectfill(buffer, 68, 675, 70 + joueur[i].pa * 30, 685, makecol(0, 0, 255)); // rectangle pa a reduire quand il perd des hp
     rectfill(buffer, 66, 685, 70 + joueur[i].pm * 60, 695, makecol(0, 255, 0)); // rectangle pm a reduire quand il perd des hp
-    masked_blit(icone_classes[joueur[i].id_classe - 1], buffer, 0, 0, 3, 640, SCREEN_W, SCREEN_H);
-    masked_blit(hud[i], buffer, 0, 0, 3, 640, SCREEN_W, SCREEN_H);
+    if (joueur[i].choix_double)
+    {
+        if (i == 0 || i == 2)
+        {
+            masked_blit(hud[0], buffer, 0, 0, 3, 640, SCREEN_W, SCREEN_H);
+        }
+        else
+        {
+            masked_blit(hud[2], buffer, 0, 0, 3, 640, SCREEN_W, SCREEN_H);
+        }
+    }
+    else
+        masked_blit(hud[i], buffer, 0, 0, 3, 640, SCREEN_W, SCREEN_H);
+
     textprintf_ex(buffer, font, 120, 658, makecol(255, 255, 255), -1, "PV : %d/55", joueur[i].pv);
     textprintf_ex(buffer, font, 120, 676, makecol(255, 255, 255), -1, "PA : %d/6", joueur[i].pa);
     textprintf_ex(buffer, font, 120, 687, makecol(255, 255, 255), -1, "PM : %d/3", joueur[i].pm);
