@@ -4,7 +4,6 @@
 void classement_fin2(BITMAP *buffer, t_joueur * joueur, int nb_joueurs, int classement[])
 {
     BITMAP *ecran_fin;
-    printf("%d\n", nb_joueurs);
     ecran_fin=load_bitmap("BITMAP/GAMEOVER.bmp",NULL);
     if (!ecran_fin)
     {
@@ -17,22 +16,22 @@ void classement_fin2(BITMAP *buffer, t_joueur * joueur, int nb_joueurs, int clas
         blit(ecran_fin, buffer, 0,0,0,0,SCREEN_W, SCREEN_H);
         if (nb_joueurs == 2)
         {
-            textprintf_ex(buffer, font, 80, 100, makecol(0,0,0), -1, "1er : Joueur %d, %s", classement[0], joueur[classement[0]].pseudo);
+            textprintf_ex(buffer, font, 80, 100, makecol(0,0,0), -1, "1er : Joueur %d, %s", classement[0] + 1, joueur[classement[0]].pseudo);
             textprintf_ex(buffer, font, 80, 110, makecol(0,0,0), -1, "Degats infliges : %d", joueur[classement[0]].degatstotal);
             textprintf_ex(buffer, font, 80, 120, makecol(0,0,0), -1, "Cases parcourues : %d", joueur[classement[0]].casesparcourues);
-            textprintf_ex(buffer, font, 300, 100, makecol(0,0,0), -1, "2eme : Joueur %d, %s", classement[1], joueur[classement[0]].pseudo);
+            textprintf_ex(buffer, font, 300, 100, makecol(0,0,0), -1, "2eme : Joueur %d, %s", classement[1] + 1, joueur[classement[0]].pseudo);
             textprintf_ex(buffer, font, 300, 110, makecol(0,0,0), -1, "Degats infliges: %d", joueur[classement[1]].degatstotal);
             textprintf_ex(buffer, font, 300, 120, makecol(0,0,0), -1, "Cases parcourues : %d", joueur[classement[1]].casesparcourues);
         }
         if (nb_joueurs == 3)
         {
-            textprintf_ex(buffer, font, 80, 100, makecol(0,0,0), -1, "1er : Joueur %d, %s", classement[0], joueur[classement[0]].pseudo);
+            textprintf_ex(buffer, font, 80, 100, makecol(0,0,0), -1, "1er : Joueur %d, %s", classement[0] + 1, joueur[classement[0]].pseudo);
             textprintf_ex(buffer, font, 80, 110, makecol(0,0,0), -1, "Degats infliges : %d", joueur[classement[0]].degatstotal);
             textprintf_ex(buffer, font, 80, 120, makecol(0,0,0), -1, "Cases parcourues : %d", joueur[classement[0]].casesparcourues);
-            textprintf_ex(buffer, font, 300, 100, makecol(0,0,0), -1, "2eme : Joueur %d, %s", classement[1], joueur[classement[1]].pseudo);
+            textprintf_ex(buffer, font, 300, 100, makecol(0,0,0), -1, "2eme : Joueur %d, %s", classement[1] + 1, joueur[classement[1]].pseudo);
             textprintf_ex(buffer, font, 300, 110, makecol(0,0,0), -1, "Degats infliges : %d", joueur[classement[1]].degatstotal);
             textprintf_ex(buffer, font, 300, 120, makecol(0,0,0), -1, "Cases parcourues : %d", joueur[classement[1]].casesparcourues);
-            textprintf_ex(buffer, font, 520, 100, makecol(0,0,0), -1, "3eme : Joueur %d, %s", classement[2], joueur[classement[2]].pseudo);
+            textprintf_ex(buffer, font, 520, 100, makecol(0,0,0), -1, "3eme : Joueur %d, %s", classement[2] + 1, joueur[classement[2]].pseudo);
             textprintf_ex(buffer, font, 520, 110, makecol(0,0,0), -1, "Degats infliges : %d", joueur[classement[2]].degatstotal);
             textprintf_ex(buffer, font, 520, 120, makecol(0,0,0), -1, "Cases parcourues : %d", joueur[classement[2]].casesparcourues);
 
@@ -40,16 +39,16 @@ void classement_fin2(BITMAP *buffer, t_joueur * joueur, int nb_joueurs, int clas
         }
         if (nb_joueurs == 4)
         {
-            textprintf_ex(buffer, font, 80, 100, makecol(0,0,0), -1, "1er : Joueur %d, %s", classement[0], joueur[classement[0]].pseudo);
+            textprintf_ex(buffer, font, 80, 100, makecol(0,0,0), -1, "1er : Joueur %d, %s", classement[0] + 1, joueur[classement[0]].pseudo);
             textprintf_ex(buffer, font, 80, 110, makecol(0,0,0), -1, "Degats infliges : %d", joueur[classement[0]].degatstotal);
             textprintf_ex(buffer, font, 80, 120, makecol(0,0,0), -1, "Cases parcourues : %d", joueur[classement[0]].casesparcourues);
-            textprintf_ex(buffer, font, 300, 100, makecol(0,0,0), -1, "2eme : Joueur %d, %s", classement[1], joueur[classement[1]].pseudo);
+            textprintf_ex(buffer, font, 300, 100, makecol(0,0,0), -1, "2eme : Joueur %d, %s", classement[1] + 1, joueur[classement[1]].pseudo);
             textprintf_ex(buffer, font, 300, 110, makecol(0,0,0), -1, "Degats infliges : %d", joueur[classement[1]].degatstotal);
             textprintf_ex(buffer, font, 300, 120, makecol(0,0,0), -1, "Cases parcourues : %d", joueur[classement[1]].casesparcourues);
-            textprintf_ex(buffer, font, 520, 100, makecol(0,0,0), -1, "3eme : Joueur %d, %s", classement[2], joueur[classement[2]].pseudo);
+            textprintf_ex(buffer, font, 520, 100, makecol(0,0,0), -1, "3eme : Joueur %d, %s", classement[2] + 1, joueur[classement[2]].pseudo);
             textprintf_ex(buffer, font, 520, 110, makecol(0,0,0), -1, "Degats infliges : %d", joueur[classement[2]].degatstotal);
             textprintf_ex(buffer, font, 520, 120, makecol(0,0,0), -1, "Cases parcourues : %d", joueur[classement[2]].casesparcourues);
-            textprintf_ex(buffer, font, 740, 100, makecol(0,0,0), -1, "4eme : Joueur %d, %s", classement[3], joueur[classement[3]].pseudo);
+            textprintf_ex(buffer, font, 740, 100, makecol(0,0,0), -1, "4eme : Joueur %d, %s", classement[3] + 1, joueur[classement[3]].pseudo);
             textprintf_ex(buffer, font, 740, 110, makecol(0,0,0), -1, "Degats infliges : %d", joueur[classement[3]].degatstotal);
             textprintf_ex(buffer, font, 740, 120, makecol(0,0,0), -1, "Cases parcourues : %d", joueur[classement[3]].casesparcourues);
         }

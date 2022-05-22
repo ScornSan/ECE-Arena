@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1653214731 source:c:\repos\ece-arena\projet\projet final\main.c
+1653254612 source:c:\repos\ece-arena\projet\projet final\main.c
 	"structures.h"
 	"prototypes.h"
 
@@ -17,7 +17,7 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1653251548 c:\repos\ece-arena\projet\projet final\structures.h
+1653254672 c:\repos\ece-arena\projet\projet final\structures.h
 	<allegro.h>
 	<inttypes.h>
 
@@ -28,7 +28,7 @@
 	<time.h>
 	<string.h>
 
-1653252982 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\tour_joueur.c
+1653254211 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\tour_joueur.c
 	"../prototypes.h"
 	"../structures.h"
 
@@ -40,7 +40,7 @@
 	"../structures.h"
 	"../prototypes.h"
 
-1653241370 source:c:\repos\ece-arena\projet\projet final\spgm affichages\affichage_elements.c
+1653254854 source:c:\repos\ece-arena\projet\projet final\spgm affichages\affichage_elements.c
 	"../prototypes.h"
 	"../structures.h"
 
@@ -158,11 +158,11 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1653244082 source:c:\repos\ece-arena\projet\projet final\combats\sorts_guerrier.c
+1653254425 source:c:\repos\ece-arena\projet\projet final\combats\sorts_guerrier.c
 	"../prototypes.h"
 	"../structures.h"
 
-1653251962 source:c:\repos\ece-arena\projet\projet final\combats\sorts_mage.c
+1653254472 source:c:\repos\ece-arena\projet\projet final\combats\sorts_mage.c
 	"../prototypes.h"
 	"../structures.h"
 
@@ -178,15 +178,15 @@
 	"../prototypes.h"
 	"../structures.h"
 
-1653215613 source:c:\repos\ece-arena\projet\projet final\fin_de_partie\classement_fin.c
+1653254652 source:c:\repos\ece-arena\projet\projet final\fin_de_partie\classement_fin.c
 	"../prototypes.h"
 	"../structures.h"
 
-1653241389 source:c:\repos\ece-arena\projet\projet final\combats\compteur_effets.c
+1653253619 source:c:\repos\ece-arena\projet\projet final\combats\compteur_effets.c
 	"../prototypes.h"
 	"../structures.h"
 
-1653229481 source:c:\repos\ece-arena\projet\projet final\combats\test_effet_tour_suivant.c
+1653254068 source:c:\repos\ece-arena\projet\projet final\combats\test_effet_tour_suivant.c
 	"../prototypes.h"
 	"../structures.h"
 

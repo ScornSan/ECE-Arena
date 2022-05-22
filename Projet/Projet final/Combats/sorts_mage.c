@@ -71,6 +71,7 @@ void sort2_mage(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP*
     int longueur_ligne = 4;
     int id_ennemi;
     time_t start;
+    int degats;
 
     while(!attaque)
     {
@@ -117,9 +118,11 @@ void sort2_mage(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP*
                 joueur[i].pa = joueur[i].pa - 4;
                 if (pourcentage_de_chance() < 7)
                 {
+                    degats = random(3, 6);
                     joueur[id_ennemi].brulure = 1;
                     joueur[id_ennemi].compteur_brulure = 1;
-                    joueur[id_ennemi].pv = joueur[id_ennemi].pv - random(3, 6);
+                    joueur[id_ennemi].pv = joueur[id_ennemi].pv - degats;
+                    joueur[i].degatstotal = joueur[i].degatstotal + degats;
                     while ((int)time(NULL) - start < 2)
                     {
                         clear_bitmap(buffer);
@@ -391,7 +394,6 @@ void sort4_mage(BITMAP *buffer_map, BITMAP * map,BITMAP * cursor, BITMAP *buffer
                 joueur[i].degatstotal = joueur[i].degatstotal + joueur[i].classe.spell[3].chance;
             }
         }
-        printf("degat %d \n", joueur[i].classe.spell[3].chance);
         joueur[i].pa = joueur[i].pa - 5;
         joueur[i].classe.spell[3].dispo = 0;
         int num_sprites = 0;

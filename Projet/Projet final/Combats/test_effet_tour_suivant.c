@@ -1,7 +1,7 @@
 #include "../prototypes.h"
 #include "../structures.h"
 
-void test_effets(t_joueur* joueur, int j)
+void test_effets(t_joueur* joueur, int j, t_bloc matrice[23][23])
 {
     /// BRULURE
     if (joueur[j].brulure)
@@ -18,6 +18,15 @@ void test_effets(t_joueur* joueur, int j)
     {
         printf("saignement\n");
         joueur[j].pv = joueur[j].pv - random(4, 8);
+    }
+    /// INVINCIBLE
+    if (joueur[j].invincible)
+    {
+        matrice[joueur[j].x][joueur[j].y].occuper = 0;
+    }
+    else
+    {
+        matrice[joueur[j].x][joueur[j].y].occuper = j + 1;
     }
     /// RAGE
     if (joueur[j].rage)

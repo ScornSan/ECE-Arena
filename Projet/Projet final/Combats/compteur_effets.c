@@ -69,6 +69,16 @@ void compteur_effet(t_joueur* joueur, int nb_joueurs, int i)
         {
             joueur[j].compteur_rage = joueur[j].compteur_rage + 1;
         }
+        /// INVINCIBLE
+        if (joueur[j].invincible && joueur[j].compteur_invincible >= nb_joueurs)
+        {
+            joueur[j].invincible = 0;
+            joueur[j].compteur_invincible = 0;
+        }
+        else if (joueur[j].invincible)
+        {
+            joueur[j].compteur_invincible = joueur[j].compteur_invincible + 1;
+        }
         /// MORT JOUEUR
         if (joueur[j].pv <= 0)
         {

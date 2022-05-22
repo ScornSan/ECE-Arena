@@ -227,6 +227,7 @@ void sort3_guerrier(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BIT
                 if (pourcentage_de_chance() < 6 && joueur[i].pa >= 4)
                 {
                     joueur[id_ennemi].pv = joueur[id_ennemi].pv - degats;
+                    joueur[i].degatstotal = joueur[i].degatstotal + degats;
                     joueur[i].pa = joueur[i].pa - 4;
                     joueur[id_ennemi].hemorragie = 1;
                     joueur[id_ennemi].compteur_hemorragie = 1;

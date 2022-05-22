@@ -107,7 +107,6 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
 
     clear_bitmap(buffer);
     time_t start = time(NULL);
-    clock_t debut2 = clock();
 
     textout_ex(desc_sorts, font, "DEGATS:", 18, 20, makecol(255, 0, 0), -1);
     textout_ex(desc_sorts, font, "PA:", 18, 40, makecol(60, 0, 255), -1);
@@ -227,6 +226,8 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
             reperage_bloc_souris(&ligne_souris, &colonne_souris, red_mouse, green_mouse, blue_mouse, matrice, joueur, i);
             reperage_chemin(buffer, joueur[i].x, joueur[i].y, ligne_souris, colonne_souris, matrice, joueur, i, &autorisation_dep);
             affichage_joueurs_respiration(buffer, joueur, i, nb_joueurs, matrice, respiration_joueur, 5);
+            textprintf_ex(buffer, font, 0, 0, makecol(0, 0, 0), -1, "Mouse X : %d", matrice[ligne_souris][colonne_souris].occuper);
+            //textprintf_ex(buffer, font, 0, 10, makecol(0, 0, 0), -1, "Mouse Y : %d", mouse_y);
             display_cursor(cursor, buffer, mouse_x - 5, mouse_y - 5);
             blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             if(autorisation_dep == 1)
@@ -241,7 +242,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
                 start = time(NULL);
                 joueur[i].pm = 3; // on remet les pm et pa du joueur au nombre initial
                 joueur[i].pa = 6;
-                test_effets(joueur, i);
+                test_effets(joueur, i, matrice);
                 compteur_effet(joueur, nb_joueurs, i);
                 i = (i + 1) % nb_joueurs; // On boucle car temps finis ou on a cliqué sur le bouton
             }
@@ -252,7 +253,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
                 joueur[0].temps_tour = clock();
                 joueur[i].pm = 3; // on remet les pm et pa du joueur au nombre initial
                 joueur[i].pa = 6;
-                test_effets(joueur, i);
+                test_effets(joueur, i, matrice);
                 compteur_effet(joueur, nb_joueurs, i);
                 i = (i + 1) % nb_joueurs; // On boucle car temps finis ou on a cliqué sur le bouton
             }
@@ -267,7 +268,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
             }
             joueur[i].pm = 3; // on remet les pm et pa du joueur au nombre initial
             joueur[i].pa = 6;
-            test_effets(joueur, i);
+            test_effets(joueur, i, matrice);
             compteur_effet(joueur, nb_joueurs, i);
             i = (i + 1) % nb_joueurs; // On boucle car le joueur est mort
         }
