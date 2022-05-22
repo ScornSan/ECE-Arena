@@ -2,7 +2,7 @@
 #define STRUCTURES_H_INCLUDED
 
 #include <allegro.h>
-#define TEMPS_TOUR 15
+#define TEMPS_TOUR 16
 #define NB_SORTS 4
 #define DIRECTIONS 4
 #define NB_BITMAPS_D 4
@@ -11,6 +11,8 @@
 #define NB_CLASSES 4
 #define TEMPS_CHOIX 15
 #define PV_JOUEUR 55
+#define __STDC_FORMAT_MACROS
+#include <inttypes.h>
 
 typedef struct bloc
 {
@@ -90,6 +92,9 @@ typedef struct Players
     int degatstotal;
     BITMAP *shield;
     BITMAP *skull;
+    BITMAP *rageux;
+    BITMAP *fin;
+    clock_t temps_tour;
     t_classe classe;
 }t_joueur;
 

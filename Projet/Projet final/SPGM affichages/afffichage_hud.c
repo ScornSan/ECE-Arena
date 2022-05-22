@@ -1,6 +1,16 @@
 #include "../prototypes.h"
 #include "../structures.h"
 
+void affichage_fin_de_tour(BITMAP* buffer, t_joueur* joueur)
+{
+    blit(joueur[0].fin, buffer, 0, 0 , 800, 660 , 210, 50);
+    textprintf_ex(buffer, font, 860 , 680 , makecol(0, 0, 0), -1, "FIN DE TOUR");
+    if ( mouse_x>= 800 && mouse_x <= 1010 && mouse_y >= 663 && mouse_y <= 713)
+    {
+        textprintf_ex(buffer, font, 860 , 680 , makecol(255, 255, 255), -1, "FIN DE TOUR");
+    }
+}
+
 void affichage_hud_sorts(t_joueur* joueur, int i, int nb_joueurs, BITMAP* buffer, BITMAP* hud_icone, BITMAP* desc_sorts)
 {
     masked_blit(hud_icone, buffer, 0, 0, 280, 660, SCREEN_W, SCREEN_H);
@@ -49,11 +59,14 @@ void affichage_hud_joueur(BITMAP* buffer, BITMAP** hud, t_joueur* joueur, int i,
 {
     if (!joueur[i].bouclier)
     {
-        rectfill(buffer, 72, 650, 74 + joueur[i].pv * 3, 673, makecol(255, 0, 0)); // rectangle pv a reduire quand il perd des hp
+        if (joueur[i].pv <= 55)
+            rectfill(buffer, 72, 650, 74 + joueur[i].pv * 3, 673, makecol(255, 0, 0)); // rectangle pv a reduire quand il perd des hp
+        else
+           rectfill(buffer, 72, 650, 74 + 165, 673, makecol(250, 0, 0)); // rectangle pv a reduire quand il perd des hp
     }
     else
     {
-        rectfill(buffer, 72, 650, 74 + 55 * 3, 673, makecol(250, 240, 0)); // rectangle pv a reduire quand il perd des hp
+        rectfill(buffer, 72, 650, 74 + 55 * 3, 673, makecol(250, 240, 0)); /// Barre de pv en jaune car bouclier
     }
     masked_blit(icone_classes[joueur[i].id_classe - 1], buffer, 0, 0, 3, 640, SCREEN_W, SCREEN_H);
     rectfill(buffer, 68, 675, 70 + joueur[i].pa * 30, 685, makecol(0, 0, 255)); // rectangle pa a reduire quand il perd des hp
@@ -77,10 +90,14 @@ void affichage_hud_joueur(BITMAP* buffer, BITMAP** hud, t_joueur* joueur, int i,
     textprintf_ex(buffer, font, 120, 687, makecol(255, 255, 255), -1, "PM : %d/3", joueur[i].pm);
 }
 
-void affichage_general(BITMAP *buffer, BITMAP *map, t_joueur* joueur, int i, int nb_joueurs, BITMAP** hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts)
+void affichage_general(BITMAP *buffer, BITMAP *map, t_joueur* joueur, int i, int nb_joueurs, BITMAP** hud_joueur, BITMAP **icone_classes, BITMAP *hud_icone, BITMAP *desc_sorts, clock_t debut2)
 {
     // Affichage de la map
     blit(map, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+    rectfill(buffer, 1215, 671, 1205 - (int)(clock() - joueur[0].temps_tour) / 100, 691, makecol(255, 0, 0)); // barre de temps
+    if (clock() - joueur[0].temps_tour > 16000)
+        joueur[0].temps_tour = clock();
     affichage_hud_sorts(joueur, i, nb_joueurs, buffer, hud_icone, desc_sorts); // Blit de 5 logos (les mêmes pour la barre d'action, à changer après...)
     affichage_hud_joueur(buffer, hud_joueur, joueur, i, icone_classes); // affiche du hud joueur, avec pv, pa, pm
+    affichage_fin_de_tour(buffer, joueur);
 }

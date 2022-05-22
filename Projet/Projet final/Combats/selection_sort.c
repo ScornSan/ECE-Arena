@@ -29,11 +29,9 @@ void attaque_de_base(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BI
             // on attaque le joueur ennemi1 sur on clique et que la souris est sur lui
             if (matrice[x_souris][y_souris].occuper != matrice[joueur[i].x][joueur[i].y].occuper && matrice[x_souris][y_souris].occuper != 0 && mouse_b&1 && green_temp1 == 140)
             {
-                joueur[i].attaque_dispo = 0;
                 start = time(NULL);
                 id_ennemi = matrice[x_souris][y_souris].id_case - 1;
                 joueur[i].pa = joueur[i].pa - 2;
-                //printf("Ennemi : %d\n", id_ennemi);
                 /// NORD OUEST
                 if (x_souris < joueur[i].x && y_souris == joueur[i].y)
                 {
@@ -62,12 +60,15 @@ void attaque_de_base(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BI
                 {
                     degats = random(1, 5);
                     joueur[id_ennemi].pv = joueur[id_ennemi].pv - degats;
+                    joueur[i].degatstotal = joueur[i].degatstotal + degats;
                     attaque = 1; // on a attaqué, on peut sortir de la boucle en infligeant les dégâts, avec le % de chance
                 }
                 else
                 {
                     attaque = 2;
                 }
+                joueur[i].pa = joueur[i].pa - 1;
+                joueur[i].attaque_dispo = 0;
                 while ((int)time(NULL) - start < 3)
                 {
                     clear_bitmap(buffer);
@@ -160,7 +161,7 @@ void sort3(t_joueur* joueur, int i, int nb_joueurs, BITMAP *buffer, BITMAP *buff
         sort3_vampire(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, respiration);
         break;
     case 4: // ASSASSIN
-        sort1_assassin(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, respiration);
+        sort3_assassin(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, respiration);
         break;
     }
 }
@@ -170,7 +171,7 @@ void sort4(BITMAP * buffer_map, BITMAP *map,int *ligne_souris, int *colonne_sour
     switch(joueur[i].id_classe)
     {
     case 1: // GUERRIER
-        sort4_guerrier(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts);
+        sort4_guerrier(joueur, i, nb_joueurs, buffer, buffer_map, matrice, x_souris, y_souris, cursor, map, hud_joueur, icone_classes, hud_icone, desc_sorts, respiration);
         break;
     case 2: // MAGE
         sort4_mage(buffer_map, map, cursor, buffer, joueur, i, matrice, red_mouse, green_mouse, blue_mouse, ligne_souris, colonne_souris,nb_joueurs, hud_icone, desc_sorts, hud_joueur, icone_classes);

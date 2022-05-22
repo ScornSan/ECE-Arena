@@ -50,7 +50,6 @@ void prenom(int *nb_joueur, BITMAP* buffer, char pseudo[4][20], BITMAP* fond, BI
     /// AFFICHAGE DES LETTRES QUE L'ON TAPE AU CLAVIER
     while (stop != 1)
     {
-        textprintf_ex(buffer,font,96,36,makecol(0,255,0), makecol(0,0,0),"%4d %4d",mouse_x,mouse_y);
         affichage_son(buffer, cursor, son_menu, &(*clic));
 
         if (*clic)

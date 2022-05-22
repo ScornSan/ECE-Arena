@@ -2,49 +2,14 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="SPGM affichages\affichage_elements.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-4" zoom_2="0">
+	<File name="Fin_de_partie\classement_fin.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2334" topLine="12" />
+			<Cursor1 position="773" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Animations\anim_attaque_de_base.c" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
+	<File name="Combats\sorts_assassin.c" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="4792" topLine="65" />
-		</Cursor>
-	</File>
-	<File name="Animations\animation_sort_guerrier.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="273" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="SPGM affichages\zone_deplacement.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5586" topLine="29" />
-		</Cursor>
-	</File>
-	<File name="Animations\animation_sort_mage.c" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2489" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="structures.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="596" topLine="33" />
-		</Cursor>
-	</File>
-	<File name="Menu_et_choix\menu.c" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="599" topLine="12" />
-		</Cursor>
-	</File>
-	<File name="Menu_et_choix\choix_classes.c" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1811" topLine="51" />
-		</Cursor>
-	</File>
-	<File name="Partie_en_cours\position_depart_joueurs.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="4323" topLine="85" />
+			<Cursor1 position="19617" topLine="315" />
 		</Cursor>
 	</File>
 	<File name="SPGM affichages\lecture_pixels.c" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
@@ -52,84 +17,9 @@
 			<Cursor1 position="355" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Combats\test_effet_tour_suivant.c" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Animations\anim_attaque_de_base.c" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="681" topLine="11" />
-		</Cursor>
-	</File>
-	<File name="SPGM affichages\initialisations_tab.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="228" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="Combats\compteur_effets.c" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1388" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="Animations\animation_deplacement.c" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="6225" topLine="29" />
-		</Cursor>
-	</File>
-	<File name="prototypes.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1955" topLine="57" />
-		</Cursor>
-	</File>
-	<File name="Combats\selection_sort.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1246" topLine="23" />
-		</Cursor>
-	</File>
-	<File name="Combats\sorts_assassin.c" open="1" top="1" tabpos="7" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1414" topLine="25" />
-		</Cursor>
-	</File>
-	<File name="Combats\sorts_vampire.c" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="10270" topLine="147" />
-		</Cursor>
-	</File>
-	<File name="Menu_et_choix\creation_classes.c" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="9230" topLine="161" />
-		</Cursor>
-	</File>
-	<File name="main.c" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2710" topLine="4" />
-		</Cursor>
-	</File>
-	<File name="SPGM affichages\calques.c" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2076" topLine="39" />
-		</Cursor>
-	</File>
-	<File name="SPGM affichages\afffichage_hud.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3523" topLine="56" />
-		</Cursor>
-	</File>
-	<File name="Partie_en_cours\tour_aleatoire.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="63" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="Animations\animation_sort_assassin.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="851" topLine="3" />
-		</Cursor>
-	</File>
-	<File name="Partie_en_cours\deplacement_joueur.c" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5234" topLine="88" />
-		</Cursor>
-	</File>
-	<File name="Combats\sorts_mage.c" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="7454" topLine="98" />
+			<Cursor1 position="3334" topLine="36" />
 		</Cursor>
 	</File>
 	<File name="SPGM affichages\dessins_blocs.c" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
@@ -137,24 +27,139 @@
 			<Cursor1 position="695" topLine="149" />
 		</Cursor>
 	</File>
+	<File name="Animations\animation_sort_mage.c" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2489" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Animations\animation_sort_guerrier.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="271" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="SPGM affichages\afffichage_hud.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5108" topLine="71" />
+		</Cursor>
+	</File>
+	<File name="Menu_et_choix\menu.c" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1253" topLine="39" />
+		</Cursor>
+	</File>
+	<File name="SPGM affichages\affichage_stats.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4843" topLine="91" />
+		</Cursor>
+	</File>
+	<File name="SPGM affichages\zone_deplacement.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5586" topLine="29" />
+		</Cursor>
+	</File>
+	<File name="Partie_en_cours\tour_aleatoire.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="63" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Partie_en_cours\deplacement_joueur.c" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5234" topLine="88" />
+		</Cursor>
+	</File>
+	<File name="prototypes.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2107" topLine="3" />
+		</Cursor>
+	</File>
+	<File name="Menu_et_choix\choix_classes.c" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2397" topLine="169" />
+		</Cursor>
+	</File>
 	<File name="Animations\animation_sort_vampire.c" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="2700" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Partie_en_cours\Tour_joueur.c" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+	<File name="Combats\sorts_guerrier.c" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="9510" topLine="110" />
+			<Cursor1 position="19720" topLine="303" />
 		</Cursor>
 	</File>
-	<File name="Fin_de_partie\classement_fin.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+	<File name="Animations\animation_deplacement.c" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="498" topLine="0" />
+			<Cursor1 position="6225" topLine="29" />
 		</Cursor>
 	</File>
-	<File name="Combats\sorts_guerrier.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
+	<File name="Combats\selection_sort.c" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="13948" topLine="210" />
+			<Cursor1 position="970" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Combats\sorts_vampire.c" open="1" top="1" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-4" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="28037" topLine="450" />
+		</Cursor>
+	</File>
+	<File name="Animations\animation_sort_assassin.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="851" topLine="3" />
+		</Cursor>
+	</File>
+	<File name="SPGM affichages\calques.c" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2076" topLine="39" />
+		</Cursor>
+	</File>
+	<File name="Combats\test_effet_tour_suivant.c" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="205" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Partie_en_cours\Tour_joueur.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="10246" topLine="240" />
+		</Cursor>
+	</File>
+	<File name="SPGM affichages\affichage_elements.c" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-4" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4801" topLine="39" />
+		</Cursor>
+	</File>
+	<File name="Combats\compteur_effets.c" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2230" topLine="65" />
+		</Cursor>
+	</File>
+	<File name="structures.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="103" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Partie_en_cours\position_depart_joueurs.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7151" topLine="156" />
+		</Cursor>
+	</File>
+	<File name="Menu_et_choix\creation_classes.c" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="11970" topLine="222" />
+		</Cursor>
+	</File>
+	<File name="SPGM affichages\initialisations_tab.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="228" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Combats\sorts_mage.c" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="24667" topLine="399" />
+		</Cursor>
+	</File>
+	<File name="main.c" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3620" topLine="54" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

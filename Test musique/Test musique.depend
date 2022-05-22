@@ -1,5 +1,0 @@
-# depslib dependency file v1.0
-1651851272 source:c:\repos\ece-arena\test musique\main.c
-	<allegro.h>
-	<stdio.h>
-

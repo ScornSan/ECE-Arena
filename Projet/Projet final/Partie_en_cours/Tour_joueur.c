@@ -13,6 +13,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
     BITMAP * buffer_map;
     BITMAP * croix_rouge;
     BITMAP * croix_bleue;
+    BITMAP *barre_temps;
 
     int clic_son = 0;
     int i = 0;
@@ -73,6 +74,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
     buffer_map =create_bitmap(SCREEN_W,SCREEN_H);
     croix_rouge = load_bitmap("BITMAP/croix_rouge.bmp", NULL);
     croix_bleue = load_bitmap("BITMAP/croix_bleue.bmp", NULL);
+    barre_temps=load_bitmap("BITMAP/chrono_hud.bmp",NULL);
 
     for (j = 0; j < 4; j++)
     {
@@ -106,6 +108,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
 
     clear_bitmap(buffer);
     time_t start = time(NULL);
+    clock_t debut2 = clock();
 
     textout_ex(desc_sorts, font, "DEGATS:", 18, 20, makecol(255, 0, 0), -1);
     textout_ex(desc_sorts, font, "PA:", 18, 40, makecol(60, 0, 255), -1);
@@ -164,7 +167,6 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
             affichage_joueurs(buffer, joueur, i, nb_joueurs, matrice);
             //circlefill(buffer, matrice[joueur[j].x][joueur[j].y].x_bloc, matrice[joueur[j].x][joueur[j].y].y_bloc, 9, makecol(joueur[j].red,joueur[j].green,joueur[j].blue));
         }
-        textprintf_ex(buffer,font,96,36,makecol(0,255,0), makecol(0,0,0),"%4d %4d",mouse_x,mouse_y);
         //affichage_croix_bleue(buffer, croix_bleue, ligne_souris, colonne_souris, matrice);
         //affichage_croix_rouge(buffer, croix_rouge, ligne_souris, colonne_souris, matrice);
         if ((int)(time(NULL) - debut >= TEMPS_CHOIX))
@@ -175,6 +177,7 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
         rest(20);
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     }
+
     //tour_joueur_alea(joueur, nb_joueurs);
     for (int i = 0; i<nb_joueurs; i++)
     {
@@ -187,10 +190,11 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
         {
             matrice[joueur[i].x][joueur[i].y].occuper = i + 1;
             matrice[joueur[i].x][joueur[i].y].id_case = i + 1;
+            joueur[i].temps_tour = clock();
         }
-        respiration_joueur[i] = i * 5;
+        respiration_joueur[i] = i * 60;
     }
-    i = random(0, 3);
+    //i = random(0, 3);
 
     /// Boucle du jeu jusqu'a que la partie soit terminé
     while (joueur_en_vie != 1)
@@ -201,7 +205,6 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
             {
                 classement[n] = i; //classement[0] = i
                 break; // On break pour aller dans le classement fin (dans le main)
-
             }
             clear_bitmap(buffer);
             /// Affichage general qui est constamment présent meme pendant les actions du joueur
@@ -215,7 +218,8 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
             {
                 draw_sprite(buffer, son_on, 0, 0);
             }
-            rectfill(buffer, 1080, 348, 1090, 348 +(int)((time(NULL)) - start) * 5, makecol(255, 0, 0)); // barre de temps
+
+            draw_sprite(buffer, barre_temps, 1025, 650);
             //textprintf_ex(buffer, font, 0, 0, makecol(0, 0, 0), -1, "Mouse X : %d", mouse_x);
             //textprintf_ex(buffer, font, 0, 10, makecol(0, 0, 0), -1, "Mouse Y : %d", mouse_y);
             //textprintf_ex(buffer, font, 0, 20, makecol(0, 0, 0), -1, "Temps: %f", (float)((time(NULL)) - start));
@@ -240,20 +244,36 @@ void tour_joueur(BITMAP* buffer, BITMAP *cursor, t_joueur* joueur, int nb_joueur
                 start = time(NULL);
                 joueur[i].pm = 3; // on remet les pm et pa du joueur au nombre initial
                 joueur[i].pa = 6;
-                compteur_effet(joueur, nb_joueurs);
-                test_effets(joueur, nb_joueurs);
+                test_effets(joueur, i);
+                compteur_effet(joueur, nb_joueurs, i);
+                i = (i + 1) % nb_joueurs; // On boucle car temps finis ou on a cliqué sur le bouton
+            }
+            else if(mouse_b&1 && mouse_x>= 800 && mouse_x <= 1010 && mouse_y >= 663 && mouse_y <= 713)
+            {
+                rest(150);
+                start = time(NULL);
+                joueur[0].temps_tour = clock();
+                joueur[i].pm = 3; // on remet les pm et pa du joueur au nombre initial
+                joueur[i].pa = 6;
+                test_effets(joueur, i);
+                compteur_effet(joueur, nb_joueurs, i);
                 i = (i + 1) % nb_joueurs; // On boucle car temps finis ou on a cliqué sur le bouton
             }
         }
         else
         {
+            if (!joueur[i].elimine)
+            {
+                joueur[i].elimine = 1;
+                classement[n] = i;
+                n--;
+            }
             joueur[i].pm = 3; // on remet les pm et pa du joueur au nombre initial
             joueur[i].pa = 6;
-            compteur_effet(joueur, nb_joueurs);
             test_effets(joueur, i);
+            compteur_effet(joueur, nb_joueurs, i);
             i = (i + 1) % nb_joueurs; // On boucle car le joueur est mort
         }
-        rest(20);
         if (mouse_b & 1 && mouse_x < 1)
         {
             break;

@@ -16,18 +16,16 @@ void test_effets(t_joueur* joueur, int j)
     /// HEMORRAGIE
     if (joueur[j].hemorragie)
     {
-        joueur[j].pv = joueur[j].pv - random(5, 10);
+        printf("saignement\n");
+        joueur[j].pv = joueur[j].pv - random(4, 8);
     }
     /// RAGE
     if (joueur[j].rage)
     {
-        joueur[j].classe.spell[1].degats_min = 8;
-        joueur[j].classe.spell[1].degats_max = 12;
+        joueur[j].classe.spell[1].degats_min = 10;
+        joueur[j].classe.spell[1].degats_max = 15;
+        joueur[j].classe.spell[2].degats_min = 8;
+        joueur[j].classe.spell[2].degats_max = 12;
         joueur[j].pm = 4;
     }
-    if (joueur[j].pv <= 0)
-    {
-        joueur[j].vivant = 0;
-    }
-    joueur[j].attaque_dispo = 1;
 }

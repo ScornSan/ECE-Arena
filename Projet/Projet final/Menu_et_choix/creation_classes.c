@@ -20,6 +20,8 @@ void creation_icones_classes(t_joueur* joueur)
                 joueur[i].classe.spell[j].description = load_bitmap(chargement, NULL);
                 sprintf(chargement, "BITMAP/sort%d_guerrier.bmp", j + 1);
                 joueur[i].classe.spell[j].logo = load_bitmap(chargement, NULL);
+                sprintf(chargement, "SPRITES/RAGE/CHEVALIER/rage__%d.bmp", j);
+                joueur[i].classe.spell[3].animation_sort[j] = load_bitmap(chargement, NULL); // sort 1
                 for (k = 0; k < NB_BITMAPS_D; k++)
                 {
                     sprintf(mvt, "SPRITES/CHEVALIER/MARCHE/walking_%d_%d.bmp", j, k + 1);
@@ -32,7 +34,7 @@ void creation_icones_classes(t_joueur* joueur)
                         joueur[i].classe.respiration[j][k] = load_bitmap(respiration, NULL);
                     }
                 }
-                if (!joueur[i].classe.spell[j].description || !joueur[i].classe.spell[j].logo || !joueur[i].classe.deplacement[j][0] || !joueur[i].classe.respiration[j][0])
+                if (!joueur[i].classe.spell[j].description || !joueur[i].classe.spell[j].logo || !joueur[i].classe.deplacement[j][0] || !joueur[i].classe.respiration[j][0] || joueur[i].classe.spell[3].animation_sort[0])
                 {
                     allegro_message("erreur creation classe guerrier");
                     allegro_exit();
@@ -40,8 +42,14 @@ void creation_icones_classes(t_joueur* joueur)
                 }
                 /// initialisation degats :
             }
-            joueur[i].classe.spell[1].degats_max = 12;
             joueur[i].classe.spell[1].degats_min = 6;
+            joueur[i].classe.spell[1].degats_max = 12;
+            joueur[i].classe.spell[2].degats_min = 4;
+            joueur[i].classe.spell[2].degats_max = 8;
+            joueur[i].classe.spell[0].dispo = 1;
+            joueur[i].classe.spell[1].dispo = 1;
+            joueur[i].classe.spell[2].dispo = 1;
+            joueur[i].classe.spell[3].dispo = 1;
             break;
         case 2: // creation d'une classe mage
             for (j = 0; j < 4; j++)
@@ -78,11 +86,19 @@ void creation_icones_classes(t_joueur* joueur)
                 }
             }
             /// HEAL du mage
-            joueur[i].classe.spell[0].degats_max = 10;
+            joueur[i].classe.spell[0].degats_max = 8;
             joueur[i].classe.spell[0].degats_min = 4;
+            /// Brulure
+            joueur[i].classe.spell[1].degats_max = 10;
+            joueur[i].classe.spell[1].degats_min = 5;
             /// Sol grondant
             joueur[i].classe.spell[3].degats_max = 10;
             joueur[i].classe.spell[3].degats_min = 5;
+
+            joueur[i].classe.spell[0].dispo = 1;
+            joueur[i].classe.spell[1].dispo = 1;
+            joueur[i].classe.spell[2].dispo = 1;
+            joueur[i].classe.spell[3].dispo = 1;
             break;
         case 3: // creation d'une classe vampire
             for (j = 0; j < 4; j++)
@@ -117,6 +133,16 @@ void creation_icones_classes(t_joueur* joueur)
                     exit(EXIT_FAILURE);
                 }
             }
+
+            joueur[i].classe.spell[0].degats_max = 8;
+            joueur[i].classe.spell[0].degats_min = 4;
+            joueur[i].classe.spell[3].degats_min = 5;
+            joueur[i].classe.spell[3].degats_max = 10;
+
+            joueur[i].classe.spell[0].dispo = 1;
+            joueur[i].classe.spell[1].dispo = 1;
+            joueur[i].classe.spell[2].dispo = 1;
+            joueur[i].classe.spell[3].dispo = 1;
             break;
         case 4: // creation d'une classe assassin
             for (j = 0; j < 4; j++)
@@ -153,6 +179,13 @@ void creation_icones_classes(t_joueur* joueur)
                     exit(EXIT_FAILURE);
                 }
             }
+
+            joueur[i].classe.spell[3].degats_min = 5;
+            joueur[i].classe.spell[3].degats_max = 10;
+            joueur[i].classe.spell[0].dispo = 1;
+            joueur[i].classe.spell[1].dispo = 1;
+            joueur[i].classe.spell[2].dispo = 1;
+            joueur[i].classe.spell[3].dispo = 1;
             break;
         }
     }
@@ -173,8 +206,8 @@ void creation_classes(t_joueur* joueur, int nb_joueurs, int choix_double)
     for (i = 0; i < nb_joueurs; i++)
     {
         joueur[i].pv = PV_JOUEUR;
-        joueur[i].pm = 2;
-        joueur[i].pa = 5;
+        joueur[i].pm = 3;
+        joueur[i].pa = 6;
         joueur[i].classe.attaque = 5;
         joueur[i].attaque_dispo = 1;
         joueur[i].direction = 0;
@@ -199,9 +232,14 @@ void creation_classes(t_joueur* joueur, int nb_joueurs, int choix_double)
         joueur[i].invincible = 0;
         joueur[i].compteur_invincible = 0;
         joueur[i].degatstotal = 0;
+        joueur[i].casesparcourues = 0;
+        joueur[i].place_manuellement = 0;
         joueur[i].classe.logo_attaque = load_bitmap("BITMAP/sort_attaque.bmp", NULL);
         joueur[i].shield = load_bitmap("SPRITES/CHEVALIER/BOUCLIER/shield_0.bmp", NULL);
         joueur[i].skull = load_bitmap("SPRITES/VAMPIRE/CONJURATION/skull_0.bmp", NULL);
+        joueur[i].rageux = load_bitmap("SPRITES/CHEVALIER/RAGE/rage_0.bmp", NULL);
+        joueur[i].classe.spell[2].animation_sort[0] = load_bitmap("SPRITES/NINJA/INVINCIBLE/ghost.bmp", NULL);
+        joueur[i].fin = load_bitmap("BITMAP/bouton_fin_de_tour.bmp", NULL);
         for (j = 0; j < 4; j++)
         {
             joueur[i].classe.spell[j].dispo = 1; /// Rendre les spells disponibles

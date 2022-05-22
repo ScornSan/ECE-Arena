@@ -75,5 +75,11 @@ void compteur_effet();
 void test_effets();
 void animation_sort2_assassin();
 void animation_sort3_vampire();
+void affichage_joueurs_respiration_ralenti();
+void desc_sort1();
+void desc_sort2();
+void desc_sort3();
+void desc_sort4();
+void classement_fin2();
 
 #endif // PROTOTYOPES_H_INCLUDED
