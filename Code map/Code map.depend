@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1651068674 source:c:\repos\ece-arena\code map\main.c
-	<stdio.h>
-	<stdlib.h>
-	<allegro.h>
-	<time.h>
-

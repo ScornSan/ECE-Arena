@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1651173812 source:c:\repos\ece-arena\projet\projet final\main.c
+1653254612 source:c:\repos\ece-arena\projet\projet final\main.c
 	"structures.h"
 	"prototypes.h"
 
@@ -9,28 +9,204 @@
 	<allegro.h>
 	<time.h>
 
-1651175623 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\choix_classes.c
+1653050635 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\choix_classes.c
 	"../prototypes.h"
 	"../structures.h"
 
-1651171255 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\creation_classes.c
+1653248876 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\creation_classes.c
 	"../prototypes.h"
 	"../structures.h"
 
-1651258210 c:\repos\ece-arena\projet\projet final\structures.h
+1653254672 c:\repos\ece-arena\projet\projet final\structures.h
 	<allegro.h>
+	<inttypes.h>
 
-1651173962 c:\repos\ece-arena\projet\projet final\prototypes.h
+1653239382 c:\repos\ece-arena\projet\projet final\prototypes.h
 	<stdio.h>
 	<stdlib.h>
 	<allegro.h>
 	<time.h>
+	<string.h>
 
-1651256874 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\tour_joueur.c
+1653254211 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\tour_joueur.c
 	"../prototypes.h"
 	"../structures.h"
 
-1651168869 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\deplacement_joueur.c
+1652961574 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\deplacement_joueur.c
+	"../prototypes.h"
+	"../structures.h"
+
+1653242013 source:c:\repos\ece-arena\projet\projet final\menu_et_choix\menu.c
+	"../structures.h"
+	"../prototypes.h"
+
+1653254854 source:c:\repos\ece-arena\projet\projet final\spgm affichages\affichage_elements.c
+	"../prototypes.h"
+	"../structures.h"
+
+1652520857 source:c:\repos\ece-arena\projet\projet final\spgm affichages\calques.c
+	"../prototypes.h"
+	"../structures.h"
+
+1652472982 source:c:\repos\ece-arena\projet\projet final\spgm affichages\dessins_blocs.c
+	"../prototypes.h"
+	"../structures.h"
+
+1652964292 source:c:\repos\ece-arena\projet\projet final\spgm affichages\initialisations_tab.c
+	"../prototypes.h"
+	"../structures.h"
+
+1652197113 source:c:\repos\ece-arena\projet\projet final\spgm affichages\lecture_pixels.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 source:c:\repos\ece-arena\projet\projet final\spgm affichages\quadrilages.c
+	"../prototypes.h"
+	"../structures.h"
+
+1652202749 source:c:\repos\ece-arena\projet\projet final\spgm affichages\zone_deplacement.c
+	"../prototypes.h"
+	"../structures.h"
+
+1653251825 source:c:\repos\ece-arena\projet\projet final\animations\animation_deplacement.c
+	"../prototypes.h"
+	"../structures.h"
+
+1652891712 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\position_depart_joueurs.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\animations\animation_deplacement.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\prototypes.h
+	<stdio.h>
+	<stdlib.h>
+	<allegro.h>
+	<time.h>
+	<string.h>
+
+1651852848 c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\structures.h
+	<allegro.h>
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\main.c
+	"structures.h"
+	"prototypes.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\menu_et_choix\choix_classes.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\menu_et_choix\creation_classes.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\menu_et_choix\menu.c
+	"../structures.h"
+	"../prototypes.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\partie_en_cours\deplacement_joueur.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\partie_en_cours\position_depart_joueurs.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\partie_en_cours\tour_joueur.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\spgm affichages\affichage_elements.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\spgm affichages\calques.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\spgm affichages\dessins_blocs.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\spgm affichages\initialisations_tab.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\spgm affichages\lecture_pixels.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\spgm affichages\quadrilages.c
+	"../prototypes.h"
+	"../structures.h"
+
+1651852848 source:c:\users\gamin\downloads\ece-arena-feature-yohan\projet\projet final\spgm affichages\zone_deplacement.c
+	"../prototypes.h"
+	"../structures.h"
+
+1653252078 source:c:\repos\ece-arena\projet\projet final\spgm affichages\afffichage_hud.c
+	"../prototypes.h"
+	"../structures.h"
+
+1653252899 source:c:\repos\ece-arena\projet\projet final\combats\selection_sort.c
+	"../prototypes.h"
+	"../structures.h"
+
+1653253063 source:c:\repos\ece-arena\projet\projet final\combats\sorts_assassin.c
+	"../prototypes.h"
+	"../structures.h"
+
+1653254425 source:c:\repos\ece-arena\projet\projet final\combats\sorts_guerrier.c
+	"../prototypes.h"
+	"../structures.h"
+
+1653254472 source:c:\repos\ece-arena\projet\projet final\combats\sorts_mage.c
+	"../prototypes.h"
+	"../structures.h"
+
+1653248706 source:c:\repos\ece-arena\projet\projet final\combats\sorts_vampire.c
+	"../prototypes.h"
+	"../structures.h"
+
+1652967708 source:c:\repos\ece-arena\projet\projet final\animations\anim_attaque_de_base.c
+	"../prototypes.h"
+	"../structures.h"
+
+1652279145 source:c:\repos\ece-arena\projet\projet final\partie_en_cours\tour_aleatoire.c
+	"../prototypes.h"
+	"../structures.h"
+
+1653254652 source:c:\repos\ece-arena\projet\projet final\fin_de_partie\classement_fin.c
+	"../prototypes.h"
+	"../structures.h"
+
+1653253619 source:c:\repos\ece-arena\projet\projet final\combats\compteur_effets.c
+	"../prototypes.h"
+	"../structures.h"
+
+1653254068 source:c:\repos\ece-arena\projet\projet final\combats\test_effet_tour_suivant.c
+	"../prototypes.h"
+	"../structures.h"
+
+1652723576 source:c:\repos\ece-arena\projet\projet final\animations\animation_sort_mage.c
+	"../prototypes.h"
+	"../structures.h"
+
+1652893675 source:c:\repos\ece-arena\projet\projet final\animations\animation_sort_vampire.c
+	"../prototypes.h"
+	"../structures.h"
+
+1652974176 source:c:\repos\ece-arena\projet\projet final\animations\animation_sort_guerrier.c
+	"../prototypes.h"
+	"../structures.h"
+
+1653054815 source:c:\repos\ece-arena\projet\projet final\animations\animation_sort_assassin.c
+	"../prototypes.h"
+	"../structures.h"
+
+1653239354 source:c:\repos\ece-arena\projet\projet final\spgm affichages\affichage_stats.c
 	"../prototypes.h"
 	"../structures.h"
 
